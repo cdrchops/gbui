@@ -6,11 +6,10 @@ Currently these are the only four available, unless you want no icon to display.
 
 [issuesMain DialogBox Issues/Todos]
 
-[http://gerbildrop.com/downloads/simplegamescreenshot4.png]
+[http://gerbildrop.com/downloads/SimpleGameScreenShot4.png]
 
 {{bui:dialogbox:simplegamescreenshot5.png| Information Dialog Box}}
 
 {{bui:dialogbox:simplegamescreenshot6.png| Warning Dialog Box}}
 
 {{bui:dialogbox:simplegamescreenshot7.png| Question Dialog Box}}
-
