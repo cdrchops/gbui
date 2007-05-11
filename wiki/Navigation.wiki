@@ -2,7 +2,7 @@ Navigation
 
 This is simply my general term for how your GUI with BUI flows.
 
-If you haven't read the _BuiSystem_ tutorial, now is a good time to read it.  If you have read it, you may want to review it.
+If you haven't read the [BuiSystem] tutorial, now is a good time to read it.  If you have read it, you may want to review it.
 
 Here's an example flow from a login screen to the main menu.
 
@@ -13,7 +13,7 @@ BWindow Login
 BWindow MainMenu
 }}}
 
-Not a whole lot there, but we know that when the user clicks the Login _BButton_ they're going to send a login _ActionEvent_ which will process and send the user to the MainMenu _BWindow_
+Not a whole lot there, but we know that when the user clicks the Login _BButton_ they're going to send a login [ActionEvent] which will process and send the user to the MainMenu _BWindow_
 
 Does this sound simple or hard yet?
 
@@ -41,10 +41,10 @@ public class TwoWindowTest extends BaseTest2 {
 }
 }}}
 
-Ok so not much yet.  The //BuiSystem.getStyle()// retrieves the //BStyleSheet// from our //BuiSystem// class which was set in [[bui:tutorials:basetest2|BaseTest2]] when the //SimpleGame// initialized.
+Ok so not much yet.  The _BuiSystem.getStyle()_ retrieves the _BStyleSheet_ from our [BuiSystem] class which was set in BaseTest2] when the //SimpleGame// initialized.
 
 On to the rest:
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jmex.bui.BWindow;
@@ -80,17 +80,17 @@ public class TwoWindowTest extends BaseTest2 {
 
     }
 }
-</code>
+}}}
 
-You'll notice that I added a //BButton// with an "action message" of //login//.  When the //BButton// is clicked it will submit that "action message" to the //ActionListener//, which in this case, goes to //handleInput(ActionEvent)// for us to tell it what to do.
+You'll notice that I added a _BButton_ with an "action message" of _login_.  When the _BButton_ is clicked it will submit that "action message" to the [ActionListener], which in this case, goes to _handleInput([ActionEvent])_ for us to tell it what to do.
 
 Let's see the miracle of Navigation at work:
 
 This code is quite a bit different from the code just above.
 
-I have taken the //loginWindow// setup and the //mainMenuWindow// setup and moved them to their own methods.  I have added a //BButton// to go back from the //mainMenuWindow// to the //loginWindow//
+I have taken the _loginWindow_ setup and the _mainMenuWindow_ setup and moved them to their own methods.  I have added a _BButton_ to go back from the _mainMenuWindow_ to the _loginWindow_
 
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jmex.bui.BWindow;
@@ -153,22 +153,22 @@ public class TwoWindowTest extends BaseTest2 {
         mainMenu.add(backButton);
     }
 }
-</code>
+}}}
 
 Let's look at this code a little more indepth:
 
-Let's start with //[[bui:tutorials:basetest2|BaseTest2]]// then we'll move on to the rest below.
+Let's start with [BaseTest2] then we'll move on to the rest below.
 
-We're creating our //ActionListener// to handle the //ActionEvents// here.
+We're creating our [ActionListener] to handle the [ActionEvents] here.
 
-<code java>
+{{{
 public class TwoWindowTest extends BaseTest2 {
     private ActionListener listener2 = new ActionListener() {
         public void actionPerformed(ActionEvent event) {
             handleInput(event);
         }
     };
-</code>
+}}}
 
 Now we create our variables for our //login// //BWindow// and our //mainMenu// //BWindow//
 
