@@ -4,12 +4,13 @@ As you can see from the examples below these are simple dialog boxes.  Each one 
 
 Currently these are the only four available, unless you want no icon to display.
 
-[DialogBox Issues/Todos]
+[issuesMain DialogBox Issues/Todos]
 
-{{bui:dialogbox:simplegamescreenshot4.png| Error Dialog Box}}
+[http://gerbildrop.com/downloads/simplegamescreenshot4.png]
 
 {{bui:dialogbox:simplegamescreenshot5.png| Information Dialog Box}}
 
 {{bui:dialogbox:simplegamescreenshot6.png| Warning Dialog Box}}
 
 {{bui:dialogbox:simplegamescreenshot7.png| Question Dialog Box}}
+
