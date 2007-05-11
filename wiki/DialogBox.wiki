@@ -8,8 +8,8 @@ Currently these are the only four available, unless you want no icon to display.
 
 [http://gerbildrop.com/downloads/SimpleGameScreenShot4.png]
 
-{{bui:dialogbox:simplegamescreenshot5.png| Information Dialog Box}}
+[http://gerbildrop.com/downloads/SimpleGameScreenShot5.png]
 
-{{bui:dialogbox:simplegamescreenshot6.png| Warning Dialog Box}}
+[http://gerbildrop.com/downloads/SimpleGameScreenShot6.png]
 
-{{bui:dialogbox:simplegamescreenshot7.png| Question Dialog Box}}
+[http://gerbildrop.com/downloads/SimpleGameScreenShot7.png]
