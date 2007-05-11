@@ -2,16 +2,16 @@
 
 = BUI Tutorials =
 
-[buiSystem BUI System]
+[BuiSystem BUI System]
 
 [ScrollingList Scrolling List]
 
-[actionListener ActionListener]
+[ActionListener ActionListener]
 
-[actionEvent ActionEvent]
+[ActionEvent ActionEvent]
 
-[navigationflow Navigation]
+[Navigation Navigation]
 
-[comboBox ComboBox]
+[ComboBox ComboBox]
 
-[collapsingTiledWindows Collapsing Tiled Windows]
+[CollapsingTiledWindows Collapsing Tiled Windows]
