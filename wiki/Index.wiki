@@ -14,14 +14,14 @@ My extensions:
 
 [DialogBox]
 
-[Dialog Icons]
+[dialogIcons Dialog Icons]
 
 [InputBox]
 
 [MessageBox]
 
-[Custom MessageBoxes]
+[customMessageBoxes Custom MessageBoxes]
 
-[Examples from DRADIS] -- my game
+[examples Examples from DRADIS] -- my game
 
-[BUI Tutorials]
+[tutorials BUI Tutorials]
