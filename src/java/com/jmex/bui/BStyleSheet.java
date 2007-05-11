@@ -382,7 +382,6 @@ public class BStyleSheet {
             throws IOException {
 
         while (tok.nextToken() != StreamTokenizer.TT_EOF) {
-            System.out.println(tok);
             Rule rule = startRule(tok);
             while (parseProperty(tok, rule)) {
             }
