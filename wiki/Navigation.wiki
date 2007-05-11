@@ -2,18 +2,18 @@ Navigation
 
 This is simply my general term for how your GUI with BUI flows.
 
-If you haven't read the [[bui:tutorials:BuiSystem | BuiSystem]] tutorial, now is a good time to read it.  If you have read it, you may want to review it.
+If you haven't read the _BuiSystem_ tutorial, now is a good time to read it.  If you have read it, you may want to review it.
 
 Here's an example flow from a login screen to the main menu.
 
-<code>
+{{{
 BWindow Login
   BButton Login (action login)
   
 BWindow MainMenu
-</code>
+}}}
 
-Not a whole lot there, but we know that when the user clicks the Login //BButton// they're going to send a login //ActionEvent// which will process and send the user to the MainMenu //BWindow//
+Not a whole lot there, but we know that when the user clicks the Login _BButton_ they're going to send a login _ActionEvent_ which will process and send the user to the MainMenu _BWindow_
 
 Does this sound simple or hard yet?
 
@@ -21,7 +21,7 @@ The answer is fairly simple.
 
 Let's start with our two windows and our test class:
 
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jmex.bui.BWindow;
@@ -39,7 +39,7 @@ public class TwoWindowTest extends BaseTest2 {
         new TwoWindowTest().start();
     }
 }
-</code>
+}}}
 
 Ok so not much yet.  The //BuiSystem.getStyle()// retrieves the //BStyleSheet// from our //BuiSystem// class which was set in [[bui:tutorials:basetest2|BaseTest2]] when the //SimpleGame// initialized.
 
