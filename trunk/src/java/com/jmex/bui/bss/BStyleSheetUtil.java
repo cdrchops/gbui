@@ -44,6 +44,67 @@ public class BStyleSheetUtil {
         return getStyleSheet(BStyleSheetUtil.class.getResourceAsStream(path));
     }
 
+    public static BStyleSheet getStyleSheetFromFile(String fileName) {
+        List<String> list = readFile(fileName);
+
+        List<String> lst = new LinkedList<String>();
+
+        for (final String aList : list) {
+            lst.addAll(readFile(aList));
+        }
+
+        return processList(lst);
+    }
+
+    private static List<String> readFile(final String path) {
+        return readFile(BStyleSheetUtil.class.getResourceAsStream(path));
+    }
+
+    private static List<String> readFile(final InputStream is) {
+        List<String> readFile = new ArrayList<String>();
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new InputStreamReader(is));
+            for (String inner = in.readLine(); inner != null; inner = in.readLine()) {
+                readFile.add(inner);
+            }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return readFile;
+    }
+
+    public static void writeFile(final String filePath,
+                                 final List content) {
+        FileOutputStream fout = null;
+        try {
+            File file = new File(filePath);
+            fout = new FileOutputStream(file);
+            for (Object aContent : content) {
+                fout.write((aContent + "\r").getBytes());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fout != null) {
+                try {
+                    fout.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     /**
      * return a combined BStyleSheet from any number of URLs
      *
@@ -108,12 +169,6 @@ public class BStyleSheetUtil {
         return style;
     }
 
-    public static BStyleSheet getStyleSheetFromFile(final String fileName) {
-        List list = readFile(fileName);
-        List<String> lst = loadMultipleBSS(list);
-        writeFile("alap", lst);
-        return processList(lst);
-    }
 
     /**
      * @param list URL varargs
@@ -205,58 +260,9 @@ public class BStyleSheetUtil {
         final StringBuilder sb = new StringBuilder();
 
         for (String s : list) {
-            sb.append(s);
+            sb.append(s).append("\n");
         }
 
         return getStyleSheet(new StringReader(sb.toString()));
-    }
-
-    private static List<String> readFile(final String path) {
-        return readFile(BStyleSheetUtil.class.getResourceAsStream(path));
-    }
-
-    private static List<String> readFile(final InputStream is) {
-        List<String> readFile = new ArrayList<String>();
-        BufferedReader in = null;
-        try {
-            in = new BufferedReader(new InputStreamReader(is));
-            for (String inner = in.readLine(); inner != null; inner = in.readLine()) {
-                readFile.add(inner);
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        return readFile;
-    }
-
-    public static void writeFile(final String filePath,
-                                 final List content) {
-        FileOutputStream fout = null;
-        try {
-            File file = new File(filePath);
-            fout = new FileOutputStream(file);
-            for (Object aContent : content) {
-                fout.write((aContent + "\r").getBytes());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fout != null) {
-                try {
-                    fout.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
     }
 }
