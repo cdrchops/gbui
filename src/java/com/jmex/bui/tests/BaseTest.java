@@ -47,7 +47,7 @@ public abstract class BaseTest extends SimpleGame {
         try {
 
             InputStream stin = getClass().getClassLoader().
-                    getResourceAsStream("rsrc/style.bss");
+                    getResourceAsStream("rsrc/style2.bss");
             istir = new InputStreamReader(stin);
             style = new BStyleSheet(istir,
                                     new BStyleSheet.DefaultResourceProvider());
