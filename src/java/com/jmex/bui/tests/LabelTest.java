@@ -21,8 +21,8 @@
 package com.jmex.bui.tests;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.jme.util.LoggingSystem;
 import com.jmex.bui.BConstants;
 import com.jmex.bui.BContainer;
 import com.jmex.bui.BDecoratedWindow;
@@ -37,6 +37,7 @@ import com.jmex.bui.layout.GroupLayout;
 /** Does something extraordinary. */
 public class LabelTest extends BaseTest
         implements BConstants {
+    @Override
     protected void createWindows(BRootNode root,
                                  BStyleSheet style) {
         BWindow window = new BDecoratedWindow(style, null);
@@ -72,7 +73,7 @@ public class LabelTest extends BaseTest
     }
 
     public static void main(String[] args) {
-        LoggingSystem.getLogger().setLevel(Level.OFF);
+	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         LabelTest test = new LabelTest();
         test.start();
     }

@@ -21,8 +21,8 @@
 package com.jmex.bui.tests;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.jme.util.LoggingSystem;
 import com.jmex.bui.headlessWindows.DialogWindow;
 
 /**
@@ -30,12 +30,13 @@ import com.jmex.bui.headlessWindows.DialogWindow;
  * @since 27Apr07
  */
 public class WarningDialogBoxTest extends BaseTest2 {
+    @Override
     protected void createWindows() {
         DialogWindow.createWarningDialogWindow("warnMessage1", "message", listener);
     }
 
     public static void main(String[] args) {
-        LoggingSystem.getLogger().setLevel(Level.WARNING);
+	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         new WarningDialogBoxTest().start();
     }
 }

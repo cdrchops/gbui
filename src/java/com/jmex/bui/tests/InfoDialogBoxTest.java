@@ -21,8 +21,8 @@
 package com.jmex.bui.tests;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.jme.util.LoggingSystem;
 import com.jmex.bui.headlessWindows.DialogWindow;
 
 /**
@@ -30,6 +30,7 @@ import com.jmex.bui.headlessWindows.DialogWindow;
  * @since 27Apr07
  */
 public class InfoDialogBoxTest extends BaseTest2 {
+    @Override
     protected void createWindows() {
         DialogWindow.createInfoDialogWindow("dialogWindow1", "message", listener);
         // if you want to pack the window
@@ -37,7 +38,7 @@ public class InfoDialogBoxTest extends BaseTest2 {
     }
 
     public static void main(String[] args) {
-        LoggingSystem.getLogger().setLevel(Level.WARNING);
+	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         new InfoDialogBoxTest().start();
     }
 }
