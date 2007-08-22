@@ -26,6 +26,7 @@ import com.jme.input.MouseInput;
 import com.jme.renderer.ColorRGBA;
 import com.jmex.bui.BButton;
 import com.jmex.bui.BuiSystem;
+import com.jmex.bui.PolledRootNode;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.listener.ListenerUtil;
@@ -50,9 +51,8 @@ public abstract class BaseTest2 extends SimpleGame {
         // we don't hide the cursor
         MouseInput.get().setCursorVisible(true);
 
-//        BuiSystem.init(new PolledRootNode(timer, input), "/rsrc/style.bss");
-//
-//        rootNode.attachChild(BuiSystem.getRootNode());
+        BuiSystem.init(new PolledRootNode(timer, input), "/rsrc/style2.bss");
+        rootNode.attachChild(BuiSystem.getRootNode());
 
         createWindows();
 
