@@ -35,19 +35,19 @@ import com.jmex.bui.layout.GroupLayout;
 public class BInputMessage extends BContainer {
     private static final BLabel infoIconLabel = new BLabel("");
     private static final BIcon INFO_ICON =
-            IconUtil.getIcon(BDialogMessage.class.getResource("/bui/dialogLogos/metal-info.png"));
+            IconUtil.getIcon(BDialogMessage.class.getResource("/rsrc/dialogLogos/metal-info.png"));
 
     private static final BLabel errorIconLabel = new BLabel("");
     private static final BIcon ERROR_ICON =
-            IconUtil.getIcon(BDialogMessage.class.getResource("/bui/dialogLogos/metal-error.png"));
+            IconUtil.getIcon(BDialogMessage.class.getResource("/rsrc/dialogLogos/metal-error.png"));
 
     private static final BLabel warnIconLabel = new BLabel("");
     private static final BIcon WARN_ICON =
-            IconUtil.getIcon(BDialogMessage.class.getResource("/bui/dialogLogos/metal-warning.png"));
+            IconUtil.getIcon(BDialogMessage.class.getResource("/rsrc/dialogLogos/metal-warning.png"));
 
     private static final BLabel questionIconLabel = new BLabel("");
     private static final BIcon QUESTION_ICON =
-            IconUtil.getIcon(BDialogMessage.class.getResource("/bui/dialogLogos/metal-question.png"));
+            IconUtil.getIcon(BDialogMessage.class.getResource("/rsrc/dialogLogos/metal-question.png"));
 
     static {
         infoIconLabel.setIcon(INFO_ICON);
