@@ -23,13 +23,13 @@ package com.jmex.bui.tests;
 import java.awt.Font;
 import java.io.StringReader;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.html.CSS;
 import javax.swing.text.html.StyleSheet;
 
-import com.jme.util.LoggingSystem;
 import com.jmex.bui.BRootNode;
 import com.jmex.bui.BStyleSheet;
 import com.jmex.bui.BWindow;
@@ -38,11 +38,13 @@ import com.jmex.bui.text.HTMLView;
 
 /** Tests our HTML view. */
 public class HTMLTest extends BaseTest {
+    @Override
     protected void createWindows(BRootNode root,
                                  BStyleSheet style) {
         // test out custom font handling
         StyleSheet sheet = new StyleSheet() {
-            public Font getFont(AttributeSet attrs) {
+            @Override
+	    public Font getFont(AttributeSet attrs) {
                 // Java's style sheet parser annoyingly looks up whatever is
                 // supplied for font-family and if it doesn't map to an
                 // internal Java font; it discards it. Thanks! So we do this
@@ -51,22 +53,21 @@ public class HTMLTest extends BaseTest {
                 String variant = (String)
                         attrs.getAttribute(CSS.Attribute.FONT_VARIANT);
                 if (variant != null && variant.equalsIgnoreCase("Test")) {
-                    int style = Font.PLAIN;
+                    int testStyle = Font.PLAIN;
                     if (StyleConstants.isBold(attrs)) {
-                        style |= Font.BOLD;
+                        testStyle |= Font.BOLD;
                     }
                     if (StyleConstants.isItalic(attrs)) {
-                        style |= Font.ITALIC;
+                        testStyle |= Font.ITALIC;
                     }
                     int size = StyleConstants.getFontSize(attrs);
                     if (StyleConstants.isSuperscript(attrs) ||
                         StyleConstants.isSubscript(attrs)) {
                         size -= 2;
                     }
-                    return new Font("Serif", style, size);
-                } else {
-                    return super.getFont(attrs);
+                    return new Font("Serif", testStyle, size);
                 }
+                return super.getFont(attrs);
             }
         };
         try {
@@ -96,7 +97,7 @@ public class HTMLTest extends BaseTest {
     }
 
     public static void main(String[] args) {
-        LoggingSystem.getLogger().setLevel(Level.WARNING);
+	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         HTMLTest test = new HTMLTest();
         test.start();
     }

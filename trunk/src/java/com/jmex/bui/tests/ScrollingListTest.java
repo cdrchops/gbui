@@ -21,8 +21,8 @@
 package com.jmex.bui.tests;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.jme.util.LoggingSystem;
 import com.jmex.bui.BButton;
 import com.jmex.bui.BConstants;
 import com.jmex.bui.BDecoratedWindow;
@@ -34,6 +34,7 @@ import com.jmex.bui.layout.GroupLayout;
 
 public class ScrollingListTest extends BaseTest
         implements BConstants {
+    @Override
     protected void createWindows(BRootNode root,
                                  BStyleSheet style) {
         BWindow window = new BDecoratedWindow(style, null);
@@ -41,7 +42,8 @@ public class ScrollingListTest extends BaseTest
 
         BScrollingList<String, BButton> list =
                 new BScrollingList<String, BButton>() {
-                    public BButton createComponent(String str) {
+                    @Override
+		    public BButton createComponent(String str) {
                         return new BButton(str);
                     }
                 };
@@ -58,7 +60,7 @@ public class ScrollingListTest extends BaseTest
     }
 
     public static void main(String[] args) {
-        LoggingSystem.getLogger().setLevel(Level.WARNING);
+	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         ScrollingListTest test = new ScrollingListTest();
         test.start();
     }

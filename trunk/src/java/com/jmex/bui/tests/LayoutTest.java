@@ -22,6 +22,7 @@ package com.jmex.bui.tests;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.jme.light.DirectionalLight;
 import com.jme.math.FastMath;
@@ -34,8 +35,26 @@ import com.jme.scene.shape.Box;
 import com.jme.scene.state.LightState;
 import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
-import com.jme.util.LoggingSystem;
-import com.jmex.bui.*;
+import com.jmex.bui.BButton;
+import com.jmex.bui.BCheckBox;
+import com.jmex.bui.BComboBox;
+import com.jmex.bui.BConstants;
+import com.jmex.bui.BContainer;
+import com.jmex.bui.BDecoratedWindow;
+import com.jmex.bui.BGeomView;
+import com.jmex.bui.BImage;
+import com.jmex.bui.BLabel;
+import com.jmex.bui.BMenuItem;
+import com.jmex.bui.BRootNode;
+import com.jmex.bui.BScrollBar;
+import com.jmex.bui.BScrollPane;
+import com.jmex.bui.BSlider;
+import com.jmex.bui.BStyleSheet;
+import com.jmex.bui.BTabbedPane;
+import com.jmex.bui.BTextArea;
+import com.jmex.bui.BTextField;
+import com.jmex.bui.BToggleButton;
+import com.jmex.bui.BWindow;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.icon.ImageIcon;
@@ -48,6 +67,7 @@ import com.jmex.bui.util.Rectangle;
 
 /** Tests random BUI bits. */
 public class LayoutTest extends BaseTest {
+    @Override
     protected void createWindows(final BRootNode root,
                                  BStyleSheet style) {
         BWindow window;
@@ -89,18 +109,18 @@ public class LayoutTest extends BaseTest {
         window.setLocation(25, 25);
 
         window = new BWindow(style, new BorderLayout(5, 5));
-        window.add(new BSlider(BSlider.VERTICAL, 0, 100, 25),
+        window.add(new BSlider(BConstants.VERTICAL, 0, 100, 25),
                    BorderLayout.WEST);
         window.add(_text = new BTextArea(), BorderLayout.CENTER);
         window.add(_input = new BTextField(), BorderLayout.SOUTH);
-        window.add(new BScrollBar(BScrollBar.VERTICAL, _text.getScrollModel()),
+        window.add(new BScrollBar(BConstants.VERTICAL, _text.getScrollModel()),
                    BorderLayout.EAST);
-        window.add(new BScrollBar(BScrollBar.HORIZONTAL, 0, 25, 50, 100),
+        window.add(new BScrollBar(BConstants.HORIZONTAL, 0, 25, 50, 100),
                    BorderLayout.NORTH);
         _input.addListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                String input = _input.getText();
-                if (input != null && !input.equals("")) {
+                String inputText = _input.getText();
+                if (inputText != null && !inputText.equals("")) {
                     _text.appendText("You said: ", ColorRGBA.red);
                     _text.appendText(_input.getText() + "\n");
                     _input.setText("");
@@ -145,7 +165,7 @@ public class LayoutTest extends BaseTest {
         label.setTooltipText("This is a vertical label.");
         label.setIcon(new ImageIcon(icon));
         label.setIconTextGap(1);
-        label.setOrientation(BLabel.VERTICAL);
+        label.setOrientation(BConstants.VERTICAL);
         cont.add(label);
         cont.add(new BCheckBox("Four"));
         cont.add(new BLabel("Five"));
@@ -154,7 +174,7 @@ public class LayoutTest extends BaseTest {
         cont.add(new BLabel("Eight"));
         cont.add(new BLabel("Nine"));
         window.add(cont, BorderLayout.CENTER);
-        window.add(new BSlider(BSlider.HORIZONTAL, 0, 100, 25),
+        window.add(new BSlider(BConstants.HORIZONTAL, 0, 100, 25),
                    BorderLayout.SOUTH);
         root.addWindow(window);
         window.pack();
@@ -216,7 +236,8 @@ public class LayoutTest extends BaseTest {
         box.setLocalRotation(quat45);
 
         box.addController(new Controller() {
-            public void update(float time) {
+            @Override
+	    public void update(float time) {
                 _angle += FastMath.HALF_PI * time;
                 _rotation.fromAngleAxis(_angle, UP);
                 box.getLocalRotation().set(_rotation);
@@ -236,7 +257,7 @@ public class LayoutTest extends BaseTest {
     }
 
     public static void main(String[] args) {
-        LoggingSystem.getLogger().setLevel(Level.WARNING);
+	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         LayoutTest test = new LayoutTest();
         test.start();
     }

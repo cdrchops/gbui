@@ -21,8 +21,8 @@
 package com.jmex.bui.tests;
 
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.jme.util.LoggingSystem;
 import com.jmex.bui.BuiSystem;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
@@ -45,6 +45,7 @@ public class AllDialogsTest extends BaseTest2 {
         }
     };
 
+    @Override
     protected void createWindows() {
         DialogWindow.createQuestionDialogWindow("qmessage1", "message", listener);
         DialogWindow.createWarningDialogWindow("warnMessage1", "message", listener);
@@ -56,7 +57,7 @@ public class AllDialogsTest extends BaseTest2 {
     }
 
     public static void main(String[] args) {
-        LoggingSystem.getLogger().setLevel(Level.WARNING);
+	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         new AllDialogsTest().start();
     }
 }
