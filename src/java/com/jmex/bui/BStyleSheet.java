@@ -289,6 +289,12 @@ public class BStyleSheet {
         return (value == null) ? BConstants.NORMAL : value.intValue();
     }
 
+    public int getLineSpacing (BComponent component, String pseudoClass)
+    {
+        Integer value = (Integer)findProperty(component, pseudoClass, "line-spacing", true);
+        return (value == null) ? BConstants.DEFAULT_SPACING : value.intValue();
+    }
+
     public int getEffectSize(BComponent component,
                              String pseudoClass) {
         Integer value = (Integer) findProperty(component, pseudoClass, "effect-size", true);
@@ -314,6 +320,11 @@ public class BStyleSheet {
     public Dimension getSize(BComponent component,
                              String pseudoClass) {
         return (Dimension) findProperty(component, pseudoClass, "size", false);
+    }
+
+    public String getTooltipStyle (BComponent component, String pseudoClass)
+    {
+        return (String)findProperty(component, pseudoClass, "tooltip", true);
     }
 
     public BKeyMap getKeyMap(BComponent component,
@@ -574,6 +585,10 @@ public class BStyleSheet {
             Integer value = new Integer(parseInt(args.get(0)));
             return value;
 
+        } else if (name.equals("line-spacing")) {
+            Integer value = new Integer(parseInt(args.get(0)));
+            return value;
+
         } else if (name.equals("padding")) {
             Insets insets = new Insets();
             insets.top = parseInt(args.get(0));
@@ -607,6 +622,10 @@ public class BStyleSheet {
                 throw new IllegalArgumentException("Unknown parent class '" + args.get(0) + "'");
             }
             return parent;
+
+        } else if (name.equals("tooltip")) {
+            String style = (String)args.get(0);
+            return style;
 
         } else {
             throw new IllegalArgumentException("Unknown property '" + name + "'");
@@ -793,6 +812,7 @@ public class BStyleSheet {
         _teconsts.put("none", new Integer(BConstants.NORMAL));
         _teconsts.put("shadow", new Integer(BConstants.SHADOW));
         _teconsts.put("outline", new Integer(BConstants.OUTLINE));
+        _teconsts.put("plain", new Integer(BConstants.PLAIN));
 
         // background image constants
         _ibconsts.put("centerxy", new Integer(ImageBackground.CENTER_XY));

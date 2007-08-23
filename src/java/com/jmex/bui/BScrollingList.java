@@ -83,7 +83,21 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
         _vport.invalidate();
     }
 
-    //Must be implemented by subclasses to instantiate the correct BComponent subclass for a given list value.
+    /**
+     * Removes values from the top of the list.
+     */
+    public void removeValuesFromTop (int num) {
+        num = Math.min(num, _values.size());
+        for (int ii = 0; ii < num; ii++) {
+            Entry<V, C> value = _values.remove(0);
+            _vport.remove(value.component);
+        }
+        _vport.invalidate();
+    }
+
+    /**
+     * Must be implemented by subclasses to instantiate the correct BComponent
+     * subclass for a given list value.
     protected abstract C createComponent(V value);
 
     //Adds a value to the list and snaps to the bottom of the list if desired.
