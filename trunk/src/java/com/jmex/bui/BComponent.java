@@ -26,8 +26,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.jme.input.KeyInput;
+import com.jme.math.Vector3f;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.RenderContext;
+import com.jme.scene.Spatial;
 import com.jme.renderer.Renderer;
 import com.jme.system.DisplaySystem;
 import com.jme.util.geom.BufferUtils;
@@ -693,6 +695,7 @@ public class BComponent {
         }
 
         _cursor = style.getCursor(this, null);
+        _tipStyle = style.getTooltipStyle(this, null);
         for (int ii = 0; ii < getStateCount(); ii++) {
             _colors[ii] = style.getColor(this, getStatePseudoClass(ii));
             _insets[ii] = style.getInsets(this, getStatePseudoClass(ii));
@@ -931,6 +934,7 @@ public class BComponent {
     protected List<ComponentListener> _listeners;
     protected HashMap<String, Object> _properties;
     protected String _tiptext;
+    protected String _tipStyle;
     protected boolean _tipmouse;
 
     protected boolean _valid, _enabled = true, _visible = true, _hover;

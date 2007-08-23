@@ -22,6 +22,8 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
+
+import com.jmex.bui.background.BBackground;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.FocusEvent;
@@ -367,7 +369,7 @@ public class BTextField extends BTextComponent
 
         // format our text and determine how much of it we can display
         _glyphs = getTextFactory().createText(
-                getDisplayText(), getColor(), BConstants.NORMAL,
+            getDisplayText(), getColor(), BConstants.PLAIN,
                 BConstants.DEFAULT_SIZE, null, true);
         if (isAdded()) {
             _glyphs.wasAdded();

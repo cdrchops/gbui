@@ -156,6 +156,18 @@ public class BTextArea extends BContainer {
         return (textfact != null) ? textfact : _textfacts[DEFAULT];
     }
 
+    /**
+     * Returns the effect for this component's text.
+     */
+    public int getTextEffect ()
+    {
+        if (_teffects != null) {
+            int teffect = _teffects[getState()];
+            return (teffect != -1) ? teffect : _teffects[DEFAULT];
+        }
+        return BConstants.NORMAL;
+    }
+
     @Override
     // from BTextArea
     public void setEnabled(boolean enabled) {
@@ -212,6 +224,12 @@ public class BTextArea extends BContainer {
                     this, getStatePseudoClass(ii));
         }
         _valigns = checkNonDefault(valigns, BConstants.CENTER);
+
+        int[] teffects = new int[getStateCount()];
+        for (int ii = 0; ii < getStateCount(); ii++) {
+            teffects[ii] = style.getTextEffect(this, getStatePseudoClass(ii));
+    }
+        _teffects = checkNonDefault(teffects, BConstants.NORMAL);
     }
 
     protected int[] checkNonDefault(int[] styles,
@@ -323,7 +341,7 @@ public class BTextArea extends BContainer {
             int offset = 0;
             ColorRGBA color = (run.color == null) ? getColor() : run.color;
             while ((offset = current.addRun(
-                    getTextFactory(), run, color, maxWidth, offset)) > 0) {
+                        getTextFactory(), run, color, getTextEffect(), maxWidth, offset)) > 0) {
                 _lines.add(current = new Line());
             }
             if (run.endsLine) {
@@ -408,7 +426,7 @@ public class BTextArea extends BContainer {
             String rtext = run.text.substring(offset);
             // TODO: this could perhaps be done more efficiently now that the
             // text factory breaks things down into multiple lines for us
-            BText[] text = tfact.wrapText(rtext, color, maxWidth - dx);
+            BText[] text = tfact.wrapText(rtext, color, effect, maxWidth-dx);
             segments.add(text[0]);
             // we only ever add runs when we're added
             text[0].wasAdded();
@@ -455,6 +473,7 @@ public class BTextArea extends BContainer {
 
     protected int[] _haligns;
     protected int[] _valigns;
+    protected int[] _teffects;
     protected BTextFactory[] _textfacts = new BTextFactory[getStateCount()];
     protected BoundedRangeModel _model = new BoundedRangeModel(0, 0, 0, 0);
     protected int _prefWidth = -1;
