@@ -38,7 +38,7 @@ public class BMessageBoxTest extends BaseTest2 {
     }
 
     public static void main(String[] args) {
-	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
+	    Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         new BMessageBoxTest().start();
     }
 }
