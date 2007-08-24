@@ -97,7 +97,7 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
 
     /**
      * Must be implemented by subclasses to instantiate the correct BComponent
-     * subclass for a given list value.
+     * subclass for a given list value.*/
     protected abstract C createComponent(V value);
 
     //Adds a value to the list and snaps to the bottom of the list if desired.

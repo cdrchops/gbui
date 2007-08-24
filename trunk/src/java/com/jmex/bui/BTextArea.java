@@ -32,8 +32,10 @@ import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 
 /**
- * Displays one or more lines of text which may contain basic formatting (changing of color, toggling bold, italic and
- * underline). Newline characters in the appended text will result in line breaks in the on-screen layout.
+ * Displays one or more lines of text which may contain basic formatting
+ * (changing of color, toggling bold, italic and underline). Newline
+ * characters in the appended text will result in line breaks in the
+ * on-screen layout.
  */
 public class BTextArea extends BContainer {
     /** A font style constant. */
@@ -417,7 +419,7 @@ public class BTextArea extends BContainer {
          */
         public int addRun(BTextFactory tfact,
                           Run run,
-                          ColorRGBA color,
+                          ColorRGBA color, int effect,
                           int maxWidth,
                           int offset) {
             if (dx == 0) {
