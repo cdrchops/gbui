@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
 
+import org.lwjgl.opengl.GL11;
+
 import com.jme.intersection.CollisionResults;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
@@ -35,7 +37,6 @@ import com.jmex.bui.event.EventListener;
 import com.jmex.bui.event.FocusEvent;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.layout.BorderLayout;
-import org.lwjgl.opengl.GL11;
 
 /** Connects the BUI system into the JME scene graph. */
 public abstract class BRootNode extends Geometry {
@@ -234,6 +235,7 @@ public abstract class BRootNode extends Geometry {
     }
 
     /** Generates a string representation of this instance. */
+    @Override
     public String toString() {
         return "BRootNode@" + hashCode();
     }
@@ -249,6 +251,7 @@ public abstract class BRootNode extends Geometry {
     }
 
     // documentation inherited
+    @Override
     public void updateGeometricState(float time,
                                      boolean initiator) {
         super.updateGeometricState(time, initiator);
@@ -265,7 +268,7 @@ public abstract class BRootNode extends Geometry {
         if (_hcomponent == null || _tipwin != null ||
             (_lastMoveTime < getTooltipTimeout() &&
              _lastTipTime > TIP_MODE_RESET) ||
-                                            (tiptext = _hcomponent.getTooltipText()) == null) {
+            (tiptext = _hcomponent.getTooltipText()) == null) {
             if (_tipwin != null) {
                 _lastTipTime = 0;
             }
@@ -284,7 +287,8 @@ public abstract class BRootNode extends Geometry {
 
         // create, set up and show the tooltip window
         _tipwin = new BWindow(hwin.getStyleSheet(), new BorderLayout()) {
-            public boolean isOverlay() {
+            @Override
+	    public boolean isOverlay() {
                 return true; // don't steal input focus
             }
         };
@@ -318,6 +322,7 @@ public abstract class BRootNode extends Geometry {
     }
 
     // documentation inherited
+    @Override
     public void onDraw(Renderer renderer) {
         // we're rendered in the ortho queue, so we just add ourselves to
         // the queue here and we'll get a call directly to draw() later
@@ -328,6 +333,7 @@ public abstract class BRootNode extends Geometry {
     }
 
     // documentation inherited
+    @Override
     public void draw(Renderer renderer) {
         super.draw(renderer);
         BWindow modalWin = null;
@@ -356,12 +362,14 @@ public abstract class BRootNode extends Geometry {
     }
 
     // documentation inherited
+    @Override
     public void findCollisions(Spatial scene,
                                CollisionResults results) {
         // nothing doing
     }
 
     // documentation inherited
+    @Override
     public boolean hasCollision(Spatial scene,
                                 boolean checkTriangles) {
         return false; // nothing doing
@@ -495,13 +503,13 @@ public abstract class BRootNode extends Geometry {
         // generate any necessary mouse entry or exit events
         if (_hcomponent != nhcomponent) {
             // inform the previous component that the mouse has exited
-            if (_hcomponent != null) {
+            if (_hcomponent != null && _hcomponent.isHoverEnabled()) {
                 _hcomponent.dispatchEvent(
                         new MouseEvent(this, _tickStamp, _modifiers,
                                        MouseEvent.MOUSE_EXITED, mx, my));
             }
             // inform the new component that the mouse has entered
-            if (nhcomponent != null) {
+            if (nhcomponent != null && nhcomponent.isHoverEnabled()) {
                 nhcomponent.dispatchEvent(
                         new MouseEvent(this, _tickStamp, _modifiers,
                                        MouseEvent.MOUSE_ENTERED, mx, my));
@@ -510,7 +518,8 @@ public abstract class BRootNode extends Geometry {
 
             // clear out any tooltip business in case the hover component
             // changed as a result of a window popping up
-            if (_hcomponent == null || _hcomponent.getWindow() != _tipwin) {
+            if (_hcomponent == null || !_hcomponent.isHoverEnabled() ||
+        	    _hcomponent.getWindow() != _tipwin) {
                 clearTipWindow();
             }
         }
