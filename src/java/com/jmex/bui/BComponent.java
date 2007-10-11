@@ -25,11 +25,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.lwjgl.opengl.GL11;
+
 import com.jme.input.KeyInput;
-import com.jme.math.Vector3f;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.RenderContext;
-import com.jme.scene.Spatial;
 import com.jme.renderer.Renderer;
 import com.jme.system.DisplaySystem;
 import com.jme.util.geom.BufferUtils;
@@ -37,13 +37,13 @@ import com.jmex.bui.background.BBackground;
 import com.jmex.bui.border.BBorder;
 import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.ComponentListener;
+import com.jmex.bui.event.InputEvent;
 import com.jmex.bui.event.KeyEvent;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.text.HTMLView;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
-import org.lwjgl.opengl.GL11;
 
 /**
  * The basic entity in the BUI user interface system. A hierarchy of components and component derivations make up a user
@@ -65,6 +65,7 @@ public class BComponent {
      */
     public static final int DISABLED = 2;
 
+    private boolean hoverEnabled = true;
     private String name;
 
     public BComponent() {}
@@ -344,7 +345,7 @@ public class BComponent {
         return isAdded() && isVisible();
     }
 
-    /** Returns the state of this component, either {@link #DEFAULT} or {@link #DISABLED}. */
+    /** Returns the state of this component, either {@link #DEFAULT}, {@link #HOVER} or {@link #DISABLED}. */
     public int getState() {
         return _enabled ? (_hover ? HOVER : DEFAULT) : DISABLED;
     }
@@ -474,9 +475,8 @@ public class BComponent {
         if (_listeners != null) {
             _listeners = new ArrayList<ComponentListener>();
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -601,7 +601,7 @@ public class BComponent {
                     if (modifiers == 0) {
                         getWindow().requestFocus(getNextFocus());
                         processed = true;
-                    } else if (modifiers == KeyEvent.SHIFT_DOWN_MASK) {
+                    } else if (modifiers == InputEvent.SHIFT_DOWN_MASK) {
                         getWindow().requestFocus(getPreviousFocus());
                         processed = true;
                     }
@@ -610,7 +610,7 @@ public class BComponent {
         }
 
         // handle mouse hover detection
-        if (_enabled && event instanceof MouseEvent) {
+        if (_enabled && event instanceof MouseEvent && hoverEnabled) {
             int ostate = getState();
             MouseEvent mev = (MouseEvent) event;
             switch (mev.getType()) {
@@ -737,9 +737,8 @@ public class BComponent {
     protected BComponent createTooltipComponent(String tiptext) {
         if (tiptext.startsWith("<html>")) {
             return new HTMLView("", tiptext);
-        } else {
-            return new BLabel(tiptext, "tooltip_label");
         }
+        return new BLabel(tiptext, "tooltip_label");
     }
 
     /** Renders the background for this component. */
@@ -804,7 +803,7 @@ public class BComponent {
 
     /** Returns true if the component should update the mouse cursor. */
     protected boolean changeCursor() {
-        return _enabled && _visible && _hover;
+        return _enabled && _visible && _hover && hoverEnabled;
     }
 
     /** Updates the mouse cursor with the supplied cursor. */
@@ -831,8 +830,8 @@ public class BComponent {
      * returned. Otherwise, null will be returned.
      */
     protected BComponent getNextFocus() {
-        if (_parent instanceof BContainer) {
-            return ((BContainer) _parent).getNextFocus(this);
+        if (_parent != null) {
+            return _parent.getNextFocus(this);
         } else if (acceptsFocus()) {
             return this;
         } else {
@@ -846,8 +845,8 @@ public class BComponent {
      * will be returned. Otherwise, null will be returned.
      */
     protected BComponent getPreviousFocus() {
-        if (_parent instanceof BContainer) {
-            return ((BContainer) _parent).getPreviousFocus(this);
+        if (_parent != null) {
+            return _parent.getPreviousFocus(this);
         } else if (acceptsFocus()) {
             return this;
         } else {
@@ -925,6 +924,14 @@ public class BComponent {
 
     public void setName(final String _name) {
         name = _name;
+    }
+
+    public boolean isHoverEnabled() {
+        return hoverEnabled;
+    }
+
+    public void setHoverEnabled(boolean hoverEnabled) {
+        this.hoverEnabled = hoverEnabled;
     }
 
     protected BContainer _parent;
