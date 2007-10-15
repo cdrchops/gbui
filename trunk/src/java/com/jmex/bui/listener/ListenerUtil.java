@@ -26,6 +26,7 @@ package com.jmex.bui.listener;
  */
 public class ListenerUtil {
     public static String getActionName(final String action) {
+	if (action == null) return null;
         String returnValue = null;
         if (action.indexOf("minimize") != -1) {
             returnValue = "minimize";
@@ -50,6 +51,7 @@ public class ListenerUtil {
 
     public static String getComponentName(final String eventAction,
                                           final String action) {
+	if (action == null) return null;
         return eventAction.substring(0, eventAction.indexOf(action));
     }
 }

@@ -37,16 +37,19 @@ public abstract class BaseTest2 extends SimpleGame {
         public void actionPerformed(final ActionEvent event) {
             if (event.getSource() instanceof BButton) {
                 String action = ListenerUtil.getActionName(event.getAction());
-                String componentName = ListenerUtil.getComponentName(event.getAction(), action);
-                if (action.equals("close")) {
-                    BuiSystem.getWindow(componentName).dismiss();
-                } else if (action.equals("ok")) {
-                    BuiSystem.getWindow(componentName).dismiss();
+                if (action != null) {
+                    String componentName = ListenerUtil.getComponentName(event.getAction(), action);
+                    if (action.equals("close")) {
+                        BuiSystem.getWindow(componentName).dismiss();
+                    } else if (action.equals("ok")) {
+                        BuiSystem.getWindow(componentName).dismiss();
+                    }
                 }
             }
         }
     };
 
+    @Override
     protected void simpleInitGame() {
         // we don't hide the cursor
         MouseInput.get().setCursorVisible(true);
@@ -68,6 +71,7 @@ public abstract class BaseTest2 extends SimpleGame {
         display.getRenderer().setBackgroundColor(ColorRGBA.gray);
     }
 
+    @Override
     protected void simpleUpdate() {}
 
     protected abstract void createWindows();
