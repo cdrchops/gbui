@@ -1,6 +1,6 @@
-Dialog Icons
+#summary Basic description and view the Dialog Icons for the Motif and Windows skinning
 
-These are the current DialogBox, InputBox and MessageBox Icons that are available.
+These are the current {{{DialogBox}}}, {{{InputBox}}} and {{{MessageBox}}} Icons that are available.
 
 To define the windows style vs motif/java style you can do that in your window options:
   * Motif
