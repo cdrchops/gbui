@@ -1,5 +1,3 @@
-ActionListeners
-
 To create an ActionListener you can:
   * implement the ActionListener class in a subclass
   * or you can create an Anonymous class
@@ -22,6 +20,6 @@ public void handleInput(ActionEvent event) {
 }
 }}}
 
-So, what can we do with the ActionEvent when it's been fired off by the _BComponent_
+So, what can we do with the ActionEvent when it's been fired off by the BComponent
 
 Check out [ActionEvent | ActionEvent]
