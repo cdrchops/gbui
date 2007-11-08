@@ -4,7 +4,7 @@ As you can see from the examples below these are simple dialog boxes.  Each one 
 
 Currently these are the only four available, unless you want no icon to display.
 
-[[bui:issuesMain | DialogBox Issues/Todos]]
+[IssuesMain DialogBox Issues/Todos]
 
 {{bui:dialogbox:simplegamescreenshot4.png| Error Dialog Box}}
 

@@ -1,8 +1,6 @@
-#summary One-sentence summary of this page.
+#summary How to use the ActionEvent
 
-= ActionEvent =
-
-[ActionEvent] is the event fired off by a {{{BComponent}}} to the listeners of your {{{BComponent}}}
+{{{ActionEvent}}} is the event fired off by a {{{BComponent}}} to the listeners of your {{{BComponent}}}
 
 To find out what *action* was fired off you can simply ask the {{{ActionEvent}}}
 
