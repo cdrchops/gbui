@@ -212,7 +212,7 @@ Now, you send the value to the console.   If you wanted to act upon that... like
 
 There are two methods that you will more than likely use most often.
 
-{{{getSelectedItem()}}} and {{{getSelectedValue()_
+{{{getSelectedItem()}}} and {{{getSelectedValue()}}}
 
 {{{getSelectedItem()}}} returns the label of the Item.
 
