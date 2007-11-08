@@ -13,7 +13,7 @@ They are (if you want):
   * draggable
   * closable
 
-[http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenShot0.png MessageBox with StatusBar]
+[http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenShot0.png] MessageBox with StatusBar
 
 {{bui:messagebox:simplegamescreenshot1.png|MessageBox without StatusBar}}
 
