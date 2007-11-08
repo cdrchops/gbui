@@ -32,4 +32,4 @@ What if you want to process one event from your {{{BComponent}}} then pass the r
 event.dispatch(listener); // where listener is a defined listener in your class or another class that has a local instance in this class
 }}}
 
-See also [Navigation]
+See also [NavigationFlow Navigation]
