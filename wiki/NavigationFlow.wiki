@@ -237,7 +237,7 @@ If you have a problem with the application starting up windowed or whatever... j
     }
 }}}
 
-Note that we get the {{{String// action from {{{event.getAction()//
+Note that we get the {{{String}}} action from {{{event.getAction()}}}
 
 Then we're going to check it against our logic statements.
 
@@ -249,7 +249,7 @@ Then we're going to check it against our logic statements.
 If we've clicked the {{{login}}} {{{BButton}}} then we're going to:
   * push the {{{login}}} {{{BWindow}}} onto the {{{Stack<BWindow>}}} in our [BuiSystem].
   * add our {{{mainMenu}}} {{{BWindow}}} to our {{{BRootNode}}}
-  * center our {{{mainMenu}}} {{{BWindow//
+  * center our {{{mainMenu}}} {{{BWindow}}}
   * tell our {{{login}}} {{{BWindow}}} to go away ({{{dismiss()}}})
 
 This is going to show our {{{mainMenu}}} {{{BWindow}}} in the center of the screen with a [http://dictionary.reference.com/browse/ginormous ginormous] {{{BButton}}} labeled {{{back}}} across the entire thing.
@@ -263,7 +263,7 @@ This is going to show our {{{mainMenu}}} {{{BWindow}}} in the center of the scre
             login.dismiss();
 }}}
 
-Now we've clicked the {{{back}}} {{{BButton}}} so we're going to tell our {{{BuiSystem//:
+Now we've clicked the {{{back}}} {{{BButton}}} so we're going to tell our {{{BuiSystem}}}:
   * That we want to get our last window off the {{{Stack<BWindow>}}}, which just a second ago we pushed it onto the {{{Stack<BWindow>}}}... the {{{login}}} {{{BWindow}}}.
   * That we want the window we've passed in to the {{{back(BWindow)}}} method to {{{dismiss()}}} just like we did a few lines up.
 
