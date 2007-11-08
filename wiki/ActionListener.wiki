@@ -14,7 +14,7 @@ private ActionListener listener = new ActionListener() {
 };
 }}}
 
-If you create an anonymous _ActionListener_ like this you'll have to define the _handleInput(ActionEvent)_ method in your class.
+If you create an Anonymous ActionListener like this you'll have to define the _handleInput(ActionEvent)_ method in your class.
 
 {{{
 public void handleInput(ActionEvent event) {
@@ -22,6 +22,6 @@ public void handleInput(ActionEvent event) {
 }
 }}}
 
-So, what can we do with the _ActionEvent_ when it's been fired off by the _BComponent_
+So, what can we do with the ActionEvent when it's been fired off by the _BComponent_
 
 Check out [ActionEvent | ActionEvent]
