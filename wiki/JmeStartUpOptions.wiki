@@ -1,4 +1,4 @@
-JME Startup Options
+#summary how to startup JME
 
 {{{ClassName}}} should be the name you've given to your application (e.g. {{{TwoWindowsTest}}}) or whatever it may be.
 
