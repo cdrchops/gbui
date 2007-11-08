@@ -170,14 +170,14 @@ public class TwoWindowTest extends BaseTest2 {
     };
 }}}
 
-Now we create our variables for our //login}}} //BWindow}}} and our //mainMenu}}} //BWindow//
+Now we create our variables for our {{{login}}} {{{BWindow}}} and our {{{mainMenu}}} {{{BWindow}}}
 
 {{{
     private BWindow login;
     private BWindow mainMenu;
 }}}
 
-Call the //setupLoginWindow()}}} and //setupMainMenuWindows()}}} which will handle all the code for setting the //login}}} and //mainMenu}}} //BWindow}}}s up respectively.
+Call the {{{setupLoginWindow()}}} and {{{setupMainMenuWindows()}}} which will handle all the code for setting the {{{login}}} and {{{mainMenu}}} {{{BWindow}}}s up respectively.
 
 {{{
     protected void createWindows() {
@@ -225,11 +225,11 @@ Comments inline with the code
 }
 }}}
 
-Just our //main// method.  [[http://jmonkeyengine.com/|JME]] has many options for starting an application.  I chose this route because I know what the other options are and for these tests you don't need to worry about starting up with dialogs or without, sizes, etc... I probably should, because most people won't have JME running prior to these tutorials, but I have a config file already created so I don't have to worry about it.
+Just our {{{main}}} method.  [http://jmonkeyengine.com/ JME] has many options for starting an application.  I chose this route because I know what the other options are and for these tests you don't need to worry about starting up with dialogs or without, sizes, etc... I probably should, because most people won't have JME running prior to these tutorials, but I have a config file already created so I don't have to worry about it.
 
-If you want to know more about JME startup options check out [[http://jmonkeyengine.com | JME]].
+If you want to know more about JME startup options check out [http://jmonkeyengine.com JME].
 
-If you have a problem with the application starting up windowed or whatever... just change your code to [[bui:tutorials:jmeStartupOptions | this]]
+If you have a problem with the application starting up windowed or whatever... just change your code to [JmeStartupOptions this]
 
 {{{
     public static void main(String[] args) {
@@ -237,7 +237,7 @@ If you have a problem with the application starting up windowed or whatever... j
     }
 }}}
 
-Note that we get the //String// action from //event.getAction()//
+Note that we get the {{{String// action from {{{event.getAction()//
 
 Then we're going to check it against our logic statements.
 
@@ -246,13 +246,13 @@ Then we're going to check it against our logic statements.
         String action = event.getAction();
 }}}
 
-If we've clicked the //login// //BButton// then we're going to:
-  * push the //login// //BWindow// onto the //Stack<BWindow>// in our [[BuiSystem]].
-  * add our //mainMenu// //BWindow// to our //BRootNode//
-  * center our //mainMenu// //BWindow//
-  * tell our //login// //BWindow// to go away (//dismiss()//)
+If we've clicked the {{{login}}} {{{BButton}}} then we're going to:
+  * push the {{{login}}} {{{BWindow}}} onto the {{{Stack<BWindow>}}} in our [BuiSystem].
+  * add our {{{mainMenu}}} {{{BWindow}}} to our {{{BRootNode}}}
+  * center our {{{mainMenu}}} {{{BWindow//
+  * tell our {{{login}}} {{{BWindow}}} to go away ({{{dismiss()}}})
 
-This is going to show our //mainMenu// //BWindow// in the center of the screen with a [[http://dictionary.reference.com/browse/ginormous|ginormous]] //BButton// labeled //back// across the entire thing.
+This is going to show our {{{mainMenu}}} {{{BWindow}}} in the center of the screen with a [http://dictionary.reference.com/browse/ginormous ginormous] {{{BButton}}} labeled {{{back}}} across the entire thing.
 
 {{{
         if (action.equals("login")) {
@@ -263,9 +263,9 @@ This is going to show our //mainMenu// //BWindow// in the center of the screen w
             login.dismiss();
 }}}
 
-Now we've clicked the //back// //BButton// so we're going to tell our //BuiSystem//:
-  * That we want to get our last window off the //Stack<BWindow>//, which just a second ago we pushed it onto the //Stack<BWindow>//... the //login// //BWindow//.
-  * That we want the window we've passed in to the //back(BWindow)// method to //dismiss()// just like we did a few lines up.
+Now we've clicked the {{{back}}} {{{BButton}}} so we're going to tell our {{{BuiSystem//:
+  * That we want to get our last window off the {{{Stack<BWindow>}}}, which just a second ago we pushed it onto the {{{Stack<BWindow>}}}... the {{{login}}} {{{BWindow}}}.
+  * That we want the window we've passed in to the {{{back(BWindow)}}} method to {{{dismiss()}}} just like we did a few lines up.
 
 {{{
         } else if (action.equals("back")) {
@@ -278,9 +278,13 @@ Now we've clicked the //back// //BButton// so we're going to tell our //BuiSyste
 
 What does it look like?  I won't dignify that with an answer... However, here are some screenshots.
 
-{{bui:tutorials:login.png?150|Login}}
+Login
 
-{{bui:tutorials:back.png?150|Back}}
+http://gbui.googlecode.com/svn/wiki/images/login.png
+
+Back
+
+http://gbui.googlecode.com/svn/wiki/images/back.png
 
 
-[[bui:tutorials:code | TwoWindowsTest.java]]
+[Code TwoWindowsTest.java]
