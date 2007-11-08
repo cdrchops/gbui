@@ -44,7 +44,7 @@ http://gbui.googlecode.com/svn/wiki/images/combobox1.png http://gbui.googlecode.
 
 Oh, you want to see items displayed?  Let's move on to adding {{{Item}}}s
 
-We can add a {{{String}}} or any other {{{Object}}}, but remember {{{BComboBox}}} is an extension of //BLabel//.  If you view the source code, you'll see that //BComboBox// has an inner class called //Item//.  We're going to use both.
+We can add a {{{String}}} or any other {{{Object}}}, but remember {{{BComboBox}}} is an extension of {{{BLabel}}}.  If you view the source code, you'll see that {{{BComboBox}}} has an inner class called {{{Item}}}.  We're going to use both.
 
 To add a simple {{{String}}} to display we simply:
 
@@ -176,7 +176,7 @@ Alright... now when we click on the only label that drops down we will see "this
 
 That's where we use {{{Item}}} which is the correct usage.  Anytime you use a {{{BComboBox}}} you should use {{{Item}}}.
 
-{{{Item// takes two parameters both {{{String}}}s.  The first one is the "actionMessage" or "value" the second is the "displayMessage" or "label" (not to be confused with a {{{BLabel}}}.
+{{{Item}}} takes two parameters both {{{String}}}s.  The first one is the "actionMessage" or "value" the second is the "displayMessage" or "label" (not to be confused with a {{{BLabel}}}.
 
 So, let's get rid of our line:
 
