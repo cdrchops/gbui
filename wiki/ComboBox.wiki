@@ -8,7 +8,7 @@ Building a //ComboBox// is just as easy as any of the other //BComponents//.
 
 Again, we'll be working with [[BaseTest2]] as our base class
 
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jmex.bui.BComboBox;
@@ -36,9 +36,9 @@ public class ComboBoxTest extends BaseTest2 {
         new ComboBoxTest().start();
     }
 }
-</code>
+}}}
 
-That's it to create a //BComboBox//... 
+That's it to create a //BComboBox//...
 
 {{bui:tutorials:combobox:combobox1.png}}{{bui:tutorials:combobox:combobox2.png}}
 
@@ -48,11 +48,11 @@ We can add a //String// or any other //Object//, but remember //BComboBox// is a
 
 To add a simple //String// to display we simply:
 
-<code java>
+{{{
     bc.addItem("this");
-</code>
+}}}
 
-Not really that impressive, but it does display... 
+Not really that impressive, but it does display...
 
 {{bui:tutorials:combobox:combobox3.png}}
 
@@ -60,22 +60,22 @@ However, it doesn't do anything.
 
 If we add an //ActionListener// as we've done in the past, then we can work with our information.  Let's do it.
 
-<code java>
+{{{
     private ActionListener listener2 = new ActionListener() {
-        public void actionPerformed(ActionEvent event) {           
+        public void actionPerformed(ActionEvent event) {
         }
     };
-</code>
+}}}
 
 Add that to our //BComboBox//:
 
-<code java>
+{{{
 bc.addListener(listener2);
-</code>
+}}}
 
 Great!  Now we have a //BComboBox// that displays, has an item, and a listener... but it still doesn't do anything.  Our code should look something like this:
 
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jmex.bui.BComboBox;
@@ -111,13 +111,13 @@ public class ComboBoxTest extends BaseTest2 {
         new ComboBoxTest().start();
     }
 }
-</code>
+}}}
 
 So what's wrong with it?  How are we going to get any kind of value out of the //BComboBox//?
 
 For this example, we're going to make the //BComboBox// a private member of our //ComboBoxTest// class.
 
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jmex.bui.BComboBox;
@@ -154,23 +154,23 @@ public class ComboBoxTest extends BaseTest2 {
         new ComboBoxTest().start();
     }
 }
-</code>
+}}}
 
 Still does nothing, but we're a little closer to our goal.  Let's add some information to our //ActionListener// and see if we can get something to print to our output (//System.out.println()//)
 
 Add this line just below the //actionPerformed(ActionEvent)// line.
 
-<code java>
+{{{
 Object o = bc.getSelectedItem();
-</code>
+}}}
 
 Now we have an //Object// to work with.  Remember //BComboBox// items are an //Object// e.g. //String// or //Item// we've told it we are giving it a //String// but what if we had given it an //Item//?  Then we want to ensure that we're getting back an //Object// that we'll check and see what type it is.
 
-<code java>
+{{{
 if (o instanceof String) {
     System.out.println(o);
 }
-</code>
+}}}
 
 Alright... now when we click on the only label that drops down we will see "this" display in our output on the console.  A little closer, but not quite right.  We're still not doing any good with our //BComboBox//.  What if you want to display one thing and have the "actionMessage" be another?
 
@@ -180,31 +180,31 @@ That's where we use //Item// which is the correct usage.  Anytime you use a //BC
 
 So, let's get rid of our line:
 
-<code java>
+{{{
 bc.addItem("this");
-</code>
+}}}
 
 We're going to replace it with five new lines:
 
-<code java>
+{{{
 Item item = new Item("this", "this2");
 Item item2 = new Item("this3", "this4");
 
 bc.addItem(item);
 bc.addItem(item2);
-</code>
+}}}
 
 Now, we have two //Item//s that will display the first one with the label "this2" the second one with the label "this4".  If we click on them, what do you think is going to come back?  Well we haven't covered that, but what will return is "this2" and "this4" respectively.
 
-That's not really what we want though... we could have done that with just the //String//.  What we really want is "this" and "this3" respectively.  These are the values we're going to act upon and decide what to do.  
+That's not really what we want though... we could have done that with just the //String//.  What we really want is "this" and "this3" respectively.  These are the values we're going to act upon and decide what to do.
 
 Let's modify our code just a little bit.
 
 In the //actionPerformed(ActionEvent)// method remove all of the code and replace it with:
 
-<code java>
+{{{
     System.out.println(bc.getSelectedValue());
-</code>
+}}}
 
 Now, you send the value to the console.   If you wanted to act upon that... like if value is bob then go to another window... you could.
 

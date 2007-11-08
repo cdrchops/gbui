@@ -1,4 +1,4 @@
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jme.app.SimpleGame;
@@ -23,7 +23,7 @@ public abstract class BaseTest2 extends SimpleGame {
 
                 // takes the action and retrieves the name of the BComponent that we're using to call with so we can use the BComponent by name if need be
                 String componentName = ListenerUtil.getComponentName(event.getAction(), action);
-                
+
                 //obvious, but if the action is close, then get the componentName and dismiss() it.
                 if (action.equals("close")) {
                     BuiSystem.getWindow(componentName).dismiss();
@@ -68,4 +68,4 @@ public abstract class BaseTest2 extends SimpleGame {
     //all of our subclasses for tests will implement this method
     protected abstract void createWindows();
 }
-</code>
+}}}

@@ -9,9 +9,9 @@ Here's an example flow from a login screen to the main menu.
 <code>
 BWindow Login
   BButton Login (action login)
-  
+
 BWindow MainMenu
-</code>
+}}}
 
 Not a whole lot there, but we know that when the user clicks the Login //BButton// they're going to send a login //ActionEvent// which will process and send the user to the MainMenu //BWindow//
 
@@ -21,7 +21,7 @@ The answer is fairly simple.
 
 Let's start with our two windows and our test class:
 
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jmex.bui.BWindow;
@@ -39,12 +39,12 @@ public class TwoWindowTest extends BaseTest2 {
         new TwoWindowTest().start();
     }
 }
-</code>
+}}}
 
 Ok so not much yet.  The //BuiSystem.getStyle()// retrieves the //BStyleSheet// from our //BuiSystem// class which was set in [[bui:tutorials:basetest2|BaseTest2]] when the //SimpleGame// initialized.
 
 On to the rest:
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jmex.bui.BWindow;
@@ -68,7 +68,7 @@ public class TwoWindowTest extends BaseTest2 {
 
         BButton loginButton = new BButton("Login", "login");
         loginButton.addListener(listener2);
-        
+
         login.add(loginButton);
     }
 
@@ -80,7 +80,7 @@ public class TwoWindowTest extends BaseTest2 {
 
     }
 }
-</code>
+}}}
 
 You'll notice that I added a //BButton// with an "action message" of //login//.  When the //BButton// is clicked it will submit that "action message" to the //ActionListener//, which in this case, goes to //handleInput(ActionEvent)// for us to tell it what to do.
 
@@ -90,7 +90,7 @@ This code is quite a bit different from the code just above.
 
 I have taken the //loginWindow// setup and the //mainMenuWindow// setup and moved them to their own methods.  I have added a //BButton// to go back from the //mainMenuWindow// to the //loginWindow//
 
-<code java>
+{{{
 package com.jmex.bui.tests;
 
 import com.jmex.bui.BWindow;
@@ -153,7 +153,7 @@ public class TwoWindowTest extends BaseTest2 {
         mainMenu.add(backButton);
     }
 }
-</code>
+}}}
 
 Let's look at this code a little more indepth:
 
@@ -161,34 +161,34 @@ Let's start with //[[bui:tutorials:basetest2|BaseTest2]]// then we'll move on to
 
 We're creating our //ActionListener// to handle the //ActionEvents// here.
 
-<code java>
+{{{
 public class TwoWindowTest extends BaseTest2 {
     private ActionListener listener2 = new ActionListener() {
         public void actionPerformed(ActionEvent event) {
             handleInput(event);
         }
     };
-</code>
+}}}
 
 Now we create our variables for our //login// //BWindow// and our //mainMenu// //BWindow//
 
-<code java>
+{{{
     private BWindow login;
     private BWindow mainMenu;
-</code>
+}}}
 
 Call the //setupLoginWindow()// and //setupMainMenuWindows()// which will handle all the code for setting the //login// and //mainMenu// //BWindow//s up respectively.
 
-<code java>
+{{{
     protected void createWindows() {
         setupLoginWindow();
         setupMainMenuWindow();
     }
-</code>
+}}}
 
 Comments inline with the code
 
-<code java>
+{{{
     public void setupLoginWindow() {
         //instantiate our login window
         //set our style from our BuiSystem and set our layout to stretch everything vertically
@@ -199,7 +199,7 @@ Comments inline with the code
 
         //create a new BButton called "loginButton" with the display "Login" and an "actionMessage" of "login"
         BButton loginButton = new BButton("Login", "login");
-        
+
         //add our listener2 to the loginButton so it knows what to do with the "actionMessage" when the button is clicked
         loginButton.addListener(listener2);
 
@@ -223,7 +223,7 @@ Comments inline with the code
         mainMenu.add(backButton);
     }
 }
-</code>
+}}}
 
 Just our //main// method.  [[http://jmonkeyengine.com/|JME]] has many options for starting an application.  I chose this route because I know what the other options are and for these tests you don't need to worry about starting up with dialogs or without, sizes, etc... I probably should, because most people won't have JME running prior to these tutorials, but I have a config file already created so I don't have to worry about it.
 
@@ -231,20 +231,20 @@ If you want to know more about JME startup options check out [[http://jmonkeyeng
 
 If you have a problem with the application starting up windowed or whatever... just change your code to [[bui:tutorials:jmeStartupOptions | this]]
 
-<code java>
+{{{
     public static void main(String[] args) {
         new TwoWindowTest().start();
     }
-</code>
+}}}
 
 Note that we get the //String// action from //event.getAction()//
 
 Then we're going to check it against our logic statements.
 
-<code java>
+{{{
     public void handleInput(ActionEvent event) {
         String action = event.getAction();
-</code>
+}}}
 
 If we've clicked the //login// //BButton// then we're going to:
   * push the //login// //BWindow// onto the //Stack<BWindow>// in our [[BuiSystem]].
@@ -254,26 +254,26 @@ If we've clicked the //login// //BButton// then we're going to:
 
 This is going to show our //mainMenu// //BWindow// in the center of the screen with a [[http://dictionary.reference.com/browse/ginormous|ginormous]] //BButton// labeled //back// across the entire thing.
 
-<code java>
+{{{
         if (action.equals("login")) {
             BuiSystem.push(login);
 
             BuiSystem.addWindow(mainMenu);
             mainMenu.center();
             login.dismiss();
-</code>
+}}}
 
 Now we've clicked the //back// //BButton// so we're going to tell our //BuiSystem//:
   * That we want to get our last window off the //Stack<BWindow>//, which just a second ago we pushed it onto the //Stack<BWindow>//... the //login// //BWindow//.
   * That we want the window we've passed in to the //back(BWindow)// method to //dismiss()// just like we did a few lines up.
 
-<code java>
+{{{
         } else if (action.equals("back")) {
             BuiSystem.back(mainMenu);
         }
     }
 
-</code>
+}}}
 
 
 What does it look like?  I won't dignify that with an answer... However, here are some screenshots.

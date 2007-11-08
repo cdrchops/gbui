@@ -6,22 +6,22 @@ To create an ActionListener you can:
 
 Anonymous class
 
-<code java>
+{{{
 private ActionListener listener = new ActionListener() {
     public void actionPerformed(ActionEvent event) {
         handleInput(event);
     }
 };
-</code>
+}}}
 
 If you create an Anonymous //ActionListener// like this you'll have to define the //handleInput(ActionEvent)// method in your class.
 
-<code java>
+{{{
 public void handleInput(ActionEvent event) {
     //this is where you'll handle stuff
 }
-</code>
+}}}
 
 So, what can we do with the //ActionEvent// when it's been fired off by the //BComponent//
 
-Check out [[bui:tutorials:ActionEvent | ActionEvent]]
+Check out [ActionEvent | ActionEvent]
