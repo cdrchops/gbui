@@ -6,10 +6,10 @@ Currently these are the only four available, unless you want no icon to display.
 
 [IssuesMain DialogBox Issues/Todos]
 
-{{bui:dialogbox:simplegamescreenshot4.png| Error Dialog Box}}
+[http://gbui.google.com/svn/wiki/images/SimpleGameScreenShot4.png Error Dialog Box]
 
-{{bui:dialogbox:simplegamescreenshot5.png| Information Dialog Box}}
+[SimpleGameScreenShot5.png Information Dialog Box]
 
-{{bui:dialogbox:simplegamescreenshot6.png| Warning Dialog Box}}
+[SimpleGameScreenShot6.png Warning Dialog Box]
 
-{{bui:dialogbox:simplegamescreenshot7.png| Question Dialog Box}}
+[SimpleGameScreenShot7.png Question Dialog Box]
