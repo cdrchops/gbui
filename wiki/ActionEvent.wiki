@@ -10,7 +10,7 @@ To find out what *action* was fired off you can simply ask the {{{ActionEvent}}}
 String action = event.getAction();
 }}}
 
-From the example above it's clear that {{{getAction()}}} returns a {{{String_.  From there you check the {{{String}}} against known actions you want performed.
+From the example above it's clear that {{{getAction()}}} returns a {{{String}}}.  From there you check the {{{String}}} against known actions you want performed.
 
 e.g.
 {{{
@@ -19,7 +19,7 @@ if (action.equals("back")) {
 }
 }}}
 
-What about filtering by a specific {{{BComponent}}} type?  For example, you only want to work with an event that is from a {{{BButton_.
+What about filtering by a specific {{{BComponent}}} type?  For example, you only want to work with an event that is from a {{{BButton}}}.
 
 {{{
 Object source = event.getSource();

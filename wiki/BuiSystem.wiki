@@ -1,8 +1,8 @@
-BuiSystem
+#summary What the BuiSystem is all about
 
 _BuiSystem {{{ is a concept I came up with for use with BUI.  I found that in [http://jmonkeyengine.com JME] there's only one {{{DisplaySystem}}} that is called by {{{DisplaySystem.getDisplaySystem()}}}.  You don't have to pass values around all over the place, just access it.  Why not do that for BUI?  So I did.
 
-Let's cover some of the internals of the {{{BuiSystem {{{
+Let's cover some of the internals of the {{{BuiSystem}}}
 
 {{{
 private static BRootNode rootNode;
@@ -16,7 +16,7 @@ The {{{BStyleSheet}}} is the {{{*.bss}}} file that tells BUI how to layout your 
 
 The {{{Stack<BWindow>}}} is our "navigation manager" of sorts.  We {{{push}}} a {{{BWindow}}} onto the {{{Stack<BWindow>}}} when we have a chance that we'll want to go back to that {{{BWindow_.  We {{{pop}}} a {{{BWindow}}} off the {{{Stack<BWindow>}}} when we're ready to go back to that {{{BWindow_.
 
-You can initialize the {{{BuiSystem {{{ by passing a {{{BRootNode}}} or child thereof, a path to your {{{BStylesheet}}} and a {{{Stack<BWindow>}}} for the history.
+You can initialize the {{{BuiSystem}}}{ by passing a {{{BRootNode}}} or child thereof, a path to your {{{BStylesheet}}} and a {{{Stack<BWindow>}}} for the history.
 
 {{{
 BuiSystem.init(_root, "/rsrc/styles.bss", new Stack<BWindow>());
@@ -35,7 +35,7 @@ BuiSystem.getStyle();
 BuiSystem.getRootNode();
 }}}
 
-With the history, it's a little different.  Either you're going to push or pop a {{{BWindow_.
+With the history, it's a little different.  Either you're going to {{{push}}} or {{{pop}}} a {{{BWindow}}}.
 
 {{{
 BuiSystem.push(WINDOW); // where WINDOW is your instantiation of a window
@@ -51,4 +51,4 @@ You can also get a specific window by name:
 BuiSystem.getWindow("myWindowName");//where myWindowName is the name you gave to your window
 }}}
 
-The {{{BuiSystem {{{ {{{BRootNode {{{ is not a replacement for components added to a specific {{{BWindow_.  You won't want to get a {{{rootNode}}} from the {{{BuiSystem {{{to reference in your subcomponent if your intent is to modify the node structure of the windows root node.  If you want to access the {{{BuiSystem {{{ {{{BRootNode}}} to do a function (eg. go back in your display to a previous display) then you would be using {{{BuiSystem.back()}}} correctly.
+The {{{BuiSystem}}} {{{BRootNode}}} is not a replacement for components added to a specific {{{BWindow}}}.  You won't want to get a {{{rootNode}}} from the {{{BuiSystem}}} to reference in your subcomponent if your intent is to modify the node structure of the windows root node.  If you want to access the {{{BuiSystem}}} {{{BRootNode}}} to do a function (eg. go back in your display to a previous display) then you would be using {{{BuiSystem.back()}}} correctly.

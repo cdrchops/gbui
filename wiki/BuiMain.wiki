@@ -1,4 +1,4 @@
-#summary BUI Utilities
+#summary BUI Utilities Main Page
 
 Gdrop BUI Utilities
 
@@ -8,7 +8,7 @@ For more about BUI goto [http://samskivert.com/code/jme-bui/ Banana User Interfa
 
 As of 30Apr07, you will not need the jme-bui jar from samskivert.  The code I have is all inclusive of bui itself.  It's merely for testing, but you might find some use in the library extensions I've made.  Eventually, as I said, I hope to merge these changes with core bui.
 
-I'm sure that there are a few changes that need to be made or a better way that someone else has to do it... 
+I'm sure that there are a few changes that need to be made or a better way that someone else has to do it...
 
 These extensions:
 
