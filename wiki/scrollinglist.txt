@@ -99,12 +99,12 @@ public class BScrollMessage {
     String actionEventName;
     ActionListener listener;
 
-    public BScrollMessage(final String _displayName,
-                         final String _actionEventName,
-                         final ActionListener _listener) {
-        displayName = _displayName;
-        actionEventName = _actionEventName;
-        listener = _listener;
+    public BScrollMessage(final String {{{displayName,
+                         final String {{{actionEventName,
+                         final ActionListener {{{listener) {
+        displayName = {{{displayName;
+        actionEventName = {{{actionEventName;
+        listener = {{{listener;
     }
 
     public String getActionEventName() {

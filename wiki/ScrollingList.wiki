@@ -2,7 +2,7 @@
 
 = Scrolling List =
 
-The example that comes in BUI for the BScrollingList is very generic.  Newbies might have to work with this for hours before coming up with a solution to even part of their problem.  
+The example that comes in BUI for the BScrollingList is very generic.  Newbies might have to work with this for hours before coming up with a solution to even part of their problem.
 
 Here's the code for ScrollingListTest
 
@@ -28,15 +28,15 @@ for (int i = 0; i < 100; i++) {
 }
 }}}
 
-Basically this code takes a  _ String _  and makes a  _ BButton _  that is added to the  _ BScrollingList _  (list) then that is added to the window.
+Basically this code takes a  {{{ String {{{  and makes a  {{{ BButton {{{  that is added to the  {{{ BScrollingList {{{  (list) then that is added to the window.
 
-So what if you want to add something different to your  _ BScrollingList _  like a  _ BLabel _  or even a  _ BButton _  that has a title, an action and a listener?
+So what if you want to add something different to your  {{{ BScrollingList {{{  like a  {{{ BLabel {{{  or even a  {{{ BButton {{{  that has a title, an action and a listener?
 
-With this code, it's not possible... written in stone are the carvings that this must be a  _ String _  which a  _ BButton _  will display to the user.
+With this code, it's not possible... written in stone are the carvings that this must be a  {{{ String {{{  which a  {{{ BButton {{{  will display to the user.
 
 Admitedly, it's a simple test, definitely not something that looks to be intended for anyone elses example, but an internal example... a test... hence it's in the test package.
 
-So, let's modify the  _ ScrollingListTest _  above... we'll start with a new class --  _ ExtendedScrollingListTest _ 
+So, let's modify the  {{{ ScrollingListTest {{{  above... we'll start with a new class --  {{{ ExtendedScrollingListTest {{{
 
 ExtendedScrollingListTest is the same as the ScrollingListTest except that the code below goes in the createWindows method and it extends [[bui:tutorials:basetest2|BaseTest2]] instead of BaseTest.
 
@@ -46,7 +46,7 @@ You'll have to use the jme-bui.jar from my downloads page or the BuiSystem class
 //create our new window
 BWindow window = new BWindow(BuiSystem.getStyle(), GroupLayout.makeVStretch());
 
-//create a scrolling list 
+//create a scrolling list
 BScrollingList<BScrollMessage, BButton> list = new BScrollingList<BScrollMessage, BButton>() {
     public BButton createComponent(BScrollMessage str) {
         BButton b = new BButton(str.getDisplayName(), str.getActionEventName());
@@ -75,7 +75,7 @@ BuiSystem.addWindow(window);
 window.setSize(400, 400);
 
  //center the window
-window.center();        
+window.center();
 }}}
 
 Doesn't look too bad does it... So let's look at what I did a little differently.
@@ -86,7 +86,7 @@ This code is a local class created simply for handling our details.  BScrollingL
 BScrollingList<BScrollMessage, BButton>
 }}}
 
-As you can see, the class I created for the first part of this Generic "argument" is called BScrollMessage.  
+As you can see, the class I created for the first part of this Generic "argument" is called BScrollMessage.
 
 What I wanted BScrollMessage to do was:
   * contain a message to display
@@ -101,12 +101,12 @@ public class BScrollMessage {
     String actionEventName;
     ActionListener listener;
 
-    public BScrollMessage(final String _displayName,
-                         final String _actionEventName,
-                         final ActionListener _listener) {
-        displayName = _displayName;
-        actionEventName = _actionEventName;
-        listener = _listener;
+    public BScrollMessage(final String {{{displayName,
+                         final String {{{actionEventName,
+                         final ActionListener {{{listener) {
+        displayName = {{{displayName;
+        actionEventName = {{{actionEventName;
+        listener = {{{listener;
     }
 
     public String getActionEventName() {
