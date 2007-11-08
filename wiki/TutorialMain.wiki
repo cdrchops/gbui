@@ -8,7 +8,7 @@ ActionListener
 
 ActionEvent
 
-[Navigationflow  Navigation]
+[NavigationFlow  Navigation]
 
 ComboBox
 
