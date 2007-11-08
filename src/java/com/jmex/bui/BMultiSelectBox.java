@@ -1,10 +1,10 @@
 package com.jmex.bui;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public abstract class BMultiSelectBox<V> extends BScrollingList<V, BToggleButton> {
     private SelectionMode selectionMode = SelectionMode.SINGLE;

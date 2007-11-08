@@ -20,17 +20,6 @@
 
 package com.jmex.bui;
 
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-
-import javax.imageio.ImageIO;
-
 import com.jme.image.Image;
 import com.jme.image.Texture;
 import com.jme.renderer.ColorRGBA;
@@ -43,6 +32,16 @@ import com.jme.scene.state.TextureState;
 import com.jme.system.DisplaySystem;
 import com.jme.util.TextureManager;
 import org.lwjgl.opengl.GLContext;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
 
 /** Contains a texture, its dimensions and a texture state. */
 public class BImage extends Quad {

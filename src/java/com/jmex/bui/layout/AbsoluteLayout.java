@@ -20,14 +20,14 @@
 
 package com.jmex.bui.layout;
 
-import java.util.HashMap;
-
 import com.jmex.bui.BComponent;
 import com.jmex.bui.BContainer;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Point;
 import com.jmex.bui.util.Rectangle;
+
+import java.util.HashMap;
 
 /**
  * Lays out components at absolute coordinate and with (optional) absolute sizes. <em>Note:</em> the components are laid

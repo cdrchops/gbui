@@ -20,13 +20,6 @@
 
 package com.jmex.bui;
 
-import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import com.jme.input.KeyInput;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.RenderContext;
@@ -44,6 +37,12 @@ import com.jmex.bui.text.HTMLView;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
+import org.lwjgl.opengl.GL11;
+
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * The basic entity in the BUI user interface system. A hierarchy of components and component derivations make up a user

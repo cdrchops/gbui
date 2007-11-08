@@ -22,8 +22,6 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
-
-import com.jmex.bui.background.BBackground;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.FocusEvent;

@@ -20,6 +20,8 @@
 
 package com.jmex.bui.bss;
 
+import com.jmex.bui.BStyleSheet;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,8 +34,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.jmex.bui.BStyleSheet;
 
 /**
  * @author timo

@@ -20,12 +20,12 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.layout.GroupLayout;
+
+import java.util.ArrayList;
 
 /** Displays one of a set of components (tabs) depending on which tab is selected. */
 public class BTabbedPane extends BContainer {

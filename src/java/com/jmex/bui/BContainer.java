@@ -20,12 +20,12 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-
 import com.jme.renderer.Renderer;
 import com.jmex.bui.layout.BLayoutManager;
 import com.jmex.bui.util.Dimension;
+
+import java.util.ArrayList;
+import java.util.logging.Level;
 
 /** A user interface element that is meant to contain other interface elements. */
 public class BContainer extends BComponent {

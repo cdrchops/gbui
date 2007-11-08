@@ -20,10 +20,6 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import com.jme.renderer.Renderer;
 import com.jmex.bui.event.ChangeEvent;
 import com.jmex.bui.event.ChangeListener;
@@ -33,6 +29,10 @@ import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 //Provides a scrollable, lazily instantiated component view of values
 public abstract class BScrollingList<V, C extends BComponent> extends BContainer {

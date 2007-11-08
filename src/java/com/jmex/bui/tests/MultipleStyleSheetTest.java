@@ -1,10 +1,10 @@
 package com.jmex.bui.tests;
 
-import java.net.URL;
-import java.util.List;
-import java.util.LinkedList;
-
 import com.jmex.bui.bss.BStyleSheetUtil;
+
+import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MultipleStyleSheetTest {
     private static final String STYLE1_STRING = "/rsrc/style.bss";

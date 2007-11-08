@@ -20,8 +20,6 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
 import com.jme.system.DisplaySystem;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.BEvent;
@@ -29,6 +27,8 @@ import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.layout.TableLayout;
 import com.jmex.bui.util.Dimension;
+
+import java.util.ArrayList;
 
 /** Displays a popup menu of items, one of which can be selected. */
 public class BPopupMenu extends BPopupWindow {

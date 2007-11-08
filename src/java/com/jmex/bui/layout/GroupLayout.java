@@ -20,11 +20,11 @@
 
 package com.jmex.bui.layout;
 
-import java.util.HashMap;
-
 import com.jmex.bui.BComponent;
 import com.jmex.bui.BContainer;
 import com.jmex.bui.util.Dimension;
+
+import java.util.HashMap;
 
 /** Group layout managers lay out widgets in horizontal or vertical groups. */
 public abstract class GroupLayout extends BLayoutManager {

@@ -20,11 +20,11 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.GroupLayout;
+
+import java.util.ArrayList;
 
 /** Displays a list of selectable entries and fires an {@link ActionEvent} when the selected value changes. */
 public class BList extends BContainer {

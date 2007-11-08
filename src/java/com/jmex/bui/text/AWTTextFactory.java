@@ -20,15 +20,14 @@
 
 package com.jmex.bui.text;
 
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Composite;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.Stroke;
+import com.jme.renderer.ColorRGBA;
+import com.jme.renderer.Renderer;
+import com.jmex.bui.BConstants;
+import com.jmex.bui.BImage;
+import com.jmex.bui.Log;
+import com.jmex.bui.util.Dimension;
+
+import java.awt.*;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextHitInfo;
@@ -36,30 +35,8 @@ import java.awt.font.TextLayout;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Level;
-
-import org.lwjgl.opengl.GL11;
-
-import com.jme.image.Image;
-import com.jme.image.Texture;
-import com.jme.math.Vector3f;
-import com.jme.renderer.ColorRGBA;
-import com.jme.renderer.Renderer;
-import com.jme.scene.Geometry;
-import com.jme.scene.Spatial;
-import com.jme.system.DisplaySystem;
-import com.jme.util.TextureManager;
-
-import com.jmex.bui.BConstants;
-import com.jmex.bui.BImage;
-import com.jmex.bui.Log;
-import com.jmex.bui.util.Dimension;
 
 /**
  * Formats text by using the AWT to render runs of text into a bitmap and then texturing a quad with the result.  This
@@ -525,9 +502,9 @@ public class AWTTextFactory extends BTextFactory {
 
         public String toString() {
             StringBuffer buf = new StringBuffer();
-            for (int ii = 0; ii < styles.length; ii++) {
-                if (styles[ii] > 0) {
-                    buf.append(styles[ii]);
+            for (char style : styles) {
+                if (style > 0) {
+                    buf.append(style);
                 }
             }
             if (color != null) {

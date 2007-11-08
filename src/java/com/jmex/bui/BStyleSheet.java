@@ -20,21 +20,6 @@
 
 package com.jmex.bui;
 
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StreamTokenizer;
-import java.lang.ref.WeakReference;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.imageio.ImageIO;
-
 import com.jme.renderer.ColorRGBA;
 import com.jmex.bui.background.BBackground;
 import com.jmex.bui.background.BlankBackground;
@@ -52,6 +37,19 @@ import com.jmex.bui.text.BTextFactory;
 import com.jmex.bui.text.DefaultKeyMap;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StreamTokenizer;
+import java.lang.ref.WeakReference;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Defines a stylesheet which is used to configure the style (font family, font size, foreground and background color,

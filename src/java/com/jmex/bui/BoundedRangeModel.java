@@ -20,12 +20,12 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
 import com.jmex.bui.event.ChangeEvent;
 import com.jmex.bui.event.ChangeListener;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.event.MouseWheelListener;
+
+import java.util.ArrayList;
 
 /**
  * Defines the model used by the {@link BScrollBar} to communicate with other components and external entities that wish

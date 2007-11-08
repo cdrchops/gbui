@@ -20,8 +20,6 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
 import com.jmex.bui.event.ChangeEvent;
@@ -30,6 +28,8 @@ import com.jmex.bui.text.BText;
 import com.jmex.bui.text.BTextFactory;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
+
+import java.util.ArrayList;
 
 /**
  * Displays one or more lines of text which may contain basic formatting

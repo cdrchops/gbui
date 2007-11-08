@@ -20,9 +20,9 @@
 
 package com.jmex.bui.icon;
 
-import java.net.URL;
-
 import com.jmex.bui.image.ImageUtil;
+
+import java.net.URL;
 
 /**
  * @author timo

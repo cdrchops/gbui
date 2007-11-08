@@ -20,8 +20,6 @@
 
 package com.jmex.bui.text;
 
-import java.net.URL;
-
 import com.jme.image.Texture;
 import com.jme.math.Vector3f;
 import com.jme.renderer.ColorRGBA;
@@ -32,6 +30,8 @@ import com.jme.scene.state.TextureState;
 import com.jme.system.DisplaySystem;
 import com.jme.util.TextureManager;
 import com.jmex.bui.util.Dimension;
+
+import java.net.URL;
 
 /** Creates instances of {@link BText} for text rendering. */
 public class JMEBitmapTextFactory extends BTextFactory {

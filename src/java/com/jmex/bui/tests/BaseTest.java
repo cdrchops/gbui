@@ -20,10 +20,6 @@
 
 package com.jmex.bui.tests;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import com.jme.app.SimpleGame;
 import com.jme.input.KeyBindingManager;
 import com.jme.input.MouseInput;
@@ -31,6 +27,10 @@ import com.jme.renderer.ColorRGBA;
 import com.jmex.bui.BRootNode;
 import com.jmex.bui.BStyleSheet;
 import com.jmex.bui.PolledRootNode;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /** A base class for our various visual tests. */
 public abstract class BaseTest extends SimpleGame {

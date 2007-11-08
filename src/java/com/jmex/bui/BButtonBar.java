@@ -1,13 +1,13 @@
 package com.jmex.bui;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import com.jmex.bui.enumeratedConstants.DialogOptions;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.event.ComponentListener;
 import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.layout.HGroupLayout;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class BButtonBar extends BContainer {
     private static BButton YES_BUTTON;
