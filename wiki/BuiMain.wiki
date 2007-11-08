@@ -12,19 +12,17 @@ I'm sure that there are a few changes that need to be made or a better way that 
 
 These extensions:
 
-[dialogBox DialogBox]
+DialogBox
 
-[dialogIcons Dialog Icons]
+DialogIcons
 
-[inputBox InputBox]
+InputBox
 
-[messageBox MessageBox]
+MessageBox
 
-[customMessageBox Custom MessageBoxes]
+[CustomMessageBox Custom MessageBoxes]
 
-[dradisExamples Examples from DRADIS] -- my game
+[DradisExamples Examples from DRADIS] -- my game
 
-[tutorialMain BUI Tutorials]
-
-
+[TutorialMain BUI Tutorials]
 
