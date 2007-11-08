@@ -1,3 +1,5 @@
+#summary Code for TwoWindowsTest
+
 {{{
 //
 // $Id: TwoWindowsTest.java,v 1.1 2007/05/01 19:46:33 timo Exp $
