@@ -1,9 +1,9 @@
-#summary One-sentence summary of this page.
+MessageBox
 
-These are simple MessageBoxes to get your message to the user.  
+These are simple MessageBoxes to get your message to the user.
 
 They can be configured:
-  * Like DialogBoxes to show an Icon to the Left 
+  * Like DialogBoxes to show an Icon to the Left
   * or simply add a title and message.
   * or display them with a title, message, icon and status bar
   * or even make them collapsable with a min max and close button
@@ -13,20 +13,18 @@ They are (if you want):
   * draggable
   * closable
 
-http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenShot0.png
+[http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenshot0.png MessageBox with StatusBar]
 
-MessageBox with StatusBar
-
-{{bui:messagebox:simplegamescreenshot1.png|MessageBox without StatusBar}}
+[http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenshot1.png MessageBox without StatusBar]
 
 Examples of Collapsing, Dragging and Tiling MessageBoxes:
 
-{{bui:tiledboxes:simplegamescreenshot10.png|}}
+http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenshot10.png
 
-{{bui:tiledboxes:simplegamescreenshot11.png|}}
+http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenshot11.png
 
-{{bui:tiledboxes:simplegamescreenshot12.png|}}
+http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenshot12.png
 
-{{bui:tiledboxes:simplegamescreenshot13.png|}}
+http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenshot13.png
 
-{{bui:tiledboxes:simplegamescreenshot14.png|}}
+http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenshot14.png
