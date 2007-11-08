@@ -1,3 +1,4 @@
+#summary Basic description of a Collapsing Windows and Tiled Windows and how to use them
 Collapsing and Tiled Windows **WIP -- not fully done yet**
 
 There are times when you want multiple windows to display.  They can, but don't have to, collapse.
