@@ -1,15 +1,15 @@
 BUI Tutorials
 
-[BuiSystem|BUI System]
+[BuiSystem BUI System]
 
-[ScrollingList|Scrolling List]
+[ScrollingList Scrolling List]
 
-[ActionListener | ActionListener]
+ActionListener
 
-[ActionEvent | ActionEvent]
+ActionEvent
 
-[Navigationflow| Navigation]
+[Navigationflow  Navigation]
 
-[ComboBox | ComboBox]
+ComboBox
 
-[CollapsingTiledWindows | Collapsing Tiled Windows]
+[CollapsingTiledWindows Collapsing Tiled Windows]
