@@ -1,3 +1,4 @@
+#summary Code for BaseTest2
 {{{
 package com.jmex.bui.tests;
 
