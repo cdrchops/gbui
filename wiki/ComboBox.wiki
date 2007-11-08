@@ -1,4 +1,4 @@
-ComboBox
+#summary Basic description of a ComboBox, views and how to use it
 
 A {{{ComboBox}}} is a box that you see with no initial value.  When you click on it, it drops down and shows you all of the values that you could select.  In HTML this would be called a {{{Select}}} tag with nested {{{Option}}} tags.
 
