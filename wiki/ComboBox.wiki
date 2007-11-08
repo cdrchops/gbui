@@ -1,12 +1,12 @@
 ComboBox
 
-A //ComboBox// is a box that you see with no initial value.  When you click on it, it drops down and shows you all of the values that you could select.  In HTML this would be called a //Select// tag with nested //Option// tags.
+A {{{ComboBox}}} is a box that you see with no initial value.  When you click on it, it drops down and shows you all of the values that you could select.  In HTML this would be called a //Select// tag with nested //Option// tags.
 
 Let's get started:
 
-Building a //ComboBox// is just as easy as any of the other //BComponents//.
+Building a {{{ComboBox}}} is just as easy as any of the other //BComponents//.
 
-Again, we'll be working with [[BaseTest2]] as our base class
+Again, we'll be working with [BaseTest2] as our base class
 
 {{{
 package com.jmex.bui.tests;
@@ -38,15 +38,15 @@ public class ComboBoxTest extends BaseTest2 {
 }
 }}}
 
-That's it to create a //BComboBox//...
+That's it to create a {{{BComboBox}}}...
 
-{{bui:tutorials:combobox:combobox1.png}}{{bui:tutorials:combobox:combobox2.png}}
+http://gbui.googlecode.com/svn/wiki/images/combobox1.png http://gbui.googlecode.com/svn/wiki/images/combobox2.png
 
-Oh, you want to see items displayed?  Let's move on to adding //Item//s
+Oh, you want to see items displayed?  Let's move on to adding {{{Item}}}s
 
-We can add a //String// or any other //Object//, but remember //BComboBox// is an extension of //BLabel//.  If you view the source code, you'll see that //BComboBox// has an inner class called //Item//.  We're going to use both.
+We can add a {{{String}}} or any other {{{Object}}}, but remember {{{BComboBox}}} is an extension of //BLabel//.  If you view the source code, you'll see that //BComboBox// has an inner class called //Item//.  We're going to use both.
 
-To add a simple //String// to display we simply:
+To add a simple {{{String}}} to display we simply:
 
 {{{
     bc.addItem("this");
@@ -58,7 +58,7 @@ Not really that impressive, but it does display...
 
 However, it doesn't do anything.
 
-If we add an //ActionListener// as we've done in the past, then we can work with our information.  Let's do it.
+If we add an {{{ActionListener}}} as we've done in the past, then we can work with our information.  Let's do it.
 
 {{{
     private ActionListener listener2 = new ActionListener() {
@@ -67,13 +67,13 @@ If we add an //ActionListener// as we've done in the past, then we can work with
     };
 }}}
 
-Add that to our //BComboBox//:
+Add that to our {{{BComboBox}}}:
 
 {{{
 bc.addListener(listener2);
 }}}
 
-Great!  Now we have a //BComboBox// that displays, has an item, and a listener... but it still doesn't do anything.  Our code should look something like this:
+Great!  Now we have a {{{BComboBox}}} that displays, has an item, and a listener... but it still doesn't do anything.  Our code should look something like this:
 
 {{{
 package com.jmex.bui.tests;
@@ -113,9 +113,9 @@ public class ComboBoxTest extends BaseTest2 {
 }
 }}}
 
-So what's wrong with it?  How are we going to get any kind of value out of the //BComboBox//?
+So what's wrong with it?  How are we going to get any kind of value out of the {{{BComboBox}}}?
 
-For this example, we're going to make the //BComboBox// a private member of our //ComboBoxTest// class.
+For this example, we're going to make the {{{BComboBox}}} a private member of our {{{ComboBoxTest}}} class.
 
 {{{
 package com.jmex.bui.tests;
