@@ -1,4 +1,4 @@
-#synopsis Examples of Custom MessageBoxes
+#summary Examples of Custom MessageBoxes
 
 These examples are simply showing the message box design, tiled message boxes with this design and collapsed message boxes with the same design
 
