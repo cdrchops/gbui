@@ -6,7 +6,7 @@ It is decorated how you need it, using styles in the bss (BUI stylesheet).
 
 Display is configured automatically, you tell it what you want it to say and what result you want to get back and you're done.
 
-[IssuesMain | InputBox Issues/Todos]
+[IssuesMain InputBox Issues/Todos]
 
 Basic Input Box
 
