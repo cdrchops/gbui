@@ -1,4 +1,4 @@
-#summary Basic description of an DialogBox, views and how to use it
+#summary Basic description of a DialogBox, views and how to use it
 
 BUI Dialog Box
 
