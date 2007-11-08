@@ -1,4 +1,4 @@
-Navigation
+#summary Introduction to plotting your Navigation and utilizing the Stack<BWindow>
 
 This is simply my general term for how your GUI with BUI flows.
 
@@ -229,7 +229,7 @@ Just our {{{main}}} method.  [http://jmonkeyengine.com/ JME] has many options fo
 
 If you want to know more about JME startup options check out [http://jmonkeyengine.com JME].
 
-If you have a problem with the application starting up windowed or whatever... just change your code to [JmeStartupOptions this]
+If you have a problem with the application starting up windowed or whatever... just change your code to [JmeStartUpOptions this]
 
 {{{
     public static void main(String[] args) {
