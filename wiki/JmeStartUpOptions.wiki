@@ -1,6 +1,6 @@
 JME Startup Options
 
-{{{ClassName}}} should be the name you've given to your application (e.g. TwoWindowsTest) or whatever it may be.
+{{{ClassName}}} should be the name you've given to your application (e.g. {{{TwoWindowsTest}}}) or whatever it may be.
 
 {{{
 ClassName app = new ClassName();
