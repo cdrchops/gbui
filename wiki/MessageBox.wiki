@@ -13,11 +13,12 @@ They are (if you want):
   * draggable
   * closable
 
-{{{MessageBox with StatusBar}}}
+MessageBox with StatusBar
 
 http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenShot0.png
 
-{{{MessageBox without StatusBar}}}
+MessageBox without StatusBar
+
 http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenShot1.png
 
 Examples of Collapsing, Dragging and Tiling MessageBoxes:
