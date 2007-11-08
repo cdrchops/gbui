@@ -1,6 +1,6 @@
 BuiSystem
 
-_BuiSystem _ is a concept I came up with for use with BUI.  I found that in [http://jmonkeyengine.com JME] there's only one _DisplaySystem _ that is called by _DisplaySystem.getDisplaySystem()_.  You don't have to pass values around all over the place, just access it.  Why not do that for BUI?  So I did.
+_BuiSystem _ is a concept I came up with for use with BUI.  I found that in [http://jmonkeyengine.com JME] there's only one _DisplaySystem _ that is called by {{{DisplaySystem.getDisplaySystem()}}}.  You don't have to pass values around all over the place, just access it.  Why not do that for BUI?  So I did.
 
 Let's cover some of the internals of the _BuiSystem _
 
