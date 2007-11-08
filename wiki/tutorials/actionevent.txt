@@ -1,0 +1,35 @@
+ActionEvent
+
+//ActionEvent// is the event fired off by a //BComponent// to the listeners of your //BComponent//
+
+To find out what **action** was fired off you can simply ask the //ActionEvent//
+
+<code java>
+String action = event.getAction();
+</code>
+
+From the example above it's clear that //getAction()// returns a String.  From there you check the //String// against known actions you want performed.
+
+e.g.
+<code java>
+if (action.equals("back")) {
+    //we're going to go back
+}
+</code>
+
+What about filtering by a specific //BComponent// type?  For example, you only want to work with an event that is from a //BButton//.
+
+<code java>
+Object source = event.getSource();
+if (source instanceof BButton) {
+    //now perform an action
+}
+</code>
+
+What if you want to process one event from your //BComponent// then pass the rest of the processing on to another listener?
+
+<code java>
+event.dispatch(listener); // where listener is a defined listener in your class or another class that has a local instance in this class
+</code>
+
+See also [[bui:tutorials:navigationFlow | Navigation]]

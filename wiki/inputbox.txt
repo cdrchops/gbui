@@ -1,0 +1,13 @@
+InputBox
+
+This is a basic InputBox.
+
+It is decorated how you need it, using styles in the bss (BUI stylesheet).
+
+Display is configured automatically, you tell it what you want it to say and what result you want to get back and you're done.
+
+[[bui:issuesMain | InputBox Issues/Todos]]
+
+{{bui:inputbox:simplegamescreenshot2.png|Basic Input Box}}
+
+{{bui:inputbox:simplegamescreenshot3.png|Basic Input Box with text}}
