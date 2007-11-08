@@ -2,7 +2,7 @@ Current Issues and/or Todos
 
 InputBox Issues
 As of 30Apr07:
-  * Working on the same issue for DialogBoxes where the pack() shrinks it to an unbelievable size
+  * Working on the same issue for [DialogBox]es where the {{{pack()}}} shrinks it to an unbelievable size
   * Working on getting the button to be smaller
   * Working on getting two buttons to display 
   * Working on pulling text from a png instead of a ttf file.  
