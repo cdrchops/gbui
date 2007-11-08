@@ -10,7 +10,7 @@ To find out what *action* was fired off you can simply ask the [ActionEvent]
 String action = event.getAction();
 }}}
 
-From the example above it's clear that _getAction()_ returns a _String_.  From there you check the //String// against known actions you want performed.
+From the example above it's clear that _getAction()_ returns a _String_.  From there you check the _String_ against known actions you want performed.
 
 e.g.
 {{{
