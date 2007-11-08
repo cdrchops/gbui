@@ -22,4 +22,4 @@ public void handleInput(ActionEvent event) {
 
 So, what can we do with the ActionEvent when it's been fired off by the BComponent
 
-Check out [ActionEvent | ActionEvent]
+Check out ActionEvent
