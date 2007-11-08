@@ -20,10 +20,10 @@
 
 package com.jmex.bui.text;
 
+import com.jmex.bui.Log;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
-
-import com.jmex.bui.Log;
 
 /** Defines the model that underlies the BUI text components. */
 public class Document {

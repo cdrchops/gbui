@@ -20,15 +20,12 @@
 
 package com.jmex.bui.text;
 
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.image.BufferedImage;
-import java.io.StringReader;
-import java.util.logging.Level;
+import com.jme.renderer.Renderer;
+import com.jmex.bui.BComponent;
+import com.jmex.bui.BImage;
+import com.jmex.bui.Log;
+import com.jmex.bui.util.Dimension;
+import com.jmex.bui.util.Insets;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -40,13 +37,10 @@ import javax.swing.text.ViewFactory;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-
-import com.jme.renderer.Renderer;
-import com.jmex.bui.BComponent;
-import com.jmex.bui.BImage;
-import com.jmex.bui.Log;
-import com.jmex.bui.util.Dimension;
-import com.jmex.bui.util.Insets;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.StringReader;
+import java.util.logging.Level;
 
 /**
  * Displays HTML using Java's HTML rendering support to layout and render the HTML. This is not a part of the text

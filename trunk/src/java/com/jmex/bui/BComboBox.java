@@ -20,13 +20,13 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.icon.BIcon;
 import com.jmex.bui.util.Dimension;
+
+import java.util.ArrayList;
 
 /** Displays a selected value and allows that value to be changed by selecting from a popup menu. */
 public class BComboBox extends BLabel {

@@ -20,9 +20,6 @@
 
 package com.jmex.bui.tests;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.jmex.bui.BuiSystem;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
@@ -30,6 +27,9 @@ import com.jmex.bui.headlessWindows.BMessageWindowUtil;
 import com.jmex.bui.headlessWindows.DialogWindow;
 import com.jmex.bui.headlessWindows.InputWindow;
 import com.jmex.bui.listener.ListenerUtil;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author timo

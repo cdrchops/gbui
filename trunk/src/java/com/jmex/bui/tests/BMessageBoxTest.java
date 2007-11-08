@@ -20,10 +20,10 @@
 
 package com.jmex.bui.tests;
 
+import com.jmex.bui.headlessWindows.BMessageWindowUtil;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.jmex.bui.headlessWindows.BMessageWindowUtil;
 
 /**
  * @author timo

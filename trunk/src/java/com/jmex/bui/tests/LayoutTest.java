@@ -20,10 +20,6 @@
 
 package com.jmex.bui.tests;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.jme.light.DirectionalLight;
 import com.jme.math.FastMath;
 import com.jme.math.Quaternion;
@@ -64,6 +60,10 @@ import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Point;
 import com.jmex.bui.util.Rectangle;
+
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** Tests random BUI bits. */
 public class LayoutTest extends BaseTest {

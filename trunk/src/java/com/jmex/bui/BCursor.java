@@ -20,15 +20,15 @@
 
 package com.jmex.bui;
 
-import java.awt.image.BufferedImage;
-import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
-import java.util.logging.Level;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Cursor;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+
+import java.awt.image.BufferedImage;
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.util.logging.Level;
 
 /** Contains a cursor. */
 public class BCursor {

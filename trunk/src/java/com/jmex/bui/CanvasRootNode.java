@@ -20,12 +20,12 @@
 
 package com.jmex.bui;
 
-import java.awt.Canvas;
-
 import com.jme.input.KeyInput;
 import com.jmex.bui.event.InputEvent;
 import com.jmex.bui.event.KeyEvent;
 import com.jmex.bui.event.MouseEvent;
+
+import java.awt.*;
 
 /** Bridges between the AWT and the BUI input event system when we are being used in an AWT canvas. */
 public class CanvasRootNode extends BRootNode

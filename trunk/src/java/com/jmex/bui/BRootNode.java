@@ -20,12 +20,6 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.logging.Level;
-
-import org.lwjgl.opengl.GL11;
-
 import com.jme.intersection.CollisionResults;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
@@ -37,6 +31,11 @@ import com.jmex.bui.event.EventListener;
 import com.jmex.bui.event.FocusEvent;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.layout.BorderLayout;
+import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.logging.Level;
 
 /** Connects the BUI system into the JME scene graph. */
 public abstract class BRootNode extends Geometry {

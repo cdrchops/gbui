@@ -20,8 +20,6 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
 import com.jme.input.InputHandler;
 import com.jme.input.KeyInput;
 import com.jme.input.KeyInputListener;
@@ -32,6 +30,8 @@ import com.jmex.bui.event.InputEvent;
 import com.jmex.bui.event.KeyEvent;
 import com.jmex.bui.event.MouseEvent;
 import org.lwjgl.opengl.Display;
+
+import java.util.ArrayList;
 
 /**
  * Processes the polled input information available from the underlying input system into input events and dispatches

@@ -20,21 +20,20 @@
 
 package com.jmex.bui.tests;
 
-import java.awt.Font;
-import java.io.StringReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.text.AttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.html.CSS;
-import javax.swing.text.html.StyleSheet;
-
 import com.jmex.bui.BRootNode;
 import com.jmex.bui.BStyleSheet;
 import com.jmex.bui.BWindow;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.text.HTMLView;
+
+import javax.swing.text.AttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.html.CSS;
+import javax.swing.text.html.StyleSheet;
+import java.awt.*;
+import java.io.StringReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /** Tests our HTML view. */
 public class HTMLTest extends BaseTest {

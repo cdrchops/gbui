@@ -20,13 +20,13 @@
 
 package com.jmex.bui.layout;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 import com.jmex.bui.BComponent;
 import com.jmex.bui.BContainer;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
+
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Lays out components in a simple grid arrangement, wherein the width and height of each column and row is defined by

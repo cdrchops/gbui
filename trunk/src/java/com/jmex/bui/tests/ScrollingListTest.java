@@ -20,9 +20,6 @@
 
 package com.jmex.bui.tests;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.jmex.bui.BButton;
 import com.jmex.bui.BConstants;
 import com.jmex.bui.BDecoratedWindow;
@@ -31,6 +28,9 @@ import com.jmex.bui.BScrollingList;
 import com.jmex.bui.BStyleSheet;
 import com.jmex.bui.BWindow;
 import com.jmex.bui.layout.GroupLayout;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ScrollingListTest extends BaseTest
         implements BConstants {

@@ -20,9 +20,6 @@
 
 package com.jmex.bui.controller;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import com.jme.system.DisplaySystem;
 import com.jmex.bui.BButton;
 import com.jmex.bui.BComponent;
@@ -33,6 +30,9 @@ import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.event.ComponentListener;
 import com.jmex.bui.headlessWindows.BAbstractMessageWindow;
 import com.jmex.bui.listener.ListenerUtil;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author timo
