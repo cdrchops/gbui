@@ -1,10 +1,10 @@
 ComboBox
 
-A {{{ComboBox}}} is a box that you see with no initial value.  When you click on it, it drops down and shows you all of the values that you could select.  In HTML this would be called a //Select// tag with nested //Option// tags.
+A {{{ComboBox}}} is a box that you see with no initial value.  When you click on it, it drops down and shows you all of the values that you could select.  In HTML this would be called a {{{Select}}} tag with nested {{{Option}}} tags.
 
 Let's get started:
 
-Building a {{{ComboBox}}} is just as easy as any of the other //BComponents//.
+Building a {{{ComboBox}}} is just as easy as any of the other {{{BComponents}}}.
 
 Again, we'll be working with [BaseTest2] as our base class
 
@@ -234,7 +234,7 @@ These next methods are ones that you might want to know about, but probably won'
 
 {{{selectValue(Object)}}} same as above, but by value
 
-{{{setItems(Collection)}}} set all of your {{{Item}}}s at one time from a {{{Collection}}} rather than adding them one by one... say for a premade selection list of items
+{{{setItems(Collection)}}} set all of your {{{Item}}}s at one time from a {{{Collection}}} rather than adding them one by one... say for a pre-made selection list of items
 
 {{{setItems(Object[])}}} same as above but with an {{{Object[]}}} rather than a {{{Collection}}}
 
