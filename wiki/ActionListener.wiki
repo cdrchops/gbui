@@ -14,7 +14,7 @@ private ActionListener listener = new ActionListener() {
 };
 }}}
 
-If you create an Anonymous _ActionListener_ like this you'll have to define the _handleInput(ActionEvent)_ method in your class.
+If you create an anonymous _ActionListener_ like this you'll have to define the _handleInput(ActionEvent)_ method in your class.
 
 {{{
 public void handleInput(ActionEvent event) {
