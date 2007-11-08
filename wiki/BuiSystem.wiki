@@ -1,8 +1,8 @@
 BuiSystem
 
-//BuiSystem// is a concept I came up with for use with BUI.  I found that in [[http://jmonkeyengine.com|JME]] there's only one //DisplaySystem// that is called by //DisplaySystem.getDisplaySystem()//.  You don't have to pass values around all over the place, just access it.  Why not do that for BUI?  So I did.
+_BuiSystem_ is a concept I came up with for use with BUI.  I found that in [http://jmonkeyengine.com JME] there's only one _DisplaySystem_ that is called by _DisplaySystem.getDisplaySystem()_.  You don't have to pass values around all over the place, just access it.  Why not do that for BUI?  So I did.
 
-Let's cover some of the internals of the //BuiSystem//
+Let's cover some of the internals of the _BuiSystem_
 
 {{{
 private static BRootNode rootNode;
