@@ -1,3 +1,5 @@
+#summary Basic description of an ActionListener, views and how to use it
+
 To create an ActionListener you can:
   * implement the ActionListener class in a subclass
   * or you can create an Anonymous class
