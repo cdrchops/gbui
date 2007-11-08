@@ -10,13 +10,13 @@ private static BStyleSheet style;
 private static Stack<BWindow> history;
 }}}
 
-The //BRootNode// is the root node of the entire BUI application you're running... it's like the parent of all that is BUI.
+The _BRootNode_ is the root node of the entire BUI application you're running... it's like the parent of all that is BUI.
 
-The //BStyleSheet// is the //*.bss// file that tells BUI how to layout your styles... whether your //BButtons// are images or text or if your //BWindow// has a line around it and what color is that line.  //BStyleSheet// and //*.bss// are like //css// //Cascading Style Sheets// for //HTML//.  You can name the .bss file any extension you want as long as the format of the .bss is consistent with what the //BStyleSheet// processor is expecting.
+The _BStyleSheet_ is the _*.bss_ file that tells BUI how to layout your styles... whether your _BButtons_ are images or text or if your _BWindow_ has a line around it and what color is that line.  _BStyleSheet_ and _*.bss_ are like _css_ _Cascading Style Sheets_ for _HTML_.  You can name the .bss file any extension you want as long as the format of the .bss is consistent with what the _BStyleSheet_ processor is expecting.
 
-The //Stack<BWindow>// is our "navigation manager" of sorts.  We //push// a //BWindow// onto the //Stack<BWindow>// when we have a chance that we'll want to go back to that //BWindow//.  We //pop// a //BWindow// off the //Stack<BWindow>// when we're ready to go back to that //BWindow//.
+The _Stack<BWindow>_ is our "navigation manager" of sorts.  We _push_ a _BWindow_ onto the _Stack<BWindow>_ when we have a chance that we'll want to go back to that _BWindow_.  We _pop_ a _BWindow_ off the _Stack<BWindow>_ when we're ready to go back to that _BWindow_.
 
-You can initialize the //BuiSystem// by passing a //BRootNode// or child thereof, a path to your //BStylesheet// and a //Stack<BWindow>// for the history.
+You can initialize the _BuiSystem_ by passing a _BRootNode_ or child thereof, a path to your _BStylesheet_ and a _Stack<BWindow>_ for the history.
 
 {{{
 BuiSystem.init(_root, "/rsrc/styles.bss", new Stack<BWindow>());
@@ -35,10 +35,10 @@ BuiSystem.getStyle();
 BuiSystem.getRootNode();
 }}}
 
-With the history, it's a little different.  Either you're going to push or pop a //BWindow//.
+With the history, it's a little different.  Either you're going to push or pop a _BWindow_.
 
 {{{
-BuiSystem.push(WINDOW); //where WINDOW is your instantiation of a window
+BuiSystem.push(WINDOW); // where WINDOW is your instantiation of a window
 }}}
 
 {{{
@@ -51,4 +51,4 @@ You can also get a specific window by name:
 BuiSystem.getWindow("myWindowName");//where myWindowName is the name you gave to your window
 }}}
 
-The //BuiSystem// //BRootNode// is not a replacement for components added to a specific //BWindow//.  You won't want to get a //rootNode// from the //BuiSystem //to reference in your subcomponent if your intent is to modify the node structure of the windows root node.  If you want to access the //BuiSystem// //BRootNode// to do a function (eg. go back in your display to a previous display) then you would be using //BuiSystem.back()// correctly.
+The _BuiSystem_ _BRootNode_ is not a replacement for components added to a specific _BWindow_.  You won't want to get a _rootNode_ from the _BuiSystem _to reference in your subcomponent if your intent is to modify the node structure of the windows root node.  If you want to access the _BuiSystem_ _BRootNode_ to do a function (eg. go back in your display to a previous display) then you would be using _BuiSystem.back()_ correctly.
