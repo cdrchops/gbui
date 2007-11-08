@@ -1,9 +1,9 @@
-MessageBox
+#summary Basic description of a MessageBox, views and how to use it
 
-These are simple MessageBoxes to get your message to the user.
+These are simple {{{MessageBox}}}es to get your message to the user.
 
 They can be configured:
-  * Like DialogBoxes to show an Icon to the Left
+  * Like {{{DialogBox}}}es to show an Icon to the Left
   * or simply add a title and message.
   * or display them with a title, message, icon and status bar
   * or even make them collapsable with a min max and close button
@@ -13,15 +13,15 @@ They are (if you want):
   * draggable
   * closable
 
-MessageBox with StatusBar
+{{{MessageBox}}} with {{{StatusBar}}}
 
 http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenShot0.png
 
-MessageBox without StatusBar
+{{{MessageBox}}} without {{{StatusBar}}}
 
 http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenShot1.png
 
-Examples of Collapsing, Dragging and Tiling MessageBoxes:
+Examples of Collapsing, Dragging and Tiling {{{MessageBoxes}}}:
 
 http://gbui.googlecode.com/svn/wiki/images/SimpleGameScreenShot10.png
 
