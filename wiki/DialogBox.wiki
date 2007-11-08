@@ -1,3 +1,5 @@
+#summary Basic description of an DialogBox, views and how to use it
+
 BUI Dialog Box
 
 As you can see from the examples below these are simple dialog boxes.  Each one emulates a similar example in awt and swing.
