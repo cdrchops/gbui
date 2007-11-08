@@ -13,7 +13,7 @@ BWindow Login
 BWindow MainMenu
 }}}
 
-Not a whole lot there, but we know that when the user clicks the Login {{{BButton}}} they're going to send a login {{{ActionEvent}}} which will process and send the user to the MainMenu {{{BWindow}}}
+Not a whole lot there, but we know that when the user clicks the Login {{{BButton}}} they're going to send a login {{{ActionEvent}}} which will process and send the user to the {{{MainMenu BWindow}}}
 
 Does this sound simple or hard yet?
 
