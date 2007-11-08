@@ -1,3 +1,5 @@
+#summary Examples of Custom Dialogs using BUI
+
 DRADIS screenshots of the menus
 
 Some work still needs to be done with them, but it gives you an example of what I've been customizing for the logins, etc.  They aren't complete, but they are working examples.  Click on each image to view a larger version.
