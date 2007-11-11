@@ -30,6 +30,7 @@ import com.jmex.bui.enumeratedConstants.DisplayStyleOptions;
 import com.jmex.bui.enumeratedConstants.IconOptions;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.event.ActionListener;
+import com.jmex.bui.listener.CollapsingWindowListener;
 
 /**
  * @author timo
@@ -37,7 +38,7 @@ import com.jmex.bui.event.ActionListener;
  */
 // TODO this utility class is a mess: simplify or remove
 public final class InputBoxUtil {
-
+    private static final CollapsingWindowListener LISTENER = new CollapsingWindowListener();
 
     private InputBoxUtil() {}
 
@@ -74,6 +75,7 @@ public final class InputBoxUtil {
     }
 
     private static BInputBox finishWindow(final BInputBox db) {
+	db.addListener(LISTENER);
         db.setSize(400, 200);
         BuiSystem.getRootNode().addWindow(db);
         db.center();
