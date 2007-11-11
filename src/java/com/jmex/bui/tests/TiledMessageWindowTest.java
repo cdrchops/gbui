@@ -20,23 +20,21 @@
 
 package com.jmex.bui.tests;
 
-import com.jmex.bui.controller.BTiledWindowController;
-import com.jmex.bui.headlessWindows.BMessageWindow;
-import com.jmex.bui.headlessWindows.BMessageWindowUtil;
+import com.jmex.bui.BuiSystem;
+import com.jmex.bui.headlessWindows.MessageWindowUtil;
+import com.jmex.bui.headlessWindows.BTitledWindow;
 
 /**
  * @author timo
  * @since 27Apr07
  */
 public class TiledMessageWindowTest extends BaseTest2 {
+    @Override
     protected void createWindows() {
-        BTiledWindowController bc = new BTiledWindowController(new CollapsingWindowListenerImpl());
-
         for (int i = 0; i < 3; i++) {
-            BMessageWindow mw = BMessageWindowUtil.createTiledInfoMessageWindow("tiledMessage" + i,
-                                                                                "This is my message" + i,
-                                                                                bc.getListener());
-            bc.addWindow(mw);
+            BTitledWindow mw = MessageWindowUtil.createMessageBox("Message box #" + i,
+        	    "You won't be able to dismiss this evil window.");
+            BuiSystem.getRootNode().addWindow(mw);
         }
     }
 

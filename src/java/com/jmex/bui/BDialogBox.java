@@ -20,48 +20,54 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.event.ComponentListener;
+import com.jmex.bui.enumeratedConstants.DialogOptions;
+import com.jmex.bui.event.ActionEvent;
+import com.jmex.bui.event.ActionListener;
+import com.jmex.bui.event.DialogListener;
+import com.jmex.bui.headlessWindows.BTitledWindow;
 import com.jmex.bui.layout.BorderLayout;
 
-/**
- * @author timo
- * @since 27Apr07
- */
-public class BDialogBox extends BContainer {
-    private BTitleBar titleBar;
-    private BDialogMessage message;
+public class BDialogBox extends BTitledWindow {
 
-    public BDialogBox(final String _name) {
-        super(_name, new BorderLayout());
+    private DialogListener listener;
+
+    public BDialogBox(final String name,
+                      final BTitleBar titleBar,
+                      final BDialogMessage message,
+                      final DialogOptions options,
+                      final BStyleSheet style) {
+	super(name, titleBar, null, style);
+	if (message == null) {
+	    throw new IllegalArgumentException("The message for BDialogBox cannot be null");
+	}
+
+	getComponentArea().setStyleClass("greymessagebg");
+	getComponentArea().setLayoutManager(new BorderLayout());
+        getComponentArea().add(message, BorderLayout.NORTH);
+
+        BButtonBar buttons = new BButtonBar("", options);
+        buttons.setButtonListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent event) {
+		fireResponse(event);
+	    }
+
+        });
+        getComponentArea().add(buttons, BorderLayout.SOUTH);
     }
 
-    public BDialogBox(final String _name,
-                      final BTitleBar _titleBar,
-                      final BDialogMessage _message) {
-        this(_name);
-        titleBar = _titleBar;
-        message = _message;
-
-        addComponents();
+    private void fireResponse(ActionEvent event) {
+	UserResponse response = UserResponse.valueOf(event.getAction());
+	if (response != null) {
+	    if (listener != null) {
+		listener.responseAvailable(response, this);
+	    }
+	    dismiss();
+	}
     }
 
-    public void addComponents() {
-        if (titleBar != null) {
-            add(titleBar, BorderLayout.NORTH);
-        } else {
-            throw new RuntimeException("TitleBar for MessageBoxes must NOT be null!");
-        }
-
-        if (message != null) {
-            add(message, BorderLayout.CENTER);
-        } else {
-            throw new RuntimeException("Message for MessageBoxes must NOT be null!");
-        }
-    }
-
-    public void addListener(final ComponentListener listener) {
-        super.addListener(listener);
-        titleBar.addListener(listener);
-        message.addListener(listener);
+    public void setDialogListener(DialogListener listener) {
+	this.listener = listener;
     }
 }

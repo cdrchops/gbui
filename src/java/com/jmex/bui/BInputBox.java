@@ -20,52 +20,28 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.event.ComponentListener;
+import com.jmex.bui.enumeratedConstants.DialogOptions;
 import com.jmex.bui.layout.BorderLayout;
 
 /**
  * @author timo
  * @since 27Apr07
  */
-public class BInputBox extends BContainer {
-    private BTitleBar titleBar;
-    private BInputMessage message;
+public class BInputBox extends BDialogBox {
+    private BTextField textField;
 
-    public BInputBox() {
-        super(new BorderLayout());
-    }
+    public BInputBox(final String name,
+	    final BTitleBar titleBar,
+            final BDialogMessage message,
+            final DialogOptions options,
+            final BStyleSheet style) {
+        super(name, titleBar, message, options, style);
 
-    public BInputBox(final BTitleBar _titleBar,
-                     final BInputMessage _message) {
-        this();
-        titleBar = _titleBar;
-        message = _message;
-
-        addComponents();
-    }
-
-    public void addComponents() {
-        if (titleBar != null) {
-            add(titleBar, BorderLayout.NORTH);
-        } else {
-            throw new RuntimeException("TitleBar for InputBoxes must NOT be null!");
-        }
-
-        if (message != null) {
-            add(message, BorderLayout.CENTER);
-        } else {
-            throw new RuntimeException("Message for InputBoxes must NOT be null!");
-        }
+        textField = new BTextField("");
+        getComponentArea().add(textField, BorderLayout.CENTER);
     }
 
     public String getInputText() {
-        return message.getInputText();
-    }
-
-    public void addListener(final ComponentListener listener) {
-        super.addListener(listener);
-
-        titleBar.addListener(listener);
-        message.addListener(listener);
+        return textField.getText();
     }
 }

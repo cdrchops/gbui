@@ -100,11 +100,23 @@ titlebarbutton {
     padding: 0 0 0 0;
 }
 
+closebutton {
+  parent: titlebarbutton;
+	background: image "rsrc/textures/close.png" centerxy;
+}
+
+minimizebutton {
+  parent: titlebarbutton;
+	background: image "rsrc/textures/minimize.png" centerxy;
+}
+
+maximizebutton {
+  parent: titlebarbutton;
+	background: image "rsrc/textures/maximize.png" centerxy;
+}
 buttonbar {
     padding: 6 30;
 }
-
-
 
 labeltext {
     padding: 5 5;

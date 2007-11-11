@@ -24,28 +24,16 @@ import com.jme.app.SimpleGame;
 import com.jme.input.KeyBindingManager;
 import com.jme.input.MouseInput;
 import com.jme.renderer.ColorRGBA;
-import com.jmex.bui.BButton;
 import com.jmex.bui.BuiSystem;
 import com.jmex.bui.PolledRootNode;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
-import com.jmex.bui.listener.ListenerUtil;
 
 /** A base class for our various visual tests. */
 public abstract class BaseTest2 extends SimpleGame {
     protected ActionListener listener = new ActionListener() {
         public void actionPerformed(final ActionEvent event) {
-            if (event.getSource() instanceof BButton) {
-                String action = ListenerUtil.getActionName(event.getAction());
-                if (action != null) {
-                    String componentName = ListenerUtil.getComponentName(event.getAction(), action);
-                    if (action.equals("close")) {
-                        BuiSystem.getWindow(componentName).dismiss();
-                    } else if (action.equals("ok")) {
-                        BuiSystem.getWindow(componentName).dismiss();
-                    }
-                }
-            }
+            System.out.println(event.getAction());
         }
     };
 

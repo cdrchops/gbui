@@ -20,79 +20,67 @@
 
 package com.jmex.bui.headlessWindows;
 
+import com.jmex.bui.BDialogMessage;
 import com.jmex.bui.BInputBox;
-import com.jmex.bui.BInputMessage;
 import com.jmex.bui.BLabel;
 import com.jmex.bui.BTitleBar;
-import com.jmex.bui.BWindow;
 import com.jmex.bui.BuiSystem;
 import com.jmex.bui.enumeratedConstants.DialogOptions;
+import com.jmex.bui.enumeratedConstants.DisplayStyleOptions;
 import com.jmex.bui.enumeratedConstants.IconOptions;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.event.ActionListener;
-import com.jmex.bui.layout.GroupLayout;
 
 /**
  * @author timo
  * @since 27Apr07
  */
-public class InputWindow extends BWindow {
-    private InputWindow(final String _name) {
-        super(_name, BuiSystem.getStyle(), GroupLayout.makeVStretch());
-    }
+// TODO this utility class is a mess: simplify or remove
+public final class InputBoxUtil {
 
-    public static void createInfoInputWindow(final String _name,
+
+    private InputBoxUtil() {}
+
+    public static BInputBox createInfoInputBox(final String _name,
                                              final String message,
                                              final ActionListener listener) {
         BInputBox db = createInfoInputBox(_name, message);
         db.addListener(listener);
-
-        finishWindow(_name, db);
+        return finishWindow(db);
     }
 
-    public static void createQuestionInputWindow(final String _name,
+    public static BInputBox createQuestionInputBox(final String _name,
                                                  final String message,
                                                  final ActionListener listener) {
         BInputBox db = createQuestionInputBox(_name, message);
         db.addListener(listener);
-
-        finishWindow(_name, db);
+        return finishWindow(db);
     }
 
-    public static void createWarningInputWindow(final String _name,
+    public static BInputBox createWarningInputBox(final String _name,
                                                 final String message,
                                                 final ActionListener listener) {
         BInputBox db = createWarningInputBox(_name, message);
         db.addListener(listener);
-
-        finishWindow(_name, db);
+        return finishWindow(db);
     }
 
-    public static void createErrorInputWindow(final String _name,
+    public static BInputBox createErrorInputBox(final String _name,
                                               final String message,
                                               final ActionListener listener) {
         BInputBox db = createErrorInputBox(_name, message);
         db.addListener(listener);
-
-        finishWindow(_name, db);
+        return finishWindow(db);
     }
 
-    private static void finishWindow(final String _name,
-                                     final BInputBox db) {
-        InputWindow instance = new InputWindow(_name);
-        instance.add(db);
-
-        instance.setSize(400, 200);
-        BuiSystem.getRootNode().addWindow(instance);
-
-        instance.center();
+    private static BInputBox finishWindow(final BInputBox db) {
+        db.setSize(400, 200);
+        BuiSystem.getRootNode().addWindow(db);
+        db.center();
+        return db;
     }
 
-    public static String getInputText(BWindow instance) {
-        return ((BInputBox) instance.getComponent(0)).getInputText();
-    }
-
-    public static void createInputWindow(final String _name,
+    public static BInputBox createInputBox(final String _name,
                                          final String title,
                                          final String titleClass,
                                          final String message,
@@ -101,7 +89,7 @@ public class InputWindow extends BWindow {
                                          final ActionListener listener) {
         BInputBox db = createInputBox(_name, title, titleClass, message, options, iconOptions);
         db.addListener(listener);
-        finishWindow(_name, db);
+        return finishWindow(db);
     }
 
     public static BInputBox createInputBox(final String _name,
@@ -111,9 +99,10 @@ public class InputWindow extends BWindow {
                                            final DialogOptions options,
                                            final IconOptions iconOptions) {
         BTitleBar tb = new BTitleBar(_name, new BLabel(title, titleClass), TitleOptions.CLOSE);
-        BInputMessage _message = new BInputMessage(_name, message, options, iconOptions);
+        BDialogMessage dlgMessage = new BDialogMessage(_name, message, iconOptions, DisplayStyleOptions.MOTIF);
 
-        return new BInputBox(tb, _message);
+        BInputBox box = new BInputBox("input box", tb, dlgMessage, options, BuiSystem.getStyle());
+        return finishWindow(box);
     }
 
     public static BInputBox createBasicInputBox(final String _name,

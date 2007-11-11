@@ -20,36 +20,23 @@
 
 package com.jmex.bui.tests;
 
-import com.jmex.bui.BMessageBox;
-import com.jmex.bui.controller.BTiledWindowController;
+import com.jmex.bui.BuiSystem;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
-import com.jmex.bui.headlessWindows.BMessageWindow;
-import com.jmex.bui.headlessWindows.BMessageWindowUtil;
+import com.jmex.bui.headlessWindows.MessageWindowUtil;
+import com.jmex.bui.headlessWindows.BTitledWindow;
 
 /**
  * @author timo
  * @since 27Apr07
  */
 public class CollapsingTiledMessageWindowTest extends BaseTest2 {
+    @Override
     protected void createWindows() {
-        BTiledWindowController bc = new BTiledWindowController(new CollapsingWindowListenerImpl());
-
-        //each portion is split up so that the reformatter doesn't change it
         for (int i = 0; i < 3; i++) {
-            BMessageBox mb = createMessageBox("name" + i);
-            BMessageWindow mw = BMessageWindowUtil.createTiledMessageWindow("name" + i, mb, bc.getListener());
-            bc.addWindow(mw);
+            BTitledWindow mw = MessageWindowUtil.
+            	createMessageBox("Window #" + i, "Window #" + i, TitleOptions.MIN_MAX_CLOSE, "Some content");
+            BuiSystem.getRootNode().addWindow(mw);
         }
-    }
-
-    private BMessageBox createMessageBox(final String name) {
-        return BMessageWindowUtil.createMessageBox(name,
-                                                   "title",
-                                                   "titlemessage",
-                                                   TitleOptions.MIN_MAX_CLOSE,
-                                                   "message",
-                                                   "status",
-                                                   "statusbar");
     }
 
     public static void main(String[] args) {

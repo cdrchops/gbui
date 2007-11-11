@@ -20,9 +20,16 @@
 
 package com.jmex.bui;
 
+import java.util.ArrayList;
+
 import com.jmex.bui.enumeratedConstants.TitleOptions;
+import com.jmex.bui.event.ActionEvent;
+import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.ComponentListener;
+import com.jmex.bui.headlessWindows.BTitledWindow;
 import com.jmex.bui.layout.BorderLayout;
+import com.jmex.bui.layout.GroupLayout;
+import com.jmex.bui.listener.CollapsingWindowListener;
 
 /**
  * @author timo
@@ -30,64 +37,25 @@ import com.jmex.bui.layout.BorderLayout;
  */
 public class BTitleBar extends BContainer {
     private BLabel title;
-    private BButtonBar buttonBar;
+    private ArrayList<BButton> buttons = new ArrayList<BButton>(3);
 
-    public BTitleBar(final String _name,
-                     final BLabel _title,
+    public BTitleBar(final String name,
+                     final BLabel title,
                      final TitleOptions options) {
-        super(_name, new BorderLayout());
+        super(name, new BorderLayout());
 
-        title = _title;
-        createButtonBar(options, null);
+        this.title = title;
+        if (title != null) {
+            add(title, BorderLayout.WEST);
+        }
         setStyleClass("titlebar");
-        addComponents();
+        createButtons(options);
     }
 
-    public BTitleBar(final String _name,
-                     final String _title,
+    public BTitleBar(final String name,
+                     final String title,
                      final TitleOptions options) {
-        this(_name, new BLabel(_title), options);
-    }
-
-    public BTitleBar(final String _name,
-                     final BLabel _title,
-                     final BButtonBar _buttonBar) {
-        super(_name, new BorderLayout());
-        title = _title;
-        buttonBar = _buttonBar;
-        addComponents();
-    }
-
-    public BTitleBar(final String _name,
-                     final String _title,
-                     final BButtonBar _buttonBar) {
-        this(_name, new BLabel(_title), _buttonBar);
-    }
-
-    public BTitleBar(final String _name,
-                     final String _title,
-                     final String titleStyle,
-                     final TitleOptions options,
-                     final String buttonBarStyle) {
-        super(_name, new BorderLayout());
-        title = new BLabel(_title, titleStyle);
-        createButtonBar(options, buttonBarStyle);
-
-        addComponents();
-    }
-
-    public BTitleBar(final String _name,
-                     final String _title,
-                     final String titleStyle,
-                     final TitleOptions options,
-                     final String buttonBarStyle,
-                     final String titleBarStyle) {
-        super(_name, new BorderLayout());
-        title = new BLabel(_title, titleStyle);
-        createButtonBar(options, buttonBarStyle);
-
-        setStyleClass(titleBarStyle);
-        addComponents();
+        this(name, new BLabel(title), options);
     }
 
     public BTitleBar(final String _name,
@@ -98,42 +66,100 @@ public class BTitleBar extends BContainer {
         setStyleClass(titleBarStyle);
     }
 
-    public BTitleBar(final String _name,
-                     final BLabel _title,
-                     final BButtonBar _buttonBar,
-                     final String titleBarStyle) {
-        this(_name, _title, _buttonBar);
-        setStyleClass(titleBarStyle);
-    }
-
-    private void createButtonBar(final TitleOptions options,
-                                 final String styleClass) {
-        buttonBar = new BButtonBar(getName(), null, options);
-        buttonBar.addComponents();
-        if (styleClass != null) {
-            buttonBar.setStyleClass(styleClass);
-        }
-    }
-
-    private void addComponents() {
-        if (getLayoutManager() instanceof BorderLayout) {
-            add(title, BorderLayout.WEST);
-
-            if (buttonBar.getTitleOptions() != TitleOptions.NONE) {
-                add(buttonBar, BorderLayout.EAST);
-            }
-        } else {
-            add(title);
-
-            if (buttonBar.getTitleOptions() != TitleOptions.NONE) {
-                add(buttonBar);
-            }
-        }
-    }
-
+    @Override
     public void addListener(ComponentListener listener) {
+        if (listener instanceof CollapsingWindowListener) {
+            BButton button;
+            for (int i = 0; i < buttons.size(); i++) {
+        	button = buttons.get(i);
+        	button.removeAllListeners();
+        	button.addListener(listener);
+            }
+        }
         super.addListener(listener);
-        title.addListener(listener);
-        buttonBar.addListener(listener);
+    }
+
+    private void createButtons(TitleOptions options) {
+	BContainer buttonContainer = new BContainer(GroupLayout.makeHoriz(GroupLayout.RIGHT));
+	BButton button;
+	switch (options) {
+	    case MIN:
+		button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
+		button.setStyleClass("minimizebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		break;
+	    case MAX:
+		button = new BButton("", BTitledWindow.WINDOW_MAXIMIZE_ACTION);
+		button.setStyleClass("maximizebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		break;
+	    case CLOSE:
+		button = new BButton("", BTitledWindow.WINDOW_CLOSE_ACTION);
+		button.setStyleClass("closebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		break;
+	    case MAX_MIN:
+		button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
+		button.setStyleClass("minimizebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		button = new BButton("", BTitledWindow.WINDOW_MAXIMIZE_ACTION);
+		button.setStyleClass("maximizebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		break;
+	    case MIN_CLOSE:
+		button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
+		button.setStyleClass("minimizebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		button = new BButton("", BTitledWindow.WINDOW_CLOSE_ACTION);
+		button.setStyleClass("closebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		break;
+	    case MIN_MAX_CLOSE:
+		button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
+		button.setStyleClass("minimizebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		button = new BButton("", BTitledWindow.WINDOW_MAXIMIZE_ACTION);
+		button.setStyleClass("maximizebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		button = new BButton("", BTitledWindow.WINDOW_CLOSE_ACTION);
+		button.setStyleClass("closebutton");
+		buttonContainer.add(button);
+		buttons.add(button);
+		break;
+	    case NONE:
+		break;
+	    default:
+		throw new RuntimeException("Option not implemented");
+
+	}
+	if (options != TitleOptions.NONE) {
+	    add(buttonContainer, BorderLayout.EAST);
+	}
+    }
+
+    public void setTitle(String windowTitle) {
+	title.setText(windowTitle);
+    }
+
+    @Override
+    public boolean dispatchEvent(BEvent event) {
+        if (event instanceof ActionEvent) {
+            ActionEvent ev = (ActionEvent) event;
+            if (ev.getAction().equals(BTitledWindow.WINDOW_CLOSE_ACTION) ||
+        	    ev.getAction().equals(BTitledWindow.WINDOW_MAXIMIZE_ACTION) ||
+        	    ev.getAction().equals(BTitledWindow.WINDOW_MINIMIZE_ACTION)){
+
+            }
+        }
+        return super.dispatchEvent(event);
     }
 }

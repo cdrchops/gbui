@@ -20,53 +20,70 @@
 
 package com.jmex.bui.listener;
 
-import com.jmex.bui.BuiSystem;
+import com.jmex.bui.BComponent;
+import com.jmex.bui.BWindow;
+import com.jmex.bui.controller.BTiledWindowController;
 import com.jmex.bui.event.ActionEvent;
-import com.jmex.bui.event.ActionListener;
-import com.jmex.bui.headlessWindows.BAbstractMessageWindow;
+import com.jmex.bui.headlessWindows.BTitledWindow;
+import com.jmex.bui.headlessWindows.BTitledWindow.WindowState;
+import com.jmex.bui.util.Dimension;
 
 /**
  * @author timo
  * @since 07May07
  */
-public abstract class CollapsingWindowListener implements ActionListener {
-    public void actionPerformed(final ActionEvent event) {
-        String action = ListenerUtil.getActionName(event.getAction());
-        String componentName = ListenerUtil.getComponentName(event.getAction(), action);
-        BAbstractMessageWindow messageWindow = (BAbstractMessageWindow) BuiSystem.getWindow(componentName);
+public class CollapsingWindowListener extends BTiledWindowController {
+    private Dimension maximizedSize = new Dimension(800, 600);
 
-        if (action.equals("minimize")) {
-            minimize(messageWindow);
-        } else if (action.equals("maximize")) {
-            maximize(messageWindow);
-        } else if (action.equals("close")) {
-            close(messageWindow);
-        } else if (action.equals("yes")) {
-            yes(messageWindow);
-        } else if (action.equals("ok")) {
-            ok(messageWindow);
-        } else if (action.equals("no")) {
-            no(messageWindow);
-        } else if (action.equals("cancel")) {
-            cancel(messageWindow);
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+        BWindow window = ((BComponent)event.getSource()).getWindow();
+        if (window instanceof BTitledWindow) {
+            BTitledWindow titledWindow = (BTitledWindow) window;
+            if (event.getAction().equals(BTitledWindow.WINDOW_MINIMIZE_ACTION)) {
+                minimize(titledWindow);
+            }
+            else if (event.getAction().equals(BTitledWindow.WINDOW_MAXIMIZE_ACTION)) {
+                maximize(titledWindow);
+            }
+            else if (event.getAction().equals(BTitledWindow.WINDOW_CLOSE_ACTION)) {
+                close(titledWindow);
+            }
+            else {
+        	super.actionPerformed(event);
+            }
         }
     }
 
-    protected abstract void minimize(BAbstractMessageWindow messageWindow);
-
-    protected abstract void maximize(BAbstractMessageWindow messageWindow);
-
-    protected abstract void yes(BAbstractMessageWindow messageWindow);
-
-    protected abstract void no(BAbstractMessageWindow messageWindow);
-
-    protected abstract void ok(BAbstractMessageWindow messageWindow);
-
-    protected void close(BAbstractMessageWindow messageWindow) {
-        messageWindow.dismiss();
+    public void setMaximizedSize(Dimension maxSize) {
+	this.maximizedSize = maxSize;
     }
 
-    protected void cancel(BAbstractMessageWindow messageWindow) {
-        messageWindow.dismiss();
+    protected void maximize(BTitledWindow window) {
+        if (window.getWindowState() != WindowState.MAXIMIZED) {
+            window.maximize(maximizedSize);
+        }
+        // restore the window
+        else {
+            window.restoreSize();
+        }
+    }
+
+    protected void minimize(BTitledWindow window) {
+        if (window.getWindowState() != WindowState.MINIMIZED) {
+            window.minimize();
+        }
+        // restore the window
+        else {
+            window.restoreSize();
+        }
+    }
+
+    protected void close(BTitledWindow window) {
+        window.dismiss();
+    }
+
+    protected void cancel(BTitledWindow windoww) {
+        windoww.dismiss();
     }
 }
