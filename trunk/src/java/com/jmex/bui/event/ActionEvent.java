@@ -36,6 +36,7 @@ public class ActionEvent extends InputEvent {
     }
 
     // documentation inherited
+    @Override
     public void dispatch(ComponentListener listener) {
         super.dispatch(listener);
         if (listener instanceof ActionListener) {
@@ -44,10 +45,12 @@ public class ActionEvent extends InputEvent {
     }
 
     // documentation inherited
+    @Override
     public boolean propagateUpHierarchy() {
         return false;
     }
 
+    @Override
     protected void toString(StringBuffer buf) {
         super.toString(buf);
         buf.append(", action=").append(_action);

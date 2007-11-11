@@ -20,7 +20,6 @@
 
 package com.jmex.bui.headlessWindows;
 
-import com.jme.input.MouseInput;
 import com.jmex.bui.BStyleSheet;
 import com.jmex.bui.BWindow;
 import com.jmex.bui.event.ActionEvent;
@@ -33,8 +32,11 @@ import com.jmex.bui.layout.BLayoutManager;
  * @since 27Apr07
  */
 public class BDraggableWindow extends BWindow {
-    private boolean _armed;
-    private boolean _pressed;
+    public static final String WINDOW_ACTIVATE_ACTION = "activate window";
+    private boolean armed;
+    private int grabOffsetX = -1;
+    private int grabOffsetY = -1;
+    private boolean dragging = false;
 
     public BDraggableWindow(final String name,
                             final BStyleSheet style,
@@ -47,49 +49,46 @@ public class BDraggableWindow extends BWindow {
         super(style, layout);
     }
 
-    // documentation inherited
+    @Override
     public boolean dispatchEvent(final BEvent event) {
         if (event instanceof MouseEvent) {
             MouseEvent mev = (MouseEvent) event;
             switch (mev.getType()) {
                 case MouseEvent.MOUSE_ENTERED:
-                    _armed = _pressed;
+                    armed = true;
                     break; // we don't consume this event
 
                 case MouseEvent.MOUSE_EXITED:
-                    _armed = false;
+                    if (!dragging) {
+                	armed = false;
+                    }
                     break; // we don't consume this event
                 case MouseEvent.MOUSE_DRAGGED:
-                    if (isDraggable()) {
-                        setBeenDrug(true);
-
-                        int finalX = MouseInput.get().getXAbsolute() - getLocation()[0];
-                        int finalY = MouseInput.get().getYAbsolute() - getLocation()[1];
-
-                        setLocation((getLocation()[0] + finalX) - _width / 2,
-                                    (getLocation()[1] + finalY) - _height);
+                    if (dragging) {
+                	_x = mev.getX() + grabOffsetX;
+                	_y = mev.getY() + grabOffsetY;
                     }
                     break;
                 case MouseEvent.MOUSE_PRESSED:
                     if (mev.getButton() == 0) {
-                        _pressed = true;
-                        _armed = true;
-                    } else if (mev.getButton() == 1) {
+                        armed = true;
+                        dragging = true;
 
-                        // clicking the right mouse button after arming the
-                        // component disarms it
-                        _armed = false;
+                        // remember the offset of the mouse pointer (won't change until released)
+                        grabOffsetY = _y - mev.getY();
+                        grabOffsetX = _x - mev.getX();
+
+                        fireAction(mev.getWhen(), mev.getModifiers());
                     }
                     return true; // consume this event
 
                 case MouseEvent.MOUSE_RELEASED:
-                    if (_armed && _pressed) {
-                        setLocation(getLocation()[0], getLocation()[1]);
-                        // create and dispatch an action event
-                        fireAction(mev.getWhen(), mev.getModifiers());
-                        _armed = false;
+                    if (armed && dragging) {
+                	// this means the windows reached its final position (window released)
+                        armed = false;
+                        dragging = false;
+                        windowReleased(mev);
                     }
-                    _pressed = false;
                     return true; // consume this event
             }
         }
@@ -99,6 +98,12 @@ public class BDraggableWindow extends BWindow {
 
     protected void fireAction(final long when,
                               final int modifiers) {
-        emitEvent(new ActionEvent(this, when, modifiers, getName() + "activate"));
+        emitEvent(new ActionEvent(this, when, modifiers, WINDOW_ACTIVATE_ACTION));
     }
+
+    /**
+     * This method is called when the window is released. It does nothing by default.
+     * @param event The mouse event generated when the window was released.
+     */
+    protected void windowReleased(MouseEvent event) {}
 }

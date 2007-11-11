@@ -20,40 +20,54 @@
 
 package com.jmex.bui.tests;
 
-import com.jmex.bui.BuiSystem;
-import com.jmex.bui.event.ActionEvent;
-import com.jmex.bui.event.ActionListener;
-import com.jmex.bui.headlessWindows.BMessageWindowUtil;
-import com.jmex.bui.headlessWindows.DialogWindow;
-import com.jmex.bui.headlessWindows.InputWindow;
-import com.jmex.bui.listener.ListenerUtil;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.jmex.bui.BComponent;
+import com.jmex.bui.BDialogBox;
+import com.jmex.bui.BInputBox;
+import com.jmex.bui.BuiSystem;
+import com.jmex.bui.UserResponse;
+import com.jmex.bui.enumeratedConstants.TitleOptions;
+import com.jmex.bui.event.DialogListener;
+import com.jmex.bui.headlessWindows.MessageWindowUtil;
+import com.jmex.bui.headlessWindows.BTitledWindow;
+import com.jmex.bui.headlessWindows.DialogBoxUtil;
+import com.jmex.bui.headlessWindows.InputBoxUtil;
 
 /**
  * @author timo
  * @since 27Apr07
  */
 public class AllDialogsTest extends BaseTest2 {
-    private ActionListener listener2 = new ActionListener() {
-        public void actionPerformed(final ActionEvent event) {
-            String action = ListenerUtil.getActionName(event.getAction());
-            String componentName = ListenerUtil.getComponentName(event.getAction(), action);
-            System.out.println("result is " + InputWindow.getInputText(BuiSystem.getWindow(componentName)));
-            listener.actionPerformed(event);
-        }
-    };
-
     @Override
     protected void createWindows() {
-        DialogWindow.createQuestionDialogWindow("qmessage1", "message", listener);
-        DialogWindow.createWarningDialogWindow("warnMessage1", "message", listener);
-        DialogWindow.createInfoDialogWindow("infoMessage1", "message", listener);
-        DialogWindow.createErrorDialogWindow("errorMessage1", "message", listener);
-        InputWindow.createInfoInputWindow("inputTest1", "Message", listener2);
-        BMessageWindowUtil.createInfoMessageWindow("message", "message", listener);
-        BMessageWindowUtil.createInfoMessageWindow("message2", "message", "status message", listener);
+	DialogListener responseListener = new DialogListener() {
+
+	    @Override
+	    public void responseAvailable(UserResponse response, BComponent source) {
+		System.out.println(response.toString());
+		if (source instanceof BInputBox) {
+		    System.out.println(((BInputBox)source).getInputText());
+		}
+	    }
+
+	};
+
+	BDialogBox box = DialogBoxUtil.createQuestionDialogBox("qmessage1", "message");
+	box.setDialogListener(responseListener);
+	box = DialogBoxUtil.createWarningDialogBox("warnMessage1", "message");
+        box.setDialogListener(responseListener);
+        box = DialogBoxUtil.createInfoDialogBox("infoMessage1", "message");
+        box.setDialogListener(responseListener);
+        box = DialogBoxUtil.createErrorDialogBox("errorMessage1", "message");
+        box.setDialogListener(responseListener);
+        box = InputBoxUtil.createInfoInputBox("inputTest1", "Message");
+        box.setDialogListener(responseListener);
+        BTitledWindow window = MessageWindowUtil.createMessageBox("blah", "Mighty window",
+        	TitleOptions.MIN_MAX_CLOSE, "You might have noticed that this window is always on top. " +
+        			"That's because it uses another CollapsingWindowListener than the other windows.");
+        BuiSystem.getRootNode().addWindow(window);
     }
 
     public static void main(String[] args) {

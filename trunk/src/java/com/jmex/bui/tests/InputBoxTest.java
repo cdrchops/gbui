@@ -20,28 +20,30 @@
 
 package com.jmex.bui.tests;
 
-import com.jmex.bui.BuiSystem;
-import com.jmex.bui.event.ActionEvent;
-import com.jmex.bui.event.ActionListener;
-import com.jmex.bui.headlessWindows.InputWindow;
-import com.jmex.bui.listener.ListenerUtil;
+import com.jmex.bui.BComponent;
+import com.jmex.bui.BInputBox;
+import com.jmex.bui.UserResponse;
+import com.jmex.bui.event.DialogListener;
+import com.jmex.bui.headlessWindows.InputBoxUtil;
 
 /**
  * @author timo
  * @since 27Apr07
  */
 public class InputBoxTest extends BaseTest2 {
-    private ActionListener listener2 = new ActionListener() {
-        public void actionPerformed(ActionEvent event) {
-            String action = ListenerUtil.getActionName(event.getAction());
-            String componentName = ListenerUtil.getComponentName(event.getAction(), action);
-            System.out.println("component name " + componentName);
-            System.out.println("result is " + InputWindow.getInputText(BuiSystem.getWindow(componentName)));
-        }
-    };
-
+    @Override
     protected void createWindows() {
-        InputWindow.createInfoInputWindow("inputTest1", "Message", listener2);
+        BInputBox box = InputBoxUtil.createInfoInputBox("inputTest1", "Message");
+        box.setDialogListener(new DialogListener() {
+
+	    @Override
+	    public void responseAvailable(UserResponse response, BComponent source) {
+		System.out.println(response.toString());
+		if (source instanceof BInputBox) {
+		    System.out.println(((BInputBox)source).getInputText());
+		}
+	    }
+	});
     }
 
     public static void main(String[] args) {

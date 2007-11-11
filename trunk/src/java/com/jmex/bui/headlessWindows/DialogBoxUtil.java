@@ -24,81 +24,30 @@ import com.jmex.bui.BDialogBox;
 import com.jmex.bui.BDialogMessage;
 import com.jmex.bui.BLabel;
 import com.jmex.bui.BTitleBar;
-import com.jmex.bui.BWindow;
 import com.jmex.bui.BuiSystem;
 import com.jmex.bui.enumeratedConstants.DialogOptions;
 import com.jmex.bui.enumeratedConstants.DisplayStyleOptions;
 import com.jmex.bui.enumeratedConstants.IconOptions;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
-import com.jmex.bui.event.ActionListener;
-import com.jmex.bui.layout.GroupLayout;
+import com.jmex.bui.listener.CollapsingWindowListener;
 
 /**
  * @author timo
  * @since 27Apr07
  */
-public class DialogWindow extends BWindow {
-    private DialogWindow(final String _name) {
-        super(_name, BuiSystem.getStyle(), GroupLayout.makeVStretch());
-    }
+//TODO this utility class is a mess: simplify or remove
+public final class DialogBoxUtil {
+    private static final CollapsingWindowListener LISTENER = new CollapsingWindowListener();
 
-    public static void createInfoDialogWindow(final String _name,
-                                              final String message,
-                                              final ActionListener listener) {
-        BDialogBox db = createInfoDialogBox(_name, message);
-        db.addListener(listener);
+    private DialogBoxUtil() {}
 
-        finishWindow(_name, db);
-    }
+    private static BDialogBox finishWindow(BDialogBox dialog) {
+	dialog.addListener(LISTENER);
+	dialog.setSize(400, 200);
+        BuiSystem.getRootNode().addWindow(dialog);
+        dialog.center();
 
-    public static void createQuestionDialogWindow(final String _name,
-                                                  final String message,
-                                                  final ActionListener listener) {
-        BDialogBox db = createQuestionDialogBox(_name, message);
-        db.addListener(listener);
-
-        finishWindow(_name, db);
-    }
-
-    public static void createWarningDialogWindow(final String _name,
-                                                 final String message,
-                                                 final ActionListener listener) {
-        BDialogBox db = createWarningDialogBox(_name, message);
-        db.addListener(listener);
-
-        finishWindow(_name, db);
-    }
-
-    public static void createErrorDialogWindow(final String _name,
-                                               final String message,
-                                               final ActionListener listener) {
-        BDialogBox db = createErrorDialogBox(_name, message);
-        db.addListener(listener);
-
-        finishWindow(_name, db);
-    }
-
-    private static void finishWindow(final String _name,
-                                     final BDialogBox _db) {
-        DialogWindow instance = new DialogWindow(_name);
-        instance.add(_db);
-
-        instance.setSize(400, 200);
-        BuiSystem.getRootNode().addWindow(instance);
-        instance.center();
-    }
-
-    public static void createDialogWindow(final String _name,
-                                          final String title,
-                                          final String titleClass,
-                                          final String message,
-                                          final DialogOptions options,
-                                          final IconOptions iconOptions,
-                                          final ActionListener listener,
-                                          final DisplayStyleOptions style) {
-        BDialogBox db = createDialogBox(_name, title, titleClass, message, options, iconOptions, style);
-        db.addListener(listener);
-        finishWindow(_name, db);
+        return dialog;
     }
 
     public static BDialogBox createDialogBox(final String _name,
@@ -109,9 +58,9 @@ public class DialogWindow extends BWindow {
                                              final IconOptions iconOptions,
                                              final DisplayStyleOptions style) {
         BTitleBar tb = new BTitleBar(_name, new BLabel(title, titleClass), TitleOptions.CLOSE);
-        BDialogMessage _message = new BDialogMessage(_name, message, options, iconOptions, style);
-
-        return new BDialogBox(_name, tb, _message);
+        BDialogMessage _message = new BDialogMessage(_name, message, iconOptions, style);
+        BDialogBox box = new BDialogBox(_name, tb, _message, options, BuiSystem.getStyle());
+        return finishWindow(box);
     }
 
     public static BDialogBox createBasicDialogBox(final String _name,
@@ -163,12 +112,6 @@ public class DialogWindow extends BWindow {
                                DisplayStyleOptions.MOTIF);
     }
 
-
-    public static BDialogBox createBasicDialogBox(final String _name,
-                                                  final String message,
-                                                  final DisplayStyleOptions style) {
-        return createInfoDialogBox(_name, message);
-    }
 
     public static BDialogBox createInfoDialogBox(final String _name,
                                                  final String message,

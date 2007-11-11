@@ -25,5 +25,5 @@ package com.jmex.bui.enumeratedConstants;
  * @since 27Apr07
  */
 public enum TitleOptions {
-    NONE, MAX, MIN, CLOSE, MAX_MIN, MAX_CLOSE, MIN_CLOSE, MIN_MAX_CLOSE
+    NONE, MAX, MIN, CLOSE, MAX_MIN, MIN_CLOSE, MIN_MAX_CLOSE
 }

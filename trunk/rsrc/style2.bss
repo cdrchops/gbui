@@ -198,15 +198,13 @@ titlebar {
 }
 
 titlebutton {
-  background: solid #000088;
-  border: 1 solid #FFFFFF;
-  padding: 3 5;
+  padding: 1 1;
   font: "Arial" bold 12;
   text-align: center;
 }
 
 titlebutton:hover {
-  //color: #cee453ff;
+  color: #E38833;
   //border: 1 solid #cee453ff;
   background: solid #2a2a90ff;
 }
@@ -224,6 +222,36 @@ titlebutton:down {
 
 titlebutton:selected {
   padding: 4 6 2 4;
+}
+
+closebutton {
+	parent: titlebutton;
+	background: image "rsrc/textures/close.png" centerxy;
+}
+
+closebutton: hover{
+	parent: titlebutton;
+	background: image "rsrc/textures/close_hover.png" centerxy;
+}
+
+minimizebutton {
+	parent: titlebutton;
+	background: image "rsrc/textures/minimize.png" centerxy;
+}
+
+minimizebutton: hover{
+	parent: titlebutton;
+	background: image "rsrc/textures/minimize_hover.png" centerxy;
+}
+
+maximizebutton {
+	parent: titlebutton;
+	background: image "rsrc/textures/maximize.png" centerxy;
+}
+
+maximizebutton: hover {
+	parent: titlebutton;
+	background: image "rsrc/textures/maximize_hover.png" centerxy;
 }
 
 dialogbutton {

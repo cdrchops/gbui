@@ -20,10 +20,14 @@
 
 package com.jmex.bui.tests;
 
-import com.jmex.bui.headlessWindows.DialogWindow;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.jmex.bui.BComponent;
+import com.jmex.bui.BDialogBox;
+import com.jmex.bui.UserResponse;
+import com.jmex.bui.event.DialogListener;
+import com.jmex.bui.headlessWindows.DialogBoxUtil;
 
 /**
  * @author timo
@@ -32,9 +36,15 @@ import java.util.logging.Logger;
 public class InfoDialogBoxTest extends BaseTest2 {
     @Override
     protected void createWindows() {
-        DialogWindow.createInfoDialogWindow("dialogWindow1", "message", listener);
-        // if you want to pack the window
-        // DialogWindow.getInstance().pack();
+        BDialogBox box = DialogBoxUtil.createInfoDialogBox("dialogWindow1", "message");
+        box.setDialogListener(new DialogListener() {
+
+	    @Override
+	    public void responseAvailable(UserResponse response, BComponent source) {
+		System.out.println(response.toString());
+	    }
+
+	});
     }
 
     public static void main(String[] args) {

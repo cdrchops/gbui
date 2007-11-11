@@ -20,97 +20,46 @@
 
 package com.jmex.bui.controller;
 
-import com.jme.system.DisplaySystem;
-import com.jmex.bui.BButton;
 import com.jmex.bui.BComponent;
 import com.jmex.bui.BWindow;
-import com.jmex.bui.BuiSystem;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
-import com.jmex.bui.event.ComponentListener;
-import com.jmex.bui.headlessWindows.BAbstractMessageWindow;
-import com.jmex.bui.listener.ListenerUtil;
-
-import java.util.LinkedList;
-import java.util.List;
+import com.jmex.bui.headlessWindows.BDraggableWindow;
+import com.jmex.bui.headlessWindows.BTitledWindow;
 
 /**
  * @author timo
  * @since 27Apr07
  */
-public class BTiledWindowController extends BComponent {
-    private ActionListener listener = new ActionListener() {
-        public void actionPerformed(ActionEvent event) {
-            handleInput(event);
-        }
-    };
+public class BTiledWindowController implements ActionListener {
+    private BTitledWindow activeWindow;
 
-    private List<BAbstractMessageWindow> lst = new LinkedList<BAbstractMessageWindow>();
-    private ComponentListener externalListener;
-    protected static int windowCount;
-    protected int width;
-    protected int height;
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        BComponent source = (BComponent)event.getSource();
 
-    public BTiledWindowController(ComponentListener _listener) {
-        width = DisplaySystem.getDisplaySystem().getWidth() / 2;
-        height = DisplaySystem.getDisplaySystem().getHeight() / 2;
+        if (source == activeWindow) return;
 
-        addListener(listener);
-        externalListener = _listener;
-    }
-
-    public void addWindow(final BAbstractMessageWindow mw) {
-        BuiSystem.getRootNode().addWindow(mw);
-
-        lst.add(mw);
-
-        if (windowCount == 0
-            && !mw.hasBeenDrug()) {
-            mw.center();
+        if (source instanceof BTitledWindow) {
+            if (event.getAction().equals(BDraggableWindow.WINDOW_ACTIVATE_ACTION)) {
+                activateWindow((BTitledWindow) source);
+            }
         } else {
-            mw.setLocation((width - mw.getWidth() / 2) + (mw.getMinimizedHeight() * windowCount),
-                           (height - mw.getHeight() / 2) - (mw.getMinimizedHeight() * windowCount));
-        }
-
-        windowCount++;
-    }
-
-    public void handleInput(final ActionEvent event) {
-        Object source = event.getSource();
-        String action = ListenerUtil.getActionName(event.getAction());
-        String componentName = ListenerUtil.getComponentName(event.getAction(), action);
-
-        if (source instanceof BButton) {
-            processWindowButtonEvent(componentName, event);
-        } else if (source instanceof BWindow) {
-            processWindow(componentName);
-        }
-    }
-
-    private void processWindow(final String msg) {
-        for (BAbstractMessageWindow bWindow : lst) {
-            if (bWindow.getName().equals(msg)) {
-                bWindow.setLayer(1);
-            } else {
-                bWindow.setLayer(0);
+            BWindow window = source.getWindow();
+            if (window instanceof BTitledWindow) {
+        	activateWindow((BTitledWindow) window);
             }
         }
+
     }
 
-    private void processWindowButtonEvent(final String componentName,
-                                          final ActionEvent event) {
-        for (BAbstractMessageWindow bWindow : lst) {
-
-            if (bWindow.getName().equals(componentName)) {
-                bWindow.setLayer(1);
-                event.dispatch(externalListener);
-            } else {
-                bWindow.setLayer(0);
-            }
-        }
+    private void activateWindow(BTitledWindow window) {
+	if (window == null) return;
+	if (activeWindow != null) {
+	    activeWindow.setLayer(0);
+	}
+	activeWindow = window;
+	activeWindow.setLayer(1);
     }
 
-    public ComponentListener getListener() {
-        return listener;
-    }
 }
