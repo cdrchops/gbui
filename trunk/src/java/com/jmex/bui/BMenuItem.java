@@ -25,7 +25,9 @@ import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.icon.BIcon;
 
-/** Displays a single menu item. */
+/**
+ * Displays a single menu item.
+ */
 public class BMenuItem extends BLabel {
     /**
      * Creates a menu item with the specified text that will generate an {@link ActionEvent} with the specified action
@@ -59,7 +61,9 @@ public class BMenuItem extends BLabel {
         _action = action;
     }
 
-    /** Returns the action configured for this menu item. */
+    /**
+     * Returns the action configured for this menu item.
+     */
     public String getAction() {
         return _action;
     }

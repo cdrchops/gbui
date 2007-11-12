@@ -20,8 +20,6 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
 import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.BEvent;
@@ -30,6 +28,8 @@ import com.jmex.bui.headlessWindows.BTitledWindow;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.listener.CollapsingWindowListener;
+
+import java.util.ArrayList;
 
 /**
  * @author timo
@@ -71,83 +71,82 @@ public class BTitleBar extends BContainer {
         if (listener instanceof CollapsingWindowListener) {
             BButton button;
             for (int i = 0; i < buttons.size(); i++) {
-        	button = buttons.get(i);
-        	button.removeAllListeners();
-        	button.addListener(listener);
+                button = buttons.get(i);
+                button.removeAllListeners();
+                button.addListener(listener);
             }
         }
         super.addListener(listener);
     }
 
     private void createButtons(TitleOptions options) {
-	BContainer buttonContainer = new BContainer(GroupLayout.makeHoriz(GroupLayout.RIGHT));
-	BButton button;
-	switch (options) {
-	    case MIN:
-		button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
-		button.setStyleClass("minimizebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		break;
-	    case MAX:
-		button = new BButton("", BTitledWindow.WINDOW_MAXIMIZE_ACTION);
-		button.setStyleClass("maximizebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		break;
-	    case CLOSE:
-		button = new BButton("", BTitledWindow.WINDOW_CLOSE_ACTION);
-		button.setStyleClass("closebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		break;
-	    case MAX_MIN:
-		button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
-		button.setStyleClass("minimizebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		button = new BButton("", BTitledWindow.WINDOW_MAXIMIZE_ACTION);
-		button.setStyleClass("maximizebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		break;
-	    case MIN_CLOSE:
-		button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
-		button.setStyleClass("minimizebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		button = new BButton("", BTitledWindow.WINDOW_CLOSE_ACTION);
-		button.setStyleClass("closebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		break;
-	    case MIN_MAX_CLOSE:
-		button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
-		button.setStyleClass("minimizebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		button = new BButton("", BTitledWindow.WINDOW_MAXIMIZE_ACTION);
-		button.setStyleClass("maximizebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		button = new BButton("", BTitledWindow.WINDOW_CLOSE_ACTION);
-		button.setStyleClass("closebutton");
-		buttonContainer.add(button);
-		buttons.add(button);
-		break;
-	    case NONE:
-		break;
-	    default:
-		throw new RuntimeException("Option not implemented");
-
-	}
-	if (options != TitleOptions.NONE) {
-	    add(buttonContainer, BorderLayout.EAST);
-	}
+        BContainer buttonContainer = new BContainer(GroupLayout.makeHoriz(GroupLayout.RIGHT));
+        BButton button;
+        switch (options) {
+            case MIN:
+                button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
+                button.setStyleClass("minimizebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                break;
+            case MAX:
+                button = new BButton("", BTitledWindow.WINDOW_MAXIMIZE_ACTION);
+                button.setStyleClass("maximizebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                break;
+            case CLOSE:
+                button = new BButton("", BTitledWindow.WINDOW_CLOSE_ACTION);
+                button.setStyleClass("closebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                break;
+            case MAX_MIN:
+                button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
+                button.setStyleClass("minimizebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                button = new BButton("", BTitledWindow.WINDOW_MAXIMIZE_ACTION);
+                button.setStyleClass("maximizebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                break;
+            case MIN_CLOSE:
+                button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
+                button.setStyleClass("minimizebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                button = new BButton("", BTitledWindow.WINDOW_CLOSE_ACTION);
+                button.setStyleClass("closebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                break;
+            case MIN_MAX_CLOSE:
+                button = new BButton("", BTitledWindow.WINDOW_MINIMIZE_ACTION);
+                button.setStyleClass("minimizebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                button = new BButton("", BTitledWindow.WINDOW_MAXIMIZE_ACTION);
+                button.setStyleClass("maximizebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                button = new BButton("", BTitledWindow.WINDOW_CLOSE_ACTION);
+                button.setStyleClass("closebutton");
+                buttonContainer.add(button);
+                buttons.add(button);
+                break;
+            case NONE:
+                break;
+            default:
+                throw new RuntimeException("Option not implemented");
+        }
+        if (options != TitleOptions.NONE) {
+            add(buttonContainer, BorderLayout.EAST);
+        }
     }
 
     public void setTitle(String windowTitle) {
-	title.setText(windowTitle);
+        title.setText(windowTitle);
     }
 
     @Override
@@ -155,8 +154,8 @@ public class BTitleBar extends BContainer {
         if (event instanceof ActionEvent) {
             ActionEvent ev = (ActionEvent) event;
             if (ev.getAction().equals(BTitledWindow.WINDOW_CLOSE_ACTION) ||
-        	    ev.getAction().equals(BTitledWindow.WINDOW_MAXIMIZE_ACTION) ||
-        	    ev.getAction().equals(BTitledWindow.WINDOW_MINIMIZE_ACTION)){
+                ev.getAction().equals(BTitledWindow.WINDOW_MAXIMIZE_ACTION) ||
+                ev.getAction().equals(BTitledWindow.WINDOW_MINIMIZE_ACTION)) {
 
             }
         }

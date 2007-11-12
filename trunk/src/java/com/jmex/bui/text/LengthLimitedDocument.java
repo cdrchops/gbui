@@ -22,9 +22,13 @@ package com.jmex.bui.text;
 
 import com.jmex.bui.BTextField;
 
-/** A document for use with a {@link BTextField} that limits the input to a maximum length. */
+/**
+ * A document for use with a {@link BTextField} that limits the input to a maximum length.
+ */
 public class LengthLimitedDocument extends Document {
-    /** Creates a document that will limit its maximum length to the specified value. */
+    /**
+     * Creates a document that will limit its maximum length to the specified value.
+     */
     public LengthLimitedDocument(int maxLength) {
         _maxLength = maxLength;
     }

@@ -28,7 +28,9 @@ import com.jmex.bui.BTextField;
  * must be allowed. Thus one cannot rely on the integer document only ever containing valid integers.
  */
 public class IntegerDocument extends Document {
-    /** Creates a new document that allows any integer value. */
+    /**
+     * Creates a new document that allows any integer value.
+     */
     public IntegerDocument() {
         this(false);
     }
@@ -63,6 +65,8 @@ public class IntegerDocument extends Document {
         }
     }
 
-    /** If true, only positive values are allowed. */
+    /**
+     * If true, only positive values are allowed.
+     */
     protected boolean _positive;
 }

@@ -22,7 +22,9 @@ package com.jmex.bui;
 
 import com.jmex.bui.icon.BIcon;
 
-/** Displays a label with a check-box button next to it. */
+/**
+ * Displays a label with a check-box button next to it.
+ */
 public class BCheckBox extends BToggleButton {
     public BCheckBox(String label) {
         super(label);

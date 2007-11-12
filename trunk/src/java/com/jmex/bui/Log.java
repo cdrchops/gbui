@@ -22,8 +22,12 @@ package com.jmex.bui;
 
 import java.util.logging.Logger;
 
-/** Contains an easily accessible log instance for the BUI package. */
+/**
+ * Contains an easily accessible log instance for the BUI package.
+ */
 public class Log {
-    /** We dispatch our log messages through this logger. */
+    /**
+     * We dispatch our log messages through this logger.
+     */
     public static Logger log = Logger.getLogger("com.jmex.bui");
 }

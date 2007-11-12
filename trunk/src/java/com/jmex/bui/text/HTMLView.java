@@ -53,18 +53,24 @@ import java.util.logging.Level;
  * will be wrapped, but it may not fit in the vertical or horizontal space made available. Caveat user.
  */
 public class HTMLView extends BComponent {
-    /** Creates a blank HTML view. The HTML contents can be set later with a call to {@link #setContents}. */
+    /**
+     * Creates a blank HTML view. The HTML contents can be set later with a call to {@link #setContents}.
+     */
     public HTMLView() {
     }
 
-    /** Creates an HTML view with the specified contents. */
+    /**
+     * Creates an HTML view with the specified contents.
+     */
     public HTMLView(String stylesheet,
                     String contents) {
         setStyleSheet(stylesheet);
         setContents(contents);
     }
 
-    /** Configures whether or not our text is antialiased. Antialiasing is on by default. */
+    /**
+     * Configures whether or not our text is antialiased. Antialiasing is on by default.
+     */
     public void setAntialiased(boolean antialias) {
         if (_antialias != antialias) {
             _antialias = antialias;
@@ -72,7 +78,9 @@ public class HTMLView extends BComponent {
         }
     }
 
-    /** Configures the stylesheet used to render HTML in this view. */
+    /**
+     * Configures the stylesheet used to render HTML in this view.
+     */
     public void setStyleSheet(String stylesheet) {
         StyleSheet ss = new StyleSheet();
         try {
@@ -85,18 +93,24 @@ public class HTMLView extends BComponent {
         }
     }
 
-    /** Configures the stylesheet used to render HTML in this view. */
+    /**
+     * Configures the stylesheet used to render HTML in this view.
+     */
     public void setStyleSheet(StyleSheet stylesheet) {
         _style = stylesheet;
         forceRelayout();
     }
 
-    /** Returns the stylesheet in effect for this view. */
+    /**
+     * Returns the stylesheet in effect for this view.
+     */
     public StyleSheet getStyleSheet() {
         return _style;
     }
 
-    /** Returns the HTML editor kit used by this view. */
+    /**
+     * Returns the HTML editor kit used by this view.
+     */
     public HTMLEditorKit getEditorKit() {
         return _kit;
     }
@@ -122,7 +136,9 @@ public class HTMLView extends BComponent {
         }
     }
 
-    /** Configures the contents of this HTML view. */
+    /**
+     * Configures the contents of this HTML view.
+     */
     public void setContents(HTMLDocument document) {
         _view = new BridgeView(
                 _kit.getViewFactory().create(document.getDefaultRootElement()));

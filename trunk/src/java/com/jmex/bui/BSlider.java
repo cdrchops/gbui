@@ -56,7 +56,9 @@ public class BSlider extends BComponent
         _model = model;
     }
 
-    /** Returns a reference to the slider's range model. */
+    /**
+     * Returns a reference to the slider's range model.
+     */
     public BoundedRangeModel getModel() {
         return _model;
     }

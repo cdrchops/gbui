@@ -24,7 +24,6 @@ public class HoverTest extends BaseTest2 {
         for (int i = 0; i < 15; i++) {
             BButton button = new BButton("bob" + i);
             window.add(button);
-
         }
 
 

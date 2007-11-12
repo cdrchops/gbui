@@ -36,20 +36,20 @@ public class MessageWindowUtil {
     private static final CollapsingWindowListener DEFAULT_LISTENER = new CollapsingWindowListener();
 
     public static BTitledWindow createMessageBox(String name,
-	    String title, TitleOptions options, String message) {
-	BTitleBar tb = new BTitleBar(name, new BLabel(title),
-		options);
-	BMessage bMessage = new BMessage(name, new BLabel(message));
-	BTitledWindow window = new BTitledWindow(name, tb,
-		null, BuiSystem.getStyle());
-	window.getComponentArea().add(bMessage);
-	window.setSize(400, 200);
-	window.center();
-	window.addListener(DEFAULT_LISTENER);
-	return window;
+                                                 String title, TitleOptions options, String message) {
+        BTitleBar tb = new BTitleBar(name, new BLabel(title),
+                                     options);
+        BMessage bMessage = new BMessage(name, new BLabel(message));
+        BTitledWindow window = new BTitledWindow(name, tb,
+                                                 null, BuiSystem.getStyle());
+        window.getComponentArea().add(bMessage);
+        window.setSize(400, 200);
+        window.center();
+        window.addListener(DEFAULT_LISTENER);
+        return window;
     }
 
     public static BTitledWindow createMessageBox(String title, String message) {
-	return createMessageBox(null, title, TitleOptions.NONE, message);
+        return createMessageBox(null, title, TitleOptions.NONE, message);
     }
 }

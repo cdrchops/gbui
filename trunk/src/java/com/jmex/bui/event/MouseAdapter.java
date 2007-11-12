@@ -20,7 +20,9 @@
 
 package com.jmex.bui.event;
 
-/** A convenience class for partially implementing the {@link MouseListener} interface. */
+/**
+ * A convenience class for partially implementing the {@link MouseListener} interface.
+ */
 public class MouseAdapter
         implements MouseListener, MouseMotionListener {
     // documentation inherited from interface MouseListener

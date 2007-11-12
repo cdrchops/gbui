@@ -125,5 +125,4 @@ public abstract class BMultiSelectBox<V> extends BScrollingList<V, BToggleButton
     }
 
     protected abstract BToggleButton createListEntry(V value);
-
 }

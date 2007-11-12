@@ -30,7 +30,9 @@ import com.jmex.bui.util.Dimension;
 
 import java.util.ArrayList;
 
-/** Displays a popup menu of items, one of which can be selected. */
+/**
+ * Displays a popup menu of items, one of which can be selected.
+ */
 public class BPopupMenu extends BPopupWindow {
     public BPopupMenu(BWindow parent) {
         this(parent, false);
@@ -52,7 +54,9 @@ public class BPopupMenu extends BPopupWindow {
         _modal = true;
     }
 
-    /** Adds the supplied item to this menu. */
+    /**
+     * Adds the supplied item to this menu.
+     */
     public void addMenuItem(BMenuItem item) {
         // nothing more complicated needs to be done, yay!
         add(item, GroupLayout.FIXED);
@@ -137,7 +141,9 @@ public class BPopupMenu extends BPopupWindow {
         setLocation(x, y);
     }
 
-    /** Called by any child {@link BMenuItem}s when they are selected. */
+    /**
+     * Called by any child {@link BMenuItem}s when they are selected.
+     */
     protected void itemSelected(BMenuItem item,
                                 long when,
                                 int modifiers) {

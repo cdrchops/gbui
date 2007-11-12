@@ -62,7 +62,9 @@ public class BPopupWindow extends BWindow {
         packAndFit(x, y, above);
     }
 
-    /** Called after we have been added to the display heirarchy to pack and position this popup window. */
+    /**
+     * Called after we have been added to the display heirarchy to pack and position this popup window.
+     */
     protected void packAndFit(int x,
                               int y,
                               boolean above) {

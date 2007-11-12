@@ -43,39 +43,39 @@ public final class InputBoxUtil {
     private InputBoxUtil() {}
 
     public static BInputBox createInfoInputBox(final String _name,
-                                             final String message,
-                                             final ActionListener listener) {
+                                               final String message,
+                                               final ActionListener listener) {
         BInputBox db = createInfoInputBox(_name, message);
         db.addListener(listener);
         return finishWindow(db);
     }
 
     public static BInputBox createQuestionInputBox(final String _name,
-                                                 final String message,
-                                                 final ActionListener listener) {
+                                                   final String message,
+                                                   final ActionListener listener) {
         BInputBox db = createQuestionInputBox(_name, message);
         db.addListener(listener);
         return finishWindow(db);
     }
 
     public static BInputBox createWarningInputBox(final String _name,
-                                                final String message,
-                                                final ActionListener listener) {
+                                                  final String message,
+                                                  final ActionListener listener) {
         BInputBox db = createWarningInputBox(_name, message);
         db.addListener(listener);
         return finishWindow(db);
     }
 
     public static BInputBox createErrorInputBox(final String _name,
-                                              final String message,
-                                              final ActionListener listener) {
+                                                final String message,
+                                                final ActionListener listener) {
         BInputBox db = createErrorInputBox(_name, message);
         db.addListener(listener);
         return finishWindow(db);
     }
 
     private static BInputBox finishWindow(final BInputBox db) {
-	db.addListener(LISTENER);
+        db.addListener(LISTENER);
         db.setSize(400, 200);
         BuiSystem.getRootNode().addWindow(db);
         db.center();
@@ -83,12 +83,12 @@ public final class InputBoxUtil {
     }
 
     public static BInputBox createInputBox(final String _name,
-                                         final String title,
-                                         final String titleClass,
-                                         final String message,
-                                         final DialogOptions options,
-                                         final IconOptions iconOptions,
-                                         final ActionListener listener) {
+                                           final String title,
+                                           final String titleClass,
+                                           final String message,
+                                           final DialogOptions options,
+                                           final IconOptions iconOptions,
+                                           final ActionListener listener) {
         BInputBox db = createInputBox(_name, title, titleClass, message, options, iconOptions);
         db.addListener(listener);
         return finishWindow(db);

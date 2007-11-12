@@ -109,7 +109,6 @@ public class BStyleSheetUtil {
      * return a combined BStyleSheet from any number of URLs
      *
      * @param list URL varargs
-     *
      * @return BStyleSheet
      */
     public static BStyleSheet getStyleSheet(final URL... list) {
@@ -120,7 +119,6 @@ public class BStyleSheetUtil {
      * return a combined BStyleSheet from any number of Strings
      *
      * @param list String varargs
-     *
      * @return BStyleSheet
      */
     public static BStyleSheet getStyleSheet(final String... list) {
@@ -172,7 +170,6 @@ public class BStyleSheetUtil {
 
     /**
      * @param list URL varargs
-     *
      * @return List<String>
      */
     private static List<String> loadMultipleBSS(final URL... list) {
@@ -191,7 +188,6 @@ public class BStyleSheetUtil {
 
     /**
      * @param list String varargs
-     *
      * @return List<String>
      */
     private static List<String> loadMultipleBSS(final String... list) {
@@ -206,7 +202,6 @@ public class BStyleSheetUtil {
 
     /**
      * @param list List of URLs and/or Strings
-     *
      * @return List<String>
      */
     private static List<String> loadMultipleBSS(final List list) {
@@ -243,7 +238,7 @@ public class BStyleSheetUtil {
      * @param list     Strings that we want to combine
      */
     public static void combineMultipleBSS(final String fileName,
-                                          final String ... list) {
+                                          final String... list) {
         writeFile(fileName, loadMultipleBSS(list));
     }
 
@@ -252,7 +247,7 @@ public class BStyleSheetUtil {
      * @param list     URLs that we want to combine
      */
     public static void combineMultipleBSS(final String fileName,
-                                          final URL ... list) {
+                                          final URL... list) {
         writeFile(fileName, loadMultipleBSS(list));
     }
 

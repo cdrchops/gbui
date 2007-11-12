@@ -22,8 +22,8 @@ package com.jmex.bui.tests;
 
 import com.jmex.bui.BuiSystem;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
-import com.jmex.bui.headlessWindows.MessageWindowUtil;
 import com.jmex.bui.headlessWindows.BTitledWindow;
+import com.jmex.bui.headlessWindows.MessageWindowUtil;
 
 /**
  * @author timo
@@ -34,7 +34,7 @@ public class CollapsingTiledMessageWindowTest extends BaseTest2 {
     protected void createWindows() {
         for (int i = 0; i < 3; i++) {
             BTitledWindow mw = MessageWindowUtil.
-            	createMessageBox("Window #" + i, "Window #" + i, TitleOptions.MIN_MAX_CLOSE, "Some content");
+                    createMessageBox("Window #" + i, "Window #" + i, TitleOptions.MIN_MAX_CLOSE, "Some content");
             BuiSystem.getRootNode().addWindow(mw);
         }
     }

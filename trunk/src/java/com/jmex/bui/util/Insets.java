@@ -20,21 +20,33 @@
 
 package com.jmex.bui.util;
 
-/** Represents insets from the edges of a component. */
+/**
+ * Represents insets from the edges of a component.
+ */
 public class Insets {
-    /** A convenient set of blank insets. */
+    /**
+     * A convenient set of blank insets.
+     */
     public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
 
-    /** The inset from the left edge. */
+    /**
+     * The inset from the left edge.
+     */
     public int left;
 
-    /** The inset from the top edge. */
+    /**
+     * The inset from the top edge.
+     */
     public int top;
 
-    /** The inset from the right edge. */
+    /**
+     * The inset from the right edge.
+     */
     public int right;
 
-    /** The inset from the bottom edge. */
+    /**
+     * The inset from the bottom edge.
+     */
     public int bottom;
 
     public Insets(int left,
@@ -57,12 +69,16 @@ public class Insets {
     public Insets() {
     }
 
-    /** Returns the sum of the horizontal insets. */
+    /**
+     * Returns the sum of the horizontal insets.
+     */
     public int getHorizontal() {
         return left + right;
     }
 
-    /** Returns the sum of the vertical insets. */
+    /**
+     * Returns the sum of the vertical insets.
+     */
     public int getVertical() {
         return top + bottom;
     }

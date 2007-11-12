@@ -22,7 +22,9 @@ package com.jmex.bui.layout;
 
 import com.jmex.bui.util.Dimension;
 
-/** This record is used by the group layout managers to return a set of statistics computed for their target widgets. */
+/**
+ * This record is used by the group layout managers to return a set of statistics computed for their target widgets.
+ */
 public class DimenInfo {
     public int count;
 

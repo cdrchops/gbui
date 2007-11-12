@@ -60,13 +60,13 @@ public class BDraggableWindow extends BWindow {
 
                 case MouseEvent.MOUSE_EXITED:
                     if (!dragging) {
-                	armed = false;
+                        armed = false;
                     }
                     break; // we don't consume this event
                 case MouseEvent.MOUSE_DRAGGED:
                     if (dragging) {
-                	_x = mev.getX() + grabOffsetX;
-                	_y = mev.getY() + grabOffsetY;
+                        _x = mev.getX() + grabOffsetX;
+                        _y = mev.getY() + grabOffsetY;
                     }
                     break;
                 case MouseEvent.MOUSE_PRESSED:
@@ -84,7 +84,7 @@ public class BDraggableWindow extends BWindow {
 
                 case MouseEvent.MOUSE_RELEASED:
                     if (armed && dragging) {
-                	// this means the windows reached its final position (window released)
+                        // this means the windows reached its final position (window released)
                         armed = false;
                         dragging = false;
                         windowReleased(mev);
@@ -103,6 +103,7 @@ public class BDraggableWindow extends BWindow {
 
     /**
      * This method is called when the window is released. It does nothing by default.
+     *
      * @param event The mouse event generated when the window was released.
      */
     protected void windowReleased(MouseEvent event) {}

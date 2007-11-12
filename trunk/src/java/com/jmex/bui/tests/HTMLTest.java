@@ -35,7 +35,9 @@ import java.io.StringReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** Tests our HTML view. */
+/**
+ * Tests our HTML view.
+ */
 public class HTMLTest extends BaseTest {
     @Override
     protected void createWindows(BRootNode root,
@@ -43,7 +45,7 @@ public class HTMLTest extends BaseTest {
         // test out custom font handling
         StyleSheet sheet = new StyleSheet() {
             @Override
-	    public Font getFont(AttributeSet attrs) {
+            public Font getFont(AttributeSet attrs) {
                 // Java's style sheet parser annoyingly looks up whatever is
                 // supplied for font-family and if it doesn't map to an
                 // internal Java font; it discards it. Thanks! So we do this
@@ -96,7 +98,7 @@ public class HTMLTest extends BaseTest {
     }
 
     public static void main(String[] args) {
-	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
+        Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         HTMLTest test = new HTMLTest();
         test.start();
     }

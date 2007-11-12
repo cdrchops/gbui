@@ -24,9 +24,13 @@ import com.jme.renderer.Renderer;
 import com.jmex.bui.BImage;
 import com.jmex.bui.util.Rectangle;
 
-/** Displays a region of an image as an icon. */
+/**
+ * Displays a region of an image as an icon.
+ */
 public class SubimageIcon extends BIcon {
-    /** Creates an icon that will display the specified region of the supplied image. */
+    /**
+     * Creates an icon that will display the specified region of the supplied image.
+     */
     public SubimageIcon(BImage image,
                         int x,
                         int y,

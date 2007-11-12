@@ -22,7 +22,9 @@ package com.jmex.bui.border;
 
 import com.jmex.bui.util.Insets;
 
-/** Defines a border with no rendered geometry but that simply takes up space. */
+/**
+ * Defines a border with no rendered geometry but that simply takes up space.
+ */
 public class EmptyBorder extends BBorder {
     public EmptyBorder(int left,
                        int top,

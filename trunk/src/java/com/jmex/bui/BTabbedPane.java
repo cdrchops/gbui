@@ -27,7 +27,9 @@ import com.jmex.bui.layout.GroupLayout;
 
 import java.util.ArrayList;
 
-/** Displays one of a set of components (tabs) depending on which tab is selected. */
+/**
+ * Displays one of a set of components (tabs) depending on which tab is selected.
+ */
 public class BTabbedPane extends BContainer {
     public BTabbedPane() {
         this(GroupLayout.LEFT);
@@ -48,13 +50,17 @@ public class BTabbedPane extends BContainer {
         _close.setStyleClass("tabbedpane_close");
     }
 
-    /** Adds a tab to the pane using the specified title with no close button. */
+    /**
+     * Adds a tab to the pane using the specified title with no close button.
+     */
     public void addTab(String title,
                        BComponent tab) {
         addTab(title, tab, false);
     }
 
-    /** Adds a tab to the pane using the specified tile. */
+    /**
+     * Adds a tab to the pane using the specified tile.
+     */
     public void addTab(String title,
                        BComponent tab,
                        boolean hasClose) {
@@ -80,7 +86,9 @@ public class BTabbedPane extends BContainer {
         }
     }
 
-    /** Removes the specified tab. */
+    /**
+     * Removes the specified tab.
+     */
     public void removeTab(BComponent tab) {
         int idx = indexOfTab(tab);
         if (idx != -1) {
@@ -91,7 +99,9 @@ public class BTabbedPane extends BContainer {
         }
     }
 
-    /** Removes the tab at the specified index. */
+    /**
+     * Removes the tab at the specified index.
+     */
     public void removeTab(int tabidx) {
         removeTab(tabidx, false);
     }
@@ -123,7 +133,6 @@ public class BTabbedPane extends BContainer {
             } else {
                 selectTab(tabidx - 1); // no-op if -1
             }
-
         } else if (_selidx > tabidx) {
             _selidx--;
         }
@@ -132,7 +141,9 @@ public class BTabbedPane extends BContainer {
         tabWasRemoved(tab.component, btnClose);
     }
 
-    /** Removes all tabs. */
+    /**
+     * Removes all tabs.
+     */
     public void removeAllTabs() {
         if (_selidx != -1) {
             remove(_tabs.get(_selidx).component);
@@ -142,17 +153,23 @@ public class BTabbedPane extends BContainer {
         _tabs.clear();
     }
 
-    /** Returns the number of tabs in this pane. */
+    /**
+     * Returns the number of tabs in this pane.
+     */
     public int getTabCount() {
         return _tabs.size();
     }
 
-    /** Selects the specified tab. */
+    /**
+     * Selects the specified tab.
+     */
     public void selectTab(BComponent tab) {
         selectTab(indexOfTab(tab));
     }
 
-    /** Selects the tab with the specified index. */
+    /**
+     * Selects the tab with the specified index.
+     */
     public void selectTab(int tabidx) {
         // no NOOPing
         if (tabidx == _selidx) {
@@ -177,28 +194,38 @@ public class BTabbedPane extends BContainer {
         _selidx = tabidx;
     }
 
-    /** Returns the selected tab component. */
+    /**
+     * Returns the selected tab component.
+     */
     public BComponent getSelectedTab() {
         return (_selidx == -1) ? null : _tabs.get(_selidx).component;
     }
 
-    /** Returns the index of the selected tab. */
+    /**
+     * Returns the index of the selected tab.
+     */
     public int getSelectedTabIndex() {
         return _selidx;
     }
 
-    /** Returns a reference to the tab button for the given tab. */
+    /**
+     * Returns a reference to the tab button for the given tab.
+     */
     public BToggleButton getTabButton(BComponent tab) {
         int idx = indexOfTab(tab);
         return (idx == -1) ? null : getTabButton(idx);
     }
 
-    /** Returns a reference to the tab button at the given index. */
+    /**
+     * Returns a reference to the tab button at the given index.
+     */
     public BToggleButton getTabButton(int idx) {
         return (BToggleButton) _buttons.getComponent(idx);
     }
 
-    /** Returns the index of the given tab. */
+    /**
+     * Returns the index of the given tab.
+     */
     public int indexOfTab(BComponent tab) {
         for (int ii = 0; ii < _tabs.size(); ii++) {
             if (_tabs.get(ii).component == tab) {
@@ -208,7 +235,9 @@ public class BTabbedPane extends BContainer {
         return -1;
     }
 
-    /** Updates the visibility of the close tab button. */
+    /**
+     * Updates the visibility of the close tab button.
+     */
     protected void updateClose(boolean showClose) {
         if (showClose && _close.getParent() == null) {
             _top.add(_close, GroupLayout.FIXED);

@@ -81,7 +81,7 @@ public class BDialogMessage extends BContainer {
                           final BLabel message,
                           final IconOptions option,
                           final DisplayStyleOptions style) {
-        this(_name, message, "greymessagebg",option, style);
+        this(_name, message, "greymessagebg", option, style);
     }
 
     public BDialogMessage(final String _name,
@@ -95,39 +95,39 @@ public class BDialogMessage extends BContainer {
     }
 
     private BLabel createIcon(IconOptions options, DisplayStyleOptions display) {
-	BLabel iconLabel = new BLabel("");
-	switch (options) {
-	    case WARNING:
-		if (display == DisplayStyleOptions.WINDOWS) {
+        BLabel iconLabel = new BLabel("");
+        switch (options) {
+            case WARNING:
+                if (display == DisplayStyleOptions.WINDOWS) {
                     iconLabel.setIcon(WARN_ICON_WINDOWS);
                 } else {
                     iconLabel.setIcon(WARN_ICON_MOTIF);
                 }
-		break;
-	    case ERROR:
-		if (display == DisplayStyleOptions.WINDOWS) {
+                break;
+            case ERROR:
+                if (display == DisplayStyleOptions.WINDOWS) {
                     iconLabel.setIcon(ERROR_ICON_WINDOWS);
                 } else {
                     iconLabel.setIcon(ERROR_ICON_MOTIF);
                 }
-		break;
-	    case QUESTION:
-		if (display == DisplayStyleOptions.WINDOWS) {
+                break;
+            case QUESTION:
+                if (display == DisplayStyleOptions.WINDOWS) {
                     iconLabel.setIcon(QUESTION_ICON_WINDOWS);
                 } else {
                     iconLabel.setIcon(QUESTION_ICON_MOTIF);
                 }
-		break;
-	    case INFO:
-	    default:
+                break;
+            case INFO:
+            default:
                 if (display == DisplayStyleOptions.WINDOWS) {
                     iconLabel.setIcon(INFO_ICON_WINDOWS);
                 } else {
                     iconLabel.setIcon(INFO_ICON_MOTIF);
                 }
-		break;
-	}
-	return iconLabel;
+                break;
+        }
+        return iconLabel;
     }
 
     private void createMessage(String _name,
@@ -145,7 +145,6 @@ public class BDialogMessage extends BContainer {
 
         if (option == null) {
             option = IconOptions.INFO;
-
         }
         add(createIcon(option, styleOption), BorderLayout.WEST);
 

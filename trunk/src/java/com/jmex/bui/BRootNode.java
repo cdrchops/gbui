@@ -37,7 +37,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
 
-/** Connects the BUI system into the JME scene graph. */
+/**
+ * Connects the BUI system into the JME scene graph.
+ */
 public abstract class BRootNode extends Geometry {
     public BRootNode() {
         super("BUI Root Node");
@@ -46,10 +48,14 @@ public abstract class BRootNode extends Geometry {
         setRenderQueueMode(Renderer.QUEUE_ORTHO);
     }
 
-    /** Returns the current timestamp used to stamp event times. */
+    /**
+     * Returns the current timestamp used to stamp event times.
+     */
     public abstract long getTickStamp();
 
-    /** Registers a top-level window with the input system. */
+    /**
+     * Registers a top-level window with the input system.
+     */
     public void addWindow(BWindow window) {
         addWindow(window, false);
     }
@@ -103,18 +109,24 @@ public abstract class BRootNode extends Geometry {
         updateHoverComponent(_mouseX, _mouseY);
     }
 
-    /** Returns true if the specified window is on top. */
+    /**
+     * Returns true if the specified window is on top.
+     */
     public boolean isOnTop(BWindow window) {
         return (_windows.size() > 0 &&
                 _windows.get(_windows.size() - 1) == window);
     }
 
-    /** Called when an added window's layer is changed. Adjusts the ordering of the windows in the stack. */
+    /**
+     * Called when an added window's layer is changed. Adjusts the ordering of the windows in the stack.
+     */
     public void resortWindows() {
         Collections.sort(_windows);
     }
 
-    /** Removes all windows from the root node. */
+    /**
+     * Removes all windows from the root node.
+     */
     public void removeAllWindows() {
         setFocus(null);
         for (int ii = _windows.size() - 1; ii >= 0; ii--) {
@@ -132,7 +144,9 @@ public abstract class BRootNode extends Geometry {
         return _windows;
     }
 
-    /** Removes a window from participation in the input system. */
+    /**
+     * Removes a window from participation in the input system.
+     */
     public void removeWindow(BWindow window) {
         // if our focus is in this window, clear it
         if (_focus != null && _focus.getWindow() == window) {
@@ -180,7 +194,9 @@ public abstract class BRootNode extends Geometry {
         _tipTime = seconds;
     }
 
-    /** Returns the tool tip timeout. See {@link #setTooltipTimeout} for details. */
+    /**
+     * Returns the tool tip timeout. See {@link #setTooltipTimeout} for details.
+     */
     public float getTooltipTimeout() {
         return _tipTime;
     }
@@ -193,12 +209,16 @@ public abstract class BRootNode extends Geometry {
         _tipWidth = width;
     }
 
-    /** Registers a listener that will be notified of all events prior to their being dispatched normally. */
+    /**
+     * Registers a listener that will be notified of all events prior to their being dispatched normally.
+     */
     public void addGlobalEventListener(EventListener listener) {
         _globals.add(listener);
     }
 
-    /** Removes a global event listener registration. */
+    /**
+     * Removes a global event listener registration.
+     */
     public void removeGlobalEventListener(EventListener listener) {
         _globals.remove(listener);
     }
@@ -218,22 +238,30 @@ public abstract class BRootNode extends Geometry {
         _defaults.add(component);
     }
 
-    /** Pops the default event target off the stack. */
+    /**
+     * Pops the default event target off the stack.
+     */
     public void popDefaultEventTarget(BComponent component) {
         _defaults.remove(component);
     }
 
-    /** Requests that the specified component be given the input focus. Pass null to clear the focus. */
+    /**
+     * Requests that the specified component be given the input focus. Pass null to clear the focus.
+     */
     public void requestFocus(BComponent component) {
         setFocus(component);
     }
 
-    /** Returns the component that currently has the focus, or null. */
+    /**
+     * Returns the component that currently has the focus, or null.
+     */
     public BComponent getFocus() {
         return _focus;
     }
 
-    /** Generates a string representation of this instance. */
+    /**
+     * Generates a string representation of this instance.
+     */
     @Override
     public String toString() {
         return "BRootNode@" + hashCode();
@@ -267,7 +295,7 @@ public abstract class BRootNode extends Geometry {
         if (_hcomponent == null || _tipwin != null ||
             (_lastMoveTime < getTooltipTimeout() &&
              _lastTipTime > TIP_MODE_RESET) ||
-            (tiptext = _hcomponent.getTooltipText()) == null) {
+                                            (tiptext = _hcomponent.getTooltipText()) == null) {
             if (_tipwin != null) {
                 _lastTipTime = 0;
             }
@@ -287,7 +315,7 @@ public abstract class BRootNode extends Geometry {
         // create, set up and show the tooltip window
         _tipwin = new BWindow(hwin.getStyleSheet(), new BorderLayout()) {
             @Override
-	    public boolean isOverlay() {
+            public boolean isOverlay() {
                 return true; // don't steal input focus
             }
         };
@@ -374,7 +402,9 @@ public abstract class BRootNode extends Geometry {
         return false; // nothing doing
     }
 
-    /** Sets the color of the shade behind the first active modal window. */
+    /**
+     * Sets the color of the shade behind the first active modal window.
+     */
     public void setModalShade(ColorRGBA color) {
         _modalShade = color;
     }
@@ -428,7 +458,9 @@ public abstract class BRootNode extends Geometry {
         }
     }
 
-    /** Configures the component that has keyboard focus. */
+    /**
+     * Configures the component that has keyboard focus.
+     */
     protected void setFocus(BComponent focus) {
         // allow the component we clicked on to adjust the focus target
         if (focus != null) {
@@ -449,12 +481,16 @@ public abstract class BRootNode extends Geometry {
         }
     }
 
-    /** Registers a {@link BGeomView} with the root node. This is called automatically from {@link BGeomView#wasAdded}. */
+    /**
+     * Registers a {@link BGeomView} with the root node. This is called automatically from {@link BGeomView#wasAdded}.
+     */
     protected void registerGeomView(BGeomView nview) {
         _geomviews.add(nview);
     }
 
-    /** Clears out a node view registration. This is called automatically from {@link BGeomView#wasRemoved}. */
+    /**
+     * Clears out a node view registration. This is called automatically from {@link BGeomView#wasRemoved}.
+     */
     protected void unregisterGeomView(BGeomView nview) {
         _geomviews.remove(nview);
     }
@@ -481,7 +517,9 @@ public abstract class BRootNode extends Geometry {
         }
     }
 
-    /** Recomputes the component over which the mouse is hovering, generating mouse exit and entry events as necessary. */
+    /**
+     * Recomputes the component over which the mouse is hovering, generating mouse exit and entry events as necessary.
+     */
     protected void updateHoverComponent(int mx,
                                         int my) {
         // check for a new hover component starting with each of our root
@@ -518,7 +556,7 @@ public abstract class BRootNode extends Geometry {
             // clear out any tooltip business in case the hover component
             // changed as a result of a window popping up
             if (_hcomponent == null || !_hcomponent.isHoverEnabled() ||
-        	    _hcomponent.getWindow() != _tipwin) {
+                _hcomponent.getWindow() != _tipwin) {
                 clearTipWindow();
             }
         }

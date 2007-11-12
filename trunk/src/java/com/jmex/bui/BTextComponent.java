@@ -23,21 +23,31 @@ package com.jmex.bui;
 import com.jme.renderer.ColorRGBA;
 import com.jmex.bui.text.BTextFactory;
 
-/** Defines methods and mechanisms common to components that render a string of text. */
+/**
+ * Defines methods and mechanisms common to components that render a string of text.
+ */
 public abstract class BTextComponent extends BComponent {
-    /** Updates the text displayed by this component. */
+    /**
+     * Updates the text displayed by this component.
+     */
     public abstract void setText(String text);
 
-    /** Returns the text currently being displayed by this component. */
+    /**
+     * Returns the text currently being displayed by this component.
+     */
     public abstract String getText();
 
-    /** Returns a text factory suitable for creating text in the style defined by the component's current state. */
+    /**
+     * Returns a text factory suitable for creating text in the style defined by the component's current state.
+     */
     public BTextFactory getTextFactory() {
         BTextFactory textfact = _textfacts[getState()];
         return (textfact != null) ? textfact : _textfacts[DEFAULT];
     }
 
-    /** Returns the horizontal alignment for this component's text. */
+    /**
+     * Returns the horizontal alignment for this component's text.
+     */
     public int getHorizontalAlignment() {
         if (_haligns != null) {
             int halign = _haligns[getState()];
@@ -46,7 +56,9 @@ public abstract class BTextComponent extends BComponent {
         return BConstants.LEFT;
     }
 
-    /** Returns the vertical alignment for this component's text. */
+    /**
+     * Returns the vertical alignment for this component's text.
+     */
     public int getVerticalAlignment() {
         if (_valigns != null) {
             int valign = _valigns[getState()];
@@ -55,7 +67,9 @@ public abstract class BTextComponent extends BComponent {
         return BConstants.CENTER;
     }
 
-    /** Returns the effect for this component's text. */
+    /**
+     * Returns the effect for this component's text.
+     */
     public int getTextEffect() {
         if (_teffects != null) {
             int teffect = _teffects[getState()];
@@ -64,7 +78,9 @@ public abstract class BTextComponent extends BComponent {
         return BConstants.NORMAL;
     }
 
-    /** Returns the effect size for this component's text. */
+    /**
+     * Returns the effect size for this component's text.
+     */
     public int getEffectSize() {
         if (_effsizes != null) {
             int effsize = _effsizes[getState()];
@@ -73,7 +89,9 @@ public abstract class BTextComponent extends BComponent {
         return BConstants.DEFAULT_SIZE;
     }
 
-    /** Returns the color to use for our text effect. */
+    /**
+     * Returns the color to use for our text effect.
+     */
     public ColorRGBA getEffectColor() {
         if (_effcols != null) {
             ColorRGBA effcol = _effcols[getState()];
@@ -132,7 +150,9 @@ public abstract class BTextComponent extends BComponent {
         return getTextFactory();
     }
 
-    /** Creates a text configuration for the supplied label (for which we are by definition acting as container). */
+    /**
+     * Creates a text configuration for the supplied label (for which we are by definition acting as container).
+     */
     protected Label.Config getLabelConfig(Label forLabel,
                                           int twidth) {
         Label.Config config = new Label.Config();

@@ -27,7 +27,9 @@ import com.jmex.bui.util.Dimension;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-/** A user interface element that is meant to contain other interface elements. */
+/**
+ * A user interface element that is meant to contain other interface elements.
+ */
 public class BContainer extends BComponent {
     /**
      * Creates a container with no layout manager. One should subsequently be set via a call to {@link
@@ -41,7 +43,9 @@ public class BContainer extends BComponent {
         super(name);
     }
 
-    /** Creates a container with the supplied layout manager. */
+    /**
+     * Creates a container with the supplied layout manager.
+     */
     public BContainer(BLayoutManager layout) {
         super("");
         setLayoutManager(layout);
@@ -53,34 +57,46 @@ public class BContainer extends BComponent {
         setLayoutManager(layout);
     }
 
-    /** Configures this container with an entity that will set the size and position of its children. */
+    /**
+     * Configures this container with an entity that will set the size and position of its children.
+     */
     public void setLayoutManager(BLayoutManager layout) {
         _layout = layout;
     }
 
-    /** Returns the layout manager configured for this container. */
+    /**
+     * Returns the layout manager configured for this container.
+     */
     public BLayoutManager getLayoutManager() {
         return _layout;
     }
 
-    /** Adds a child to this container. */
+    /**
+     * Adds a child to this container.
+     */
     public void add(BComponent child) {
         add(child, null);
     }
 
-    /** Adds a child to this container at the specified position. */
+    /**
+     * Adds a child to this container at the specified position.
+     */
     public void add(int index,
                     BComponent child) {
         add(index, child, null);
     }
 
-    /** Adds a child to this container with the specified layout constraints. */
+    /**
+     * Adds a child to this container with the specified layout constraints.
+     */
     public void add(BComponent child,
                     Object constraints) {
         add(_children.size(), child, constraints);
     }
 
-    /** Adds a child to this container at the specified position, with the specified layout constraints. */
+    /**
+     * Adds a child to this container at the specified position, with the specified layout constraints.
+     */
     public void add(int index,
                     BComponent child,
                     Object constraints) {
@@ -101,7 +117,9 @@ public class BContainer extends BComponent {
         invalidate();
     }
 
-    /** Removes the child at a specific position from this container. */
+    /**
+     * Removes the child at a specific position from this container.
+     */
     public void remove(int index) {
         BComponent child = getComponent(index);
         _children.remove(index);
@@ -120,7 +138,9 @@ public class BContainer extends BComponent {
         invalidate();
     }
 
-    /** Removes the specified child from this container. */
+    /**
+     * Removes the specified child from this container.
+     */
     public void remove(BComponent child) {
         if (!_children.remove(child)) {
             // if the component was not our child, stop now
@@ -141,17 +161,23 @@ public class BContainer extends BComponent {
         invalidate();
     }
 
-    /** Returns the number of components contained in this container. */
+    /**
+     * Returns the number of components contained in this container.
+     */
     public int getComponentCount() {
         return _children.size();
     }
 
-    /** Returns the <code>index</code>th component from this container. */
+    /**
+     * Returns the <code>index</code>th component from this container.
+     */
     public BComponent getComponent(int index) {
         return _children.get(index);
     }
 
-    /** Removes all children of this container. */
+    /**
+     * Removes all children of this container.
+     */
     public void removeAll() {
         for (int ii = getComponentCount() - 1; ii >= 0; ii--) {
             remove(getComponent(ii));
@@ -332,7 +358,9 @@ public class BContainer extends BComponent {
         return getPreviousFocus();
     }
 
-    /** Applies an operation to all of our children. */
+    /**
+     * Applies an operation to all of our children.
+     */
     protected void applyOperation(ChildOp op) {
         for (int ii = 0, ll = getComponentCount(); ii < ll; ii++) {
             BComponent child = getComponent(ii);
@@ -345,7 +373,9 @@ public class BContainer extends BComponent {
         }
     }
 
-    /** Used in {@link #wasAdded} and {@link #wasRemoved}. */
+    /**
+     * Used in {@link #wasAdded} and {@link #wasRemoved}.
+     */
     protected static abstract class ChildOp {
         public abstract void apply(BComponent child);
     }

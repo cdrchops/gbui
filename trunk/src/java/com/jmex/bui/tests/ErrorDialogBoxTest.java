@@ -20,35 +20,32 @@
 
 package com.jmex.bui.tests;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.jmex.bui.BComponent;
 import com.jmex.bui.BDialogBox;
 import com.jmex.bui.UserResponse;
 import com.jmex.bui.event.DialogListener;
 import com.jmex.bui.headlessWindows.DialogBoxUtil;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author timo
  * @since 27Apr07
  */
 public class ErrorDialogBoxTest extends BaseTest2 {
-    @Override
     protected void createWindows() {
         BDialogBox box = DialogBoxUtil.createErrorDialogBox("dialog1", "Error message.");
         box.setDialogListener(new DialogListener() {
 
-	    @Override
-	    public void responseAvailable(UserResponse response, BComponent source) {
-		System.out.println(response.toString());
-	    }
-
-	});
+            public void responseAvailable(UserResponse response, BComponent source) {
+                System.out.println(response.toString());
+            }
+        });
     }
 
     public static void main(String[] args) {
-	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
+        Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         new ErrorDialogBoxTest().start();
     }
 }

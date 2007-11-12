@@ -43,7 +43,7 @@ public class ScrollingListTest extends BaseTest
         BScrollingList<String, BButton> list =
                 new BScrollingList<String, BButton>() {
                     @Override
-		    public BButton createComponent(String str) {
+                    public BButton createComponent(String str) {
                         return new BButton(str);
                     }
                 };
@@ -60,7 +60,7 @@ public class ScrollingListTest extends BaseTest
     }
 
     public static void main(String[] args) {
-	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
+        Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         ScrollingListTest test = new ScrollingListTest();
         test.start();
     }

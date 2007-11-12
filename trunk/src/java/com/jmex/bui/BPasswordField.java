@@ -20,7 +20,9 @@
 
 package com.jmex.bui;
 
-/** A derivation of {@link BTextField} that does not display the actual text, but asterisks instead. */
+/**
+ * A derivation of {@link BTextField} that does not display the actual text, but asterisks instead.
+ */
 public class BPasswordField extends BTextField {
     public BPasswordField() {
     }

@@ -26,7 +26,9 @@ import com.jmex.bui.util.Dimension;
 
 import java.util.HashMap;
 
-/** Group layout managers lay out widgets in horizontal or vertical groups. */
+/**
+ * Group layout managers lay out widgets in horizontal or vertical groups.
+ */
 public abstract class GroupLayout extends BLayoutManager {
     /**
      * The group layout managers supports two constraints: fixedness and weight. A fixed component will not be stretched
@@ -38,24 +40,34 @@ public abstract class GroupLayout extends BLayoutManager {
      * ignored.
      */
     public static class Constraints {
-        /** Whether or not this component is fixed. */
+        /**
+         * Whether or not this component is fixed.
+         */
         public boolean fixed = false;
 
-        /** The weight of this component relative to the other components in the container. */
+        /**
+         * The weight of this component relative to the other components in the container.
+         */
         public int weight = 1;
 
-        /** Constructs a new constraints object with the specified fixedness and weight. */
+        /**
+         * Constructs a new constraints object with the specified fixedness and weight.
+         */
         public Constraints(boolean fixed) {
             this.fixed = fixed;
         }
 
-        /** Constructs a new constraints object with the specified fixedness and weight. */
+        /**
+         * Constructs a new constraints object with the specified fixedness and weight.
+         */
         public Constraints(int weight) {
             this.weight = weight;
         }
     }
 
-    /** A class used to make our policy constants type-safe. */
+    /**
+     * A class used to make our policy constants type-safe.
+     */
     public static class Policy {
         int code;
 
@@ -64,7 +76,9 @@ public abstract class GroupLayout extends BLayoutManager {
         }
     }
 
-    /** A class used to make our policy constants type-safe. */
+    /**
+     * A class used to make our policy constants type-safe.
+     */
     public static class Justification {
         int code;
 
@@ -79,13 +93,19 @@ public abstract class GroupLayout extends BLayoutManager {
      */
     public final static Constraints FIXED = new Constraints(true);
 
-    /** Do not adjust the widgets on this axis. */
+    /**
+     * Do not adjust the widgets on this axis.
+     */
     public final static Policy NONE = new Policy(0);
 
-    /** Stretch all the widgets to their maximum possible size on this axis. */
+    /**
+     * Stretch all the widgets to their maximum possible size on this axis.
+     */
     public final static Policy STRETCH = new Policy(1);
 
-    /** Stretch all the widgets to be equal to the size of the largest widget on this axis. */
+    /**
+     * Stretch all the widgets to be equal to the size of the largest widget on this axis.
+     */
     public final static Policy EQUALIZE = new Policy(2);
 
     /**
@@ -94,19 +114,29 @@ public abstract class GroupLayout extends BLayoutManager {
      */
     public final static Policy CONSTRAIN = new Policy(3);
 
-    /** A justification constant. */
+    /**
+     * A justification constant.
+     */
     public final static Justification CENTER = new Justification(0);
 
-    /** A justification constant. */
+    /**
+     * A justification constant.
+     */
     public final static Justification LEFT = new Justification(1);
 
-    /** A justification constant. */
+    /**
+     * A justification constant.
+     */
     public final static Justification RIGHT = new Justification(2);
 
-    /** A justification constant. */
+    /**
+     * A justification constant.
+     */
     public final static Justification TOP = new Justification(3);
 
-    /** A justification constant. */
+    /**
+     * A justification constant.
+     */
     public final static Justification BOTTOM = new Justification(4);
 
     public GroupLayout setPolicy(Policy policy) {
@@ -163,7 +193,6 @@ public abstract class GroupLayout extends BLayoutManager {
                     _constraints = new HashMap<BComponent, Object>();
                 }
                 _constraints.put(comp, constraints);
-
             } else {
                 throw new RuntimeException(
                         "GroupLayout constraints object must be of type GroupLayout.Constraints");
@@ -204,7 +233,9 @@ public abstract class GroupLayout extends BLayoutManager {
         return 1;
     }
 
-    /** Computes dimensions of the children widgets that are useful for the group layout managers. */
+    /**
+     * Computes dimensions of the children widgets that are useful for the group layout managers.
+     */
     protected DimenInfo computeDimens(BContainer parent,
                                       boolean horiz,
                                       int whint,
@@ -276,7 +307,9 @@ public abstract class GroupLayout extends BLayoutManager {
         return info;
     }
 
-    /** A helper function for {@link #computeDimens}. */
+    /**
+     * A helper function for {@link #computeDimens}.
+     */
     protected Dimension computeChildDimens(
             DimenInfo info,
             int ii,
@@ -295,7 +328,9 @@ public abstract class GroupLayout extends BLayoutManager {
         return csize;
     }
 
-    /** Convenience method for creating a horizontal group layout manager. */
+    /**
+     * Convenience method for creating a horizontal group layout manager.
+     */
     public static GroupLayout makeHoriz(
             Policy policy,
             Justification justification,
@@ -307,7 +342,9 @@ public abstract class GroupLayout extends BLayoutManager {
         return lay;
     }
 
-    /** Convenience method for creating a vertical group layout manager. */
+    /**
+     * Convenience method for creating a vertical group layout manager.
+     */
     public static GroupLayout makeVert(
             Policy policy,
             Justification justification,
@@ -319,21 +356,27 @@ public abstract class GroupLayout extends BLayoutManager {
         return lay;
     }
 
-    /** Convenience method for creating a horizontal group layout manager. */
+    /**
+     * Convenience method for creating a horizontal group layout manager.
+     */
     public static GroupLayout makeHoriz(Justification justification) {
         HGroupLayout lay = new HGroupLayout();
         lay.setJustification(justification);
         return lay;
     }
 
-    /** Convenience method for creating a vertical group layout manager. */
+    /**
+     * Convenience method for creating a vertical group layout manager.
+     */
     public static GroupLayout makeVert(Justification justification) {
         VGroupLayout lay = new VGroupLayout();
         lay.setJustification(justification);
         return lay;
     }
 
-    /** Convenience method for creating a horizontal group layout manager that stretches in both directions. */
+    /**
+     * Convenience method for creating a horizontal group layout manager that stretches in both directions.
+     */
     public static GroupLayout makeHStretch() {
         HGroupLayout lay = new HGroupLayout();
         lay.setPolicy(STRETCH);
@@ -341,7 +384,9 @@ public abstract class GroupLayout extends BLayoutManager {
         return lay;
     }
 
-    /** Convenience method for creating a vertical group layout manager that stretches in both directions. */
+    /**
+     * Convenience method for creating a vertical group layout manager that stretches in both directions.
+     */
     public static GroupLayout makeVStretch() {
         VGroupLayout lay = new VGroupLayout();
         lay.setPolicy(STRETCH);
@@ -349,14 +394,18 @@ public abstract class GroupLayout extends BLayoutManager {
         return lay;
     }
 
-    /** Makes a container configured with a horizontal group layout manager. */
+    /**
+     * Makes a container configured with a horizontal group layout manager.
+     */
     public static BContainer makeHBox(Justification justification) {
         HGroupLayout lay = new HGroupLayout();
         lay.setJustification(justification);
         return new BContainer(lay);
     }
 
-    /** Makes a horizontal box of components that uses the supplied (on-axis) justification. */
+    /**
+     * Makes a horizontal box of components that uses the supplied (on-axis) justification.
+     */
     public static BContainer makeHBox(Justification justification,
                                       BComponent... comps) {
         BContainer cont = makeHBox(justification);
@@ -366,14 +415,18 @@ public abstract class GroupLayout extends BLayoutManager {
         return cont;
     }
 
-    /** Creates a container configured with a vertical group layout manager. */
+    /**
+     * Creates a container configured with a vertical group layout manager.
+     */
     public static BContainer makeVBox(Justification justification) {
         VGroupLayout lay = new VGroupLayout();
         lay.setJustification(justification);
         return new BContainer(lay);
     }
 
-    /** Makes a vertical box of components that uses the supplied (on-axis) justification. */
+    /**
+     * Makes a vertical box of components that uses the supplied (on-axis) justification.
+     */
     public static BContainer makeVBox(Justification justification,
                                       BComponent... comps) {
         BContainer cont = makeVBox(justification);

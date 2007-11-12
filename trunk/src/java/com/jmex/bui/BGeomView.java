@@ -29,29 +29,41 @@ import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
 import org.lwjgl.opengl.GL11;
 
-/** Displays 3D geometry (a {@link Spatial}) inside a normal user interface. */
+/**
+ * Displays 3D geometry (a {@link Spatial}) inside a normal user interface.
+ */
 public class BGeomView extends BComponent {
-    /** Creates a view with no configured geometry. Geometry can be set later with {@link #setGeometry}. */
+    /**
+     * Creates a view with no configured geometry. Geometry can be set later with {@link #setGeometry}.
+     */
     public BGeomView() {
         this(null);
     }
 
-    /** Creates a view with the specified {@link Spatial} to be rendered. */
+    /**
+     * Creates a view with the specified {@link Spatial} to be rendered.
+     */
     public BGeomView(Spatial geom) {
         _geom = geom;
     }
 
-    /** Returns the camera used when rendering our geometry. */
+    /**
+     * Returns the camera used when rendering our geometry.
+     */
     public Camera getCamera() {
         return _camera;
     }
 
-    /** Configures the spatial to be rendered by this view. */
+    /**
+     * Configures the spatial to be rendered by this view.
+     */
     public void setGeometry(Spatial geom) {
         _geom = geom;
     }
 
-    /** Called every frame (while we're added to the view hierarchy) by the {@link BRootNode}. */
+    /**
+     * Called every frame (while we're added to the view hierarchy) by the {@link BRootNode}.
+     */
     public void update(float frameTime) {
         if (_geom != null) {
             _geom.updateGeometricState(frameTime, true);
@@ -129,7 +141,6 @@ public class BGeomView extends BComponent {
             renderer.setCamera(_camera);
             _camera.update();
             renderer.draw(_geom);
-
         } finally {
             // restore the camera
             renderer.setCamera(cam);
@@ -143,7 +154,9 @@ public class BGeomView extends BComponent {
         }
     }
 
-    /** Called to create and configure the camera that we'll use when rendering our geometry. */
+    /**
+     * Called to create and configure the camera that we'll use when rendering our geometry.
+     */
     protected Camera createCamera(DisplaySystem ds) {
         // create a standard camera and frustum
         Camera camera = ds.getRenderer().createCamera(

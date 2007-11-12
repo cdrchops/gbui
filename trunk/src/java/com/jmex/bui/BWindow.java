@@ -24,7 +24,9 @@ import com.jme.system.DisplaySystem;
 import com.jmex.bui.layout.BLayoutManager;
 import com.jmex.bui.util.Dimension;
 
-/** A window defines the top-level of a component hierarchy. It must be created with a stylesheet and layout manager. */
+/**
+ * A window defines the top-level of a component hierarchy. It must be created with a stylesheet and layout manager.
+ */
 public class BWindow extends BContainer
         implements Comparable<BWindow> {
     public BWindow(String name,
@@ -41,12 +43,16 @@ public class BWindow extends BContainer
         setLayoutManager(layout);
     }
 
-    /** Returns the stylesheet in effect for this window. */
+    /**
+     * Returns the stylesheet in effect for this window.
+     */
     public BStyleSheet getStyleSheet() {
         return _style;
     }
 
-    /** Sizes this window to its preferred size. This method does not change the window's coordinates. */
+    /**
+     * Sizes this window to its preferred size. This method does not change the window's coordinates.
+     */
     public void pack() {
         pack(-1, -1);
     }
@@ -82,12 +88,16 @@ public class BWindow extends BContainer
         _modal = modal;
     }
 
-    /** Returns whether or not this window is modal. See {@link #setModal} for more information on modality. */
+    /**
+     * Returns whether or not this window is modal. See {@link #setModal} for more information on modality.
+     */
     public boolean isModal() {
         return _modal;
     }
 
-    /** Returns whether this window should have shading applied beneath it. */
+    /**
+     * Returns whether this window should have shading applied beneath it.
+     */
     public boolean shouldShadeBehind() {
         return _modal;
     }
@@ -100,12 +110,16 @@ public class BWindow extends BContainer
         return false;
     }
 
-    /** Returns the root node that manages this window. */
+    /**
+     * Returns the root node that manages this window.
+     */
     public BRootNode getRootNode() {
         return _root;
     }
 
-    /** Returns the layer occupied by this window. See {@link #setLayer} for more details. */
+    /**
+     * Returns the layer occupied by this window. See {@link #setLayer} for more details.
+     */
     public int getLayer() {
         return _layer;
     }
@@ -124,7 +138,9 @@ public class BWindow extends BContainer
         }
     }
 
-    /** Detaches this window from the root node and removes it from the display. */
+    /**
+     * Detaches this window from the root node and removes it from the display.
+     */
     public void dismiss() {
         if (_root != null) {
             _root.removeWindow(this);
@@ -179,12 +195,16 @@ public class BWindow extends BContainer
         return _root != null;
     }
 
-    /** Set the parent window.  If the parent window is removed from its root node, this window will also be removed. */
+    /**
+     * Set the parent window.  If the parent window is removed from its root node, this window will also be removed.
+     */
     public void setParentWindow(BWindow parentWindow) {
         _parentWindow = parentWindow;
     }
 
-    /** Returne the parent window. */
+    /**
+     * Returne the parent window.
+     */
     public BWindow getParentWindow() {
         return _parentWindow;
     }
@@ -215,7 +235,9 @@ public class BWindow extends BContainer
         }
     }
 
-    /** Requests that the specified component be given the input focus. */
+    /**
+     * Requests that the specified component be given the input focus.
+     */
     protected void requestFocus(BComponent component) {
         if (_root == null) {
             _savedFocus = component;
@@ -224,7 +246,9 @@ public class BWindow extends BContainer
         }
     }
 
-    /** Called when this window gets the focus after a window on the hierarchy has been removed. */
+    /**
+     * Called when this window gets the focus after a window on the hierarchy has been removed.
+     */
     protected void gotFocus() {
         if (_savedFocus != null) {
             _root.setFocus(_savedFocus);
@@ -232,21 +256,33 @@ public class BWindow extends BContainer
         }
     }
 
-    /** The stylesheet used to configure components in this window. */
+    /**
+     * The stylesheet used to configure components in this window.
+     */
     protected BStyleSheet _style;
 
-    /** The root node that connects us into the JME system. */
+    /**
+     * The root node that connects us into the JME system.
+     */
     protected BRootNode _root;
 
-    /** Whether or not this window steals input from other windows further down the hierarchy. */
+    /**
+     * Whether or not this window steals input from other windows further down the hierarchy.
+     */
     protected boolean _modal;
 
-    /** The "layer" in the window stack occupied by this window. */
+    /**
+     * The "layer" in the window stack occupied by this window.
+     */
     protected int _layer;
 
-    /** Stores a reference to our focus when this window is no longer the top-most window. */
+    /**
+     * Stores a reference to our focus when this window is no longer the top-most window.
+     */
     protected BComponent _savedFocus;
 
-    /** Used to associate this window with a parent window. */
+    /**
+     * Used to associate this window with a parent window.
+     */
     protected BWindow _parentWindow;
 }

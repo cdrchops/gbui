@@ -26,17 +26,25 @@ import com.jmex.bui.layout.GroupLayout;
 
 import java.util.ArrayList;
 
-/** Displays a list of selectable entries and fires an {@link ActionEvent} when the selected value changes. */
+/**
+ * Displays a list of selectable entries and fires an {@link ActionEvent} when the selected value changes.
+ */
 public class BList extends BContainer {
-    /** The action fired when the list selection changes. */
+    /**
+     * The action fired when the list selection changes.
+     */
     public static final String SELECT = "select";
 
-    /** Creates an empty list. */
+    /**
+     * Creates an empty list.
+     */
     public BList() {
         this(null);
     }
 
-    /** Creates a list and populates it with the supplied values. */
+    /**
+     * Creates a list and populates it with the supplied values.
+     */
     public BList(Object[] values) {
         super(GroupLayout.makeVert(GroupLayout.NONE, GroupLayout.TOP,
                                    GroupLayout.STRETCH));
@@ -47,7 +55,9 @@ public class BList extends BContainer {
         }
     }
 
-    /** Adds a value to the list. */
+    /**
+     * Adds a value to the list.
+     */
     public void addValue(Object value) {
         // list entries can be selected by clicking on them, but unselected
         // only by clicking another entry
@@ -114,13 +124,19 @@ public class BList extends BContainer {
         return "list";
     }
 
-    /** The values contained in the list. */
+    /**
+     * The values contained in the list.
+     */
     protected ArrayList<Object> _values = new ArrayList<Object>();
 
-    /** The index of the current selection (or -1 for none). */
+    /**
+     * The index of the current selection (or -1 for none).
+     */
     protected int _selidx = -1;
 
-    /** Listens for button selections. */
+    /**
+     * Listens for button selections.
+     */
     protected ActionListener _slistener = new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             if (_selidx != -1) {

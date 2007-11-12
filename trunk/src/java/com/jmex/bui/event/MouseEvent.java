@@ -20,21 +20,33 @@
 
 package com.jmex.bui.event;
 
-/** Encapsulates the information associated with a mouse event. */
+/**
+ * Encapsulates the information associated with a mouse event.
+ */
 public class MouseEvent extends InputEvent {
-    /** An event generated when a mouse button is pressed. */
+    /**
+     * An event generated when a mouse button is pressed.
+     */
     public static final int MOUSE_PRESSED = 0;
 
-    /** An event generated when a mouse button is released. */
+    /**
+     * An event generated when a mouse button is released.
+     */
     public static final int MOUSE_RELEASED = 1;
 
-    /** An event generated when the mouse enters a component's bounds. */
+    /**
+     * An event generated when the mouse enters a component's bounds.
+     */
     public static final int MOUSE_ENTERED = 2;
 
-    /** An event generated when the mouse exits a component's bounds. */
+    /**
+     * An event generated when the mouse exits a component's bounds.
+     */
     public static final int MOUSE_EXITED = 3;
 
-    /** An event generated when the mouse is moved. */
+    /**
+     * An event generated when the mouse is moved.
+     */
     public static final int MOUSE_MOVED = 4;
 
     /**
@@ -43,16 +55,24 @@ public class MouseEvent extends InputEvent {
      */
     public static final int MOUSE_DRAGGED = 5;
 
-    /** An event generated when the mouse wheel was rotated. */
+    /**
+     * An event generated when the mouse wheel was rotated.
+     */
     public static final int MOUSE_WHEELED = 6;
 
-    /** A constant representing the "left" mouse button. */
+    /**
+     * A constant representing the "left" mouse button.
+     */
     public static final int BUTTON1 = 0;
 
-    /** A constant representing the "right" mouse button. */
+    /**
+     * A constant representing the "right" mouse button.
+     */
     public static final int BUTTON2 = 1;
 
-    /** A constant representing the middle mouse button. */
+    /**
+     * A constant representing the middle mouse button.
+     */
     public static final int BUTTON3 = 2;
 
     public MouseEvent(Object source,
@@ -90,7 +110,9 @@ public class MouseEvent extends InputEvent {
         _delta = delta;
     }
 
-    /** Returns the type of this event, one of {@link #MOUSE_PRESSED}, {#link MOUSE_RELEASE}, etc. */
+    /**
+     * Returns the type of this event, one of {@link #MOUSE_PRESSED}, {#link MOUSE_RELEASE}, etc.
+     */
     public int getType() {
         return _type;
     }
@@ -103,12 +125,16 @@ public class MouseEvent extends InputEvent {
         return _button;
     }
 
-    /** Returns the (absolute) x coordinate of the mouse at the time this event was generated. */
+    /**
+     * Returns the (absolute) x coordinate of the mouse at the time this event was generated.
+     */
     public int getX() {
         return _mx;
     }
 
-    /** Returns the (absolute) y coordinate of the mouse at the time this event was generated. */
+    /**
+     * Returns the (absolute) y coordinate of the mouse at the time this event was generated.
+     */
     public int getY() {
         return _my;
     }

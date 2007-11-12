@@ -20,7 +20,9 @@
 
 package com.jmex.bui.event;
 
-/** Used to dispatch notifications of text changes in text components. */
+/**
+ * Used to dispatch notifications of text changes in text components.
+ */
 public class TextEvent extends BEvent {
     public TextEvent(Object source,
                      long when) {

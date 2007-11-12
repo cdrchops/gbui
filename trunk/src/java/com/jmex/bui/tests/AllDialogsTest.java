@@ -20,9 +20,6 @@
 
 package com.jmex.bui.tests;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.jmex.bui.BComponent;
 import com.jmex.bui.BDialogBox;
 import com.jmex.bui.BInputBox;
@@ -30,33 +27,33 @@ import com.jmex.bui.BuiSystem;
 import com.jmex.bui.UserResponse;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.event.DialogListener;
-import com.jmex.bui.headlessWindows.MessageWindowUtil;
 import com.jmex.bui.headlessWindows.BTitledWindow;
 import com.jmex.bui.headlessWindows.DialogBoxUtil;
 import com.jmex.bui.headlessWindows.InputBoxUtil;
+import com.jmex.bui.headlessWindows.MessageWindowUtil;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author timo
  * @since 27Apr07
  */
 public class AllDialogsTest extends BaseTest2 {
-    @Override
     protected void createWindows() {
-	DialogListener responseListener = new DialogListener() {
+        DialogListener responseListener = new DialogListener() {
 
-	    @Override
-	    public void responseAvailable(UserResponse response, BComponent source) {
-		System.out.println(response.toString());
-		if (source instanceof BInputBox) {
-		    System.out.println(((BInputBox)source).getInputText());
-		}
-	    }
+            public void responseAvailable(UserResponse response, BComponent source) {
+                System.out.println(response.toString());
+                if (source instanceof BInputBox) {
+                    System.out.println(((BInputBox) source).getInputText());
+                }
+            }
+        };
 
-	};
-
-	BDialogBox box = DialogBoxUtil.createQuestionDialogBox("qmessage1", "message");
-	box.setDialogListener(responseListener);
-	box = DialogBoxUtil.createWarningDialogBox("warnMessage1", "message");
+        BDialogBox box = DialogBoxUtil.createQuestionDialogBox("qmessage1", "message");
+        box.setDialogListener(responseListener);
+        box = DialogBoxUtil.createWarningDialogBox("warnMessage1", "message");
         box.setDialogListener(responseListener);
         box = DialogBoxUtil.createInfoDialogBox("infoMessage1", "message");
         box.setDialogListener(responseListener);
@@ -65,13 +62,13 @@ public class AllDialogsTest extends BaseTest2 {
         box = InputBoxUtil.createInfoInputBox("inputTest1", "Message");
         box.setDialogListener(responseListener);
         BTitledWindow window = MessageWindowUtil.createMessageBox("blah", "Mighty window",
-        	TitleOptions.MIN_MAX_CLOSE, "You might have noticed that this window is always on top. " +
-        			"That's because it uses another CollapsingWindowListener than the other windows.");
+                                                                  TitleOptions.MIN_MAX_CLOSE, "You might have noticed that this window is always on top. " +
+                                                                                              "That's because it uses another CollapsingWindowListener than the other windows.");
         BuiSystem.getRootNode().addWindow(window);
     }
 
     public static void main(String[] args) {
-	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
+        Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         new AllDialogsTest().start();
     }
 }

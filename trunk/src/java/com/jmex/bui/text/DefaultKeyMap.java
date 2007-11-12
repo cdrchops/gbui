@@ -23,7 +23,9 @@ package com.jmex.bui.text;
 import com.jme.input.KeyInput;
 import com.jmex.bui.event.InputEvent;
 
-/** Defines a default key mapping for our text editing components. */
+/**
+ * Defines a default key mapping for our text editing components.
+ */
 public class DefaultKeyMap extends BKeyMap {
     public DefaultKeyMap() {
         addMapping(ANY_MODIFIER, KeyInput.KEY_RETURN, EditCommands.ACTION);

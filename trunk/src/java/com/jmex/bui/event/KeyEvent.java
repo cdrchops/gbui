@@ -22,12 +22,18 @@ package com.jmex.bui.event;
 
 import com.jme.input.KeyInput;
 
-/** Encapsulates the information associated with a keyboard event. */
+/**
+ * Encapsulates the information associated with a keyboard event.
+ */
 public class KeyEvent extends InputEvent {
-    /** Indicates that an event represents a key pressing. */
+    /**
+     * Indicates that an event represents a key pressing.
+     */
     public static final int KEY_PRESSED = 0;
 
-    /** Indicates that an event represents a key release. */
+    /**
+     * Indicates that an event represents a key release.
+     */
     public static final int KEY_RELEASED = 1;
 
     public KeyEvent(Object source,
@@ -42,7 +48,9 @@ public class KeyEvent extends InputEvent {
         _keyCode = keyCode;
     }
 
-    /** Indicates whether this was a {@link #KEY_PRESSED} or {@link #KEY_RELEASED} event. */
+    /**
+     * Indicates whether this was a {@link #KEY_PRESSED} or {@link #KEY_RELEASED} event.
+     */
     public int getType() {
         return _type;
     }

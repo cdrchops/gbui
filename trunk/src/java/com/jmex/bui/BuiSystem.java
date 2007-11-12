@@ -43,7 +43,9 @@ public class BuiSystem {
     private static BStyleSheet style;
     private static Stack<BWindow> history;
 
-    /** Instantiates everything for us so we don't have to worry about a thing */
+    /**
+     * Instantiates everything for us so we don't have to worry about a thing
+     */
     public static void init() {
         init(null, null, "/rsrc/styles.bss");
     }
@@ -172,7 +174,6 @@ public class BuiSystem {
      * return a window referenced by name
      *
      * @param name String name of the window we're looking for
-     *
      * @return BWindow retrieved by name
      */
     public static BWindow getWindow(final String name) {

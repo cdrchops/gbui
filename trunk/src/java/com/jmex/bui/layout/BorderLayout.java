@@ -40,25 +40,39 @@ import com.jmex.bui.util.Insets;
  * </pre>
  */
 public class BorderLayout extends BLayoutManager {
-    /** A layout constraint. */
+    /**
+     * A layout constraint.
+     */
     public static final Integer NORTH = new Integer(0);
 
-    /** A layout constraint. */
+    /**
+     * A layout constraint.
+     */
     public static final Integer SOUTH = new Integer(1);
 
-    /** A layout constraint. */
+    /**
+     * A layout constraint.
+     */
     public static final Integer EAST = new Integer(2);
 
-    /** A layout constraint. */
+    /**
+     * A layout constraint.
+     */
     public static final Integer WEST = new Integer(3);
 
-    /** A layout constraint. */
+    /**
+     * A layout constraint.
+     */
     public static final Integer CENTER = new Integer(4);
 
-    /** A layout constraint. */
+    /**
+     * A layout constraint.
+     */
     public static final Integer IGNORE = new Integer(5);
 
-    /** Creates a border layout with zero gap between the horizontal components and zero gap between the vertical. */
+    /**
+     * Creates a border layout with zero gap between the horizontal components and zero gap between the vertical.
+     */
     public BorderLayout() {
         this(0, 0);
     }
@@ -72,7 +86,9 @@ public class BorderLayout extends BLayoutManager {
         setGaps(hgap, vgap);
     }
 
-    /** Configures our inter-component gaps. */
+    /**
+     * Configures our inter-component gaps.
+     */
     public void setGaps(int hgap,
                         int vgap) {
         _hgap = hgap;

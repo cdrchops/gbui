@@ -2,6 +2,7 @@ package com.jmex.bui;
 
 /**
  * The possible user responses for the standard dialog.
+ *
  * @author Lucian Cristian Beskid
  */
 public enum UserResponse {
@@ -12,8 +13,9 @@ public enum UserResponse {
     CANCEL("Cancel");
 
     private String label;
+
     private UserResponse(String label) {
-	this.label = label;
+        this.label = label;
     }
 
     @Override

@@ -35,23 +35,35 @@ import java.util.HashMap;
  * <p> The table layout defaults to left horizontal alignment and top vertical alignment.
  */
 public class TableLayout extends BLayoutManager {
-    /** An enumeration class representing alignments. */
+    /**
+     * An enumeration class representing alignments.
+     */
     public static class Alignment {
     }
 
-    /** Left justifies the table contents within the container. */
+    /**
+     * Left justifies the table contents within the container.
+     */
     public static final Alignment LEFT = new Alignment();
 
-    /** Centers the table contents within the container. */
+    /**
+     * Centers the table contents within the container.
+     */
     public static final Alignment CENTER = new Alignment();
 
-    /** Right justifies the table contents within the container. */
+    /**
+     * Right justifies the table contents within the container.
+     */
     public static final Alignment RIGHT = new Alignment();
 
-    /** Top justifies the table contents within the container. */
+    /**
+     * Top justifies the table contents within the container.
+     */
     public static final Alignment TOP = new Alignment();
 
-    /** Bottom justifies the table contents within the container. */
+    /**
+     * Bottom justifies the table contents within the container.
+     */
     public static final Alignment BOTTOM = new Alignment();
 
     /**
@@ -60,12 +72,16 @@ public class TableLayout extends BLayoutManager {
      */
     public static final Alignment STRETCH = new Alignment();
 
-    /** Creates a table layout with the specified number of columns and a zero pixel gap between rows and columns. */
+    /**
+     * Creates a table layout with the specified number of columns and a zero pixel gap between rows and columns.
+     */
     public TableLayout(int columns) {
         this(columns, 0, 0);
     }
 
-    /** Creates a table layout with the specified number of columns and the specifeid gap between rows and columns. */
+    /**
+     * Creates a table layout with the specified number of columns and the specifeid gap between rows and columns.
+     */
     public TableLayout(int columns,
                        int rowgap,
                        int colgap) {

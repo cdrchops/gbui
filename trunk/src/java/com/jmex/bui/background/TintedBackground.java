@@ -26,9 +26,13 @@ import com.jmex.bui.BComponent;
 import com.jmex.bui.BImage;
 import org.lwjgl.opengl.GL11;
 
-/** Displays a partially transparent solid color in the background. */
+/**
+ * Displays a partially transparent solid color in the background.
+ */
 public class TintedBackground extends BBackground {
-    /** Creates a tinted background with the specified color. */
+    /**
+     * Creates a tinted background with the specified color.
+     */
     public TintedBackground(ColorRGBA color) {
         _color = color;
     }

@@ -65,7 +65,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** Tests random BUI bits. */
+/**
+ * Tests random BUI bits.
+ */
 public class LayoutTest extends BaseTest {
     @Override
     protected void createWindows(final BRootNode root,
@@ -237,7 +239,7 @@ public class LayoutTest extends BaseTest {
 
         box.addController(new Controller() {
             @Override
-	    public void update(float time) {
+            public void update(float time) {
                 _angle += FastMath.HALF_PI * time;
                 _rotation.fromAngleAxis(_angle, UP);
                 box.getLocalRotation().set(_rotation);
@@ -257,7 +259,7 @@ public class LayoutTest extends BaseTest {
     }
 
     public static void main(String[] args) {
-	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
+        Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         LayoutTest test = new LayoutTest();
         test.start();
     }

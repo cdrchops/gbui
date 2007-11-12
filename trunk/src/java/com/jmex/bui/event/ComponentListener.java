@@ -20,6 +20,8 @@
 
 package com.jmex.bui.event;
 
-/** A placeholder interface that all component listeners extend. */
+/**
+ * A placeholder interface that all component listeners extend.
+ */
 public interface ComponentListener {
 }

@@ -1,12 +1,12 @@
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
 import com.jmex.bui.enumeratedConstants.DialogOptions;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.layout.HGroupLayout;
 import com.jmex.bui.util.Dimension;
+
+import java.util.ArrayList;
 
 public class BButtonBar extends BContainer {
     private static final Dimension DEFAULT_SIZE = new Dimension(50, 30);
@@ -20,9 +20,9 @@ public class BButtonBar extends BContainer {
     }
 
     public void setButtonListener(ActionListener listener) {
-	for (int i= 0; i < buttons.size(); i++) {
-	    buttons.get(i).addListener(listener);
-	}
+        for (int i = 0; i < buttons.size(); i++) {
+            buttons.get(i).addListener(listener);
+        }
     }
 
     private void createButtons() {

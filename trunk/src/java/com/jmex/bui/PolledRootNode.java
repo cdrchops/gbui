@@ -115,7 +115,9 @@ public class PolledRootNode extends BRootNode {
                 KeyInput.get().isKeyDown(KeyInput.KEY_RCONTROL)) ? 0 : _tipTime;
     }
 
-    /** This listener is notified when a key is pressed or released. */
+    /**
+     * This listener is notified when a key is pressed or released.
+     */
     protected KeyInputListener _keyListener = new KeyInputListener() {
         public void onKey(char character,
                           int keyCode,
@@ -156,7 +158,9 @@ public class PolledRootNode extends BRootNode {
         }
     };
 
-    /** This listener is notified when the mouse is updated. */
+    /**
+     * This listener is notified when the mouse is updated.
+     */
     protected MouseInputListener _mouseListener = new MouseInputListener() {
         public void onButton(int button,
                              boolean pressed,
@@ -223,16 +227,24 @@ public class PolledRootNode extends BRootNode {
     protected InputHandler _handler;
     protected ArrayList<BComponent> _invalidRoots = new ArrayList<BComponent>();
 
-    /** This is used for key repeat. */
+    /**
+     * This is used for key repeat.
+     */
     protected int _pressed = -1;
 
-    /** This is used for key repeat. */
+    /**
+     * This is used for key repeat.
+     */
     protected char _presschar;
 
-    /** This is used for key repeat. */
+    /**
+     * This is used for key repeat.
+     */
     protected long _nextRepeat;
 
-    /** Maps key codes to modifier flags. */
+    /**
+     * Maps key codes to modifier flags.
+     */
     protected static final int[] KEY_MODIFIER_MAP = {
             KeyInput.KEY_LSHIFT, InputEvent.SHIFT_DOWN_MASK,
             KeyInput.KEY_RSHIFT, InputEvent.SHIFT_DOWN_MASK,
@@ -244,14 +256,18 @@ public class PolledRootNode extends BRootNode {
             KeyInput.KEY_RWIN, InputEvent.META_DOWN_MASK,
     };
 
-    /** Maps button indices to modifier flags. */
+    /**
+     * Maps button indices to modifier flags.
+     */
     protected static final int[] MOUSE_MODIFIER_MAP = {
             InputEvent.BUTTON1_DOWN_MASK,
             InputEvent.BUTTON2_DOWN_MASK,
             InputEvent.BUTTON3_DOWN_MASK,
     };
 
-    /** Used to check whether any button remains pressed. */
+    /**
+     * Used to check whether any button remains pressed.
+     */
     protected static final int ANY_BUTTON_PRESSED =
             InputEvent.BUTTON1_DOWN_MASK |
             InputEvent.BUTTON2_DOWN_MASK |

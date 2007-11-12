@@ -33,9 +33,13 @@ import com.jmex.bui.util.Dimension;
 
 import java.net.URL;
 
-/** Creates instances of {@link BText} for text rendering. */
+/**
+ * Creates instances of {@link BText} for text rendering.
+ */
 public class JMEBitmapTextFactory extends BTextFactory {
-    /** Creates a bitmap text factory with the specified font URL and the supplied per-character width and height. */
+    /**
+     * Creates a bitmap text factory with the specified font URL and the supplied per-character width and height.
+     */
     public JMEBitmapTextFactory(URL font,
                                 int width,
                                 int height) {

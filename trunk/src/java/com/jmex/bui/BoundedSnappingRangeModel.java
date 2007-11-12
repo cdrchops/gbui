@@ -20,9 +20,13 @@
 
 package com.jmex.bui;
 
-/** Provides a Bounded range model where values snap to a period. */
+/**
+ * Provides a Bounded range model where values snap to a period.
+ */
 public class BoundedSnappingRangeModel extends BoundedRangeModel {
-    /** Creates a bounded range model with the specified minimum, current, extent and maximum values, and a snap period. */
+    /**
+     * Creates a bounded range model with the specified minimum, current, extent and maximum values, and a snap period.
+     */
     public BoundedSnappingRangeModel(
             int min,
             int value,
