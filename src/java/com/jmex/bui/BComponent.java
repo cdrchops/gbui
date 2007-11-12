@@ -20,13 +20,6 @@
 
 package com.jmex.bui;
 
-import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import com.jme.input.KeyInput;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.RenderContext;
@@ -44,13 +37,21 @@ import com.jmex.bui.text.HTMLView;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
+import org.lwjgl.opengl.GL11;
+
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * The basic entity in the BUI user interface system. A hierarchy of components and component derivations make up a user
  * interface.
  */
 public class BComponent {
-    /** The default component state. This is used to select the component's style pseudoclass among other things. */
+    /**
+     * The default component state. This is used to select the component's style pseudoclass among other things.
+     */
     public static final int DEFAULT = 0;
 
     /**
@@ -99,12 +100,16 @@ public class BComponent {
         _styleClass = styleClass;
     }
 
-    /** Returns the Style class to be used for this component. */
+    /**
+     * Returns the Style class to be used for this component.
+     */
     public String getStyleClass() {
         return (_styleClass == null) ? getDefaultStyleClass() : _styleClass;
     }
 
-    /** Informs this component of its parent in the interface heirarchy. */
+    /**
+     * Informs this component of its parent in the interface heirarchy.
+     */
     public void setParent(BContainer parent) {
         if (_parent != null && parent != null) {
             Log.log.warning("Already added child readded to interface hierarchy! [comp=" + this +
@@ -118,7 +123,9 @@ public class BComponent {
         _parent = parent;
     }
 
-    /** Returns the parent of this component in the interface hierarchy. */
+    /**
+     * Returns the parent of this component in the interface hierarchy.
+     */
     public BContainer getParent() {
         return _parent;
     }
@@ -135,7 +142,6 @@ public class BComponent {
         // if we have a fully specified preferred size, just use it
         if (_preferredSize != null && _preferredSize.width != -1 && _preferredSize.height != -1) {
             ps = new Dimension(_preferredSize);
-
         } else {
             // override hints with preferred size
             if (_preferredSize != null) {
@@ -194,43 +200,59 @@ public class BComponent {
         _preferredSize = preferredSize;
     }
 
-    /** Configures the preferred size of this component. See {@link #setPreferredSize(Dimension)}. */
+    /**
+     * Configures the preferred size of this component. See {@link #setPreferredSize(Dimension)}.
+     */
     public void setPreferredSize(int width,
                                  int height) {
         setPreferredSize(new Dimension(width, height));
     }
 
-    /** Returns the x coordinate of this component. */
+    /**
+     * Returns the x coordinate of this component.
+     */
     public int getX() {
         return _x;
     }
 
-    /** Returns the y coordinate of this component. */
+    /**
+     * Returns the y coordinate of this component.
+     */
     public int getY() {
         return _y;
     }
 
-    /** Returns the width of this component. */
+    /**
+     * Returns the width of this component.
+     */
     public int getWidth() {
         return _width;
     }
 
-    /** Returns the height of this component. */
+    /**
+     * Returns the height of this component.
+     */
     public int getHeight() {
         return _height;
     }
 
-    /** Returns the x position of this component in absolute screen coordinates. */
+    /**
+     * Returns the x position of this component in absolute screen coordinates.
+     */
     public int getAbsoluteX() {
         return _x + ((_parent == null) ? 0 : _parent.getAbsoluteX());
     }
 
-    /** Returns the y position of this component in absolute screen coordinates. */
+    /**
+     * Returns the y position of this component in absolute screen coordinates.
+     */
     public int getAbsoluteY() {
         return _y + ((_parent == null) ? 0 : _parent.getAbsoluteY());
     }
 
-    /** Returns the bounds of this component in a new rectangle. */
+    /**
+     * Returns the bounds of this component in a new rectangle.
+     */
     public Rectangle getBounds() {
         return new Rectangle(_x, _y, _width, _height);
     }
@@ -244,24 +266,32 @@ public class BComponent {
         return (insets == null) ? Insets.ZERO_INSETS : insets;
     }
 
-    /** Returns the (foreground) color configured for this component. */
+    /**
+     * Returns the (foreground) color configured for this component.
+     */
     public ColorRGBA getColor() {
         ColorRGBA color = _colors[getState()];
         return (color != null) ? color : _colors[DEFAULT];
     }
 
-    /** Returns our bounds as a nicely formatted string. */
+    /**
+     * Returns our bounds as a nicely formatted string.
+     */
     public String boundsToString() {
         return _width + "x" + _height + "+" + _x + "+" + _y;
     }
 
-    /** Returns the currently active border for this component. */
+    /**
+     * Returns the currently active border for this component.
+     */
     public BBorder getBorder() {
         BBorder border = _borders[getState()];
         return (border != null) ? border : _borders[DEFAULT];
     }
 
-    /** Returns a reference to the background used by this component. */
+    /**
+     * Returns a reference to the background used by this component.
+     */
     public BBackground getBackground() {
         BBackground background = _backgrounds[getState()];
         return (background != null) ? background : _backgrounds[DEFAULT];
@@ -285,7 +315,9 @@ public class BComponent {
         _backgrounds[state] = background;
     }
 
-    /** Returns a reference to the cursor used by this component. */
+    /**
+     * Returns a reference to the cursor used by this component.
+     */
     public BCursor getCursor() {
         return _cursor;
     }
@@ -298,12 +330,16 @@ public class BComponent {
         _cursor = cursor;
     }
 
-    /** Sets the alpha level for this component. */
+    /**
+     * Sets the alpha level for this component.
+     */
     public void setAlpha(float alpha) {
         _alpha = alpha;
     }
 
-    /** Returns the alpha transparency of this component. */
+    /**
+     * Returns the alpha transparency of this component.
+     */
     public float getAlpha() {
         return _alpha;
     }
@@ -319,7 +355,9 @@ public class BComponent {
         }
     }
 
-    /** Returns true if this component is enabled and responding to user interaction, false if not. */
+    /**
+     * Returns true if this component is enabled and responding to user interaction, false if not.
+     */
     public boolean isEnabled() {
         return _enabled;
     }
@@ -335,17 +373,23 @@ public class BComponent {
         }
     }
 
-    /** Returns true if this component is visible, false if it is not. */
+    /**
+     * Returns true if this component is visible, false if it is not.
+     */
     public boolean isVisible() {
         return _visible;
     }
 
-    /** Returns true if this component is both added to the interface hierarchy and visible, false if not. */
+    /**
+     * Returns true if this component is both added to the interface hierarchy and visible, false if not.
+     */
     public boolean isShowing() {
         return isAdded() && isVisible();
     }
 
-    /** Returns the state of this component, either {@link #DEFAULT}, {@link #HOVER} or {@link #DISABLED}. */
+    /**
+     * Returns the state of this component, either {@link #DEFAULT}, {@link #HOVER} or {@link #DISABLED}.
+     */
     public int getState() {
         return _enabled ? (_hover ? HOVER : DEFAULT) : DISABLED;
     }
@@ -362,17 +406,23 @@ public class BComponent {
         _properties.put(key, value);
     }
 
-    /** Returns the user defined property mapped to the specified key, or null. */
+    /**
+     * Returns the user defined property mapped to the specified key, or null.
+     */
     public Object getProperty(String key) {
         return (_properties == null) ? null : _properties.get(key);
     }
 
-    /** Returns whether or not this component accepts the keyboard focus. */
+    /**
+     * Returns whether or not this component accepts the keyboard focus.
+     */
     public boolean acceptsFocus() {
         return false;
     }
 
-    /** Returns true if this component has the focus. */
+    /**
+     * Returns true if this component has the focus.
+     */
     public boolean hasFocus() {
         return isAdded() ? getWindow().getRootNode().getFocus() == this : false;
     }
@@ -391,7 +441,9 @@ public class BComponent {
         }
     }
 
-    /** Requests that this component be given the input focus. */
+    /**
+     * Requests that this component be given the input focus.
+     */
     public void requestFocus() {
         // sanity check
         if (!acceptsFocus()) {
@@ -409,7 +461,9 @@ public class BComponent {
         }
     }
 
-    /** Sets the upper left position of this component in absolute screen coordinates. */
+    /**
+     * Sets the upper left position of this component in absolute screen coordinates.
+     */
     public void setLocation(int x,
                             int y) {
         setBounds(x, y, _width, _height);
@@ -419,7 +473,9 @@ public class BComponent {
         return new int[]{_x, _y};
     }
 
-    /** Sets the width and height of this component in screen coordinates. */
+    /**
+     * Sets the width and height of this component in screen coordinates.
+     */
     public void setSize(int width,
                         int height) {
         setBounds(_x, _y, width, height);
@@ -487,7 +543,9 @@ public class BComponent {
         _tiptext = text;
     }
 
-    /** Returns the tooltip text configured for this component. */
+    /**
+     * Returns the tooltip text configured for this component.
+     */
     public String getTooltipText() {
         return _tiptext;
     }
@@ -502,23 +560,31 @@ public class BComponent {
         _tipmouse = mouse;
     }
 
-    /** Returns true if the tooltip window should be position relative to the mouse. */
+    /**
+     * Returns true if the tooltip window should be position relative to the mouse.
+     */
     public boolean isTooltipRelativeToMouse() {
         return _tipmouse;
     }
 
-    /** Returns true if this component is added to a hierarchy of components that culminates in a top-level window. */
+    /**
+     * Returns true if this component is added to a hierarchy of components that culminates in a top-level window.
+     */
     public boolean isAdded() {
         BWindow win = getWindow();
         return (win != null && win.isAdded());
     }
 
-    /** Returns true if this component has been validated and laid out. */
+    /**
+     * Returns true if this component has been validated and laid out.
+     */
     public boolean isValid() {
         return _valid;
     }
 
-    /** Instructs this component to lay itself out and then mark itself as valid. */
+    /**
+     * Instructs this component to lay itself out and then mark itself as valid.
+     */
     public void validate() {
         if (!_valid) {
             if (isVisible()) {
@@ -560,7 +626,6 @@ public class BComponent {
 
             // render our border
             renderBorder(renderer);
-
         } finally {
             GL11.glTranslatef(-_x, -_y, 0);
         }
@@ -648,7 +713,9 @@ public class BComponent {
         return processed;
     }
 
-    /** Instructs this component to lay itself out. This is called as a result of the component changing size. */
+    /**
+     * Instructs this component to lay itself out. This is called as a result of the component changing size.
+     */
     protected void layout() {
         // we have nothing to do by default
     }
@@ -741,7 +808,9 @@ public class BComponent {
         return new BLabel(tiptext, "tooltip_label");
     }
 
-    /** Renders the background for this component. */
+    /**
+     * Renders the background for this component.
+     */
     protected void renderBackground(Renderer renderer) {
         BBackground background = getBackground();
         if (background != null) {
@@ -749,7 +818,9 @@ public class BComponent {
         }
     }
 
-    /** Renders the border for this component. */
+    /**
+     * Renders the border for this component.
+     */
     protected void renderBorder(Renderer renderer) {
         BBorder border = getBorder();
         if (border != null) {
@@ -796,24 +867,32 @@ public class BComponent {
         return STATE_PCLASSES[state];
     }
 
-    /** Called when the component's state has changed. */
+    /**
+     * Called when the component's state has changed.
+     */
     protected void stateDidChange() {
         invalidate();
     }
 
-    /** Returns true if the component should update the mouse cursor. */
+    /**
+     * Returns true if the component should update the mouse cursor.
+     */
     protected boolean changeCursor() {
         return _enabled && _visible && _hover && hoverEnabled;
     }
 
-    /** Updates the mouse cursor with the supplied cursor. */
+    /**
+     * Updates the mouse cursor with the supplied cursor.
+     */
     protected void updateCursor(BCursor cursor) {
         if (cursor != null) {
             cursor.show();
         }
     }
 
-    /** Returns the window that defines the root of our component hierarchy. */
+    /**
+     * Returns the window that defines the root of our component hierarchy.
+     */
     public BWindow getWindow() {
         if (this instanceof BWindow) {
             return (BWindow) this;
@@ -878,7 +957,6 @@ public class BComponent {
      * previous state.
      *
      * @param store a rectangle to hold the previous scissor region for later restoration
-     *
      * @return <code>true</code> if scissoring was already enabled, false if it was not.
      */
     protected static boolean intersectScissorBox(
@@ -953,7 +1031,9 @@ public class BComponent {
     protected BBackground[] _backgrounds = new BBackground[getStateCount()];
     protected BCursor _cursor;
 
-    /** Temporary storage for scissor box queries. */
+    /**
+     * Temporary storage for scissor box queries.
+     */
     protected static IntBuffer _bbuf = BufferUtils.createIntBuffer(16);
 
     protected static final int STATE_COUNT = 3;

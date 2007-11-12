@@ -34,7 +34,9 @@ import com.jmex.bui.layout.GroupLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** Does something extraordinary. */
+/**
+ * Does something extraordinary.
+ */
 public class LabelTest extends BaseTest
         implements BConstants {
     @Override
@@ -73,7 +75,7 @@ public class LabelTest extends BaseTest
     }
 
     public static void main(String[] args) {
-	Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
+        Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         LabelTest test = new LabelTest();
         test.start();
     }

@@ -20,7 +20,9 @@
 
 package com.jmex.bui.background;
 
-/** A blank background. */
+/**
+ * A blank background.
+ */
 public class BlankBackground extends BBackground {
     public BlankBackground() {
     }

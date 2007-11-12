@@ -20,7 +20,9 @@
 
 package com.jmex.bui.event;
 
-/** Generated when a model is changed. */
+/**
+ * Generated when a model is changed.
+ */
 public class ChangeEvent extends BEvent {
     public ChangeEvent(Object source) {
         super(source, -1L);

@@ -43,12 +43,13 @@ public class BTitledWindow extends BDraggableWindow {
 
     /**
      * The current state of the window.
+     *
      * @author Lucian Cristian Beskid
      */
     public enum WindowState {
-	NORMAL,
-	MAXIMIZED,
-	MINIMIZED
+        NORMAL,
+        MAXIMIZED,
+        MINIMIZED
     }
 
     private WindowState windowState = WindowState.NORMAL;
@@ -66,9 +67,9 @@ public class BTitledWindow extends BDraggableWindow {
     private BContainer componentArea;
 
     public BTitledWindow(String name,
-	    BTitleBar titleBar,
-	    BStatusBar statusBar,
-	    BStyleSheet style) {
+                         BTitleBar titleBar,
+                         BStatusBar statusBar,
+                         BStyleSheet style) {
         super(name, style, new BorderLayout());
         this.titleBar = titleBar;
         this.statusBar = statusBar;
@@ -85,7 +86,7 @@ public class BTitledWindow extends BDraggableWindow {
     }
 
     private void init() {
-	if (titleBar != null) {
+        if (titleBar != null) {
             add(titleBar, BorderLayout.NORTH);
         } else {
             throw new RuntimeException("The title bar cannot be null.");
@@ -99,17 +100,18 @@ public class BTitledWindow extends BDraggableWindow {
     }
 
     public void setMaximizedSize(int width, int height) {
-	maximizedSize.width = width;
-	maximizedSize.height = height;
+        maximizedSize.width = width;
+        maximizedSize.height = height;
     }
 
     public Dimension getMaximizedSize() {
-	return maximizedSize;
+        return maximizedSize;
     }
 
     /**
      * The component area of a window is the part of the window underneath the title bar.
      * It is analogue to the Swing window's content pane.
+     *
      * @return The container representing the window's component area.
      */
     public BContainer getComponentArea() {
@@ -117,8 +119,8 @@ public class BTitledWindow extends BDraggableWindow {
     }
 
     public void setComponentArea(BContainer compoenentArea) {
-	remove(this.componentArea);
-	this.componentArea.removeAll();
+        remove(this.componentArea);
+        this.componentArea.removeAll();
         this.componentArea = compoenentArea;
         invalidate();
     }
@@ -128,104 +130,103 @@ public class BTitledWindow extends BDraggableWindow {
     }
 
     public void maximize(Dimension size) {
-	if (windowState != WindowState.MAXIMIZED) {
-	    if (size != null) {
-		// save the current state
-		if (windowState != WindowState.MINIMIZED) {
-		    originalBounds = getBounds();
-		}
-		// if there are defaults, take them into account
-		if (maximizedSize.width > 0 && maximizedSize.height > 0) {
-		    setSize(Math.min(maximizedSize.width, size.width), Math
-			    .min(maximizedSize.height, size.height));
-		}
-		// else just use the provided size
-		else {
-		    setSize(size.width, size.height);
-		}
-		previousState = windowState;
-		windowState = WindowState.MAXIMIZED;
-		componentArea.setVisible(true);
-		center();
-		maximizedBounds.x = _x;
-	        maximizedBounds.y = _y;
-	        maximizedBounds.width = _width;
-	        maximizedBounds.height = _height;
-	    }
-	    // attempt to use our own settings if any
-	    else if (maximizedSize.width > 0 && maximizedSize.height > 0) {
-		setSize(maximizedSize.width, maximizedSize.height);
-		if (windowState != WindowState.MINIMIZED) {
-		    originalBounds = getBounds();
-		}
-		previousState = windowState;
-		windowState = WindowState.MAXIMIZED;
-		componentArea.setVisible(true);
-	        center();
-	        maximizedBounds.x = _x;
-	        maximizedBounds.y = _y;
-	        maximizedBounds.width = _width;
-	        maximizedBounds.height = _height;
-	    }
-	}
+        if (windowState != WindowState.MAXIMIZED) {
+            if (size != null) {
+                // save the current state
+                if (windowState != WindowState.MINIMIZED) {
+                    originalBounds = getBounds();
+                }
+                // if there are defaults, take them into account
+                if (maximizedSize.width > 0 && maximizedSize.height > 0) {
+                    setSize(Math.min(maximizedSize.width, size.width), Math
+                            .min(maximizedSize.height, size.height));
+                }
+                // else just use the provided size
+                else {
+                    setSize(size.width, size.height);
+                }
+                previousState = windowState;
+                windowState = WindowState.MAXIMIZED;
+                componentArea.setVisible(true);
+                center();
+                maximizedBounds.x = _x;
+                maximizedBounds.y = _y;
+                maximizedBounds.width = _width;
+                maximizedBounds.height = _height;
+            }
+            // attempt to use our own settings if any
+            else if (maximizedSize.width > 0 && maximizedSize.height > 0) {
+                setSize(maximizedSize.width, maximizedSize.height);
+                if (windowState != WindowState.MINIMIZED) {
+                    originalBounds = getBounds();
+                }
+                previousState = windowState;
+                windowState = WindowState.MAXIMIZED;
+                componentArea.setVisible(true);
+                center();
+                maximizedBounds.x = _x;
+                maximizedBounds.y = _y;
+                maximizedBounds.width = _width;
+                maximizedBounds.height = _height;
+            }
+        }
     }
 
     public void minimize() {
-	if (windowState != WindowState.MINIMIZED) {
-	    // save the bounds if necessary
-	    if (windowState == WindowState.NORMAL) {
-		originalBounds = getBounds();
-	    } else if (windowState == WindowState.MAXIMIZED) {
-		maximizedBounds = getBounds();
-	    }
-	    // adjust the new y position
-	    setLocation(_x, _y + _height - titleBar.getHeight());
-	    componentArea.setVisible(false);
-	    setSize(getWidth(), titleBar.getHeight());
-	    previousState = windowState;
-	    windowState = WindowState.MINIMIZED;
-	}
+        if (windowState != WindowState.MINIMIZED) {
+            // save the bounds if necessary
+            if (windowState == WindowState.NORMAL) {
+                originalBounds = getBounds();
+            } else if (windowState == WindowState.MAXIMIZED) {
+                maximizedBounds = getBounds();
+            }
+            // adjust the new y position
+            setLocation(_x, _y + _height - titleBar.getHeight());
+            componentArea.setVisible(false);
+            setSize(getWidth(), titleBar.getHeight());
+            previousState = windowState;
+            windowState = WindowState.MINIMIZED;
+        }
     }
 
     /**
      * Restores the size of the BTitledWindow if it is maximized or minimized.
      */
     public void restoreSize() {
-	// restore from maximized to normal
-	if (windowState == WindowState.MAXIMIZED) {
-	    setSize(originalBounds.width, originalBounds.height);
-    	    setLocation(originalBounds.x, originalBounds.y);
-    	    componentArea.setVisible(true);
-    	    previousState = windowState;
-	    windowState = WindowState.NORMAL;
-	}
-	// restore from minimized to previous
-	else if (windowState == WindowState.MINIMIZED) {
-	    if (previousState == WindowState.NORMAL) {
-		setSize(originalBounds.width, originalBounds.height);
-    	    	setLocation(originalBounds.x, originalBounds.y);
-    	    	previousState = windowState;
-    	    	windowState = WindowState.NORMAL;
-    	    	componentArea.setVisible(true);
-	    }
-	    else if (previousState == WindowState.MAXIMIZED){
-		setSize(maximizedBounds.width, maximizedBounds.height);
-    	    	setLocation(maximizedBounds.x, maximizedBounds.y);
-    	    	previousState = windowState;
-    	    	windowState = WindowState.MAXIMIZED;
-    	    	componentArea.setVisible(true);
-	    }
-	}
+        // restore from maximized to normal
+        if (windowState == WindowState.MAXIMIZED) {
+            setSize(originalBounds.width, originalBounds.height);
+            setLocation(originalBounds.x, originalBounds.y);
+            componentArea.setVisible(true);
+            previousState = windowState;
+            windowState = WindowState.NORMAL;
+        }
+        // restore from minimized to previous
+        else if (windowState == WindowState.MINIMIZED) {
+            if (previousState == WindowState.NORMAL) {
+                setSize(originalBounds.width, originalBounds.height);
+                setLocation(originalBounds.x, originalBounds.y);
+                previousState = windowState;
+                windowState = WindowState.NORMAL;
+                componentArea.setVisible(true);
+            } else if (previousState == WindowState.MAXIMIZED) {
+                setSize(maximizedBounds.width, maximizedBounds.height);
+                setLocation(maximizedBounds.x, maximizedBounds.y);
+                previousState = windowState;
+                windowState = WindowState.MAXIMIZED;
+                componentArea.setVisible(true);
+            }
+        }
     }
 
     @Override
     protected void windowReleased(MouseEvent event) {
-	// we'll need to update the saved bounds if the window
-	// was dragged in a minimized state
-	if (windowState == WindowState.MINIMIZED) {
-	    originalBounds.x = _x - originalBounds.width + titleBar.getWidth();
-	    originalBounds.y = _y - originalBounds.height + titleBar.getHeight();
-	}
+        // we'll need to update the saved bounds if the window
+        // was dragged in a minimized state
+        if (windowState == WindowState.MINIMIZED) {
+            originalBounds.x = _x - originalBounds.width + titleBar.getWidth();
+            originalBounds.y = _y - originalBounds.height + titleBar.getHeight();
+        }
     }
 
     public String getMaximizedStyleClass() {
@@ -243,5 +244,4 @@ public class BTitledWindow extends BDraggableWindow {
     public void setMinimizedStyleClass(final String minimizedStyleClass) {
         this.minimizedStyle = minimizedStyleClass;
     }
-
 }

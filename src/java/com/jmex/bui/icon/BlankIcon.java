@@ -22,7 +22,9 @@ package com.jmex.bui.icon;
 
 import com.jme.renderer.Renderer;
 
-/** Takes up space. */
+/**
+ * Takes up space.
+ */
 public class BlankIcon extends BIcon {
     public BlankIcon(int width,
                      int height) {

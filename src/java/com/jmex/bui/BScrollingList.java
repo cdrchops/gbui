@@ -86,7 +86,7 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
     /**
      * Removes values from the top of the list.
      */
-    public void removeValuesFromTop (int num) {
+    public void removeValuesFromTop(int num) {
         num = Math.min(num, _values.size());
         for (int ii = 0; ii < num; ii++) {
             Entry<V, C> value = _values.remove(0);
@@ -97,7 +97,8 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
 
     /**
      * Must be implemented by subclasses to instantiate the correct BComponent
-     * subclass for a given list value.*/
+     * subclass for a given list value.
+     */
     protected abstract C createComponent(V value);
 
     //Adds a value to the list and snaps to the bottom of the list if desired.
@@ -122,7 +123,9 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
             return _vbar;
         }
 
-        /** Recomputes our layout and snaps to the bottom if we were at the bottom previously. */
+        /**
+         * Recomputes our layout and snaps to the bottom if we were at the bottom previously.
+         */
         public void invalidateAndSnap() {
             _snap =
                     _model.getValue() + _model.getExtent() >= _model.getMaximum();
@@ -319,7 +322,9 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
         protected Rectangle _srect = new Rectangle();
     }
 
-    /** Used to track the total height of our entries. */
+    /**
+     * Used to track the total height of our entries.
+     */
     protected static class Entry<V, C extends BComponent> {
         public C component;
         public V value;

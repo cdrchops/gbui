@@ -27,10 +27,14 @@ import com.jmex.bui.event.MouseEvent;
 
 import java.awt.*;
 
-/** Bridges between the AWT and the BUI input event system when we are being used in an AWT canvas. */
+/**
+ * Bridges between the AWT and the BUI input event system when we are being used in an AWT canvas.
+ */
 public class CanvasRootNode extends BRootNode
-        implements java.awt.event.MouseListener, java.awt.event.MouseMotionListener,
-                   java.awt.event.MouseWheelListener, java.awt.event.KeyListener {
+        implements java.awt.event.MouseListener,
+                   java.awt.event.MouseMotionListener,
+                   java.awt.event.MouseWheelListener,
+                   java.awt.event.KeyListener {
     public CanvasRootNode(Canvas canvas) {
         _canvas = canvas;
 

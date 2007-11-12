@@ -24,22 +24,29 @@ import com.jme.renderer.Renderer;
 import com.jmex.bui.icon.BIcon;
 import com.jmex.bui.util.Dimension;
 
-/** A simple component for displaying a textual label. */
+/**
+ * A simple component for displaying a textual label.
+ */
 public class BLabel extends BTextComponent
         implements BConstants {
-    /** Configures the label's strategy when it does not fit into its allocated space. */
+    /**
+     * Configures the label's strategy when it does not fit into its allocated space.
+     */
     public enum Fit {
         WRAP, TRUNCATE, SCALE
     }
 
 
-
-    /** Creates a label that will display the supplied text. */
+    /**
+     * Creates a label that will display the supplied text.
+     */
     public BLabel(String text) {
         this(text, null);
     }
 
-    /** Creates a label that will display the supplied text using the specified style class. */
+    /**
+     * Creates a label that will display the supplied text using the specified style class.
+     */
     public BLabel(String text,
                   String styleClass) {
         _label = new Label(this);
@@ -47,12 +54,16 @@ public class BLabel extends BTextComponent
         setStyleClass(styleClass);
     }
 
-    /** Creates a label that will display the supplied icon. */
+    /**
+     * Creates a label that will display the supplied icon.
+     */
     public BLabel(BIcon icon) {
         this(icon, null);
     }
 
-    /** Creates a label that will display the supplied icon using the specified style class. */
+    /**
+     * Creates a label that will display the supplied icon using the specified style class.
+     */
     public BLabel(BIcon icon,
                   String styleClass) {
         _label = new Label(this);
@@ -60,22 +71,30 @@ public class BLabel extends BTextComponent
         setStyleClass(styleClass);
     }
 
-    /** Configures the label to display the specified icon. */
+    /**
+     * Configures the label to display the specified icon.
+     */
     public void setIcon(BIcon icon) {
         _label.setIcon(icon);
     }
 
-    /** Returns the icon being displayed by this label. */
+    /**
+     * Returns the icon being displayed by this label.
+     */
     public BIcon getIcon() {
         return _label.getIcon();
     }
 
-    /** Configures the gap between the icon and the text. */
+    /**
+     * Configures the gap between the icon and the text.
+     */
     public void setIconTextGap(int gap) {
         _label.setIconTextGap(gap);
     }
 
-    /** Returns the gap between the icon and the text. */
+    /**
+     * Returns the gap between the icon and the text.
+     */
     public int getIconTextGap() {
         return _label.getIconTextGap();
     }

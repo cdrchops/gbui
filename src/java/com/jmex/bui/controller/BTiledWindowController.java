@@ -34,11 +34,12 @@ import com.jmex.bui.headlessWindows.BTitledWindow;
 public class BTiledWindowController implements ActionListener {
     private BTitledWindow activeWindow;
 
-    @Override
     public void actionPerformed(ActionEvent event) {
-        BComponent source = (BComponent)event.getSource();
+        BComponent source = (BComponent) event.getSource();
 
-        if (source == activeWindow) return;
+        if (source == activeWindow) {
+            return;
+        }
 
         if (source instanceof BTitledWindow) {
             if (event.getAction().equals(BDraggableWindow.WINDOW_ACTIVATE_ACTION)) {
@@ -47,19 +48,19 @@ public class BTiledWindowController implements ActionListener {
         } else {
             BWindow window = source.getWindow();
             if (window instanceof BTitledWindow) {
-        	activateWindow((BTitledWindow) window);
+                activateWindow((BTitledWindow) window);
             }
         }
-
     }
 
     private void activateWindow(BTitledWindow window) {
-	if (window == null) return;
-	if (activeWindow != null) {
-	    activeWindow.setLayer(0);
-	}
-	activeWindow = window;
-	activeWindow.setLayer(1);
+        if (window == null) {
+            return;
+        }
+        if (activeWindow != null) {
+            activeWindow.setLayer(0);
+        }
+        activeWindow = window;
+        activeWindow.setLayer(1);
     }
-
 }

@@ -38,10 +38,14 @@ import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
 import org.lwjgl.opengl.GL11;
 
-/** Displays and allows for the editing of a single line of text. */
-public class BTextField extends BTextComponent
-        implements EditCommands, Document.Listener {
-    /** Creates a blank text field. */
+/**
+ * Displays and allows for the editing of a single line of text.
+ */
+public class BTextField extends BTextComponent implements EditCommands,
+                                                          Document.Listener {
+    /**
+     * Creates a blank text field.
+     */
     public BTextField() {
         this("");
     }
@@ -54,7 +58,9 @@ public class BTextField extends BTextComponent
         this("", maxLength);
     }
 
-    /** Creates a text field with the specified starting text. */
+    /**
+     * Creates a text field with the specified starting text.
+     */
     public BTextField(String text) {
         this(text, 0);
     }
@@ -99,7 +105,9 @@ public class BTextField extends BTextComponent
         }
     }
 
-    /** Configures this text field with a custom document. */
+    /**
+     * Configures this text field with a custom document.
+     */
     public void setDocument(Document document) {
         _text = document;
         _text.addListener(this);
@@ -113,7 +121,9 @@ public class BTextField extends BTextComponent
         return _text;
     }
 
-    /** Configures the preferred width of this text field (the preferred height will be calculated from the font). */
+    /**
+     * Configures the preferred width of this text field (the preferred height will be calculated from the font).
+     */
     public void setPreferredWidth(int width) {
         _prefWidth = width;
     }
@@ -222,7 +232,6 @@ public class BTextField extends BTextComponent
 
                 return true; // we've consumed these events
             }
-
         } else if (event instanceof MouseEvent) {
             MouseEvent mev = (MouseEvent) event;
             if (mev.getType() == MouseEvent.MOUSE_PRESSED &&
@@ -234,7 +243,6 @@ public class BTextField extends BTextComponent
                 setCursorPos(_glyphs.getHitPos(mx, my));
                 return true;
             }
-
         } else if (event instanceof FocusEvent) {
             FocusEvent fev = (FocusEvent) event;
             switch (fev.getType()) {
@@ -344,18 +352,24 @@ public class BTextField extends BTextComponent
         return d;
     }
 
-    /** Called when this text field has gained the focus. */
+    /**
+     * Called when this text field has gained the focus.
+     */
     protected void gainedFocus() {
         _showCursor = true;
         setCursorPos(_cursp);
     }
 
-    /** Called when this text field has lost the focus. */
+    /**
+     * Called when this text field has lost the focus.
+     */
     protected void lostFocus() {
         _showCursor = false;
     }
 
-    /** Recreates the entity that we use to render our text. */
+    /**
+     * Recreates the entity that we use to render our text.
+     */
     protected void recreateGlyphs() {
         clearGlyphs();
 
@@ -367,7 +381,7 @@ public class BTextField extends BTextComponent
 
         // format our text and determine how much of it we can display
         _glyphs = getTextFactory().createText(
-            getDisplayText(), getColor(), BConstants.PLAIN,
+                getDisplayText(), getColor(), BConstants.PLAIN,
                 BConstants.DEFAULT_SIZE, null, true);
         if (isAdded()) {
             _glyphs.wasAdded();
@@ -375,7 +389,9 @@ public class BTextField extends BTextComponent
         setCursorPos(_cursp);
     }
 
-    /** Clears out our text textures and other related bits. */
+    /**
+     * Clears out our text textures and other related bits.
+     */
     protected void clearGlyphs() {
         if (_glyphs != null && isAdded()) {
             _glyphs.wasRemoved();
@@ -391,7 +407,9 @@ public class BTextField extends BTextComponent
         return _text.getText();
     }
 
-    /** Updates the cursor position, moving the visible representation as well as the insertion and deletion point. */
+    /**
+     * Updates the cursor position, moving the visible representation as well as the insertion and deletion point.
+     */
     protected void setCursorPos(int cursorPos) {
         // note the new cursor character position
         _cursp = cursorPos;

@@ -22,7 +22,9 @@ package com.jmex.bui.event;
 
 import java.util.EventObject;
 
-/** The base event class for all BUI events. */
+/**
+ * The base event class for all BUI events.
+ */
 public class BEvent extends EventObject {
     /**
      * Returns the time at which this event was generated or -1 if this event was not a result of a user action with an
@@ -32,7 +34,9 @@ public class BEvent extends EventObject {
         return _when;
     }
 
-    /** Generates a string representation of this instance. */
+    /**
+     * Generates a string representation of this instance.
+     */
     public String toString() {
         StringBuffer buf = new StringBuffer("[ev:");
         toString(buf);
@@ -40,7 +44,9 @@ public class BEvent extends EventObject {
         return buf.toString();
     }
 
-    /** Instructs this event to notify the supplied listener if they implement an interface appropriate to this event. */
+    /**
+     * Instructs this event to notify the supplied listener if they implement an interface appropriate to this event.
+     */
     public void dispatch(ComponentListener listener) {
         if (listener instanceof EventListener) {
             ((EventListener) listener).eventDispatched(this);

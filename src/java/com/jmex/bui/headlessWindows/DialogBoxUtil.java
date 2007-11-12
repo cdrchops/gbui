@@ -42,8 +42,8 @@ public final class DialogBoxUtil {
     private DialogBoxUtil() {}
 
     private static BDialogBox finishWindow(BDialogBox dialog) {
-	dialog.addListener(LISTENER);
-	dialog.setSize(400, 200);
+        dialog.addListener(LISTENER);
+        dialog.setSize(400, 200);
         BuiSystem.getRootNode().addWindow(dialog);
         dialog.center();
 

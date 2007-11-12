@@ -20,12 +20,18 @@
 
 package com.jmex.bui.event;
 
-/** An event dispatched to a component when it receives or loses the focus. */
+/**
+ * An event dispatched to a component when it receives or loses the focus.
+ */
 public class FocusEvent extends BEvent {
-    /** Indicates that a component gained the focus. */
+    /**
+     * Indicates that a component gained the focus.
+     */
     public static final int FOCUS_GAINED = 0;
 
-    /** Indicates that a component lost the focus. */
+    /**
+     * Indicates that a component lost the focus.
+     */
     public static final int FOCUS_LOST = 1;
 
     public FocusEvent(Object source,
@@ -35,7 +41,9 @@ public class FocusEvent extends BEvent {
         _type = type;
     }
 
-    /** Indicates whether this was a {@link #FOCUS_GAINED} or {@link #FOCUS_LOST} event. */
+    /**
+     * Indicates whether this was a {@link #FOCUS_GAINED} or {@link #FOCUS_LOST} event.
+     */
     public int getType() {
         return _type;
     }

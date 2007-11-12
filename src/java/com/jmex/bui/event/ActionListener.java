@@ -20,8 +20,12 @@
 
 package com.jmex.bui.event;
 
-/** Dispatches action events to interested parties. */
+/**
+ * Dispatches action events to interested parties.
+ */
 public interface ActionListener extends ComponentListener {
-    /** Dispatched when a component has generated an "action". */
+    /**
+     * Dispatched when a component has generated an "action".
+     */
     public void actionPerformed(ActionEvent event);
 }

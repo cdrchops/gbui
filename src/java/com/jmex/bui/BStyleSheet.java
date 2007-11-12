@@ -107,22 +107,32 @@ import java.util.HashMap;
  * rendered (every frame) with the memory expense of storing the style of every component in memory.
  */
 public class BStyleSheet {
-    /** An interface used by the stylesheet to obtain font and image resources. */
+    /**
+     * An interface used by the stylesheet to obtain font and image resources.
+     */
     public interface ResourceProvider {
-        /** Creates a factory that will render text using the specified font. */
+        /**
+         * Creates a factory that will render text using the specified font.
+         */
         public BTextFactory createTextFactory(
                 String family,
                 String style,
                 int size);
 
-        /** Loads the image with the specified path. */
+        /**
+         * Loads the image with the specified path.
+         */
         public BImage loadImage(String path) throws IOException;
 
-        /** Loads the cursor with the specified name. */
+        /**
+         * Loads the cursor with the specified name.
+         */
         public BCursor loadCursor(String name) throws IOException;
     }
 
-    /** A default implementation of the stylesheet resource provider. */
+    /**
+     * A default implementation of the stylesheet resource provider.
+     */
     public static class DefaultResourceProvider implements ResourceProvider {
         public BTextFactory createTextFactory(
                 String family,
@@ -193,25 +203,37 @@ public class BStyleSheet {
             return cursor;
         }
 
-        /** A cache of {@link BImage} instances. */
+        /**
+         * A cache of {@link BImage} instances.
+         */
         protected HashMap<String, WeakReference<BImage>> _cache =
                 new HashMap<String, WeakReference<BImage>>();
 
-        /** A cache of {@link BCursor} instances. */
+        /**
+         * A cache of {@link BCursor} instances.
+         */
         protected HashMap<String, WeakReference<BCursor>> _ccache =
                 new HashMap<String, WeakReference<BCursor>>();
     }
 
-    /** A font style constant. */
+    /**
+     * A font style constant.
+     */
     public static final String PLAIN = "plain";
 
-    /** A font style constant. */
+    /**
+     * A font style constant.
+     */
     public static final String BOLD = "bold";
 
-    /** A font style constant. */
+    /**
+     * A font style constant.
+     */
     public static final String ITALIC = "italic";
 
-    /** A font style constant. */
+    /**
+     * A font style constant.
+     */
     public static final String BOLD_ITALIC = "bolditalic";
 
     public static void main(String[] args) {
@@ -227,7 +249,9 @@ public class BStyleSheet {
         }
     }
 
-    /** Creates a stylesheet from the specified textual source. */
+    /**
+     * Creates a stylesheet from the specified textual source.
+     */
     public BStyleSheet(Reader reader,
                        ResourceProvider rsrcprov)
             throws IOException {
@@ -287,9 +311,8 @@ public class BStyleSheet {
         return (value == null) ? BConstants.NORMAL : value.intValue();
     }
 
-    public int getLineSpacing (BComponent component, String pseudoClass)
-    {
-        Integer value = (Integer)findProperty(component, pseudoClass, "line-spacing", true);
+    public int getLineSpacing(BComponent component, String pseudoClass) {
+        Integer value = (Integer) findProperty(component, pseudoClass, "line-spacing", true);
         return (value == null) ? BConstants.DEFAULT_SPACING : value.intValue();
     }
 
@@ -320,9 +343,8 @@ public class BStyleSheet {
         return (Dimension) findProperty(component, pseudoClass, "size", false);
     }
 
-    public String getTooltipStyle (BComponent component, String pseudoClass)
-    {
-        return (String)findProperty(component, pseudoClass, "tooltip", true);
+    public String getTooltipStyle(BComponent component, String pseudoClass) {
+        return (String) findProperty(component, pseudoClass, "tooltip", true);
     }
 
     public BKeyMap getKeyMap(BComponent component,
@@ -478,13 +500,11 @@ public class BStyleSheet {
                                     ArrayList args) {
         if (name.equals("color") || name.equals("effect-color")) {
             return parseColor((String) args.get(0));
-
         } else if (name.equals("background")) {
             BackgroundProperty bprop = new BackgroundProperty();
             bprop.type = (String) args.get(0);
             if (bprop.type.equals("solid")) {
                 bprop.color = parseColor((String) args.get(1));
-
             } else if (bprop.type.equals("image")) {
                 bprop.ipath = (String) args.get(1);
                 if (args.size() > 2) {
@@ -506,7 +526,6 @@ public class BStyleSheet {
                                            parseInt(args.get(6)) : bprop.frame.right;
                     }
                 }
-
             } else if (bprop.type.equals("blank")) {
                 // nothing to do
 
@@ -515,27 +534,22 @@ public class BStyleSheet {
                         "Unknown background type: '" + bprop.type + "'");
             }
             return bprop;
-
         } else if (name.equals("icon")) {
             IconProperty iprop = new IconProperty();
             iprop.type = (String) args.get(0);
             if (iprop.type.equals("image")) {
                 iprop.ipath = (String) args.get(1);
-
             } else if (iprop.type.equals("blank")) {
                 iprop.width = parseInt(args.get(1));
                 iprop.height = parseInt(args.get(2));
-
             } else {
                 throw new IllegalArgumentException("Unknown icon type: '" + iprop.type + "'");
             }
             return iprop;
-
         } else if (name.equals("cursor")) {
             CursorProperty cprop = new CursorProperty();
             cprop.name = (String) args.get(0);
             return cprop;
-
         } else if (name.equals("font")) {
             try {
                 FontProperty fprop = new FontProperty();
@@ -547,14 +561,12 @@ public class BStyleSheet {
                 }
                 fprop.size = parseInt(args.get(2));
                 return fprop;
-
             } catch (Exception e) {
                 e.printStackTrace(System.err);
                 throw new IllegalArgumentException(
                         "Fonts must be specified as: " +
                         "\"Font name\" plain|bold|italic|bolditalic point-size");
             }
-
         } else if (name.equals("text-align")) {
             String type = (String) args.get(0);
             Object value = _taconsts.get(type);
@@ -562,7 +574,6 @@ public class BStyleSheet {
                 throw new IllegalArgumentException("Unknown text-align type '" + type + "'");
             }
             return value;
-
         } else if (name.equals("vertical-align")) {
             String type = (String) args.get(0);
             Object value = _vaconsts.get(type);
@@ -570,7 +581,6 @@ public class BStyleSheet {
                 throw new IllegalArgumentException("Unknown vertical-align type '" + type + "'");
             }
             return value;
-
         } else if (name.equals("text-effect")) {
             String type = (String) args.get(0);
             Object value = _teconsts.get(type);
@@ -578,15 +588,12 @@ public class BStyleSheet {
                 throw new IllegalArgumentException("Unknown text-effect type '" + type + "'");
             }
             return value;
-
         } else if (name.equals("effect-size")) {
             Integer value = new Integer(parseInt(args.get(0)));
             return value;
-
         } else if (name.equals("line-spacing")) {
             Integer value = new Integer(parseInt(args.get(0)));
             return value;
-
         } else if (name.equals("padding")) {
             Insets insets = new Insets();
             insets.top = parseInt(args.get(0));
@@ -594,37 +601,30 @@ public class BStyleSheet {
             insets.bottom = (args.size() > 2) ? parseInt(args.get(2)) : insets.top;
             insets.left = (args.size() > 3) ? parseInt(args.get(3)) : insets.right;
             return insets;
-
         } else if (name.equals("border")) {
             int thickness = parseInt(args.get(0));
             String type = (String) args.get(1);
             if (type.equals("blank")) {
                 return new EmptyBorder(thickness, thickness, thickness, thickness);
-
             } else if (type.equals("solid")) {
                 return new LineBorder(parseColor((String) args.get(2)), thickness);
-
             } else {
                 throw new IllegalArgumentException("Unknown border type '" + type + "'");
             }
-
         } else if (name.equals("size")) {
             Dimension size = new Dimension();
             size.width = parseInt(args.get(0));
             size.height = parseInt(args.get(1));
             return size;
-
         } else if (name.equals("parent")) {
             Rule parent = _rules.get(args.get(0));
             if (parent == null) {
                 throw new IllegalArgumentException("Unknown parent class '" + args.get(0) + "'");
             }
             return parent;
-
         } else if (name.equals("tooltip")) {
-            String style = (String)args.get(0);
+            String style = (String) args.get(0);
             return style;
-
         } else {
             throw new IllegalArgumentException("Unknown property '" + name + "'");
         }
@@ -729,7 +729,6 @@ public class BStyleSheet {
         public Object resolve(ResourceProvider rsrcprov) {
             if (type.equals("solid")) {
                 return new TintedBackground(color);
-
             } else if (type.equals("image")) {
                 BImage image;
                 try {
@@ -739,7 +738,6 @@ public class BStyleSheet {
                     return new BlankBackground();
                 }
                 return new ImageBackground(scale, image, frame);
-
             } else {
                 return new BlankBackground();
             }
@@ -763,10 +761,8 @@ public class BStyleSheet {
                     return new BlankIcon(10, 10);
                 }
                 return new ImageIcon(image);
-
             } else if (type.equals("blank")) {
                 return new BlankIcon(width, height);
-
             } else {
                 return new BlankIcon(10, 10);
             }

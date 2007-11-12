@@ -25,7 +25,9 @@ package com.jmex.bui.text;
  * components.
  */
 public class BKeyMap {
-    /** A command constant indicating no mapping exists for a particular modifier and key code combination. */
+    /**
+     * A command constant indicating no mapping exists for a particular modifier and key code combination.
+     */
     public static final int NO_MAPPING = -1;
 
     /**
@@ -34,7 +36,9 @@ public class BKeyMap {
      */
     public static final int ANY_MODIFIER = -1;
 
-    /** Adds a mapping for the specified modifier and key code combination to the specified command. */
+    /**
+     * Adds a mapping for the specified modifier and key code combination to the specified command.
+     */
     public void addMapping(int modifiers,
                            int keyCode,
                            int command) {
@@ -72,7 +76,9 @@ public class BKeyMap {
         return defaultCommand;
     }
 
-    /** Contains information about a single key mapping. */
+    /**
+     * Contains information about a single key mapping.
+     */
     protected static class Mapping {
         public int modifiers;
         public int keyCode;
@@ -93,9 +99,13 @@ public class BKeyMap {
         }
     }
 
-    /** Contains a primitive hashmap of mappings. */
+    /**
+     * Contains a primitive hashmap of mappings.
+     */
     protected Mapping[] _mappings = new Mapping[BUCKETS];
 
-    /** The number of mapping buckets we maintain. */
+    /**
+     * The number of mapping buckets we maintain.
+     */
     protected static final int BUCKETS = 64;
 }

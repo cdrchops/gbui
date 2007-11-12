@@ -31,19 +31,16 @@ import com.jmex.bui.headlessWindows.InputBoxUtil;
  * @since 27Apr07
  */
 public class InputBoxTest extends BaseTest2 {
-    @Override
     protected void createWindows() {
         BInputBox box = InputBoxUtil.createInfoInputBox("inputTest1", "Message");
         box.setDialogListener(new DialogListener() {
-
-	    @Override
-	    public void responseAvailable(UserResponse response, BComponent source) {
-		System.out.println(response.toString());
-		if (source instanceof BInputBox) {
-		    System.out.println(((BInputBox)source).getInputText());
-		}
-	    }
-	});
+            public void responseAvailable(UserResponse response, BComponent source) {
+                System.out.println(response.toString());
+                if (source instanceof BInputBox) {
+                    System.out.println(((BInputBox) source).getInputText());
+                }
+            }
+        });
     }
 
     public static void main(String[] args) {

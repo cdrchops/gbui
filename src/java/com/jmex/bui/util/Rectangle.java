@@ -20,18 +20,28 @@
 
 package com.jmex.bui.util;
 
-/** Represents the bounds of a component. */
+/**
+ * Represents the bounds of a component.
+ */
 public class Rectangle {
-    /** The x position of the entity in question. */
+    /**
+     * The x position of the entity in question.
+     */
     public int x;
 
-    /** The y position of the entity in question. */
+    /**
+     * The y position of the entity in question.
+     */
     public int y;
 
-    /** The width of the entity in question. */
+    /**
+     * The width of the entity in question.
+     */
     public int width;
 
-    /** The height of the entity in question. */
+    /**
+     * The height of the entity in question.
+     */
     public int height;
 
     public Rectangle(int x,
@@ -48,7 +58,9 @@ public class Rectangle {
     public Rectangle() {
     }
 
-    /** Sets the fields of this rectangle. */
+    /**
+     * Sets the fields of this rectangle.
+     */
     public void set(int x,
                     int y,
                     int width,
@@ -90,7 +102,9 @@ public class Rectangle {
         return x ^ y ^ width ^ height;
     }
 
-    /** Generates a string representation of this instance. */
+    /**
+     * Generates a string representation of this instance.
+     */
     public String toString() {
         return width + "x" + height + (x >= 0 ? "+" : "") + x +
                (y >= 0 ? "+" : "") + y;

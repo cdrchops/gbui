@@ -28,9 +28,13 @@ import com.jmex.bui.util.Dimension;
 
 import java.util.ArrayList;
 
-/** Displays a selected value and allows that value to be changed by selecting from a popup menu. */
+/**
+ * Displays a selected value and allows that value to be changed by selecting from a popup menu.
+ */
 public class BComboBox extends BLabel {
-    /** Used for displaying a label that is associated with a particular non-displayable value. */
+    /**
+     * Used for displaying a label that is associated with a particular non-displayable value.
+     */
     public static class Item
             implements Comparable<Item> {
         public Object value;
@@ -57,7 +61,9 @@ public class BComboBox extends BLabel {
         protected String _label;
     }
 
-    /** Creates an empty combo box. */
+    /**
+     * Creates an empty combo box.
+     */
     public BComboBox() {
         super("");
         setFit(Fit.TRUNCATE);
@@ -99,7 +105,9 @@ public class BComboBox extends BLabel {
         clearCache();
     }
 
-    /** Replaces any existing items in this combo box with the supplied items. */
+    /**
+     * Replaces any existing items in this combo box with the supplied items.
+     */
     public void setItems(Iterable<?> items) {
         clearItems();
         for (Object item : items) {
@@ -107,7 +115,9 @@ public class BComboBox extends BLabel {
         }
     }
 
-    /** Replaces any existing items in this combo box with the supplied items. */
+    /**
+     * Replaces any existing items in this combo box with the supplied items.
+     */
     public void setItems(Object[] items) {
         clearItems();
         for (int ii = 0; ii < items.length; ii++) {
@@ -115,12 +125,16 @@ public class BComboBox extends BLabel {
         }
     }
 
-    /** Returns the index of the selected item or -1 if no item is selected. */
+    /**
+     * Returns the index of the selected item or -1 if no item is selected.
+     */
     public int getSelectedIndex() {
         return _selidx;
     }
 
-    /** Returns the selected item or null if no item is selected. */
+    /**
+     * Returns the selected item or null if no item is selected.
+     */
     public Object getSelectedItem() {
         return getItem(_selidx);
     }
@@ -133,7 +147,9 @@ public class BComboBox extends BLabel {
         return getValue(_selidx);
     }
 
-    /** Selects the item with the specified index. */
+    /**
+     * Selects the item with the specified index.
+     */
     public void selectItem(int index) {
         selectItem(index, 0L, 0);
     }
@@ -163,29 +179,39 @@ public class BComboBox extends BLabel {
         selectItem(new Item(value, ""));
     }
 
-    /** Returns the number of items in this combo box. */
+    /**
+     * Returns the number of items in this combo box.
+     */
     public int getItemCount() {
         return _items.size();
     }
 
-    /** Returns the item at the specified index. */
+    /**
+     * Returns the item at the specified index.
+     */
     public Object getItem(int index) {
         return (index < 0 || index >= _items.size()) ? null : _items.get(index).item;
     }
 
-    /** Returns the value at the specified index, the item must be an instance of {@link Item}. */
+    /**
+     * Returns the value at the specified index, the item must be an instance of {@link Item}.
+     */
     public Object getValue(int index) {
         return (index < 0 || index >= _items.size()) ? null : ((Item) _items.get(index).item).value;
     }
 
-    /** Removes all items from this combo box. */
+    /**
+     * Removes all items from this combo box.
+     */
     public void clearItems() {
         clearCache();
         _items.clear();
         _selidx = -1;
     }
 
-    /** Sets the preferred number of columns in the popup menu. */
+    /**
+     * Sets the preferred number of columns in the popup menu.
+     */
     public void setPreferredColumns(int columns) {
         _columns = columns;
         if (_menu != null) {
@@ -313,18 +339,28 @@ public class BComboBox extends BLabel {
         }
     }
 
-    /** The index of the currently selected item. */
+    /**
+     * The index of the currently selected item.
+     */
     protected int _selidx = -1;
 
-    /** The list of items in this combo box. */
+    /**
+     * The list of items in this combo box.
+     */
     protected ArrayList<ComboMenuItem> _items = new ArrayList<ComboMenuItem>();
 
-    /** A cached popup menu containing our items. */
+    /**
+     * A cached popup menu containing our items.
+     */
     protected ComboPopupMenu _menu;
 
-    /** Our cached preferred size. */
+    /**
+     * Our cached preferred size.
+     */
     protected Dimension _psize;
 
-    /** Our preferred number of columns for the popup menu. */
+    /**
+     * Our preferred number of columns for the popup menu.
+     */
     protected int _columns;
 }

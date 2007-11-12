@@ -29,10 +29,14 @@ import com.jmex.bui.util.Dimension;
  * that entire image.
  */
 public abstract class BText {
-    /** Returns the length in characters of this text. */
+    /**
+     * Returns the length in characters of this text.
+     */
     public abstract int getLength();
 
-    /** Returns the screen dimensions of this text. */
+    /**
+     * Returns the screen dimensions of this text.
+     */
     public abstract Dimension getSize();
 
     /**
@@ -48,13 +52,17 @@ public abstract class BText {
      */
     public abstract int getCursorPos(int index);
 
-    /** Renders this text to the display. */
+    /**
+     * Renders this text to the display.
+     */
     public abstract void render(Renderer render,
                                 int x,
                                 int y,
                                 float alpha);
 
-    /** Optional rendering this text scaled to a certain height/width. */
+    /**
+     * Optional rendering this text scaled to a certain height/width.
+     */
     public void render(Renderer render,
                        int x,
                        int y,
@@ -64,9 +72,13 @@ public abstract class BText {
         render(render, x, y, alpha);
     }
 
-    /** Called when the component that contains this text is was added to the interface hierarchy. */
+    /**
+     * Called when the component that contains this text is was added to the interface hierarchy.
+     */
     public abstract void wasAdded();
 
-    /** Called when the component that contains this text is no longer part of a user interface hierarchy. */
+    /**
+     * Called when the component that contains this text is no longer part of a user interface hierarchy.
+     */
     public abstract void wasRemoved();
 }

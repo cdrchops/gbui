@@ -30,9 +30,13 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.logging.Level;
 
-/** Contains a cursor. */
+/**
+ * Contains a cursor.
+ */
 public class BCursor {
-    /** Create a cursor from a BufferedImage. */
+    /**
+     * Create a cursor from a BufferedImage.
+     */
     public static Cursor createCursor(BufferedImage image,
                                       int hx,
                                       int hy) {
@@ -63,13 +67,17 @@ public class BCursor {
         setCursor(image, hx, hy);
     }
 
-    /** Set the cursor to the specified value. */
+    /**
+     * Set the cursor to the specified value.
+     */
     public void setCursor(Cursor cursor) {
         _cursor = cursor;
         _image = null;
     }
 
-    /** Create a cursor from the image with the supplied hotspot and use it. */
+    /**
+     * Create a cursor from the image with the supplied hotspot and use it.
+     */
     public void setCursor(BufferedImage image,
                           int hx,
                           int hy) {
@@ -82,12 +90,16 @@ public class BCursor {
         }
     }
 
-    /** Retrieve the cursor. */
+    /**
+     * Retrieve the cursor.
+     */
     public Cursor getCursor() {
         return _cursor;
     }
 
-    /** Display this cursor. */
+    /**
+     * Display this cursor.
+     */
     public void show() {
         if (!Display.isCreated()) {
             return;

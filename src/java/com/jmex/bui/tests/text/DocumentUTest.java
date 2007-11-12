@@ -24,7 +24,9 @@ import com.jmex.bui.text.Document;
 import junit.framework.Test;
 import junit.framework.TestCase;
 
-/** A unit test for {@link Document}. */
+/**
+ * A unit test for {@link Document}.
+ */
 public class DocumentUTest extends TestCase {
     public static Test suite() {
         return new DocumentUTest("testEdit");

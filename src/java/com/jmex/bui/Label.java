@@ -30,14 +30,17 @@ import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
 import org.lwjgl.opengl.GL11;
 
-/** Handles the underlying layout and rendering for {@link BLabel} and {@link BButton}. */
-public class Label
-        implements BConstants {
+/**
+ * Handles the underlying layout and rendering for {@link BLabel} and {@link BButton}.
+ */
+public class Label implements BConstants {
     public Label(BTextComponent container) {
         _container = container;
     }
 
-    /** Updates the text displayed by this label. */
+    /**
+     * Updates the text displayed by this label.
+     */
     public void setText(String text) {
         if (_value != null && _value.equals(text)) {
             return;
@@ -51,12 +54,16 @@ public class Label
         _container.invalidate();
     }
 
-    /** Returns the text currently being displayed by this label. */
+    /**
+     * Returns the text currently being displayed by this label.
+     */
     public String getText() {
         return _value;
     }
 
-    /** Configures the label to display the specified icon. */
+    /**
+     * Configures the label to display the specified icon.
+     */
     public void setIcon(BIcon icon) {
         if (_icon == icon) {
             return;
@@ -88,17 +95,23 @@ public class Label
         }
     }
 
-    /** Returns the icon being displayed by this label. */
+    /**
+     * Returns the icon being displayed by this label.
+     */
     public BIcon getIcon() {
         return _icon;
     }
 
-    /** Configures the gap between the icon and the text. */
+    /**
+     * Configures the gap between the icon and the text.
+     */
     public void setIconTextGap(int gap) {
         _gap = gap;
     }
 
-    /** Returns the gap between the icon and the text. */
+    /**
+     * Returns the gap between the icon and the text.
+     */
     public int getIconTextGap() {
         return _gap;
     }
@@ -122,7 +135,9 @@ public class Label
         _fit = mode;
     }
 
-    /** Called by our containing component when it was added to the interface hierarchy. */
+    /**
+     * Called by our containing component when it was added to the interface hierarchy.
+     */
     public void wasAdded() {
         if (_icon != null) {
             _icon.wasAdded();
@@ -132,7 +147,9 @@ public class Label
         }
     }
 
-    /** Called by our containing component when it was removed from the interface hierarchy. */
+    /**
+     * Called by our containing component when it was removed from the interface hierarchy.
+     */
     public void wasRemoved() {
         if (_icon != null) {
             _icon.wasRemoved();
@@ -142,7 +159,9 @@ public class Label
         }
     }
 
-    /** Computes the preferred size of the label. */
+    /**
+     * Computes the preferred size of the label.
+     */
     public Dimension computePreferredSize(int whint,
                                           int hhint) {
         // if our cached preferred size is not valid, recompute it
@@ -152,7 +171,9 @@ public class Label
         return new Dimension(_prefsize);
     }
 
-    /** Lays out the label text and icon. */
+    /**
+     * Lays out the label text and icon.
+     */
     public void layout(Insets insets,
                        int contWidth,
                        int contHeight) {
@@ -200,7 +221,9 @@ public class Label
         useConfig(config);
     }
 
-    /** Releases any underlying texture resources created by this label. */
+    /**
+     * Releases any underlying texture resources created by this label.
+     */
     public void releaseText() {
         if (_config != null && _config.glyphs != null) {
             if (_container.isAdded()) {
@@ -210,7 +233,9 @@ public class Label
         }
     }
 
-    /** Renders the label text and icon. */
+    /**
+     * Renders the label text and icon.
+     */
     public void render(Renderer renderer,
                        int x,
                        int y,
@@ -236,7 +261,7 @@ public class Label
                               float alpha) {
         if (_fit == BLabel.Fit.WRAP) {
             _config.glyphs.render(
-                renderer, _tx, _ty, _container.getHorizontalAlignment(), alpha, _config.spacing);
+                    renderer, _tx, _ty, _container.getHorizontalAlignment(), alpha, _config.spacing);
             return;
         }
 
@@ -258,7 +283,7 @@ public class Label
                 _container.getAbsoluteY() + insets.bottom, width, height);
         try {
             _config.glyphs.render(
-                renderer, _tx, _ty, _container.getHorizontalAlignment(), alpha, _config.spacing);
+                    renderer, _tx, _ty, _container.getHorizontalAlignment(), alpha, _config.spacing);
         } finally {
             BComponent.restoreScissorState(scissored, _srect);
         }
@@ -326,7 +351,9 @@ public class Label
         }
     }
 
-    /** Creates glyphs for the current text at the specified target width. */
+    /**
+     * Creates glyphs for the current text at the specified target width.
+     */
     protected Config layoutConfig(Config oconfig,
                                   int twidth) {
         // if we're not wrapping, force our target width

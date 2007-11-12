@@ -30,7 +30,9 @@ import com.jmex.bui.BImage;
 import com.jmex.bui.util.Insets;
 import org.lwjgl.opengl.GL11;
 
-/** Defines a border that displays a single line around the bordered component in a specified color. */
+/**
+ * Defines a border that displays a single line around the bordered component in a specified color.
+ */
 public class LineBorder extends BBorder {
     public LineBorder(ColorRGBA color) {
         this(color, 1);

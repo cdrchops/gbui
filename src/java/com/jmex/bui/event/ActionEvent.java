@@ -20,7 +20,9 @@
 
 package com.jmex.bui.event;
 
-/** Dispatched by a component when some sort of component-specific action has occurred. */
+/**
+ * Dispatched by a component when some sort of component-specific action has occurred.
+ */
 public class ActionEvent extends InputEvent {
     public ActionEvent(Object source,
                        long when,
@@ -30,7 +32,9 @@ public class ActionEvent extends InputEvent {
         _action = action;
     }
 
-    /** Returns the action associated with this event. */
+    /**
+     * Returns the action associated with this event.
+     */
     public String getAction() {
         return _action;
     }

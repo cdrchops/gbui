@@ -29,7 +29,9 @@ import com.jmex.bui.PolledRootNode;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 
-/** A base class for our various visual tests. */
+/**
+ * A base class for our various visual tests.
+ */
 public abstract class BaseTest2 extends SimpleGame {
     protected ActionListener listener = new ActionListener() {
         public void actionPerformed(final ActionEvent event) {

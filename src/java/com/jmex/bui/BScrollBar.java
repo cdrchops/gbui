@@ -31,20 +31,27 @@ import com.jmex.bui.event.MouseWheelListener;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.util.Insets;
 
-/** Displays a scroll bar for all your horizontal and vertical scrolling needs. */
-public class BScrollBar extends BContainer
-        implements BConstants {
-    /** Creates a vertical scroll bar with the default range, value and extent. */
+/**
+ * Displays a scroll bar for all your horizontal and vertical scrolling needs.
+ */
+public class BScrollBar extends BContainer implements BConstants {
+    /**
+     * Creates a vertical scroll bar with the default range, value and extent.
+     */
     public BScrollBar() {
         this(VERTICAL);
     }
 
-    /** Creates a scroll bar with the default range, value and extent. */
+    /**
+     * Creates a scroll bar with the default range, value and extent.
+     */
     public BScrollBar(int orientation) {
         this(orientation, 0, 100, 0, 10);
     }
 
-    /** Creates a scroll bar with the specified orientation, range, value and extent. */
+    /**
+     * Creates a scroll bar with the specified orientation, range, value and extent.
+     */
     public BScrollBar(int orientation,
                       int min,
                       int value,
@@ -53,7 +60,9 @@ public class BScrollBar extends BContainer
         this(orientation, new BoundedRangeModel(min, value, extent, max));
     }
 
-    /** Creates a scroll bar with the specified orientation which will interact with the supplied model. */
+    /**
+     * Creates a scroll bar with the specified orientation which will interact with the supplied model.
+     */
     public BScrollBar(int orientation,
                       BoundedRangeModel model) {
         super(new BorderLayout());
@@ -62,7 +71,9 @@ public class BScrollBar extends BContainer
         _model.addChangeListener(_updater);
     }
 
-    /** Returns a reference to the scrollbar's range model. */
+    /**
+     * Returns a reference to the scrollbar's range model.
+     */
     public BoundedRangeModel getModel() {
         return _model;
     }
@@ -137,7 +148,9 @@ public class BScrollBar extends BContainer
         return super.getHitComponent(mx, my);
     }
 
-    /** Recomputes and repositions the scroll bar thumb to reflect the current configuration of the model. */
+    /**
+     * Recomputes and repositions the scroll bar thumb to reflect the current configuration of the model.
+     */
     protected void update() {
         if (!isAdded()) {
             return;

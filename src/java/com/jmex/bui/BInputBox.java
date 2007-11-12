@@ -31,10 +31,10 @@ public class BInputBox extends BDialogBox {
     private BTextField textField;
 
     public BInputBox(final String name,
-	    final BTitleBar titleBar,
-            final BDialogMessage message,
-            final DialogOptions options,
-            final BStyleSheet style) {
+                     final BTitleBar titleBar,
+                     final BDialogMessage message,
+                     final DialogOptions options,
+                     final BStyleSheet style) {
         super(name, titleBar, message, options, style);
 
         textField = new BTextField("");

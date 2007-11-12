@@ -28,10 +28,14 @@ import com.jmex.bui.util.Insets;
  * border must only be used with a single component at a time.
  */
 public abstract class BBorder {
-    /** Adds the supplied insets to this border's insets and returns adjusted insets. */
+    /**
+     * Adds the supplied insets to this border's insets and returns adjusted insets.
+     */
     public abstract Insets adjustInsets(Insets insets);
 
-    /** Renders this border. */
+    /**
+     * Renders this border.
+     */
     public void render(Renderer renderer,
                        int x,
                        int y,
@@ -40,11 +44,15 @@ public abstract class BBorder {
                        float alpha) {
     }
 
-    /** Called when the component that contains this border is was added to the interface hierarchy. */
+    /**
+     * Called when the component that contains this border is was added to the interface hierarchy.
+     */
     public void wasAdded() {
     }
 
-    /** Called when the component that contains this border is no longer part of a user interface hierarchy. */
+    /**
+     * Called when the component that contains this border is no longer part of a user interface hierarchy.
+     */
     public void wasRemoved() {
     }
 }

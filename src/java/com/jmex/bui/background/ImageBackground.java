@@ -62,7 +62,9 @@ public class ImageBackground extends BBackground {
     public static final int FRAME_X = 10;
     public static final int FRAME_Y = 11;
 
-    /** Creates an image background in the specified mode using the supplied image. */
+    /**
+     * Creates an image background in the specified mode using the supplied image.
+     */
     public ImageBackground(int mode,
                            BImage image) {
         this(mode, image, null);
@@ -97,7 +99,9 @@ public class ImageBackground extends BBackground {
                (_frame.left + _frame.right) : _image.getWidth();
     }
 
-    /** Returns the minimum height allowed by this background. */
+    /**
+     * Returns the minimum height allowed by this background.
+     */
     public int getMinimumHeight() {
         return (_mode == FRAME_XY || _mode == FRAME_Y) ?
                _frame.top + _frame.bottom : _image.getHeight();
@@ -189,7 +193,6 @@ public class ImageBackground extends BBackground {
         int iwidth = _image.getWidth(), iheight = _image.getHeight();
         if (_mode == TILE_X) {
             renderRow(renderer, x, y, width, Math.min(height, iheight), alpha);
-
         } else if (_mode == TILE_Y) {
             int up = height / iheight;
             iwidth = Math.min(width, iwidth);
@@ -202,7 +205,6 @@ public class ImageBackground extends BBackground {
                 _image.render(renderer, 0, 0, iwidth, remain,
                               x, y + up * iheight, iwidth, remain, alpha);
             }
-
         } else if (_mode == TILE_XY) {
             int up = height / iheight;
             for (int yy = 0; yy < up; yy++) {

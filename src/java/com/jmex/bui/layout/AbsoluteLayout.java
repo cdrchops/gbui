@@ -39,7 +39,9 @@ public class AbsoluteLayout extends BLayoutManager {
         this(false);
     }
 
-    /** @param flipped If true, will treat the y coordinates as 0 for the top and height for the bottom. */
+    /**
+     * @param flipped If true, will treat the y coordinates as 0 for the top and height for the bottom.
+     */
     public AbsoluteLayout(boolean flipped) {
         _flipped = flipped;
     }
@@ -54,7 +56,6 @@ public class AbsoluteLayout extends BLayoutManager {
                 throw new IllegalArgumentException(
                         "Components must be laid out at positive coords: " + p);
             }
-
         } else if (constraints instanceof Rectangle) {
             Rectangle r = (Rectangle) constraints;
             if (r.x < 0 || r.y < 0) {
@@ -65,7 +66,6 @@ public class AbsoluteLayout extends BLayoutManager {
                 throw new IllegalArgumentException(
                         "Constraints must specify positive dimensions: " + r);
             }
-
         } else {
             throw new IllegalArgumentException(
                     "Components must be added to an AbsoluteLayout with " +

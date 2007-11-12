@@ -23,15 +23,23 @@ package com.jmex.bui;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.icon.BIcon;
 
-/** Like a {@link BButton} except that it toggles between two states (selected and normal) when clicked. */
+/**
+ * Like a {@link BButton} except that it toggles between two states (selected and normal) when clicked.
+ */
 public class BToggleButton extends BButton {
-    /** Indicates that this button is in the selected state. */
+    /**
+     * Indicates that this button is in the selected state.
+     */
     public static final int SELECTED = BButton.STATE_COUNT + 0;
 
-    /** Indicates that this button is in the selected state and is disabled. */
+    /**
+     * Indicates that this button is in the selected state and is disabled.
+     */
     public static final int DISSELECTED = BButton.STATE_COUNT + 1;
 
-    /** Creates a button with the specified textual label. */
+    /**
+     * Creates a button with the specified textual label.
+     */
     public BToggleButton(String text) {
         super(text);
     }
@@ -54,12 +62,16 @@ public class BToggleButton extends BButton {
         super(icon, action);
     }
 
-    /** Returns whether or not this button is in the selected state. */
+    /**
+     * Returns whether or not this button is in the selected state.
+     */
     public boolean isSelected() {
         return _selected;
     }
 
-    /** Configures the selected state of this button. */
+    /**
+     * Configures the selected state of this button.
+     */
     public void setSelected(boolean selected) {
         if (_selected != selected) {
             _selected = selected;
@@ -96,7 +108,9 @@ public class BToggleButton extends BButton {
         super.fireAction(when, modifiers);
     }
 
-    /** Used to track whether we are selected or not. */
+    /**
+     * Used to track whether we are selected or not.
+     */
     protected boolean _selected;
 
     protected static final int STATE_COUNT = BButton.STATE_COUNT + 2;

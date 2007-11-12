@@ -32,7 +32,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/** A base class for our various visual tests. */
+/**
+ * A base class for our various visual tests.
+ */
 public abstract class BaseTest extends SimpleGame {
     protected void simpleInitGame() {
         _root = new PolledRootNode(timer, input);

@@ -20,12 +20,18 @@
 
 package com.jmex.bui.util;
 
-/** Represents the size of a component. */
+/**
+ * Represents the size of a component.
+ */
 public class Dimension {
-    /** The width of the entity in question. */
+    /**
+     * The width of the entity in question.
+     */
     public int width;
 
-    /** The height of the entity in question. */
+    /**
+     * The height of the entity in question.
+     */
     public int height;
 
     public Dimension(int width,

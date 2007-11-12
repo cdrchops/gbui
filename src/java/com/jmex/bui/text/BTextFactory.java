@@ -23,10 +23,14 @@ package com.jmex.bui.text;
 import com.jme.renderer.ColorRGBA;
 import com.jmex.bui.BConstants;
 
-/** Creates instances of {@link BText} using a particular technology and a particular font configuration. */
+/**
+ * Creates instances of {@link BText} using a particular technology and a particular font configuration.
+ */
 public abstract class BTextFactory
         implements BConstants {
-    /** Returns the height of our text. */
+    /**
+     * Returns the height of our text.
+     */
     public abstract int getHeight();
 
     /**
@@ -53,15 +57,19 @@ public abstract class BTextFactory
             ColorRGBA effectColor,
             boolean useAdvance);
 
-    /** Wraps a string into a set of text objects that do not exceed the specified width. */
+    /**
+     * Wraps a string into a set of text objects that do not exceed the specified width.
+     */
     public BText[] wrapText(String text,
                             ColorRGBA color,
                             int maxWidth) {
         return wrapText(text, color, NORMAL, DEFAULT_SIZE, null, maxWidth);
     }
 
-    /** Wraps a string into a set of text objects that do not exceed the specified width. */
-    public BText[] wrapText (String text, ColorRGBA color, int effect, int maxWidth) {
+    /**
+     * Wraps a string into a set of text objects that do not exceed the specified width.
+     */
+    public BText[] wrapText(String text, ColorRGBA color, int effect, int maxWidth) {
         return wrapText(text, color, effect, DEFAULT_SIZE, null, maxWidth);
     }
 

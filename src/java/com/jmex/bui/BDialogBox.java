@@ -36,38 +36,36 @@ public class BDialogBox extends BTitledWindow {
                       final BDialogMessage message,
                       final DialogOptions options,
                       final BStyleSheet style) {
-	super(name, titleBar, null, style);
-	if (message == null) {
-	    throw new IllegalArgumentException("The message for BDialogBox cannot be null");
-	}
+        super(name, titleBar, null, style);
+        if (message == null) {
+            throw new IllegalArgumentException("The message for BDialogBox cannot be null");
+        }
 
-	getComponentArea().setStyleClass("greymessagebg");
-	getComponentArea().setLayoutManager(new BorderLayout());
+        getComponentArea().setStyleClass("greymessagebg");
+        getComponentArea().setLayoutManager(new BorderLayout());
         getComponentArea().add(message, BorderLayout.NORTH);
 
         BButtonBar buttons = new BButtonBar("", options);
         buttons.setButtonListener(new ActionListener() {
 
-	    @Override
-	    public void actionPerformed(ActionEvent event) {
-		fireResponse(event);
-	    }
-
+            public void actionPerformed(ActionEvent event) {
+                fireResponse(event);
+            }
         });
         getComponentArea().add(buttons, BorderLayout.SOUTH);
     }
 
     private void fireResponse(ActionEvent event) {
-	UserResponse response = UserResponse.valueOf(event.getAction());
-	if (response != null) {
-	    if (listener != null) {
-		listener.responseAvailable(response, this);
-	    }
-	    dismiss();
-	}
+        UserResponse response = UserResponse.valueOf(event.getAction());
+        if (response != null) {
+            if (listener != null) {
+                listener.responseAvailable(response, this);
+            }
+            dismiss();
+        }
     }
 
     public void setDialogListener(DialogListener listener) {
-	this.listener = listener;
+        this.listener = listener;
     }
 }

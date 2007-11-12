@@ -25,9 +25,13 @@ import com.jmex.bui.Log;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-/** Defines the model that underlies the BUI text components. */
+/**
+ * Defines the model that underlies the BUI text components.
+ */
 public class Document {
-    /** Used to listen for changes to this document. */
+    /**
+     * Used to listen for changes to this document.
+     */
     public interface Listener {
         /**
          * Called when text is inserted into a document. The text will have already been inserted into the document.
@@ -52,7 +56,9 @@ public class Document {
                                 int length);
     }
 
-    /** Registers a document listener. */
+    /**
+     * Registers a document listener.
+     */
     public void addListener(Listener listener) {
         if (_listeners == null) {
             _listeners = new ArrayList<Listener>();
@@ -60,19 +66,25 @@ public class Document {
         _listeners.add(listener);
     }
 
-    /** Clears a document listener registration. */
+    /**
+     * Clears a document listener registration.
+     */
     public void removeListener(Listener listener) {
         if (_listeners != null) {
             _listeners.remove(listener);
         }
     }
 
-    /** Returns the entire text of the document. */
+    /**
+     * Returns the entire text of the document.
+     */
     public String getText() {
         return _text;
     }
 
-    /** Returns a subset of the text of the document. */
+    /**
+     * Returns a subset of the text of the document.
+     */
     public String getText(int offset,
                           int length) {
         return _text.substring(offset, length);
@@ -87,7 +99,9 @@ public class Document {
         return replace(0, getLength(), text);
     }
 
-    /** Returns the number of characters in the document. */
+    /**
+     * Returns the number of characters in the document.
+     */
     public int getLength() {
         return _text.length();
     }
@@ -155,7 +169,9 @@ public class Document {
         return true;
     }
 
-    /** Notifies document listeners. */
+    /**
+     * Notifies document listeners.
+     */
     protected void notify(boolean inserted,
                           int offset,
                           int length) {

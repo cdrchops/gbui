@@ -40,7 +40,6 @@ public class ImageUtil {
         }
 
         return image;
-
     }
 
     public static BImage getImage(final String path,

@@ -98,11 +98,9 @@ public class VGroupLayout extends GroupLayout {
             } else {
                 tothei = info.fixhei + totgap;
             }
-
         } else if (_policy == EQUALIZE) {
             defhei = info.maxhei;
             tothei = info.fixhei + defhei * freecount + totgap;
-
         } else {
             tothei = info.tothei + totgap;
         }

@@ -26,13 +26,19 @@ import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.icon.BIcon;
 
-/** Displays a simple button that can be depressed and which generates an action event when pressed and released. */
+/**
+ * Displays a simple button that can be depressed and which generates an action event when pressed and released.
+ */
 public class BButton extends BLabel
         implements BConstants {
-    /** Indicates that this button is in the down state. */
+    /**
+     * Indicates that this button is in the down state.
+     */
     public static final int DOWN = BComponent.STATE_COUNT + 0;
 
-    /** Creates a button with the specified textual label. */
+    /**
+     * Creates a button with the specified textual label.
+     */
     public BButton(String text) {
         this(text, "");
     }
@@ -83,12 +89,16 @@ public class BButton extends BLabel
         }
     }
 
-    /** Configures the action to be generated when this button is clicked. */
+    /**
+     * Configures the action to be generated when this button is clicked.
+     */
     public void setAction(String action) {
         _action = action;
     }
 
-    /** Returns the action generated when this button is clicked. */
+    /**
+     * Returns the action generated when this button is clicked.
+     */
     public String getAction() {
         return _action;
     }

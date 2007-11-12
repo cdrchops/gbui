@@ -23,9 +23,13 @@ package com.jmex.bui.icon;
 import com.jme.renderer.Renderer;
 import com.jmex.bui.BImage;
 
-/** Displays an image as an icon. */
+/**
+ * Displays an image as an icon.
+ */
 public class ImageIcon extends BIcon {
-    /** Creates an icon from the supplied source image. */
+    /**
+     * Creates an icon from the supplied source image.
+     */
     public ImageIcon(BImage image) {
         _image = image;
     }

@@ -44,7 +44,9 @@ import java.util.ArrayList;
  * </pre>
  */
 public class BoundedRangeModel {
-    /** Creates a bounded range model with the specified minimum value, current value, extent and maximum value. */
+    /**
+     * Creates a bounded range model with the specified minimum value, current value, extent and maximum value.
+     */
     public BoundedRangeModel(int min,
                              int value,
                              int extent,
@@ -55,37 +57,51 @@ public class BoundedRangeModel {
         _max = max;
     }
 
-    /** Adds a listener to this model. */
+    /**
+     * Adds a listener to this model.
+     */
     public void addChangeListener(ChangeListener listener) {
         _listeners.add(listener);
     }
 
-    /** Removes the specified listener from the model. */
+    /**
+     * Removes the specified listener from the model.
+     */
     public void removeChangeListener(ChangeListener listener) {
         _listeners.remove(listener);
     }
 
-    /** Returns the minimum value this model will allow for its value. */
+    /**
+     * Returns the minimum value this model will allow for its value.
+     */
     public int getMinimum() {
         return _min;
     }
 
-    /** Returns the maximum value this model will allow for <code>value + extent</code>. */
+    /**
+     * Returns the maximum value this model will allow for <code>value + extent</code>.
+     */
     public int getMaximum() {
         return _max;
     }
 
-    /** Returns the range of this model (the maximum minus the minimum). */
+    /**
+     * Returns the range of this model (the maximum minus the minimum).
+     */
     public int getRange() {
         return _max - _min;
     }
 
-    /** Returns the current value of the model. */
+    /**
+     * Returns the current value of the model.
+     */
     public int getValue() {
         return _value;
     }
 
-    /** Returns the current extent of the model. */
+    /**
+     * Returns the current extent of the model.
+     */
     public int getExtent() {
         return _extent;
     }
@@ -169,7 +185,9 @@ public class BoundedRangeModel {
         return false;
     }
 
-    /** Creates a mouse wheel listener that will respond to wheel events by adjusting this model up or down accordingly. */
+    /**
+     * Creates a mouse wheel listener that will respond to wheel events by adjusting this model up or down accordingly.
+     */
     public MouseWheelListener createWheelListener() {
         return new MouseWheelListener() {
             public void mouseWheeled(MouseEvent event) {

@@ -70,7 +70,9 @@ public class NavigationalController implements EventListener {
         }
     }
 
-    /** Navigate all way back to the first window. */
+    /**
+     * Navigate all way back to the first window.
+     */
     public void navigateToTop() {
         boolean wasAttached = false;
         if (BuiSystem.getHistory().size() > 1) {

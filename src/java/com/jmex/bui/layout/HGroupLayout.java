@@ -100,11 +100,9 @@ public class HGroupLayout extends GroupLayout {
             } else {
                 totwid = info.fixwid + totgap;
             }
-
         } else if (_policy == EQUALIZE) {
             defwid = info.maxwid;
             totwid = info.fixwid + defwid * freecount + totgap;
-
         } else if (_policy == CONSTRAIN) {
             totwid = info.totwid + totgap;
             // if we exceed the width available, we must constrain
@@ -112,7 +110,6 @@ public class HGroupLayout extends GroupLayout {
                 conscale = (b.width - totgap) / (float) info.totwid;
                 totwid = b.width;
             }
-
         } else { // NONE
             totwid = info.totwid + totgap;
         }

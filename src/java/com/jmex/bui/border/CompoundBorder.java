@@ -23,7 +23,9 @@ package com.jmex.bui.border;
 import com.jme.renderer.Renderer;
 import com.jmex.bui.util.Insets;
 
-/** Combines two borders into a single compound border. */
+/**
+ * Combines two borders into a single compound border.
+ */
 public class CompoundBorder extends BBorder {
     public CompoundBorder(BBorder outer,
                           BBorder inner) {

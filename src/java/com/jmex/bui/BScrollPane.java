@@ -28,7 +28,9 @@ import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
 import org.lwjgl.opengl.GL11;
 
-/** Provides a scrollable clipped view on a sub-heirarchy of components. */
+/**
+ * Provides a scrollable clipped view on a sub-heirarchy of components.
+ */
 public class BScrollPane extends BContainer {
     public BScrollPane(BComponent child) {
         this(child, true, false);
@@ -59,17 +61,23 @@ public class BScrollPane extends BContainer {
         }
     }
 
-    /** Returns a reference to the child of this scroll pane. */
+    /**
+     * Returns a reference to the child of this scroll pane.
+     */
     public BComponent getChild() {
         return _vport.getTarget();
     }
 
-    /** Returns a reference to the vertical scroll bar. */
+    /**
+     * Returns a reference to the vertical scroll bar.
+     */
     public BScrollBar getVerticalScrollBar() {
         return _vbar;
     }
 
-    /** Returns a reference to the horizontal scroll bar. */
+    /**
+     * Returns a reference to the horizontal scroll bar.
+     */
     public BScrollBar getHorizontalScrollBar() {
         return _hbar;
     }
@@ -85,7 +93,9 @@ public class BScrollPane extends BContainer {
         }
     }
 
-    /** Configures the style class of the viewport (the non-scrolling container that will hold the scrolling contents). */
+    /**
+     * Configures the style class of the viewport (the non-scrolling container that will hold the scrolling contents).
+     */
     public void setViewportStyleClass(String styleClass) {
         _vport.setStyleClass(styleClass);
     }
@@ -148,7 +158,9 @@ public class BScrollPane extends BContainer {
         _layingOut = false;
     }
 
-    /** Does all the heavy lifting for the {@link BScrollPane}. */
+    /**
+     * Does all the heavy lifting for the {@link BScrollPane}.
+     */
     protected static class BViewport extends BContainer {
         public BViewport(
                 BComponent target,
@@ -172,17 +184,23 @@ public class BScrollPane extends BContainer {
             add(_target = target);
         }
 
-        /** Returns a reference to the target of this viewport. */
+        /**
+         * Returns a reference to the target of this viewport.
+         */
         public BComponent getTarget() {
             return _target;
         }
 
-        /** Returns the range model defined by this viewport's size and the preferred size of its target component. */
+        /**
+         * Returns the range model defined by this viewport's size and the preferred size of its target component.
+         */
         public BoundedRangeModel getVModel() {
             return _vmodel;
         }
 
-        /** Returns the range model defined by this viewport's size and the preferred size of its target component. */
+        /**
+         * Returns the range model defined by this viewport's size and the preferred size of its target component.
+         */
         public BoundedRangeModel getHModel() {
             return _hmodel;
         }

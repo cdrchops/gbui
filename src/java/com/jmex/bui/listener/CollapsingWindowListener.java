@@ -37,26 +37,23 @@ public class CollapsingWindowListener extends BTiledWindowController {
 
     @Override
     public void actionPerformed(final ActionEvent event) {
-        BWindow window = ((BComponent)event.getSource()).getWindow();
+        BWindow window = ((BComponent) event.getSource()).getWindow();
         if (window instanceof BTitledWindow) {
             BTitledWindow titledWindow = (BTitledWindow) window;
             if (event.getAction().equals(BTitledWindow.WINDOW_MINIMIZE_ACTION)) {
                 minimize(titledWindow);
-            }
-            else if (event.getAction().equals(BTitledWindow.WINDOW_MAXIMIZE_ACTION)) {
+            } else if (event.getAction().equals(BTitledWindow.WINDOW_MAXIMIZE_ACTION)) {
                 maximize(titledWindow);
-            }
-            else if (event.getAction().equals(BTitledWindow.WINDOW_CLOSE_ACTION)) {
+            } else if (event.getAction().equals(BTitledWindow.WINDOW_CLOSE_ACTION)) {
                 close(titledWindow);
-            }
-            else {
-        	super.actionPerformed(event);
+            } else {
+                super.actionPerformed(event);
             }
         }
     }
 
     public void setMaximizedSize(Dimension maxSize) {
-	this.maximizedSize = maxSize;
+        this.maximizedSize = maxSize;
     }
 
     protected void maximize(BTitledWindow window) {

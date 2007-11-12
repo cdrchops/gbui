@@ -20,12 +20,18 @@
 
 package com.jmex.bui.util;
 
-/** Represents the location of a component. */
+/**
+ * Represents the location of a component.
+ */
 public class Point {
-    /** The x position of the entity in question. */
+    /**
+     * The x position of the entity in question.
+     */
     public int x;
 
-    /** The y position of the entity in question. */
+    /**
+     * The y position of the entity in question.
+     */
     public int y;
 
     public Point(int x,

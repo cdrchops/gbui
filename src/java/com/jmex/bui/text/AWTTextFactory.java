@@ -52,7 +52,9 @@ import java.util.HashMap;
  * </pre>
  */
 public class AWTTextFactory extends BTextFactory {
-    /** Creates an AWT text factory with the supplied font. */
+    /**
+     * Creates an AWT text factory with the supplied font.
+     */
     public AWTTextFactory(Font font,
                           boolean antialias) {
         _antialias = antialias;
@@ -92,7 +94,7 @@ public class AWTTextFactory extends BTextFactory {
             }
             layout = new TextLayout(
                     parseStyledText(text, _attrs, null, effect != BConstants.PLAIN).getIterator(),
-                                    gfx.getFontRenderContext());
+                    gfx.getFontRenderContext());
         } finally {
             gfx.dispose();
         }
@@ -124,7 +126,7 @@ public class AWTTextFactory extends BTextFactory {
 
             String[] bare = new String[1];
             AttributedString atext =
-                parseStyledText(text, _attrs, bare, effect != BConstants.PLAIN);
+                    parseStyledText(text, _attrs, bare, effect != BConstants.PLAIN);
             LineBreakMeasurer measurer = new LineBreakMeasurer(
                     atext.getIterator(), gfx.getFontRenderContext());
             text = bare[0];
@@ -150,7 +152,6 @@ public class AWTTextFactory extends BTextFactory {
 
                 texts.add(createText(layout, color, effect, effectSize, effectColor, length, true));
             }
-
         } finally {
             gfx.dispose();
         }
@@ -158,7 +159,9 @@ public class AWTTextFactory extends BTextFactory {
         return texts.toArray(new BText[texts.size()]);
     }
 
-    /** Helper function. */
+    /**
+     * Helper function.
+     */
     protected BText createText(final TextLayout layout,
                                ColorRGBA color,
                                final int effect,
@@ -192,10 +195,10 @@ public class AWTTextFactory extends BTextFactory {
                 size.width += effectSize;
                 size.height += effectSize;
                 break;
-        case OUTLINE:
-            size.width += effectSize*2;
-            size.height += effectSize*2;
-            break;
+            case OUTLINE:
+                size.width += effectSize * 2;
+                size.height += effectSize * 2;
+                break;
         }
 
         // render the text into the image
@@ -227,7 +230,6 @@ public class AWTTextFactory extends BTextFactory {
                                            effectColor.b, effectColor.a));
                     gfx.draw(layout.getOutline(null));
                 }
-
             } else {
                 // if we're antialiasing, we need to set a custom compositing rule to avoid
                 // incorrectly blending with the blank background
@@ -267,7 +269,6 @@ public class AWTTextFactory extends BTextFactory {
                     layout.draw(gfx, dx, layout.getAscent());
                 }
             }
-
         } finally {
             gfx.dispose();
         }
@@ -337,7 +338,9 @@ public class AWTTextFactory extends BTextFactory {
         };
     }
 
-    /** Parses our simple styled text formatting codes and creates an attributed string to render them. */
+    /**
+     * Parses our simple styled text formatting codes and creates an attributed string to render them.
+     */
     protected AttributedString parseStyledText(
             String text,
             HashMap<TextAttribute, Font> attrs,
@@ -370,7 +373,6 @@ public class AWTTextFactory extends BTextFactory {
                     runs.add(run);
                 }
                 continue;
-
             } else if (c == '@') { // start of run
                 // if we don't have enough characters left in the string for a complete run, skip
                 // it; we need at least 5: @=X()
@@ -408,7 +410,7 @@ public class AWTTextFactory extends BTextFactory {
             int parenidx = text.indexOf('(', ii);
             if (parenidx == -1) {
                 Log.log.info("Invalid style specification, missing paren " +
-                                "[text=" + text + ", pos=" + ii + "].");
+                             "[text=" + text + ", pos=" + ii + "].");
                 continue;
             }
 
@@ -484,8 +486,8 @@ public class AWTTextFactory extends BTextFactory {
                         break;
 
                     default:
-                    Log.log.info("Invalid style command [text=" + text +
-                                        ", command=" + run.styles[ss] + ", run=" + run + "].");
+                        Log.log.info("Invalid style command [text=" + text +
+                                     ", command=" + run.styles[ss] + ", run=" + run + "].");
                         break;
                 }
             }
