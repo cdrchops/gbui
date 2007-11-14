@@ -61,15 +61,16 @@ public class BTitledWindow extends BDraggableWindow {
     private Rectangle originalBounds = new Rectangle(0, 0, 0, 0);
     private Rectangle maximizedBounds = new Rectangle(0, 0, 0, 0);
     private Dimension maximizedSize = new Dimension(-1, -1);
+    private Dimension minimizedSize = new Dimension(-1, -1);
 
     private BTitleBar titleBar;
     private BStatusBar statusBar;
     private BContainer componentArea;
 
-    public BTitledWindow(String name,
-                         BTitleBar titleBar,
-                         BStatusBar statusBar,
-                         BStyleSheet style) {
+    public BTitledWindow(final String name,
+                         final BTitleBar titleBar,
+                         final BStatusBar statusBar,
+                         final BStyleSheet style) {
         super(name, style, new BorderLayout());
         this.titleBar = titleBar;
         this.statusBar = statusBar;
@@ -77,7 +78,7 @@ public class BTitledWindow extends BDraggableWindow {
     }
 
     @Override
-    public void addListener(ComponentListener listener) {
+    public void addListener(final ComponentListener listener) {
         if (listener instanceof CollapsingWindowListener) {
             titleBar.removeAllListeners();
             titleBar.addListener(listener);
@@ -99,7 +100,22 @@ public class BTitledWindow extends BDraggableWindow {
         add(componentArea, BorderLayout.CENTER);
     }
 
-    public void setMaximizedSize(int width, int height) {
+    public Dimension getMinimizedSize() {
+        return minimizedSize;
+    }
+
+    public void setMinimizedSize(final Dimension _minimizedSize) {
+        minimizedSize = _minimizedSize;
+    }
+
+    public void setMinimizedSize(final int width,
+                                 final int height) {
+        minimizedSize.width = width;
+        minimizedSize.height = height;
+    }
+
+    public void setMaximizedSize(final int width,
+                                 final int height) {
         maximizedSize.width = width;
         maximizedSize.height = height;
     }
@@ -118,7 +134,7 @@ public class BTitledWindow extends BDraggableWindow {
         return componentArea;
     }
 
-    public void setComponentArea(BContainer compoenentArea) {
+    public void setComponentArea(final BContainer compoenentArea) {
         remove(this.componentArea);
         this.componentArea.removeAll();
         this.componentArea = compoenentArea;
@@ -129,7 +145,11 @@ public class BTitledWindow extends BDraggableWindow {
         return windowState;
     }
 
-    public void maximize(Dimension size) {
+    public void setWindowState(final WindowState _windowState) {
+        windowState = _windowState;
+    }
+
+    public void maximize(final Dimension size) {
         if (windowState != WindowState.MAXIMIZED) {
             if (size != null) {
                 // save the current state
@@ -220,7 +240,7 @@ public class BTitledWindow extends BDraggableWindow {
     }
 
     @Override
-    protected void windowReleased(MouseEvent event) {
+    protected void windowReleased(final MouseEvent event) {
         // we'll need to update the saved bounds if the window
         // was dragged in a minimized state
         if (windowState == WindowState.MINIMIZED) {
