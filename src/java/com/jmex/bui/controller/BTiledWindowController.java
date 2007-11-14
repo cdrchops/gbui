@@ -31,7 +31,7 @@ import com.jmex.bui.headlessWindows.BTitledWindow;
  * @author timo
  * @since 27Apr07
  */
-public class BTiledWindowController implements ActionListener {
+public class BTiledWindowController {
     private BTitledWindow activeWindow;
 
     public void actionPerformed(ActionEvent event) {
