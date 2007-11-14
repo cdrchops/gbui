@@ -194,7 +194,7 @@ public class BuiSystem {
      */
     public static void back(final BWindow currentWindow) {
         BWindow window = pop();
-        getRootNode().addWindow(window);
+        addWindow(window);
         window.center();
         currentWindow.dismiss();
     }
@@ -224,6 +224,15 @@ public class BuiSystem {
      */
     public static void addWindow(final BWindow window) {
         getRootNode().addWindow(window);
+    }
+
+    /**
+     * Removes a BWindow from the BRootNode
+     *
+     * @param window BWindow the window we want to add to our BRootNode
+     */
+    public static void removeWindow(final BWindow window) {
+        getRootNode().removeWindow(window);
     }
 
     /**
