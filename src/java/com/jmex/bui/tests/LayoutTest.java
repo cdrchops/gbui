@@ -25,32 +25,14 @@ import com.jme.math.FastMath;
 import com.jme.math.Quaternion;
 import com.jme.math.Vector3f;
 import com.jme.renderer.ColorRGBA;
+import com.jme.renderer.Renderer;
 import com.jme.scene.Controller;
 import com.jme.scene.Node;
 import com.jme.scene.shape.Box;
 import com.jme.scene.state.LightState;
 import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
-import com.jmex.bui.BButton;
-import com.jmex.bui.BCheckBox;
-import com.jmex.bui.BComboBox;
-import com.jmex.bui.BConstants;
-import com.jmex.bui.BContainer;
-import com.jmex.bui.BDecoratedWindow;
-import com.jmex.bui.BGeomView;
-import com.jmex.bui.BImage;
-import com.jmex.bui.BLabel;
-import com.jmex.bui.BMenuItem;
-import com.jmex.bui.BRootNode;
-import com.jmex.bui.BScrollBar;
-import com.jmex.bui.BScrollPane;
-import com.jmex.bui.BSlider;
-import com.jmex.bui.BStyleSheet;
-import com.jmex.bui.BTabbedPane;
-import com.jmex.bui.BTextArea;
-import com.jmex.bui.BTextField;
-import com.jmex.bui.BToggleButton;
-import com.jmex.bui.BWindow;
+import com.jmex.bui.*;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.icon.ImageIcon;
@@ -65,9 +47,16 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/** Tests random BUI bits. */
+
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Tests random BUI bits.
  */
+
 public class LayoutTest extends BaseTest {
     @Override
     protected void createWindows(final BRootNode root,
@@ -222,8 +211,9 @@ public class LayoutTest extends BaseTest {
         light.setDirection(new Vector3f(1, -1, 0));
         light.setEnabled(true);
 
-        LightState ls =
-                DisplaySystem.getDisplaySystem().getRenderer().createLightState();
+        Renderer renderer = DisplaySystem.getDisplaySystem().getRenderer();
+
+        LightState ls = renderer.createLightState();
         ls.setEnabled(true);
         ls.attach(light);
 
