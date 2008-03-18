@@ -14,6 +14,11 @@ import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.layout.GroupLayout;
 
 /**
+ * Test border of 0 around BWindow so that the white line doesn't appear
+ * comment out window.setStyleClass("champion");
+ * and uncomment window.setStyleClass("window");
+ * and you'll see the white line 
+ *
  * @author torr
  * @since Mar 18, 2008 - 1:08:33 PM
  */
@@ -33,6 +38,7 @@ public class BorderlessWindowTest extends BaseTest2 {
     protected void createWindows() {
         BWindow window = new BWindow(BuiSystem.getStyle(), GroupLayout.makeVStretch());
         window.setStyleClass("champion");
+//        window.setStyleClass("window");
 
         bc = new BComboBox();
 
