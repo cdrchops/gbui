@@ -107,7 +107,12 @@ public class BGeomView extends BComponent {
 
         applyDefaultStates();
         Camera cam = renderer.getCamera();
+
+        int x = getAbsoluteX();
+        int y = getAbsoluteY();
+
         boolean useOrtho = (_geom.getRenderQueueMode() == Renderer.QUEUE_ORTHO);
+
         try {
             if (!useOrtho) {
             renderer.unsetOrtho();
@@ -130,8 +135,12 @@ public class BGeomView extends BComponent {
 
             // set up our camera viewport if it has changed
             Insets insets = getInsets();
-                int ax = getAbsoluteX() + insets.left, ay = getAbsoluteY() + insets.bottom;
-                int width = _width - insets.getHorizontal(), height = _height - insets.getVertical();
+
+            int ax = x + insets.left;
+            int ay = y + insets.bottom;
+            int width = _width - insets.getHorizontal();
+            int height = _height - insets.getVertical();
+
             if (updateDisplay || _cx != ax || _cy != ay ||
                 _cwidth != width || _cheight != height) {
                 _cx = ax;
@@ -168,7 +177,7 @@ public class BGeomView extends BComponent {
 
                 // we need to restore the GL translation as that got wiped out when we left and
                 // re-entered ortho mode
-            GL11.glTranslatef(getAbsoluteX(), getAbsoluteY(), 0);
+            GL11.glTranslatef(x, y, 0);
         }
     }
     }
