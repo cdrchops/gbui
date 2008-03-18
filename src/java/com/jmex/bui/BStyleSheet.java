@@ -20,7 +20,22 @@
 
 package com.jmex.bui;
 
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StreamTokenizer;
+import java.lang.ref.WeakReference;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.imageio.ImageIO;
+
 import com.jme.renderer.ColorRGBA;
+
 import com.jmex.bui.background.BBackground;
 import com.jmex.bui.background.BlankBackground;
 import com.jmex.bui.background.ImageBackground;
@@ -52,10 +67,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Defines a stylesheet which is used to configure the style (font family, font size, foreground and background color,
- * etc.) of components in the BUI library. The BUI stylesheets syntax is a subset of the Cascading Style Sheet sytnax
- * and follows its semantic conventions as well where possible.
- * <p/>
+ * Defines a stylesheet which is used to configure the style (font family, font size, foreground
+ * and background color, etc.) of components in the BUI library. The BUI stylesheets syntax is a
+ * subset of the Cascading Style Sheet sytnax and follows its semantic conventions as well where
+ * possible.
+ *
  * <p> A basic stylesheet enumerating most usable values is as follows:
  * <pre>
  * style_class {
@@ -68,13 +84,14 @@ import java.util.HashMap;
  *                                    //      framex|framey|framexy
  *   background: image monkey.png framexy top right bottom left;
  *   cursor: name;
- * <p/>
+ *
  *   // text properties
  *   font: Helvetica XX 12; // XX = normal|bold|italic|bolditalic
  *   text-align: XX; // XX = left|center|right
  *   vertical-align: XX; // XX = top|center|bottom
- *   text-effect: XX; // XX = none|outline|shadow
- * <p/>
+ *   text-effect: XX; // XX = none|outline|shadow|glow
+ *   line-spacing: -2; // XX = amount of space to add/remove between lines
+ *
  *   // box properties
  *   padding: top; // right=top, bottom=top, left=top
  *   padding: top, right; // bottom=top, left=right
@@ -82,29 +99,35 @@ import java.util.HashMap;
  *   border: 1 solid #FFCC99;
  *   border: 1 blank;
  *   size: 250 100; // overrrides component preferred size
- * <p/>
+ *
  *   // explicit inheritance
  *   parent: other_class; // other_class must be defined *before* this one
+ *
+ *   tooltip: other_class; // used to define the style class for the tool_tip
  * }
  * </pre>
- * <p/>
- * Each component is identified by its default stylesheet class, which are derived from the component's Java class name:
- * <code>window, label, textfield, component, popupmenu, etc.</code> The component's stylesheet class can be overridden
- * with a call to {@link BComponent#setStyleClass}.
- * <p/>
- * <p> A component's style is resolved in the following manner: <ul> <li> First by looking up the property using the
- * component's stylesheet class.
- * <p/>
- * <li> <em>For certain properties</em>, the interface hierarchy is then climbed and each parents' stylesheet class is
- * checked for the property in question. The properties for which that applies are: <code>color, font, text-align,
- * vertical-align</code>.
- * <p/>
- * <li> Lastly the <code>root</code> stylesheet class is checked (for all properties, not just those for which we climb
- * the interface hierarchy). </ul>
- * <p/>
- * <p> This resolution process is followed at the time the component is added to the interface hierarchy and the result
- * is used to configure the component. We tradeoff the relative expense of doing the lookup every time the component is
- * rendered (every frame) with the memory expense of storing the style of every component in memory.
+ *
+ * Each component is identified by its default stylesheet class, which are derived from the
+ * component's Java class name: <code>window, label, textfield, component, popupmenu, etc.</code>
+ * The component's stylesheet class can be overridden with a call to {@link
+ * BComponent#setStyleClass}.
+ *
+ * <p> A component's style is resolved in the following manner:
+ * <ul>
+ * <li> First by looking up the property using the component's stylesheet class.
+
+ * <li> <em>For certain properties</em>, the interface hierarchy is then climbed and each parents'
+ * stylesheet class is checked for the property in question. The properties for which that applies
+ * are: <code>color, font, text-align, vertical-align</code>.
+ *
+ * <li> Lastly the <code>root</code> stylesheet class is checked (for all properties, not just
+ * those for which we climb the interface hierarchy).
+ * </ul>
+ *
+ * <p> This resolution process is followed at the time the component is added to the interface
+ * hierarchy and the result is used to configure the component. We tradeoff the relative expense of
+ * doing the lookup every time the component is rendered (every frame) with the memory expense of
+ * storing the style of every component in memory.
  */
 public class BStyleSheet {
     /**
@@ -500,11 +523,13 @@ public class BStyleSheet {
                                     ArrayList args) {
         if (name.equals("color") || name.equals("effect-color")) {
             return parseColor((String) args.get(0));
+
         } else if (name.equals("background")) {
             BackgroundProperty bprop = new BackgroundProperty();
             bprop.type = (String) args.get(0);
             if (bprop.type.equals("solid")) {
                 bprop.color = parseColor((String) args.get(1));
+
             } else if (bprop.type.equals("image")) {
                 bprop.ipath = (String) args.get(1);
                 if (args.size() > 2) {

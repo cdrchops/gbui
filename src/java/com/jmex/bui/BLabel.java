@@ -20,7 +20,13 @@
 
 package com.jmex.bui;
 
+import com.jme.math.Vector3f;
+import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
+import com.jme.scene.Text;
+import com.jme.scene.shape.Quad;
+import com.jme.system.DisplaySystem;
+
 import com.jmex.bui.icon.BIcon;
 import com.jmex.bui.util.Dimension;
 
@@ -35,7 +41,6 @@ public class BLabel extends BTextComponent
     public enum Fit {
         WRAP, TRUNCATE, SCALE
     }
-
 
     /**
      * Creates a label that will display the supplied text.
@@ -58,17 +63,34 @@ public class BLabel extends BTextComponent
      * Creates a label that will display the supplied icon.
      */
     public BLabel(BIcon icon) {
-        this(icon, null);
+        this(icon, null, null);
+    }
+
+    /**
+     * Creates a label that will display the supplied icon using the specified style class.
+     */
+    public BLabel (BIcon icon, String styleClass) {
+    	this(icon, null, styleClass);
     }
 
     /**
      * Creates a label that will display the supplied icon using the specified style class.
      */
     public BLabel(BIcon icon,
+                  String text,
                   String styleClass) {
         _label = new Label(this);
-        _label.setIcon(icon);
-        setStyleClass(styleClass);
+        if (icon != null) {
+            setIcon(icon);
+        }
+
+        if (text != null) {
+            setText(text);
+        }
+
+        if (styleClass != null) {
+            setStyleClass(styleClass);
+        }
     }
 
     /**
@@ -113,6 +135,13 @@ public class BLabel extends BTextComponent
      */
     public void setFit(Fit mode) {
         _label.setFit(mode);
+    }
+
+    /**
+     * Returns the current fit mode for this label.
+     */
+    public Fit getFit () {
+        return _label._fit;
     }
 
     // documentation inherited

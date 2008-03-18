@@ -139,6 +139,22 @@ public class BContainer extends BComponent {
     }
 
     /**
+     * Replaces a given old component with a new component (if the old component exits).
+     *
+     * @return true if the old component was replaced, false otherwise.
+     */
+    public boolean replace (BComponent oldc, BComponent newc)
+    {
+        int idx = _children.indexOf(oldc);
+        if (idx >= 0) {
+            remove(idx);
+            add(idx, newc);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Removes the specified child from this container.
      */
     public void remove(BComponent child) {
@@ -173,6 +189,15 @@ public class BContainer extends BComponent {
      */
     public BComponent getComponent(int index) {
         return _children.get(index);
+    }
+
+    /**
+     * Returns the index of the specified component in this container or -1 if the component count
+     * not be found.
+     */
+    public int getComponentIndex (BComponent component)
+    {
+        return _children.indexOf(component);
     }
 
     /**
@@ -362,8 +387,8 @@ public class BContainer extends BComponent {
      * Applies an operation to all of our children.
      */
     protected void applyOperation(ChildOp op) {
-        for (int ii = 0, ll = getComponentCount(); ii < ll; ii++) {
-            BComponent child = getComponent(ii);
+        BComponent[] children = _children.toArray(new BComponent[_children.size()]);
+        for (BComponent child : children) {
             try {
                 op.apply(child);
             } catch (Exception e) {
@@ -374,9 +399,9 @@ public class BContainer extends BComponent {
     }
 
     /**
-     * Used in {@link #wasAdded} and {@link #wasRemoved}.
+     * Used in {@link BComponent#wasAdded} and {@link BComponent#wasRemoved}.
      */
-    protected static abstract class ChildOp {
+    protected static interface ChildOp {
         public abstract void apply(BComponent child);
     }
 

@@ -21,6 +21,7 @@
 package com.jmex.bui.text;
 
 import com.jme.renderer.ColorRGBA;
+
 import com.jmex.bui.BConstants;
 
 /**
@@ -34,8 +35,8 @@ public abstract class BTextFactory
     public abstract int getHeight();
 
     /**
-     * Creates a text instance using our the font configuration associated with this text factory and the foreground
-     * color specified.
+     * Creates a text instance using our the font configuration associated with this text factory
+     * and the foreground color specified.
      */
     public BText createText(String text,
                             ColorRGBA color) {
@@ -43,11 +44,11 @@ public abstract class BTextFactory
     }
 
     /**
-     * Creates a text instance using our the font configuration associated with this text factory and the foreground
-     * color, text effect and text effect color specified.
+     * Creates a text instance using our the font configuration associated with this text factory
+     * and the foreground color, text effect and text effect color specified.
      *
-     * @param useAdvance if true, the advance to the next insertion point will be included in the bounds of the created
-     *                   text (this is needed by editable text displays).
+     * @param useAdvance if true, the advance to the next insertion point will be included in the
+     * bounds of the created text (this is needed by editable text displays).
      */
     public abstract BText createText(
             String text,

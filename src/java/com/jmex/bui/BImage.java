@@ -125,10 +125,12 @@ public class BImage extends Quad {
         int type = hasAlpha ? BufferedImage.TYPE_4BYTE_ABGR : BufferedImage.TYPE_3BYTE_BGR;
         BufferedImage tex = new BufferedImage(twidth, theight, type);
         AffineTransform tx = null;
+
         if (flip) {
             tx = AffineTransform.getScaleInstance(1, -1);
             tx.translate(0, -_height);
         }
+
         Graphics2D gfx = (Graphics2D) tex.getGraphics();
         gfx.drawImage(image, tx, null);
         gfx.dispose();
