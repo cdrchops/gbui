@@ -21,11 +21,14 @@
 package com.jmex.bui;
 
 import com.jme.input.InputHandler;
+import com.jme.input.InputSystem;
 import com.jme.input.KeyInput;
 import com.jme.input.KeyInputListener;
 import com.jme.input.MouseInput;
 import com.jme.input.MouseInputListener;
+import com.jme.scene.Node;
 import com.jme.util.Timer;
+
 import com.jmex.bui.event.InputEvent;
 import com.jmex.bui.event.KeyEvent;
 import com.jmex.bui.event.MouseEvent;
@@ -34,8 +37,9 @@ import org.lwjgl.opengl.Display;
 import java.util.ArrayList;
 
 /**
- * Processes the polled input information available from the underlying input system into input events and dispatches
- * those to the appropriate parties.
+ * Processes the polled input information available from the underlying
+ * input system into input events and dispatches those to the appropriate
+ * parties.
  */
 public class PolledRootNode extends BRootNode {
     public PolledRootNode(Timer timer,
@@ -223,6 +227,7 @@ public class PolledRootNode extends BRootNode {
         }
     };
 
+    protected long _tickStamp;
     protected Timer _timer;
     protected InputHandler _handler;
     protected ArrayList<BComponent> _invalidRoots = new ArrayList<BComponent>();

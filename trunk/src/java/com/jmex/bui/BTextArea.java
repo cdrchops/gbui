@@ -22,6 +22,7 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
+
 import com.jmex.bui.event.ChangeEvent;
 import com.jmex.bui.event.ChangeListener;
 import com.jmex.bui.text.BText;
@@ -201,8 +202,31 @@ public class BTextArea extends BContainer {
         return BConstants.NORMAL;
     }
 
-    @Override
-    // from BTextArea
+    /**
+     * Returns the effect size for this component's text.
+     */
+    public int getEffectSize ()
+    {
+        if (_effsizes != null) {
+            int effsize = _effsizes[getState()];
+            return (effsize > 0) ? effsize : _effsizes[DEFAULT];
+        }
+        return BConstants.DEFAULT_SIZE;
+    }
+
+    /**
+     * Returns the color to use for our text effect.
+     */
+    public ColorRGBA getEffectColor ()
+    {
+        if (_effcols != null) {
+            ColorRGBA effcol = _effcols[getState()];
+            return (effcol != null) ? effcol : _effcols[DEFAULT];
+        }
+        return ColorRGBA.white;
+    }
+
+    @Override // from BTextArea
     public void setEnabled(boolean enabled) {
         boolean wasEnabled = isEnabled();
         super.setEnabled(enabled);
@@ -240,12 +264,13 @@ public class BTextArea extends BContainer {
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);
 
+        int[] haligns = new int[getStateCount()];
+
         for (int ii = 0; ii < getStateCount(); ii++) {
             _textfacts[ii] = style.getTextFactory(
                     this, getStatePseudoClass(ii));
         }
 
-        int[] haligns = new int[getStateCount()];
         for (int ii = 0; ii < getStateCount(); ii++) {
             haligns[ii] = style.getTextAlignment(this, getStatePseudoClass(ii));
         }
@@ -263,10 +288,29 @@ public class BTextArea extends BContainer {
             teffects[ii] = style.getTextEffect(this, getStatePseudoClass(ii));
         }
         _teffects = checkNonDefault(teffects, BConstants.NORMAL);
+
+        int[] effsizes = new int[getStateCount()];
+        for (int ii = 0; ii < getStateCount(); ii++) {
+            effsizes[ii] = style.getEffectSize(this, getStatePseudoClass(ii));
+    }
+        _effsizes = checkNonDefault(effsizes, BConstants.DEFAULT_SIZE);
+
+        ColorRGBA[] effcols = new ColorRGBA[getStateCount()];
+        boolean nondef = false;
+        for (int ii = 0; ii < getStateCount(); ii++) {
+            effcols[ii] = style.getEffectColor(this, getStatePseudoClass(ii));
+            nondef = nondef || (effcols[ii] != null);
+        }
+        if (nondef) {
+            _effcols = effcols;
+        }
+
+        for (int ii = 0; ii < getStateCount(); ii++) {
+            _textfacts[ii] = style.getTextFactory(this, getStatePseudoClass(ii));
+        }
     }
 
-    protected int[] checkNonDefault(int[] styles,
-                                    int defval) {
+    protected int[] checkNonDefault (int[] styles, int defval) {
         for (int ii = 0; ii < styles.length; ii++) {
             if (styles[ii] != -1 && styles[ii] != defval) {
                 return styles;
@@ -376,7 +420,7 @@ public class BTextArea extends BContainer {
             int offset = 0;
             ColorRGBA color = (run.color == null) ? getColor() : run.color;
             while ((offset = current.addRun(
-                    getTextFactory(), run, color, getTextEffect(), maxWidth, offset)) > 0) {
+                    getTextFactory(), run, color, getTextEffect(), getEffectSize(), getEffectColor(), maxWidth, offset)) > 0) {
                 _lines.add(current = new Line());
             }
             if (run.endsLine) {
@@ -468,7 +512,10 @@ public class BTextArea extends BContainer {
          */
         public int addRun(BTextFactory tfact,
                           Run run,
-                          ColorRGBA color, int effect,
+                          ColorRGBA color,
+                          int effect,
+                          int effectSize,
+                          ColorRGBA effectColor,
                           int maxWidth,
                           int offset) {
             if (dx == 0) {
@@ -477,7 +524,8 @@ public class BTextArea extends BContainer {
             String rtext = run.text.substring(offset);
             // TODO: this could perhaps be done more efficiently now that the
             // text factory breaks things down into multiple lines for us
-            BText[] text = tfact.wrapText(rtext, color, effect, maxWidth - dx);
+            BText[] text = tfact.wrapText(
+                rtext, color, effect, effectSize, effectColor, maxWidth-dx);
             segments.add(text[0]);
             // we only ever add runs when we're added
             text[0].wasAdded();
@@ -528,10 +576,13 @@ public class BTextArea extends BContainer {
 
     protected int[] _haligns;
     protected int[] _valigns;
-    protected int[] _teffects;
+    protected int[] _teffects, _effsizes;
+    protected ColorRGBA[] _effcols;
     protected BTextFactory[] _textfacts = new BTextFactory[getStateCount()];
+
     protected BoundedRangeModel _model = new BoundedRangeModel(0, 0, 0, 0);
     protected int _prefWidth = -1;
+
     protected ArrayList<Run> _runs = new ArrayList<Run>();
     protected ArrayList<Line> _lines = new ArrayList<Line>();
 }

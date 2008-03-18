@@ -107,8 +107,16 @@ public class BoundedRangeModel {
     }
 
     /**
-     * Returns the increment by which this model should be scrolled when the user presses one of the buttons at the end
-     * of the scrollbar.
+     * Returns the value of the model mapped into the range [0-1]: (value - minumum) / range.
+     */
+    public float getRatio ()
+    {
+        return (getValue() - getMinimum()) / (float)getRange();
+    }
+
+    /**
+     * Returns the increment by which this model should be scrolled when the user presses one of
+     * the buttons at the end of the scrollbar.
      */
     public int getScrollIncrement() {
         return Math.max(1, getExtent() / 2);
@@ -206,7 +214,6 @@ public class BoundedRangeModel {
 
     protected int _min, _max;
     protected int _value, _extent;
-    protected ArrayList<ChangeListener> _listeners =
-            new ArrayList<ChangeListener>();
+    protected ArrayList<ChangeListener> _listeners = new ArrayList<ChangeListener>();
     protected ChangeEvent _event = new ChangeEvent(this);
 }

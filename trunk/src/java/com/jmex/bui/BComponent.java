@@ -20,12 +20,22 @@
 
 package com.jmex.bui;
 
+import java.nio.IntBuffer;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.lwjgl.opengl.GL11;
+
 import com.jme.input.KeyInput;
+import com.jme.math.Vector3f;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.RenderContext;
 import com.jme.renderer.Renderer;
+import com.jme.scene.Spatial;
 import com.jme.system.DisplaySystem;
 import com.jme.util.geom.BufferUtils;
+
 import com.jmex.bui.background.BBackground;
 import com.jmex.bui.border.BBorder;
 import com.jmex.bui.event.BEvent;
@@ -45,8 +55,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * The basic entity in the BUI user interface system. A hierarchy of components and component derivations make up a user
- * interface.
+ * The basic entity in the BUI user interface system. A hierarchy of components and component
+ * derivations make up a user interface.
  */
 public class BComponent {
     /**
@@ -87,9 +97,10 @@ public class BComponent {
     }
 
     /**
-     * Configures this component with a custom stylesheet class. By default a component's class is defined by its
-     * component type (label, button, checkbox, etc.) but one can provide custom style information to a component by
-     * configuring it with a custom class and defining that class in the applicable stylesheet.
+     * Configures this component with a custom stylesheet class. By default a component's class is
+     * defined by its component type (label, button, checkbox, etc.) but one can provide custom
+     * style information to a component by configuring it with a custom class and defining that
+     * class in the applicable stylesheet.
      */
     public void setStyleClass(String styleClass) {
         if (isAdded()) {
@@ -131,10 +142,10 @@ public class BComponent {
     }
 
     /**
-     * Returns the preferred size of this component, supplying a width and or height hint to the component to inform it
-     * of restrictions in one of the two dimensions. Not all components will make use of the hints, but layout managers
-     * should provide them if they know the component will be forced to a particular width or height regardless of what
-     * it prefers.
+     * Returns the preferred size of this component, supplying a width and or height hint to the
+     * component to inform it of restrictions in one of the two dimensions. Not all components will
+     * make use of the hints, but layout managers should provide them if they know the component
+     * will be forced to a particular width or height regardless of what it prefers.
      */
     public Dimension getPreferredSize(int whint,
                                       int hhint) {
@@ -142,6 +153,7 @@ public class BComponent {
         // if we have a fully specified preferred size, just use it
         if (_preferredSize != null && _preferredSize.width != -1 && _preferredSize.height != -1) {
             ps = new Dimension(_preferredSize);
+
         } else {
             // override hints with preferred size
             if (_preferredSize != null) {
@@ -192,9 +204,10 @@ public class BComponent {
     }
 
     /**
-     * Configures the preferred size of this component. This will override any information provided by derived classes
-     * that have opinions about their preferred size. Either the width or the height can be configured as -1 in which
-     * case the computed preferred size will be used for that dimension.
+     * Configures the preferred size of this component. This will override any information provided
+     * by derived classes that have opinions about their preferred size. Either the width or the
+     * height can be configured as -1 in which case the computed preferred size will be used for
+     * that dimension.
      */
     public void setPreferredSize(Dimension preferredSize) {
         _preferredSize = preferredSize;
@@ -258,8 +271,8 @@ public class BComponent {
     }
 
     /**
-     * Returns the insets configured on this component. <code>null</code> will never be returned, an {@link Insets}
-     * instance with all fields set to zero will be returned instead.
+     * Returns the insets configured on this component. <code>null</code> will never be returned,
+     * an {@link Insets} instance with all fields set to zero will be returned instead.
      */
     public Insets getInsets() {
         Insets insets = _insets[getState()];
@@ -298,9 +311,7 @@ public class BComponent {
     }
 
     /**
-     * Configures the background for this component for the specified state.  This must only be called after the
-     * component has been added to the interface heirarchy or the value will be overridden by the stylesheet associated
-     * with this component.
+     * Configures the background for this component for the specified state.
      */
     public void setBackground(int state,
                               BBackground background) {
@@ -323,8 +334,9 @@ public class BComponent {
     }
 
     /**
-     * Configures the cursor for this component.  This must only be called after the component has been added to the
-     * interface hierarchy or the value will be overridden by the stylesheet associated with this component.
+     * Configures the cursor for this component.  This must only be called after the component has
+     * been added to the interface hierarchy or the value will be overridden by the stylesheet
+     * associated with this component.
      */
     public void setCursor(BCursor cursor) {
         _cursor = cursor;
@@ -345,8 +357,8 @@ public class BComponent {
     }
 
     /**
-     * Sets this components enabled state. A component that is not enabled should not respond to user interaction and
-     * should render itself in such a way as not to afford user interaction.
+     * Sets this components enabled state. A component that is not enabled should not respond to
+     * user interaction and should render itself in such a way as not to afford user interaction.
      */
     public void setEnabled(boolean enabled) {
         if (enabled != _enabled) {
@@ -363,8 +375,8 @@ public class BComponent {
     }
 
     /**
-     * Sets this component's visibility state.  A component that is invisible is not rendered and does not contribute to
-     * the layout.
+     * Sets this component's visibility state.  A component that is invisible is not rendered and
+     * does not contribute to the layout.
      */
     public void setVisible(boolean visible) {
         if (visible != _visible) {
@@ -381,25 +393,25 @@ public class BComponent {
     }
 
     /**
-     * Returns true if this component is both added to the interface hierarchy and visible, false if not.
+     * Returns true if this component is both added to the interface hierarchy and visible, false
+     * if not.
      */
     public boolean isShowing() {
         return isAdded() && isVisible();
     }
 
     /**
-     * Returns the state of this component, either {@link #DEFAULT}, {@link #HOVER} or {@link #DISABLED}.
+     * Returns the state of this component, either {@link #DEFAULT} or {@link #DISABLED}.
      */
     public int getState() {
         return _enabled ? (_hover ? HOVER : DEFAULT) : DISABLED;
     }
 
     /**
-     * Sets a user defined property on this component. User defined properties allow the association of arbitrary
-     * additional data with a component for application specific purposes.
+     * Sets a user defined property on this component. User defined properties allow the
+     * association of arbitrary additional data with a component for application specific purposes.
      */
-    public void setProperty(String key,
-                            Object value) {
+    public void setProperty (String key, Object value) {
         if (_properties == null) {
             _properties = new HashMap<String, Object>();
         }
@@ -428,8 +440,8 @@ public class BComponent {
     }
 
     /**
-     * Returns the component that should receive focus if this component is clicked. If this component does not accept
-     * focus, its parent will be checked and so on.
+     * Returns the component that should receive focus if this component is clicked. If this
+     * component does not accept focus, its parent will be checked and so on.
      */
     public BComponent getFocusTarget() {
         if (acceptsFocus()) {
@@ -529,15 +541,16 @@ public class BComponent {
 
     public boolean removeAllListeners() {
         if (_listeners != null) {
-            _listeners = new ArrayList<ComponentListener>();
+            _listeners.clear();
             return true;
         }
         return false;
     }
 
     /**
-     * Configures the tooltip text for this component. If the text starts with &lt;html&gt; then the tooltip will be
-     * displayed with an @{link HTMLView} otherwise it will be displayed with a {@link BLabel}.
+     * Configures the tooltip text for this component. If the text starts with &lt;html&gt; then
+     * the tooltip will be displayed with an @{link HTMLView} otherwise it will be displayed with a
+     * {@link BLabel}.
      */
     public void setTooltipText(String text) {
         _tiptext = text;
@@ -553,8 +566,8 @@ public class BComponent {
     /**
      * Sets where to position the tooltip window.
      *
-     * @param mouse if true, the window will appear relative to the mouse position, if false, the window will appear
-     *              relative to the component bounds.
+     * @param mouse if true, the window will appear relative to the mouse position, if false, the
+     * window will appear relative to the component bounds.
      */
     public void setTooltipRelativeToMouse(boolean mouse) {
         _tipmouse = mouse;
@@ -568,7 +581,8 @@ public class BComponent {
     }
 
     /**
-     * Returns true if this component is added to a hierarchy of components that culminates in a top-level window.
+     * Returns true if this component is added to a hierarchy of components that culminates in a
+     * top-level window.
      */
     public boolean isAdded() {
         BWindow win = getWindow();
@@ -595,8 +609,8 @@ public class BComponent {
     }
 
     /**
-     * Marks this component as invalid and needing a relayout. If the component is valid, its parent will also be marked
-     * as invalid.
+     * Marks this component as invalid and needing a relayout. If the component is valid, its
+     * parent will also be marked as invalid.
      */
     public void invalidate() {
         if (_valid) {
@@ -608,8 +622,8 @@ public class BComponent {
     }
 
     /**
-     * Translates into the component's coordinate space, renders the background and border and then calls {@link
-     * #renderComponent} to allow the component to render itself.
+     * Translates into the component's coordinate space, renders the background and border and then
+     * calls {@link #renderComponent} to allow the component to render itself.
      */
     public void render(Renderer renderer) {
         if (!_visible) {
@@ -632,9 +646,9 @@ public class BComponent {
     }
 
     /**
-     * Returns the component "hit" by the specified mouse coordinates which might be this component or any of its
-     * children. This method should return null if the supplied mouse coordinates are outside the bounds of this
-     * component.
+     * Returns the component "hit" by the specified mouse coordinates which might be this component
+     * or any of its children. This method should return null if the supplied mouse coordinates are
+     * outside the bounds of this component.
      */
     public BComponent getHitComponent(int mx,
                                       int my) {
@@ -646,9 +660,9 @@ public class BComponent {
     }
 
     /**
-     * Instructs this component to process the supplied event. If the event is not processed, it will be passed up to
-     * its parent component for processing. Derived classes should thus only call <code>super.dispatchEvent</code> for
-     * events that they did not "consume".
+     * Instructs this component to process the supplied event. If the event is not processed, it
+     * will be passed up to its parent component for processing. Derived classes should thus only
+     * call <code>super.dispatchEvent</code> for events that they did not "consume".
      *
      * @return true if this event was consumed, false if not.
      */
@@ -666,7 +680,7 @@ public class BComponent {
                     if (modifiers == 0) {
                         getWindow().requestFocus(getNextFocus());
                         processed = true;
-                    } else if (modifiers == InputEvent.SHIFT_DOWN_MASK) {
+                    } else if (modifiers == KeyEvent.SHIFT_DOWN_MASK) {
                         getWindow().requestFocus(getPreviousFocus());
                         processed = true;
                     }
@@ -714,18 +728,19 @@ public class BComponent {
     }
 
     /**
-     * Instructs this component to lay itself out. This is called as a result of the component changing size.
+     * Instructs this component to lay itself out. This is called as a result of the component
+     * changing size.
      */
     protected void layout() {
         // we have nothing to do by default
     }
 
     /**
-     * Computes and returns a preferred size for this component. This method is called if no overriding preferred size
-     * has been supplied.
+     * Computes and returns a preferred size for this component. This method is called if no
+     * overriding preferred size has been supplied.
      *
-     * @return the computed preferred size of this component <em>in a newly created Dimension</em> instance which will
-     *         be adopted (and modified) by the caller.
+     * @return the computed preferred size of this component <em>in a newly created Dimension</em>
+     * instance which will be adopted (and modified) by the caller.
      */
     protected Dimension computePreferredSize(int whint,
                                              int hhint) {
@@ -733,8 +748,8 @@ public class BComponent {
     }
 
     /**
-     * This method is called when we are added to a hierarchy that is connected to a top-level window (at which point we
-     * can rely on having a look and feel and can set ourselves up).
+     * This method is called when we are added to a hierarchy that is connected to a top-level
+     * window (at which point we can rely on having a look and feel and can set ourselves up).
      */
     protected void wasAdded() {
         configureStyle(getWindow().getStyleSheet());
@@ -753,8 +768,8 @@ public class BComponent {
     }
 
     /**
-     * Instructs this component to fetch its style configuration from the supplied style sheet. This method is called
-     * when a component is added to the interface hierarchy.
+     * Instructs this component to fetch its style configuration from the supplied style
+     * sheet. This method is called when a component is added to the interface hierarchy.
      */
     protected void configureStyle(BStyleSheet style) {
         if (_preferredSize == null) {
@@ -770,14 +785,16 @@ public class BComponent {
             if (_borders[ii] != null) {
                 _insets[ii] = _borders[ii].adjustInsets(_insets[ii]);
             }
-            _backgrounds[ii] =
-                    style.getBackground(this, getStatePseudoClass(ii));
+            if (_backgrounds[ii] == null) {
+                _backgrounds[ii] = style.getBackground(this, getStatePseudoClass(ii));
         }
+    }
     }
 
     /**
-     * This method is called when we are removed from a hierarchy that is connected to a top-level window. If we wish to
-     * clean up after things done in {@link #wasAdded}, this is a fine place to do so.
+     * This method is called when we are removed from a hierarchy that is connected to a top-level
+     * window. If we wish to clean up after things done in {@link #wasAdded}, this is a fine place
+     * to do so.
      */
     protected void wasRemoved() {
         // mark ourselves as invalid so that if this component is again added to an interface
@@ -798,14 +815,15 @@ public class BComponent {
     }
 
     /**
-     * Creates the component that will be used to display our tooltip. This method will only be called if {@link
-     * #getTooltipText} returns non-null text.
+     * Creates the component that will be used to display our tooltip. This method will only be
+     * called if {@link #getTooltipText} returns non-null text.
      */
     protected BComponent createTooltipComponent(String tiptext) {
         if (tiptext.startsWith("<html>")) {
             return new HTMLView("", tiptext);
+        } else {
+            return new BLabel(tiptext, _tipStyle);
         }
-        return new BLabel(tiptext, "tooltip_label");
     }
 
     /**
@@ -829,34 +847,36 @@ public class BComponent {
     }
 
     /**
-     * Renders any custom bits for this component. This is called with the graphics context translated to (0, 0)
-     * relative to this component.
+     * Renders any custom bits for this component. This is called with the graphics context
+     * translated to (0, 0) relative to this component.
      */
     protected void renderComponent(Renderer renderer) {
     }
 
     /**
-     * Returns the default stylesheet class to be used for all instances of this component. Derived classes will likely
-     * want to override this method and set up a default class for their type of component.
+     * Returns the default stylesheet class to be used for all instances of this component. Derived
+     * classes will likely want to override this method and set up a default class for their type
+     * of component.
      */
     protected String getDefaultStyleClass() {
         return "component";
     }
 
     /**
-     * Returns the number of different states that this component can take.  These states correspond to stylesheet
-     * pseudoclasses that allow components to customize their configuration based on whether they are enabled or
-     * disabled, or pressed if they are a button, etc.
+     * Returns the number of different states that this component can take.  These states
+     * correspond to stylesheet pseudoclasses that allow components to customize their
+     * configuration based on whether they are enabled or disabled, or pressed if they are a
+     * button, etc.
      */
     protected int getStateCount() {
         return STATE_COUNT;
     }
 
     /**
-     * Returns the pseudoclass identifier for the specified component state.  This string will be the way that the state
-     * is identified in the associated stylesheet. For example, the {@link #DISABLED} state maps to
-     * <code>disabled</code> and is configured like so:
-     * <p/>
+     * Returns the pseudoclass identifier for the specified component state.  This string will be
+     * the way that the state is identified in the associated stylesheet. For example, the {@link
+     * #DISABLED} state maps to <code>disabled</code> and is configured like so:
+     *
      * <pre>
      * component:disabled {
      *    color: #CCCCCC; // etc.
@@ -904,12 +924,12 @@ public class BComponent {
     }
 
     /**
-     * Searches for the next component that should receive the keyboard focus. If such a component can be found, it will
-     * be returned. If no other focusable component can be found and this component is focusable, this component will be
-     * returned. Otherwise, null will be returned.
+     * Searches for the next component that should receive the keyboard focus. If such a component
+     * can be found, it will be returned. If no other focusable component can be found and this
+     * component is focusable, this component will be returned. Otherwise, null will be returned.
      */
     protected BComponent getNextFocus() {
-        if (_parent != null) {
+        if (_parent != null && _parent instanceof BContainer) {
             return _parent.getNextFocus(this);
         } else if (acceptsFocus()) {
             return this;
@@ -919,12 +939,13 @@ public class BComponent {
     }
 
     /**
-     * Searches for the previous component that should receive the keyboard focus. If such a component can be found, it
-     * will be returned. If no other focusable component can be found and this component is focusable, this component
-     * will be returned. Otherwise, null will be returned.
+     * Searches for the previous component that should receive the keyboard focus. If such a
+     * component can be found, it will be returned. If no other focusable component can be found
+     * and this component is focusable, this component will be returned. Otherwise, null will be
+     * returned.
      */
     protected BComponent getPreviousFocus() {
-        if (_parent != null) {
+        if (_parent != null && _parent instanceof BContainer) {
             return _parent.getPreviousFocus(this);
         } else if (acceptsFocus()) {
             return this;
@@ -934,11 +955,12 @@ public class BComponent {
     }
 
     /**
-     * Dispatches an event emitted by this component. The event is given to the root node for processing though in
-     * general it will result in an immediate call to {@link #dispatchEvent} with the event.
+     * Dispatches an event emitted by this component. The event is given to the root node for
+     * processing though in general it will result in an immediate call to {@link #dispatchEvent}
+     * with the event.
      *
-     * @return true if the event was emitted, false if it was dropped because we are not currently added to the
-     *         interface hierarchy.
+     * @return true if the event was emitted, false if it was dropped because we are not currently
+     * added to the interface hierarchy.
      */
     protected boolean emitEvent(BEvent event) {
         BWindow window;
@@ -952,9 +974,9 @@ public class BComponent {
     }
 
     /**
-     * Activates scissoring and sets the scissor region to the intersection of the current region (if any) and the
-     * specified rectangle.  After rendering the scissored region, call {@link #restoreScissorState} to restore the
-     * previous state.
+     * Activates scissoring and sets the scissor region to the intersection of the current region
+     * (if any) and the specified rectangle.  After rendering the scissored region, call
+     * {@link #restoreScissorState} to restore the previous state.
      *
      * @param store a rectangle to hold the previous scissor region for later restoration
      * @return <code>true</code> if scissoring was already enabled, false if it was not.
@@ -983,8 +1005,8 @@ public class BComponent {
     /**
      * Restores the previous scissor state after a call to {@link #intersectScissorBox}.
      *
-     * @param enabled the value returned by {@link #intersectScissorBox}, indicating whether or not scissoring was
-     *                enabled
+     * @param enabled the value returned by {@link #intersectScissorBox}, indicating whether or not
+     * scissoring was enabled
      * @param rect    the scissor box to restore
      */
     protected static void restoreScissorState(boolean enabled,

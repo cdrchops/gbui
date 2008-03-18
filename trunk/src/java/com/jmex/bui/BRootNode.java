@@ -21,8 +21,13 @@
 package com.jmex.bui;
 
 import com.jme.intersection.CollisionResults;
+import com.jme.intersection.PickResults;
+import com.jme.math.Ray;
+import com.jme.renderer.Camera;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
+
+import com.jmex.bui.Log;
 import com.jme.scene.Geometry;
 import com.jme.scene.Spatial;
 import com.jme.system.DisplaySystem;
@@ -260,6 +265,22 @@ public abstract class BRootNode extends Geometry {
     }
 
     /**
+     * Returns the total number of windows added to this node.
+     */
+    public int getWindowCount ()
+    {
+        return _windows.size();
+    }
+
+    /**
+     * Returns the window at the specified index.
+     */
+    public BWindow getWindow (int index)
+    {
+        return _windows.get(index);
+    }
+
+    /**
      * Generates a string representation of this instance.
      */
     @Override
@@ -323,11 +344,14 @@ public abstract class BRootNode extends Geometry {
         _tipwin.setStyleClass("tooltip_window");
         _tipwin.add(tcomp, BorderLayout.CENTER);
         addWindow(_tipwin);
+
         // it's possible that adding the tip window will cause it to immediately be removed, so
         // make sure we don't NPE
         if (_tipwin == null) {
             return;
         }
+
+        // if it's still here, lay it out
         int width = DisplaySystem.getDisplaySystem().getWidth();
         int height = DisplaySystem.getDisplaySystem().getHeight();
         _tipwin.pack(_tipWidth == -1 ? width - 10 : _tipWidth, height - 10);
@@ -414,8 +438,10 @@ public abstract class BRootNode extends Geometry {
      * event, it will be passed on to the most recently opened modal window if one exists (and the supplied target
      * component was not a child of that window) and then to the default event targets if the event is still
      * unconsumed.
+     *
+     * @return true if the event was dispatched, false if not.
      */
-    protected void dispatchEvent(BComponent target,
+    protected boolean dispatchEvent(BComponent target,
                                  BEvent event) {
         // notify our global listeners if we have any
         for (int ii = 0, ll = _globals.size(); ii < ll; ii++) {
@@ -431,7 +457,7 @@ public abstract class BRootNode extends Geometry {
         BWindow sentwin = null;
         if (target != null) {
             if (target.dispatchEvent(event)) {
-                return;
+                return true;
             }
             sentwin = target.getWindow();
         }
@@ -442,7 +468,7 @@ public abstract class BRootNode extends Geometry {
             if (window.isModal()) {
                 if (window != sentwin) {
                     if (window.dispatchEvent(event)) {
-                        return;
+                        return true;
                     }
                 }
                 break;
@@ -453,9 +479,12 @@ public abstract class BRootNode extends Geometry {
         for (int ii = _defaults.size() - 1; ii >= 0; ii--) {
             BComponent deftarg = _defaults.get(ii);
             if (deftarg.dispatchEvent(event)) {
-                return;
+                return true;
             }
         }
+
+        // let our caller know that the event was not dispatched by anyone
+        return false;
     }
 
     /**
@@ -471,12 +500,12 @@ public abstract class BRootNode extends Geometry {
         if (_focus != focus) {
             if (_focus != null) {
                 _focus.dispatchEvent(
-                        new FocusEvent(this, _tickStamp, FocusEvent.FOCUS_LOST));
+                        new FocusEvent(this, getTickStamp(), FocusEvent.FOCUS_LOST));
             }
             _focus = focus;
             if (_focus != null) {
                 _focus.dispatchEvent(
-                        new FocusEvent(this, _tickStamp, FocusEvent.FOCUS_GAINED));
+                        new FocusEvent(this, getTickStamp(), FocusEvent.FOCUS_GAINED));
             }
         }
     }
@@ -542,13 +571,13 @@ public abstract class BRootNode extends Geometry {
             // inform the previous component that the mouse has exited
             if (_hcomponent != null && _hcomponent.isHoverEnabled()) {
                 _hcomponent.dispatchEvent(
-                        new MouseEvent(this, _tickStamp, _modifiers,
+                        new MouseEvent(this, getTickStamp(), _modifiers,
                                        MouseEvent.MOUSE_EXITED, mx, my));
             }
             // inform the new component that the mouse has entered
             if (nhcomponent != null && nhcomponent.isHoverEnabled()) {
                 nhcomponent.dispatchEvent(
-                        new MouseEvent(this, _tickStamp, _modifiers,
+                        new MouseEvent(this, getTickStamp(), _modifiers,
                                        MouseEvent.MOUSE_ENTERED, mx, my));
             }
             _hcomponent = nhcomponent;
@@ -588,7 +617,6 @@ public abstract class BRootNode extends Geometry {
         GL11.glEnd();
     }
 
-    protected long _tickStamp;
     protected int _modifiers;
     protected int _mouseX, _mouseY;
 

@@ -27,7 +27,9 @@ import com.jmex.bui.layout.GroupLayout;
 import java.util.ArrayList;
 
 /**
- * Displays a list of selectable entries and fires an {@link ActionEvent} when the selected value changes.
+ * Displays a list of selectable entries and fires an {@link ActionEvent} when the selected value
+ * changes. Each entry is displayed as a string obtained by calling {@link Object#toString} on the
+ * supplied values.
  */
 public class BList extends BContainer {
     /**

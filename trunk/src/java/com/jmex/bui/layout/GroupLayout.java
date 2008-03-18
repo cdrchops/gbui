@@ -20,6 +20,8 @@
 
 package com.jmex.bui.layout;
 
+import java.util.HashMap;
+
 import com.jmex.bui.BComponent;
 import com.jmex.bui.BContainer;
 import com.jmex.bui.util.Dimension;
@@ -86,6 +88,9 @@ public abstract class GroupLayout extends BLayoutManager {
             this.code = code;
         }
     }
+
+    /** The default gap used by a group layout. */
+    public static final int DEFAULT_GAP = 5;
 
     /**
      * A constraints object that indicates that the component should be fixed and have the default weight of one. This
@@ -193,6 +198,7 @@ public abstract class GroupLayout extends BLayoutManager {
                     _constraints = new HashMap<BComponent, Object>();
                 }
                 _constraints.put(comp, constraints);
+
             } else {
                 throw new RuntimeException(
                         "GroupLayout constraints object must be of type GroupLayout.Constraints");
@@ -443,6 +449,4 @@ public abstract class GroupLayout extends BLayoutManager {
     protected Justification _offjust = CENTER;
 
     protected HashMap<BComponent, Object> _constraints;
-
-    protected static final int DEFAULT_GAP = 5;
 }

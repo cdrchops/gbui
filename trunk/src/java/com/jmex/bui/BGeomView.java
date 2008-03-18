@@ -20,14 +20,17 @@
 
 package com.jmex.bui;
 
+import org.lwjgl.opengl.GL11;
+
 import com.jme.math.Vector3f;
 import com.jme.renderer.Camera;
 import com.jme.renderer.Renderer;
 import com.jme.scene.Spatial;
 import com.jme.system.DisplaySystem;
+
+import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
-import org.lwjgl.opengl.GL11;
 
 /**
  * Displays 3D geometry (a {@link Spatial}) inside a normal user interface.
@@ -51,6 +54,10 @@ public class BGeomView extends BComponent {
      * Returns the camera used when rendering our geometry.
      */
     public Camera getCamera() {
+        if (_camera == null) {
+            _camera = createCamera(DisplaySystem.getDisplaySystem());
+        }
+
         return _camera;
     }
 
@@ -59,6 +66,13 @@ public class BGeomView extends BComponent {
      */
     public void setGeometry(Spatial geom) {
         _geom = geom;
+    }
+
+    /**
+     * Returns the geometry rendered by this view.
+     */
+    public Spatial getGeometry() {
+    	return _geom;
     }
 
     /**
@@ -93,7 +107,9 @@ public class BGeomView extends BComponent {
 
         applyDefaultStates();
         Camera cam = renderer.getCamera();
+        boolean useOrtho = (_geom.getRenderQueueMode() == Renderer.QUEUE_ORTHO);
         try {
+            if (!useOrtho) {
             renderer.unsetOrtho();
 
             // create or resize our camera if necessary
@@ -114,10 +130,8 @@ public class BGeomView extends BComponent {
 
             // set up our camera viewport if it has changed
             Insets insets = getInsets();
-            int ax = getAbsoluteX() + insets.left,
-                    ay = getAbsoluteY() + insets.bottom,
-                    width = _width - insets.getHorizontal(),
-                    height = _height - insets.getVertical();
+                int ax = getAbsoluteX() + insets.left, ay = getAbsoluteY() + insets.bottom;
+                int width = _width - insets.getHorizontal(), height = _height - insets.getVertical();
             if (updateDisplay || _cx != ax || _cy != ay ||
                 _cwidth != width || _cheight != height) {
                 _cx = ax;
@@ -140,18 +154,23 @@ public class BGeomView extends BComponent {
             // now set up the custom camera and render our geometry
             renderer.setCamera(_camera);
             _camera.update();
+            }
+
+            // actually render the geometry
             renderer.draw(_geom);
         } finally {
+            if (!useOrtho) {
             // restore the camera
             renderer.setCamera(cam);
             cam.update();
-            cam.apply();
+//            cam.apply();
             renderer.setOrtho();
 
-            // we need to restore the GL translation as that got wiped out when
-            // we left and re-entered ortho mode
+                // we need to restore the GL translation as that got wiped out when we left and
+                // re-entered ortho mode
             GL11.glTranslatef(getAbsoluteX(), getAbsoluteY(), 0);
         }
+    }
     }
 
     /**
@@ -159,8 +178,7 @@ public class BGeomView extends BComponent {
      */
     protected Camera createCamera(DisplaySystem ds) {
         // create a standard camera and frustum
-        Camera camera = ds.getRenderer().createCamera(
-                (int) _swidth, (int) _sheight);
+        Camera camera = ds.getRenderer().createCamera(_swidth, _sheight);
         camera.setParallelProjection(false);
 
         // put and point it somewhere sensible by default

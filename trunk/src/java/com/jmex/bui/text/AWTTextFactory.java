@@ -20,14 +20,15 @@
 
 package com.jmex.bui.text;
 
-import com.jme.renderer.ColorRGBA;
-import com.jme.renderer.Renderer;
-import com.jmex.bui.BConstants;
-import com.jmex.bui.BImage;
-import com.jmex.bui.Log;
-import com.jmex.bui.util.Dimension;
-
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextHitInfo;
@@ -35,13 +36,37 @@ import java.awt.font.TextLayout;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.text.AttributedString;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+
+import org.lwjgl.opengl.GL11;
+
+import com.jme.image.Image;
+import com.jme.image.Texture;
+import com.jme.math.Vector3f;
+import com.jme.renderer.ColorRGBA;
+import com.jme.renderer.Renderer;
+import com.jme.scene.Geometry;
+import com.jme.scene.Spatial;
+import com.jme.system.DisplaySystem;
+import com.jme.util.TextureManager;
+
+import com.jmex.bui.BConstants;
+import com.jmex.bui.BImage;
+import com.jmex.bui.Log;
+import com.jmex.bui.util.Dimension;
+
+import static com.jmex.bui.Log.log;
 
 /**
- * Formats text by using the AWT to render runs of text into a bitmap and then texturing a quad with the result.  This
- * text factory handles a simple styled text syntax:
- * <p/>
+ * Formats text by using the AWT to render runs of text into a bitmap and then texturing a quad
+ * with the result.  This text factory handles a simple styled text syntax:
+ *
  * <pre>
  * &#064;=b(this text would be bold)
  * &#064;=i(this text would be italic)
@@ -93,13 +118,12 @@ public class AWTTextFactory extends BTextFactory {
                                      RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             }
             layout = new TextLayout(
-                    parseStyledText(text, _attrs, null, effect != BConstants.PLAIN).getIterator(),
-                    gfx.getFontRenderContext());
+                    parseStyledText(text, _attrs, null, effect != BConstants.PLAIN).getIterator(), gfx.getFontRenderContext());
         } finally {
             gfx.dispose();
         }
 
-        return createText(layout, color, effect, effectSize, effectColor,
+        return createText(text, layout, color, effect, effectSize, effectColor,
                           text.length(), useAdvance);
     }
 
@@ -125,8 +149,7 @@ public class AWTTextFactory extends BTextFactory {
             }
 
             String[] bare = new String[1];
-            AttributedString atext =
-                    parseStyledText(text, _attrs, bare, effect != BConstants.PLAIN);
+            AttributedString atext = parseStyledText(text, _attrs, bare, effect != BConstants.PLAIN);
             LineBreakMeasurer measurer = new LineBreakMeasurer(
                     atext.getIterator(), gfx.getFontRenderContext());
             text = bare[0];
@@ -142,7 +165,7 @@ public class AWTTextFactory extends BTextFactory {
 
                 // measure out as much text as we can render in one line
                 layout = measurer.nextLayout(maxWidth, nextret, false);
-                int length = measurer.getPosition() - pos;
+                String origText = text.substring(pos, measurer.getPosition());
 
                 // skip past any newline that we used to terminate our wrap
                 pos = measurer.getPosition();
@@ -150,8 +173,10 @@ public class AWTTextFactory extends BTextFactory {
                     pos++;
                 }
 
-                texts.add(createText(layout, color, effect, effectSize, effectColor, length, true));
+                texts.add(createText(origText, layout, color,
+                                     effect, effectSize, effectColor, origText.length(), true));
             }
+
         } finally {
             gfx.dispose();
         }
@@ -162,7 +187,8 @@ public class AWTTextFactory extends BTextFactory {
     /**
      * Helper function.
      */
-    protected BText createText(final TextLayout layout,
+    protected BText createText(String origText,
+                               final TextLayout layout,
                                ColorRGBA color,
                                final int effect,
                                final int effectSize,
@@ -175,7 +201,7 @@ public class AWTTextFactory extends BTextFactory {
 
         // MacOS font rendering is buggy, so we must compute the outline and use that for bounds
         // computation and rendering
-        if (effect == OUTLINE || _isMacOS) {
+        if (effect == OUTLINE || effect == GLOW || _isMacOS) {
             bounds = layout.getOutline(null).getBounds();
         }
         if (useAdvance) {
@@ -199,6 +225,10 @@ public class AWTTextFactory extends BTextFactory {
                 size.width += effectSize * 2;
                 size.height += effectSize * 2;
                 break;
+        case GLOW:
+            size.width += effectSize*2;
+            size.height += effectSize*2;
+            break;
         }
 
         // render the text into the image
@@ -230,6 +260,27 @@ public class AWTTextFactory extends BTextFactory {
                                            effectColor.b, effectColor.a));
                     gfx.draw(layout.getOutline(null));
                 }
+
+            } else if (effect == GLOW ) {
+                // draw the background of the glow
+                char[] chars = origText.toCharArray();
+                int ox = 0;
+                for (char c : chars) {
+                    BufferedImage img = getGlowBackground(c, size.height, effectColor, effectSize);
+                    gfx.drawImage(img, null, ox, 0);
+                    ox += (img.getWidth() - effectSize*2);
+                }
+
+                // draw the foreground of the glow
+                ox = effectSize;
+                for (char c : chars) {
+                    if (c != '\n' && c != '\r') {
+                        BufferedImage img = getGlowForeground(c, size.height, color, effectSize);
+                        gfx.drawImage(img, null, ox, 0);
+                        ox += img.getWidth();
+                    }
+                }
+
             } else {
                 // if we're antialiasing, we need to set a custom compositing rule to avoid
                 // incorrectly blending with the blank background
@@ -269,6 +320,7 @@ public class AWTTextFactory extends BTextFactory {
                     layout.draw(gfx, dx, layout.getAscent());
                 }
             }
+
         } finally {
             gfx.dispose();
         }
@@ -338,12 +390,81 @@ public class AWTTextFactory extends BTextFactory {
         };
     }
 
+    /** Helper function. */
+    protected BufferedImage getGlowBackground (char c, int height, ColorRGBA color, int effectSize)
+    {
+        BufferedImage image = _cachedGlowBGs.get(_gkey.init(c, color, effectSize));
+        if (image != null) {
+            return image;
+        }
+
+        image = new BufferedImage(
+            computeWidth(c) + effectSize*2, height, BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics2D gfx = image.createGraphics();
+        try {
+            gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            TextLayout layout = new TextLayout(
+                String.valueOf(c), _attrs.get(TextAttribute.FONT), gfx.getFontRenderContext());
+            float alphaScale = Math.max(effectSize, 2f) / 2f;
+            gfx.setColor(new Color(color.r, color.g, color.b, color.a / alphaScale));
+            gfx.translate(effectSize, layout.getAscent() + effectSize);
+            for (int ii = effectSize; ii > 0; ii--) {
+                gfx.setStroke(new BasicStroke(effectSize * ((float) ii / effectSize),
+                                              BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER, 1));
+                gfx.draw(layout.getOutline(null));
+            }
+        } finally {
+            gfx.dispose();
+        }
+        _cachedGlowBGs.put(_gkey.cloneKey(), image);
+
+        return image;
+    }
+
+    /** Helper function. */
+    protected BufferedImage getGlowForeground (char c, int height, ColorRGBA color, int effectSize)
+    {
+        BufferedImage image = _cachedGlowFGs.get(_gkey.init(c, color, effectSize));
+        if (image != null) {
+            return image;
+        }
+
+        image = new BufferedImage(computeWidth(c), height, BufferedImage.TYPE_4BYTE_ABGR);
+        Graphics2D gfx = image.createGraphics();
+        try {
+            gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            TextLayout layout = new TextLayout(
+                String.valueOf(c), _attrs.get(TextAttribute.FONT), gfx.getFontRenderContext());
+            gfx.setColor(new Color(color.r, color.g, color.b, color.a));
+            gfx.translate(0, layout.getAscent() + effectSize);
+            gfx.fill(layout.getOutline(null));
+        } finally {
+            gfx.dispose();
+        }
+        _cachedGlowFGs.put(_gkey.cloneKey(), image);
+
+        return image;
+    }
+
+    /** Helper function. */
+    protected int computeWidth (char c)
+    {
+        Graphics2D gfx = _stub.createGraphics();
+        try {
+            TextLayout layout = new TextLayout(
+                String.valueOf(c), _attrs.get(TextAttribute.FONT), gfx.getFontRenderContext());
+            return (int) Math.ceil(layout.getAdvance());
+        } finally {
+            gfx.dispose();
+        }
+    }
+
     /**
      * Parses our simple styled text formatting codes and creates an attributed string to render them.
      */
     protected AttributedString parseStyledText(
             String text,
-            HashMap<TextAttribute, Font> attrs,
+            Map<TextAttribute, Font> attrs,
             String[] bare,
             boolean style) {
         // if there are no style commands in the text, skip the complexity
@@ -517,10 +638,51 @@ public class AWTTextFactory extends BTextFactory {
         }
     }
 
+    protected static class GlowKey implements Cloneable
+    {
+        public char c;
+        public ColorRGBA color;
+        public int size;
+
+        public GlowKey init (char c, ColorRGBA color, int size) {
+            this.c = c;
+            this.color = color;
+            this.size = size;
+            return this;
+        }
+
+        public GlowKey cloneKey () {
+            try {
+                return (GlowKey)super.clone();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        public boolean equals (Object other) {
+            if (!(other instanceof GlowKey)) {
+                return false;
+            }
+            GlowKey okey = (GlowKey)other;
+            return (c == okey.c) && (size == okey.size) && color.equals(okey.color);
+        }
+
+        public int hashCode () {
+            return c ^ size ^ color.hashCode();
+        }
+    }
+
     protected boolean _antialias;
-    protected HashMap<TextAttribute, Font> _attrs = new HashMap<TextAttribute, Font>();
+    protected Map<TextAttribute, Font> _attrs = new HashMap<TextAttribute, Font>();
     protected int _height;
     protected BufferedImage _stub;
+
+    // for caching glow fore- and backgrounds
+    protected Map<GlowKey, BufferedImage> _cachedGlowBGs = new HashMap<GlowKey, BufferedImage>();
+    protected Map<GlowKey, BufferedImage> _cachedGlowFGs = new HashMap<GlowKey, BufferedImage>();
+
+    // to avoid exercising the garbage collector
+    protected GlowKey _gkey = new GlowKey();
 
     protected static boolean _isMacOS;
 
