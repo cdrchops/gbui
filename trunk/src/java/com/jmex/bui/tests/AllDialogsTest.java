@@ -20,6 +20,9 @@
 
 package com.jmex.bui.tests;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.jmex.bui.BComponent;
 import com.jmex.bui.BDialogBox;
 import com.jmex.bui.BInputBox;
@@ -31,9 +34,6 @@ import com.jmex.bui.headlessWindows.BTitledWindow;
 import com.jmex.bui.headlessWindows.DialogBoxUtil;
 import com.jmex.bui.headlessWindows.InputBoxUtil;
 import com.jmex.bui.headlessWindows.MessageWindowUtil;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author timo
@@ -66,7 +66,7 @@ public class AllDialogsTest extends BaseTest2 {
                                                                                               "That's because it uses another CollapsingWindowListener than the other windows.");
         BuiSystem.getRootNode().addWindow(window);
     }
-
+    
     public static void main(String[] args) {
         Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
         new AllDialogsTest().start();

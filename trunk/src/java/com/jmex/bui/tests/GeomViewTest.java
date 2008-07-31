@@ -16,12 +16,12 @@ import com.jme.scene.state.LightState;
 import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
 import com.jmex.bui.BComponent;
-import com.jmex.bui.BDecoratedWindow;
 import com.jmex.bui.BGeomView;
 import com.jmex.bui.BStyleSheet;
 import com.jmex.bui.BWindow;
 import com.jmex.bui.PolledRootNode;
 import com.jmex.bui.background.TintedBackground;
+import com.jmex.bui.headlessWindows.BDraggableWindow;
 import com.jmex.bui.layout.BorderLayout;
 
 public class GeomViewTest extends SimpleGame {
@@ -64,7 +64,7 @@ public class GeomViewTest extends SimpleGame {
     ZBufferState zBufferState = DisplaySystem.getDisplaySystem().getRenderer()
         .createZBufferState();
     zBufferState.setEnabled(true);
-    zBufferState.setFunction(ZBufferState.CF_LESS);
+    zBufferState.setFunction(ZBufferState.TestFunction.LessThan);
 
     Node n = new Node("blah");
     n.setRenderState(ls);
@@ -75,7 +75,7 @@ public class GeomViewTest extends SimpleGame {
     BGeomView view = new BGeomView();
     view.setGeometry(n);
 
-    BWindow window = new BDecoratedWindow(style, null);
+    BWindow window = new BDraggableWindow(style, null);
     window.setLayoutManager(new BorderLayout());
     window.setSize(400, 300);
     window.center();
