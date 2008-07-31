@@ -27,8 +27,6 @@ import com.jme.renderer.Camera;
 import com.jme.renderer.Renderer;
 import com.jme.scene.Spatial;
 import com.jme.system.DisplaySystem;
-
-import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
 
@@ -162,6 +160,7 @@ public class BGeomView extends BComponent {
 
             // now set up the custom camera and render our geometry
             renderer.setCamera(_camera);
+            _camera.apply();
             _camera.update();
             }
 
@@ -172,7 +171,7 @@ public class BGeomView extends BComponent {
             // restore the camera
             renderer.setCamera(cam);
             cam.update();
-//            cam.apply();
+            cam.apply();
             renderer.setOrtho();
 
                 // we need to restore the GL translation as that got wiped out when we left and

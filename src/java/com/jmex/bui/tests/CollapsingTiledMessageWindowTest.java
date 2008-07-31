@@ -40,6 +40,8 @@ public class CollapsingTiledMessageWindowTest extends BaseTest2 {
     }
 
     public static void main(String[] args) {
-        new CollapsingTiledMessageWindowTest().start();
+        CollapsingTiledMessageWindowTest test = new CollapsingTiledMessageWindowTest();
+        test.setConfigShowMode(ConfigShowMode.AlwaysShow);
+        test.start();
     }
 }

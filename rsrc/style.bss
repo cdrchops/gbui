@@ -170,7 +170,7 @@ left {
 center {
   font: "Dialog" bold 16;
   text-align: center;
-  text-effect: glow;
+  //text-effect: glow;
   effect-color: #99CCFF;
   effect-size: 3;
   vertical-align: center;
@@ -229,5 +229,5 @@ labeltext {
 }
 
 champion {
-    border: 0
+    border: 0;
 }

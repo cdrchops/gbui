@@ -20,21 +20,7 @@
 
 package com.jmex.bui;
 
-import com.jme.image.Image;
-import com.jme.image.Texture;
-import com.jme.renderer.ColorRGBA;
-import com.jme.renderer.Renderer;
-import com.jme.scene.Spatial;
-import com.jme.scene.shape.Quad;
-import com.jme.scene.state.AlphaState;
-import com.jme.scene.state.RenderState;
-import com.jme.scene.state.TextureState;
-import com.jme.system.DisplaySystem;
-import com.jme.util.TextureManager;
-import org.lwjgl.opengl.GLContext;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -42,6 +28,28 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+
+import javax.imageio.ImageIO;
+
+import org.lwjgl.opengl.GLContext;
+
+import com.jme.image.Image;
+import com.jme.image.Texture;
+import com.jme.image.Texture2D;
+import com.jme.image.Image.Format;
+import com.jme.image.Texture.MagnificationFilter;
+import com.jme.image.Texture.MinificationFilter;
+import com.jme.renderer.ColorRGBA;
+import com.jme.renderer.Renderer;
+import com.jme.scene.Spatial;
+import com.jme.scene.shape.Quad;
+import com.jme.scene.state.BlendState;
+import com.jme.scene.state.RenderState;
+import com.jme.scene.state.TextureState;
+import com.jme.scene.state.BlendState.DestinationFunction;
+import com.jme.scene.state.BlendState.SourceFunction;
+import com.jme.system.DisplaySystem;
+import com.jme.util.TextureManager;
 
 /**
  * Contains a texture, its dimensions and a texture state.
@@ -63,9 +71,9 @@ public class BImage extends Quad {
     }
 
     /**
-     * An alpha state that blends the source plus one minus destination.
+     * A blend state that blends the source plus one minus destination.
      */
-    public static AlphaState blendState;
+    public static BlendState blendState;
 
     /**
      * Configures the supplied spatial with transparency in the standard user interface sense which is that transparent
@@ -143,7 +151,7 @@ public class BImage extends Quad {
         scratch.put(data);
         scratch.flip();
         Image textureImage = new Image();
-        textureImage.setType(hasAlpha ? Image.RGBA8888 : Image.RGB888);
+        textureImage.setFormat(hasAlpha ? Format.RGBA8 : Format.RGBA8);
         textureImage.setWidth(twidth);
         textureImage.setHeight(theight);
         textureImage.setData(scratch);
@@ -151,7 +159,7 @@ public class BImage extends Quad {
         setImage(textureImage);
 
         // make sure we have a unique default color object
-        getBatch(0).getDefaultColor().set(ColorRGBA.white);
+        getDefaultColor().set(ColorRGBA.white);
     }
 
     /**
@@ -172,14 +180,14 @@ public class BImage extends Quad {
     /**
      * Returns the width of this image.
      */
-    public int getWidth() {
+    public int getImageWidth() {
         return _width;
     }
 
     /**
      * Returns the height of this image.
      */
-    public int getHeight() {
+    public int getImageHeight() {
         return _height;
     }
 
@@ -190,7 +198,7 @@ public class BImage extends Quad {
         if (transparent) {
             setRenderState(blendState);
         } else {
-            clearRenderState(RenderState.RS_ALPHA);
+            clearRenderState(RenderState.RS_BLEND);
         }
         updateRenderState();
     }
@@ -204,17 +212,18 @@ public class BImage extends Quad {
             releaseTexture();
         }
 
-        Texture texture = new Texture();
+        Texture texture = new Texture2D();
         texture.setImage(image);
 
         _twidth = image.getWidth();
         _theight = image.getHeight();
 
-        texture.setFilter(Texture.FM_LINEAR);
-        texture.setMipmapState(Texture.MM_LINEAR);
+        texture.setMagnificationFilter(MagnificationFilter.Bilinear);
+        texture.setMinificationFilter(MinificationFilter.BilinearNearestMipMap);
+        //texture.setMipmapState(Texture.MM_LINEAR);
         _tstate.setTexture(texture);
         _tstate.setEnabled(true);
-        _tstate.setCorrection(TextureState.CM_AFFINE);
+        _tstate.setCorrectionType(TextureState.CorrectionType.Affine);
         setRenderState(_tstate);
         updateRenderState();
 
@@ -237,7 +246,7 @@ public class BImage extends Quad {
         float ux = (sx + swidth) / (float) _twidth;
         float uy = (sy + sheight) / (float) _theight;
 
-        FloatBuffer tcoords = getTextureBuffer(0, 0);
+        FloatBuffer tcoords = getTextureCoords().get(0).coords;
         tcoords.clear();
         tcoords.put(lx).put(uy);
         tcoords.put(lx).put(ly);
@@ -308,7 +317,7 @@ public class BImage extends Quad {
         localTranslation.y = ty + theight / 2f;
         updateGeometricState(0, true);
 
-        getBatch(0).getDefaultColor().a = alpha;
+        getDefaultColor().a = alpha;
         draw(renderer);
     }
 
@@ -384,10 +393,10 @@ public class BImage extends Quad {
     };
 
     static {
-        blendState = DisplaySystem.getDisplaySystem().getRenderer().createAlphaState();
+        blendState = DisplaySystem.getDisplaySystem().getRenderer().createBlendState();
         blendState.setBlendEnabled(true);
-        blendState.setSrcFunction(AlphaState.SB_SRC_ALPHA);
-        blendState.setDstFunction(AlphaState.DB_ONE_MINUS_SRC_ALPHA);
+        blendState.setSourceFunction(SourceFunction.SourceAlpha);
+        blendState.setDestinationFunction(DestinationFunction.OneMinusSourceAlpha);
         blendState.setEnabled(true);
         _supportsNonPowerOfTwo = GLContext.getCapabilities().GL_ARB_texture_non_power_of_two;
     }
