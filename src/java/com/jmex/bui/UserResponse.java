@@ -6,20 +6,14 @@ package com.jmex.bui;
  * @author Lucian Cristian Beskid
  */
 public enum UserResponse {
-    NONE("None"),
-    YES("Yes"),
-    NO("No"),
-    OK("OK"),
-    CANCEL("Cancel");
+    NONE,
+    YES,
+    NO,
+    OK,
+    CANCEL;
 
-    private String label;
-
-    private UserResponse(String label) {
-        this.label = label;
-    }
-
-    @Override
-    public String toString() {
-        return label;
+    public String toDisplay() {
+        final String str = toString();        
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 }
