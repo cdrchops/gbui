@@ -20,14 +20,7 @@
 
 package com.jmex.bui.tests;
 
-import com.jmex.bui.BConstants;
-import com.jmex.bui.BContainer;
-import com.jmex.bui.BDecoratedWindow;
-import com.jmex.bui.BImage;
-import com.jmex.bui.BLabel;
-import com.jmex.bui.BRootNode;
-import com.jmex.bui.BStyleSheet;
-import com.jmex.bui.BWindow;
+import com.jmex.bui.*;
 import com.jmex.bui.icon.ImageIcon;
 import com.jmex.bui.layout.GroupLayout;
 

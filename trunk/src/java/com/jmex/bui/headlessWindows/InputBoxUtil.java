@@ -20,11 +20,7 @@
 
 package com.jmex.bui.headlessWindows;
 
-import com.jmex.bui.BDialogMessage;
-import com.jmex.bui.BInputBox;
-import com.jmex.bui.BLabel;
-import com.jmex.bui.BTitleBar;
-import com.jmex.bui.BuiSystem;
+import com.jmex.bui.*;
 import com.jmex.bui.enumeratedConstants.DialogOptions;
 import com.jmex.bui.enumeratedConstants.DisplayStyleOptions;
 import com.jmex.bui.enumeratedConstants.IconOptions;

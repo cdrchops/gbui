@@ -20,16 +20,13 @@
 
 package com.jmex.bui;
 
-import java.util.ArrayList;
-
+import static com.jmex.bui.Log.log;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
-import com.jmex.bui.event.ChangeEvent;
-import com.jmex.bui.event.ChangeListener;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.layout.GroupLayout;
 
-import static com.jmex.bui.Log.log;
+import java.util.ArrayList;
 
 /**
  * Displays one of a set of components (tabs) depending on which tab is selected.

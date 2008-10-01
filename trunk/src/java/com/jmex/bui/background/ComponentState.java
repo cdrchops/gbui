@@ -4,8 +4,6 @@
  */
 package com.jmex.bui.background;
 
-import com.jmex.bui.BComponent;
-
 /**
  * @author timo
  * @since Mar 18, 2008 4:37:31 PM

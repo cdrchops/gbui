@@ -1,8 +1,5 @@
 package com.jmex.bui.tests;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import com.jme.app.SimpleGame;
 import com.jme.input.MouseInput;
 import com.jme.light.DirectionalLight;
@@ -15,14 +12,12 @@ import com.jme.scene.shape.Box;
 import com.jme.scene.state.LightState;
 import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
-import com.jmex.bui.BComponent;
-import com.jmex.bui.BDecoratedWindow;
-import com.jmex.bui.BGeomView;
-import com.jmex.bui.BStyleSheet;
-import com.jmex.bui.BWindow;
-import com.jmex.bui.PolledRootNode;
+import com.jmex.bui.*;
 import com.jmex.bui.background.TintedBackground;
 import com.jmex.bui.layout.BorderLayout;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class GeomViewTest extends SimpleGame {
   private Box box;

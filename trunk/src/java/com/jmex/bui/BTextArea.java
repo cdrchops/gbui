@@ -22,7 +22,6 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
-
 import com.jmex.bui.event.ChangeEvent;
 import com.jmex.bui.event.ChangeListener;
 import com.jmex.bui.text.BText;

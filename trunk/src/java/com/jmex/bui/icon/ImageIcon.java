@@ -20,12 +20,12 @@
 
 package com.jmex.bui.icon;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import javax.swing.Icon;
-
 import com.jme.renderer.Renderer;
 import com.jmex.bui.BImage;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Displays an image as an icon.

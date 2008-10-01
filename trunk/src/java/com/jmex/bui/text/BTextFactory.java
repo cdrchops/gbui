@@ -21,7 +21,6 @@
 package com.jmex.bui.text;
 
 import com.jme.renderer.ColorRGBA;
-
 import com.jmex.bui.BConstants;
 
 /**

@@ -20,27 +20,16 @@
 
 package com.jmex.bui;
 
-import java.nio.IntBuffer;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.lwjgl.opengl.GL11;
-
 import com.jme.input.KeyInput;
-import com.jme.math.Vector3f;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.RenderContext;
 import com.jme.renderer.Renderer;
-import com.jme.scene.Spatial;
 import com.jme.system.DisplaySystem;
 import com.jme.util.geom.BufferUtils;
-
 import com.jmex.bui.background.BBackground;
 import com.jmex.bui.border.BBorder;
 import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.ComponentListener;
-import com.jmex.bui.event.InputEvent;
 import com.jmex.bui.event.KeyEvent;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.text.HTMLView;
