@@ -56,12 +56,12 @@ public class ImageIcon extends BIcon {
 
     // documentation inherited
     public int getWidth() {
-        return _image.getImageWidth();
+        return _image.getWidth();
     }
 
     // documentation inherited
     public int getHeight() {
-        return _image.getImageHeight();
+        return _image.getHeight();
     }
 
     // documentation inherited

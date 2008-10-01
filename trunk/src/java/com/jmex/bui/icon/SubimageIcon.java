@@ -30,6 +30,12 @@ import com.jmex.bui.util.Rectangle;
 public class SubimageIcon extends BIcon {
     /**
      * Creates an icon that will display the specified region of the supplied image.
+     *
+     * @param image  BImage
+     * @param x      int
+     * @param y      int
+     * @param width  int
+     * @param height int
      */
     public SubimageIcon(BImage image,
                         int x,
@@ -50,18 +56,21 @@ public class SubimageIcon extends BIcon {
         return _region.height;
     }
 
+    @Override
     // documentation inherited
     public void wasAdded() {
         super.wasAdded();
         _image.reference();
     }
 
+    @Override
     // documentation inherited
     public void wasRemoved() {
         super.wasRemoved();
         _image.release();
     }
 
+    @Override
     // documentation inherited
     public void render(Renderer renderer,
                        int x,
@@ -69,7 +78,7 @@ public class SubimageIcon extends BIcon {
                        float alpha) {
         super.render(renderer, x, y, alpha);
         _image.render(renderer, _region.x, _region.y,
-                      _region.width, _region.height, x, y, alpha);
+                _region.width, _region.height, x, y, alpha);
     }
 
     protected BImage _image;

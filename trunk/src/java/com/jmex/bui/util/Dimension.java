@@ -48,6 +48,22 @@ public class Dimension {
     public Dimension() {
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int _width) {
+        width = _width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int _height) {
+        height = _height;
+    }
+
     public String toString() {
         return width + "x" + height;
     }

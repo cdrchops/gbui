@@ -20,10 +20,6 @@
 
 package com.jmex.bui.tests;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.jme.light.DirectionalLight;
 import com.jme.math.FastMath;
 import com.jme.math.Quaternion;
@@ -36,26 +32,7 @@ import com.jme.scene.shape.Box;
 import com.jme.scene.state.LightState;
 import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
-import com.jmex.bui.BButton;
-import com.jmex.bui.BCheckBox;
-import com.jmex.bui.BComboBox;
-import com.jmex.bui.BConstants;
-import com.jmex.bui.BContainer;
-import com.jmex.bui.BDecoratedWindow;
-import com.jmex.bui.BGeomView;
-import com.jmex.bui.BImage;
-import com.jmex.bui.BLabel;
-import com.jmex.bui.BMenuItem;
-import com.jmex.bui.BRootNode;
-import com.jmex.bui.BScrollBar;
-import com.jmex.bui.BScrollPane;
-import com.jmex.bui.BSlider;
-import com.jmex.bui.BStyleSheet;
-import com.jmex.bui.BTabbedPane;
-import com.jmex.bui.BTextArea;
-import com.jmex.bui.BTextField;
-import com.jmex.bui.BToggleButton;
-import com.jmex.bui.BWindow;
+import com.jmex.bui.*;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.icon.ImageIcon;
@@ -65,6 +42,10 @@ import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Point;
 import com.jmex.bui.util.Rectangle;
+
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Tests random BUI bits.
@@ -99,8 +80,8 @@ public class LayoutTest extends BaseTest {
         window.add(pane);
         BButton button = new BButton("One contents");
         button.setTooltipText("This is a very long tooltip the likes of " +
-                              "which you may not dare to contemplate. Indeed " +
-                              "it is so long that I expect it to wrap.");
+                "which you may not dare to contemplate. Indeed " +
+                "it is so long that I expect it to wrap.");
         pane.addTab("One", button);
         button.setEnabled(false);
 
@@ -114,13 +95,13 @@ public class LayoutTest extends BaseTest {
 
         window = new BWindow(style, new BorderLayout(5, 5));
         window.add(new BSlider(BConstants.VERTICAL, 0, 100, 25),
-                   BorderLayout.WEST);
+                BorderLayout.WEST);
         window.add(_text = new BTextArea(), BorderLayout.CENTER);
         window.add(_input = new BTextField(), BorderLayout.SOUTH);
         window.add(new BScrollBar(BConstants.VERTICAL, _text.getScrollModel()),
-                   BorderLayout.EAST);
+                BorderLayout.EAST);
         window.add(new BScrollBar(BConstants.HORIZONTAL, 0, 25, 50, 100),
-                   BorderLayout.NORTH);
+                BorderLayout.NORTH);
         _input.addListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 String inputText = _input.getText();
@@ -179,7 +160,7 @@ public class LayoutTest extends BaseTest {
         cont.add(new BLabel("Nine"));
         window.add(cont, BorderLayout.CENTER);
         window.add(new BSlider(BConstants.HORIZONTAL, 0, 100, 25),
-                   BorderLayout.SOUTH);
+                BorderLayout.SOUTH);
         root.addWindow(window);
         window.pack();
         window.setLocation(300, 400);
@@ -200,18 +181,18 @@ public class LayoutTest extends BaseTest {
             protected int _count;
         };
         window.add(new BButton("250x25+50+75", list, ""),
-                   new Rectangle(50, 75, 250, 25));
+                new Rectangle(50, 75, 250, 25));
         root.addWindow(window);
         window.pack();
         window.setLocation(300, 25);
 
         window = new BWindow(style, new BorderLayout());
         window.add(new BLabel("This is some styled text.\n" +
-                              "@=b(bold) @=i(italic) @=u(underline) " +
-                              "@=s(strike: @*)\n" +
-                              "@=#FFCC99(escaped chars: @@ @( @))\n" +
-                              "@=bu#99CCFF(bold, underlined and colored)"),
-                   BorderLayout.CENTER);
+                "@=b(bold) @=i(italic) @=u(underline) " +
+                "@=s(strike: @*)\n" +
+                "@=#FFCC99(escaped chars: @@ @( @))\n" +
+                "@=bu#99CCFF(bold, underlined and colored)"),
+                BorderLayout.CENTER);
         root.addWindow(window);
         window.pack();
         window.setLocation(300, 470);
@@ -233,7 +214,7 @@ public class LayoutTest extends BaseTest {
         ZBufferState zstate =
                 DisplaySystem.getDisplaySystem().getRenderer().createZBufferState();
         zstate.setEnabled(true);
-        zstate.setFunction(ZBufferState.TestFunction.LessThan);
+        zstate.setFunction(ZBufferState.CF_LESS);
 
         final Box box = new Box("box", new Vector3f(), 4, 4, 4);
         Quaternion quat45 = new Quaternion();

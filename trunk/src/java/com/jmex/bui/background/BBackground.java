@@ -28,6 +28,8 @@ import com.jme.renderer.Renderer;
 public abstract class BBackground {
     /**
      * Returns the minimum width allowed by this background.
+     *
+     * @return int
      */
     public int getMinimumWidth() {
         return 1;
@@ -35,6 +37,8 @@ public abstract class BBackground {
 
     /**
      * Returns the minimum height allowed by this background.
+     *
+     * @return int
      */
     public int getMinimumHeight() {
         return 1;
@@ -42,6 +46,13 @@ public abstract class BBackground {
 
     /**
      * Renders this background.
+     *
+     * @param renderer Renderer
+     * @param x        int
+     * @param y        int
+     * @param width    int
+     * @param height   int
+     * @param alpha    float
      */
     public void render(Renderer renderer,
                        int x,

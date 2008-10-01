@@ -24,9 +24,7 @@ package com.jmex.bui.util;
  * @author timo
  * @since 27Apr07
  */
-public class BBounds {
-    private int width;
-    private int height;
+public class BBounds extends Dimension {
     private int x;
     private int y;
 
@@ -36,24 +34,8 @@ public class BBounds {
                    final int _height) {
         this.x = _x;
         this.y = _y;
-        this.width = _width;
-        this.height = _height;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(final int _height) {
-        this.height = _height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(final int _width) {
-        this.width = _width;
+        width = _width;
+        height = _height;
     }
 
     public int getX() {
