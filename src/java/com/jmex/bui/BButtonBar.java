@@ -20,8 +20,8 @@ public class BButtonBar extends BContainer {
     }
 
     public void setButtonListener(ActionListener listener) {
-        for (int i = 0; i < buttons.size(); i++) {
-            buttons.get(i).addListener(listener);
+        for (BButton button : buttons) {
+            button.addListener(listener);
         }
     }
 
