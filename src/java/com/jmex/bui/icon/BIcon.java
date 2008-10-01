@@ -28,16 +28,25 @@ import com.jme.renderer.Renderer;
 public abstract class BIcon {
     /**
      * Returns the width of this icon.
+     *
+     * @return int
      */
     public abstract int getWidth();
 
     /**
      * Returns the height of this icon.
+     *
+     * @return int
      */
     public abstract int getHeight();
 
     /**
      * Renders this icon.
+     *
+     * @param renderer Renderer
+     * @param x        int
+     * @param y        int
+     * @param alpha    float
      */
     public void render(Renderer renderer,
                        int x,

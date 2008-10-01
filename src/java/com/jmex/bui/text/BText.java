@@ -31,17 +31,25 @@ import com.jmex.bui.util.Dimension;
 public abstract class BText {
     /**
      * Returns the length in characters of this text.
+     *
+     * @return int length of text
      */
     public abstract int getLength();
 
     /**
      * Returns the screen dimensions of this text.
+     *
+     * @return Dimension size of text
      */
     public abstract Dimension getSize();
 
     /**
      * Returns the character position to which the cursor should be moved given that the user clicked the specified
      * coordinate (relative to the text's bounds).
+     *
+     * @param x int
+     * @param y int
+     * @return int hit position
      */
     public abstract int getHitPos(int x,
                                   int y);

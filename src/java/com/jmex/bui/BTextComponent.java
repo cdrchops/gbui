@@ -21,6 +21,7 @@
 package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
+import com.jmex.bui.background.ComponentState;
 import com.jmex.bui.text.BTextFactory;
 
 /**
@@ -29,20 +30,25 @@ import com.jmex.bui.text.BTextFactory;
 public abstract class BTextComponent extends BComponent {
     /**
      * Updates the text displayed by this component.
+     * @param text String
      */
     public abstract void setText(String text);
 
     /**
      * Returns the text currently being displayed by this component.
+     *
+     * @return String text
      */
     public abstract String getText();
 
     /**
      * Returns a text factory suitable for creating text in the style defined by the component's current state.
+     *
+     * @return textFact BTextFactory
      */
     public BTextFactory getTextFactory() {
         BTextFactory textfact = _textfacts[getState()];
-        return (textfact != null) ? textfact : _textfacts[DEFAULT];
+        return (textfact != null) ? textfact : _textfacts[ComponentState.DEFAULT.ordinal()];
     }
 
     /**
@@ -51,7 +57,7 @@ public abstract class BTextComponent extends BComponent {
     public int getHorizontalAlignment() {
         if (_haligns != null) {
             int halign = _haligns[getState()];
-            return (halign != -1) ? halign : _haligns[DEFAULT];
+            return (halign != -1) ? halign : _haligns[ComponentState.DEFAULT.ordinal()];
         }
         return BConstants.LEFT;
     }
@@ -62,7 +68,7 @@ public abstract class BTextComponent extends BComponent {
     public int getVerticalAlignment() {
         if (_valigns != null) {
             int valign = _valigns[getState()];
-            return (valign != -1) ? valign : _valigns[DEFAULT];
+            return (valign != -1) ? valign : _valigns[ComponentState.DEFAULT.ordinal()];
         }
         return BConstants.CENTER;
     }
@@ -73,7 +79,7 @@ public abstract class BTextComponent extends BComponent {
     public int getTextEffect() {
         if (_teffects != null) {
             int teffect = _teffects[getState()];
-            return (teffect != -1) ? teffect : _teffects[DEFAULT];
+            return (teffect != -1) ? teffect : _teffects[ComponentState.DEFAULT.ordinal()];
         }
         return BConstants.NORMAL;
     }
@@ -84,7 +90,7 @@ public abstract class BTextComponent extends BComponent {
     public int getEffectSize() {
         if (_effsizes != null) {
             int effsize = _effsizes[getState()];
-            return (effsize > 0) ? effsize : _effsizes[DEFAULT];
+            return (effsize > 0) ? effsize : _effsizes[ComponentState.DEFAULT.ordinal()];
         }
         return BConstants.DEFAULT_SIZE;
     }
@@ -95,7 +101,7 @@ public abstract class BTextComponent extends BComponent {
     public ColorRGBA getEffectColor() {
         if (_effcols != null) {
             ColorRGBA effcol = _effcols[getState()];
-            return (effcol != null) ? effcol : _effcols[DEFAULT];
+            return (effcol != null) ? effcol : _effcols[ComponentState.DEFAULT.ordinal()];
         }
         return ColorRGBA.white;
     }
@@ -145,6 +151,7 @@ public abstract class BTextComponent extends BComponent {
     /**
      * Returns the text factory that should be used by the supplied label (for which we are by definition acting as
      * container) to generate its text.
+     * //todo: what was this supposed to do and is it out of sync with the BUI project? -- timo 18Mar08
      */
     protected BTextFactory getTextFactory(Label forLabel) {
         return getTextFactory();
