@@ -20,13 +20,7 @@
 
 package com.jmex.bui;
 
-import com.jme.math.Vector3f;
-import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
-import com.jme.scene.Text;
-import com.jme.scene.shape.Quad;
-import com.jme.system.DisplaySystem;
-
 import com.jmex.bui.icon.BIcon;
 import com.jmex.bui.util.Dimension;
 

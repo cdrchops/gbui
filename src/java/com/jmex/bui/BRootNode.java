@@ -21,13 +21,8 @@
 package com.jmex.bui;
 
 import com.jme.intersection.CollisionResults;
-import com.jme.intersection.PickResults;
-import com.jme.math.Ray;
-import com.jme.renderer.Camera;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
-
-import com.jmex.bui.Log;
 import com.jme.scene.Geometry;
 import com.jme.scene.Spatial;
 import com.jme.system.DisplaySystem;

@@ -20,8 +20,6 @@
 
 package com.jmex.bui.layout;
 
-import java.util.HashMap;
-
 import com.jmex.bui.BComponent;
 import com.jmex.bui.BContainer;
 import com.jmex.bui.util.Dimension;
