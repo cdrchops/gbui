@@ -43,6 +43,7 @@ public class BDecoratedWindow extends BWindow {
         }
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "decoratedwindow";
