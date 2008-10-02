@@ -63,11 +63,13 @@ public class BSlider extends BComponent
         return _model;
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return ((_orient == HORIZONTAL) ? "h" : "v") + "slider";
     }
 
+    @Override
     // documentation inherited
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);
@@ -78,6 +80,7 @@ public class BSlider extends BComponent
         }
     }
 
+    @Override
     // documentation inherited
     protected void wasAdded() {
         super.wasAdded();
@@ -88,6 +91,7 @@ public class BSlider extends BComponent
         }
     }
 
+    @Override
     // documentation inherited
     protected void wasRemoved() {
         super.wasRemoved();
@@ -98,6 +102,7 @@ public class BSlider extends BComponent
         }
     }
 
+    @Override
     // documentation inherited
     protected Dimension computePreferredSize(int whint,
                                              int hhint) {
@@ -111,6 +116,7 @@ public class BSlider extends BComponent
         return psize;
     }
 
+    @Override
     // documentation inherited
     public boolean dispatchEvent(BEvent event) {
         if (isEnabled() && event instanceof MouseEvent) {
@@ -147,6 +153,7 @@ public class BSlider extends BComponent
         return super.dispatchEvent(event);
     }
 
+    @Override
     // documentation inherited
     protected void renderComponent(Renderer renderer) {
         super.renderComponent(renderer);

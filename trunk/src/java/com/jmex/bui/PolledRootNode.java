@@ -20,14 +20,21 @@
 
 package com.jmex.bui;
 
-import com.jme.input.*;
+import com.jme.input.InputHandler;
+import com.jme.input.KeyInput;
+import com.jme.input.KeyInputListener;
+import com.jme.input.MouseInput;
+import com.jme.input.MouseInputListener;
 import com.jme.util.Timer;
 import com.jmex.bui.event.InputEvent;
 import com.jmex.bui.event.KeyEvent;
 import com.jmex.bui.event.MouseEvent;
+import com.jmex.bui.listener.BUpdateListener;
 import org.lwjgl.opengl.Display;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Processes the polled input information available from the underlying
@@ -35,6 +42,10 @@ import java.util.ArrayList;
  * parties.
  */
 public class PolledRootNode extends BRootNode {
+    public PolledRootNode(Timer timer) {
+        this(timer, null);
+    }
+
     public PolledRootNode(Timer timer,
                           InputHandler handler) {
         _timer = timer;
@@ -43,6 +54,75 @@ public class PolledRootNode extends BRootNode {
         // register our interest in key presses and mouse events
         KeyInput.get().addListener(_keyListener);
         MouseInput.get().addListener(_mouseListener);
+    }
+
+    public void addMouseListener(MouseInputListener listener) {
+        if (mouseListeners == null) {
+            mouseListeners = new HashSet<MouseInputListener>();
+        }
+
+        mouseListeners.add(listener);
+    }
+
+    public void addKeyListener(KeyInputListener listener) {
+        if (keyListeners == null) {
+            keyListeners = new HashSet<KeyInputListener>();
+        }
+
+        keyListeners.add(listener);
+    }
+
+    public void addUpdateListener(BUpdateListener listener) {
+        if (updateListeners == null) {
+            updateListeners = new HashSet<BUpdateListener>();
+        }
+
+        updateListeners.add(listener);
+    }
+
+    public void fireOnMouseButton(int button, boolean pressed, int x, int y) {
+        if (mouseListeners == null) {
+            return;
+        }
+        for (MouseInputListener mouseListener : mouseListeners) {
+            mouseListener.onButton(button, pressed, x, y);
+        }
+    }
+
+    private void fireOnMouseMove(int xDelta, int yDelta, int newX, int newY) {
+        if (mouseListeners == null) {
+            return;
+        }
+        for (MouseInputListener mouseListener : mouseListeners) {
+            mouseListener.onMove(xDelta, yDelta, newX, newY);
+        }
+    }
+
+    private void fireOnMouseWheel(int wheelDelta, int x, int y) {
+        if (mouseListeners == null) {
+            return;
+        }
+        for (MouseInputListener mouseListener : mouseListeners) {
+            mouseListener.onWheel(wheelDelta, x, y);
+        }
+    }
+
+    private void fireOnKey(char character, int keyCode, boolean pressed) {
+        if (keyListeners == null) {
+            return;
+        }
+        for (KeyInputListener keyListener : keyListeners) {
+            keyListener.onKey(character, keyCode, pressed);
+        }
+    }
+
+    private void fireUpdate(BComponent component, float time) {
+        if (updateListeners == null) {
+            return;
+        }
+        for (BUpdateListener updateListener : updateListeners) {
+            updateListener.update(component, time);
+        }
     }
 
     // documentation inherited
@@ -58,6 +138,7 @@ public class PolledRootNode extends BRootNode {
         }
     }
 
+    @Override
     // documentation inherited
     public void updateWorldData(float timePerFrame) {
         super.updateWorldData(timePerFrame);
@@ -70,9 +151,12 @@ public class PolledRootNode extends BRootNode {
         MouseInput.get().update();
 
         // if we have no focus component, update the normal input handler
-        if (_focus == null && _handler != null) {
+        if (_focus == null
+            && _handler != null) {
             _handler.update(timePerFrame);
         }
+
+        fireUpdate(_hcomponent, timePerFrame);
 
         // if our OpenGL window lost focus, clear our modifiers
         boolean lostFocus = !Display.isActive();
@@ -106,6 +190,7 @@ public class PolledRootNode extends BRootNode {
         }
     }
 
+    @Override
     // documentation inherited
     public float getTooltipTimeout() {
         return (KeyInput.get().isKeyDown(KeyInput.KEY_LCONTROL) ||
@@ -140,7 +225,7 @@ public class PolledRootNode extends BRootNode {
                     PolledRootNode.this, _tickStamp, _modifiers,
                     pressed ? KeyEvent.KEY_PRESSED : KeyEvent.KEY_RELEASED,
                     character, keyCode);
-            dispatchEvent(_focus, event);
+            boolean processed = dispatchEvent(_focus, event);
 
             // update our stored list of pressed keys
             if (pressed) {
@@ -151,6 +236,10 @@ public class PolledRootNode extends BRootNode {
                 if (_pressed == keyCode) {
                     _pressed = -1;
                 }
+            }
+
+            if (!processed) {
+                fireOnKey(character, keyCode, pressed);
             }
         }
     };
@@ -181,7 +270,7 @@ public class PolledRootNode extends BRootNode {
             }
 
             // generate a mouse event and dispatch it
-            dispatchEvent(new MouseEvent(
+            boolean processed = dispatchEvent(new MouseEvent(
                     PolledRootNode.this, _tickStamp, _modifiers,
                     pressed ? MouseEvent.MOUSE_PRESSED :
                     MouseEvent.MOUSE_RELEASED, button, x, y));
@@ -191,6 +280,10 @@ public class PolledRootNode extends BRootNode {
             if ((_modifiers & ANY_BUTTON_PRESSED) == 0) {
                 _ccomponent = null;
             }
+
+            if (!processed) {
+                fireOnMouseButton(button, pressed, x, y);
+            }
         }
 
         public void onMove(int xDelta,
@@ -198,24 +291,32 @@ public class PolledRootNode extends BRootNode {
                            int newX,
                            int newY) {
             mouseDidMove(newX, newY);
-            dispatchEvent(new MouseEvent(
+            boolean processed = dispatchEvent(new MouseEvent(
                     PolledRootNode.this, _tickStamp, _modifiers,
                     _ccomponent != null ? MouseEvent.MOUSE_DRAGGED :
                     MouseEvent.MOUSE_MOVED,
                     newX, newY));
+
+            if (!processed) {
+                fireOnMouseMove(xDelta, yDelta, newX, newY);
+            }
         }
 
         public void onWheel(int wheelDelta,
                             int x,
                             int y) {
-            dispatchEvent(new MouseEvent(
+            boolean processed = dispatchEvent(new MouseEvent(
                     PolledRootNode.this, _tickStamp, _modifiers,
                     MouseEvent.MOUSE_WHEELED, -1, x, y, wheelDelta));
             updateHoverComponent(x, y);
+
+            if (!processed) {
+                fireOnMouseWheel(wheelDelta, x, y);
+            }
         }
 
-        protected void dispatchEvent(MouseEvent event) {
-            PolledRootNode.this.dispatchEvent(
+        protected boolean dispatchEvent(MouseEvent event) {
+            return PolledRootNode.this.dispatchEvent(
                     _ccomponent != null ? _ccomponent : _hcomponent, event);
         }
     };
@@ -273,4 +374,8 @@ public class PolledRootNode extends BRootNode {
 
     protected static final long INITIAL_REPEAT_DELAY = 400L;
     protected static final long SUBSEQ_REPEAT_DELAY = 30L;
+
+    private Set<MouseInputListener> mouseListeners;
+    private Set<KeyInputListener> keyListeners;
+    private Set<BUpdateListener> updateListeners;
 }

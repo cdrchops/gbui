@@ -81,6 +81,7 @@ public class BGeomView extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     protected void wasAdded() {
         super.wasAdded();
@@ -88,6 +89,7 @@ public class BGeomView extends BComponent {
         _root.registerGeomView(this);
     }
 
+    @Override
     // documentation inherited
     protected void wasRemoved() {
         super.wasRemoved();
@@ -95,6 +97,7 @@ public class BGeomView extends BComponent {
         _root = null;
     }
 
+    @Override
     // documentation inherited
     protected void renderComponent(Renderer renderer) {
         super.renderComponent(renderer);
@@ -139,7 +142,7 @@ public class BGeomView extends BComponent {
                 int height = _height - insets.getVertical();
 
                 if (updateDisplay || _cx != ax || _cy != ay ||
-                        _cwidth != width || _cheight != height) {
+                    _cwidth != width || _cheight != height) {
                     _cx = ax;
                     _cy = ay;
                     _cwidth = width;

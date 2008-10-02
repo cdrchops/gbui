@@ -36,7 +36,7 @@ public class BTabbedPane extends BContainer {
     /**
      * Creates a tabbed pane with left justified buttons.
      */
-    public BTabbedPane () {
+    public BTabbedPane() {
         this(GroupLayout.LEFT);
     }
 
@@ -45,19 +45,17 @@ public class BTabbedPane extends BContainer {
      *
      * @param tabAlign the justification for the tab buttons.
      */
-    public BTabbedPane (GroupLayout.Justification tabAlign)
-    {
-    	this(tabAlign, GroupLayout.DEFAULT_GAP);
+    public BTabbedPane(GroupLayout.Justification tabAlign) {
+        this(tabAlign, GroupLayout.DEFAULT_GAP);
     }
 
     /**
      * Creates a tabbed pane.
      *
      * @param tabAlign the justification for the tab buttons.
-     * @param gap the number of pixels space between each tab button.
+     * @param gap      the number of pixels space between each tab button.
      */
-    public BTabbedPane (GroupLayout.Justification tabAlign, int gap)
-    {
+    public BTabbedPane(GroupLayout.Justification tabAlign, int gap) {
         super(new BorderLayout());
 
         GroupLayout gl = GroupLayout.makeHoriz(
@@ -281,6 +279,7 @@ public class BTabbedPane extends BContainer {
         }
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "tabbedpane";

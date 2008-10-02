@@ -121,6 +121,7 @@ public class BList extends BContainer {
         _selidx = idx;
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "list";

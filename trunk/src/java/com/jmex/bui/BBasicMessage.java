@@ -30,12 +30,18 @@ import com.jmex.bui.layout.HGroupLayout;
 public class BBasicMessage extends BContainer {
     private String message;
 
+    /**
+     * @param _message String
+     */
     public BBasicMessage(String _message) {
         super(new HGroupLayout(GroupLayout.STRETCH));
         message = _message;
         setupComponents();
     }
 
+    /**
+     * convenience method for doing the simple setup of a label and component
+     */
     private void setupComponents() {
         BLabel lmessage = new BLabel(message);
         lmessage.setStyleClass("message");

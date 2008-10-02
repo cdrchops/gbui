@@ -1,22 +1,23 @@
-//
-// $Id: BComboBox.java,v 1.2 2007/04/27 19:46:29 vivaldi Exp $
-//
-// BUI - a user interface library for the JME 3D engine
-// Copyright (C) 2005, Michael Bayne, All Rights Reserved
-//
-// This library is free software; you can redistribute it and/or modify it
-// under the terms of the GNU Lesser General Public License as published
-// by the Free Software Foundation; either version 2.1 of the License, or
-// (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+/**
+ // $Id: BComboBox.java,v 1.2 2007/04/27 19:46:29 vivaldi Exp $
+ // $Copyright:$
+ // BUI - a user interface library for the JME 3D engine
+ // Copyright (C) 2005, Michael Bayne, All Rights Reserved
+ //
+ // This library is free software; you can redistribute it and/or modify it
+ // under the terms of the GNU Lesser General Public License as published
+ // by the Free Software Foundation; either version 2.1 of the License, or
+ // (at your option) any later version.
+ //
+ // This library is distributed in the hope that it will be useful,
+ // but WITHOUT ANY WARRANTY; without even the implied warranty of
+ // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ // Lesser General Public License for more details.
+ //
+ // You should have received a copy of the GNU Lesser General Public
+ // License along with this library; if not, write to the Free Software
+ // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 
 package com.jmex.bui;
 
@@ -28,6 +29,7 @@ import com.jmex.bui.util.Dimension;
 
 import java.util.ArrayList;
 
+
 /**
  * Displays a selected value and allows that value to be changed by selecting from a popup menu.
  */
@@ -35,8 +37,7 @@ public class BComboBox extends BLabel {
     /**
      * Used for displaying a label that is associated with a particular non-displayable value.
      */
-    public static class Item
-            implements Comparable<Item> {
+    public static class Item extends BComponent implements Comparable<Item> {
         public Object value;
 
         public Item(Object value,
@@ -45,10 +46,12 @@ public class BComboBox extends BLabel {
             _label = label;
         }
 
+        @Override
         public String toString() {
             return _label;
         }
 
+        @Override
         public boolean equals(Object other) {
             Item oitem = (Item) other;
             return (value == null) ? (oitem.value == null) : value.equals(oitem.value);
@@ -72,6 +75,8 @@ public class BComboBox extends BLabel {
     /**
      * Creates a combo box with the supplied set of items. The result of {@link Object#toString} for each item will be
      * displayed in the list.
+     *
+     * @param items Object[]
      */
     public BComboBox(Object[] items) {
         super("");
@@ -81,6 +86,8 @@ public class BComboBox extends BLabel {
     /**
      * Creates a combo box with the supplied set of items. The result of {@link Object#toString} for each item will be
      * displayed in the list.
+     *
+     * @param items Iteratable
      */
     public BComboBox(Iterable<?> items) {
         super("");
@@ -90,6 +97,8 @@ public class BComboBox extends BLabel {
     /**
      * Appends an item to our list of items. The result of {@link Object#toString} for the item will be displayed in the
      * list.
+     *
+     * @param item Object
      */
     public void addItem(Object item) {
         addItem(_items.size(), item);
@@ -98,6 +107,9 @@ public class BComboBox extends BLabel {
     /**
      * Inserts an item into our list of items at the specified position (zero being before all other items and so
      * forth).  The result of {@link Object#toString} for the item will be displayed in the list.
+     *
+     * @param index int
+     * @param item  Object
      */
     public void addItem(int index,
                         Object item) {
@@ -107,6 +119,8 @@ public class BComboBox extends BLabel {
 
     /**
      * Replaces any existing items in this combo box with the supplied items.
+     *
+     * @param items Iteratable<?>
      */
     public void setItems(Iterable<?> items) {
         clearItems();
@@ -117,16 +131,20 @@ public class BComboBox extends BLabel {
 
     /**
      * Replaces any existing items in this combo box with the supplied items.
+     *
+     * @param items Object[]
      */
     public void setItems(Object[] items) {
         clearItems();
-        for (int ii = 0; ii < items.length; ii++) {
-            addItem(items[ii]);
+        for (Object item : items) {
+            addItem(item);
         }
     }
 
     /**
      * Returns the index of the selected item or -1 if no item is selected.
+     *
+     * @return int selected index
      */
     public int getSelectedIndex() {
         return _selidx;
@@ -134,6 +152,8 @@ public class BComboBox extends BLabel {
 
     /**
      * Returns the selected item or null if no item is selected.
+     *
+     * @return Object selected index Item
      */
     public Object getSelectedItem() {
         return getItem(_selidx);
@@ -142,6 +162,8 @@ public class BComboBox extends BLabel {
     /**
      * Requires that the combo box be configured with {@link Item} items, returns the {@link Item#value} of the
      * currently selected item.
+     *
+     * @return Object selected index value
      */
     public Object getSelectedValue() {
         return getValue(_selidx);

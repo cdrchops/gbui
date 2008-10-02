@@ -20,7 +20,14 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.event.*;
+import com.jmex.bui.event.ActionEvent;
+import com.jmex.bui.event.ActionListener;
+import com.jmex.bui.event.ChangeEvent;
+import com.jmex.bui.event.ChangeListener;
+import com.jmex.bui.event.MouseAdapter;
+import com.jmex.bui.event.MouseEvent;
+import com.jmex.bui.event.MouseListener;
+import com.jmex.bui.event.MouseWheelListener;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.util.Insets;
 
@@ -37,27 +44,38 @@ public class BScrollBar extends BContainer implements BConstants {
 
     /**
      * Creates a scroll bar with the default range, value and extent.
+     *
+     * @param orientation int
      */
-    public BScrollBar(int orientation) {
+    public BScrollBar(final int orientation) {
         this(orientation, 0, 100, 0, 10);
     }
 
     /**
      * Creates a scroll bar with the specified orientation, range, value and extent.
+     *
+     * @param orientation int
+     * @param min         int
+     * @param value       int
+     * @param extent      int
+     * @param max         int
      */
-    public BScrollBar(int orientation,
-                      int min,
-                      int value,
-                      int extent,
-                      int max) {
+    public BScrollBar(final int orientation,
+                      final int min,
+                      final int value,
+                      final int extent,
+                      final int max) {
         this(orientation, new BoundedRangeModel(min, value, extent, max));
     }
 
     /**
      * Creates a scroll bar with the specified orientation which will interact with the supplied model.
+     *
+     * @param orientation int
+     * @param model       BoundedRangeModel
      */
-    public BScrollBar(int orientation,
-                      BoundedRangeModel model) {
+    public BScrollBar(final int orientation,
+                      final BoundedRangeModel model) {
         super(new BorderLayout());
         _orient = orientation;
         _model = model;
@@ -66,11 +84,14 @@ public class BScrollBar extends BContainer implements BConstants {
 
     /**
      * Returns a reference to the scrollbar's range model.
+     *
+     * @return BoundingRangeModel brm
      */
     public BoundedRangeModel getModel() {
         return _model;
     }
 
+    @Override
     // documentation inherited
     public void wasAdded() {
         super.wasAdded();
@@ -105,6 +126,7 @@ public class BScrollBar extends BContainer implements BConstants {
         _more.setAction("more");
     }
 
+    @Override
     // documentation inherited
     public void wasRemoved() {
         super.wasRemoved();
@@ -131,6 +153,7 @@ public class BScrollBar extends BContainer implements BConstants {
         }
     }
 
+    @Override
     // documentation inherited
     public BComponent getHitComponent(int mx,
                                       int my) {
@@ -167,11 +190,13 @@ public class BScrollBar extends BContainer implements BConstants {
                          _well.getY() + winsets.bottom + ty, twidth, theight);
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "scrollbar";
     }
 
+    @Override
     // documentation inherited
     protected void layout() {
         super.layout();
@@ -219,6 +244,7 @@ public class BScrollBar extends BContainer implements BConstants {
             _sy = event.getY() - getAbsoluteY();
         }
 
+        @Override
         public void mouseDragged(MouseEvent event) {
             int dv = 0;
             if (_orient == HORIZONTAL) {

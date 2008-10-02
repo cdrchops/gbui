@@ -29,15 +29,16 @@ import com.jmex.bui.icon.BIcon;
 /**
  * Displays a simple button that can be depressed and which generates an action event when pressed and released.
  */
-public class BButton extends BLabel
-        implements BConstants {
+public class BButton extends BLabel implements BConstants {
     /**
      * Indicates that this button is in the down state.
      */
-    public static final int DOWN = BComponent.STATE_COUNT + 0;
+    public static final int DOWN = BComponent.STATE_COUNT;// + 0;
 
     /**
      * Creates a button with the specified textual label.
+     *
+     * @param text String
      */
     public BButton(String text) {
         this(text, "");
@@ -46,6 +47,9 @@ public class BButton extends BLabel
     /**
      * Creates a button with the specified label and action. The action will be dispatched via an {@link ActionEvent}
      * when the button is clicked.
+     *
+     * @param text   String
+     * @param action String
      */
     public BButton(String text,
                    String action) {
@@ -55,6 +59,10 @@ public class BButton extends BLabel
     /**
      * Creates a button with the specified label and action. The action will be dispatched via an {@link ActionEvent} to
      * the specified {@link ActionListener} when the button is clicked.
+     *
+     * @param text     String
+     * @param listener ActionLIstener
+     * @param action   String
      */
     public BButton(String text,
                    ActionListener listener,
@@ -69,6 +77,9 @@ public class BButton extends BLabel
     /**
      * Creates a button with the specified icon and action. The action will be dispatched via an {@link ActionEvent}
      * when the button is clicked.
+     *
+     * @param icon   BIcon
+     * @param action String
      */
     public BButton(BIcon icon,
                    String action) {
@@ -78,6 +89,10 @@ public class BButton extends BLabel
     /**
      * Creates a button with the specified icon and action. The action will be dispatched via an {@link ActionEvent} to
      * the specified {@link ActionListener} when the button is clicked.
+     *
+     * @param icon     BIcon
+     * @param listener ActionListener
+     * @param action   String
      */
     public BButton(BIcon icon,
                    ActionListener listener,
@@ -91,6 +106,8 @@ public class BButton extends BLabel
 
     /**
      * Configures the action to be generated when this button is clicked.
+     *
+     * @param action String
      */
     public void setAction(String action) {
         _action = action;
@@ -98,11 +115,14 @@ public class BButton extends BLabel
 
     /**
      * Returns the action generated when this button is clicked.
+     *
+     * @return String action
      */
     public String getAction() {
         return _action;
     }
 
+    @Override
     // documentation inherited
     public int getState() {
         int state = super.getState();
@@ -117,6 +137,7 @@ public class BButton extends BLabel
         }
     }
 
+    @Override
     // documentation inherited
     public boolean dispatchEvent(BEvent event) {
         if (isEnabled() && event instanceof MouseEvent) {
@@ -169,16 +190,19 @@ public class BButton extends BLabel
         return super.dispatchEvent(event);
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "button";
     }
 
+    @Override
     // documentation inherited
     protected int getStateCount() {
         return STATE_COUNT;
     }
 
+    @Override
     // documentation inherited
     protected String getStatePseudoClass(int state) {
         if (state >= BComponent.STATE_COUNT) {
@@ -188,6 +212,7 @@ public class BButton extends BLabel
         }
     }
 
+    @Override
     // documentation inherited
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);
@@ -204,6 +229,9 @@ public class BButton extends BLabel
     /**
      * Called when the button is "clicked" which may due to the mouse being pressed and released while over the button
      * or due to keyboard manipulation while the button has focus.
+     *
+     * @param when      long
+     * @param modifiers int
      */
     protected void fireAction(long when,
                               int modifiers) {

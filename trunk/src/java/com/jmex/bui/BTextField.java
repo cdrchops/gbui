@@ -22,8 +22,17 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
-import com.jmex.bui.event.*;
-import com.jmex.bui.text.*;
+import com.jmex.bui.event.ActionEvent;
+import com.jmex.bui.event.BEvent;
+import com.jmex.bui.event.FocusEvent;
+import com.jmex.bui.event.KeyEvent;
+import com.jmex.bui.event.MouseEvent;
+import com.jmex.bui.event.TextEvent;
+import com.jmex.bui.text.BKeyMap;
+import com.jmex.bui.text.BText;
+import com.jmex.bui.text.Document;
+import com.jmex.bui.text.EditCommands;
+import com.jmex.bui.text.LengthLimitedDocument;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
@@ -150,11 +159,13 @@ public class BTextField extends BTextComponent implements EditCommands,
         emitEvent(new TextEvent(this, -1L));
     }
 
+    @Override
     // documentation inherited
     public boolean acceptsFocus() {
         return isVisible() && isEnabled();
     }
 
+    @Override
     // documentation inherited
     public boolean dispatchEvent(BEvent event) {
         if (event instanceof KeyEvent) {
@@ -250,11 +261,13 @@ public class BTextField extends BTextComponent implements EditCommands,
         return super.dispatchEvent(event);
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "textfield";
     }
 
+    @Override
     // documentation inherited
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);
@@ -263,6 +276,7 @@ public class BTextField extends BTextComponent implements EditCommands,
         _keymap = style.getKeyMap(this, null);
     }
 
+    @Override
     // documentation inherited
     protected void wasAdded() {
         super.wasAdded();
@@ -271,6 +285,7 @@ public class BTextField extends BTextComponent implements EditCommands,
         recreateGlyphs();
     }
 
+    @Override
     // documentation inherited
     protected void wasRemoved() {
         super.wasRemoved();
@@ -281,6 +296,7 @@ public class BTextField extends BTextComponent implements EditCommands,
         }
     }
 
+    @Override
     // documentation inherited
     protected void layout() {
         super.layout();
@@ -289,12 +305,14 @@ public class BTextField extends BTextComponent implements EditCommands,
         recreateGlyphs();
     }
 
+    @Override
     // documentation inherited
     protected void stateDidChange() {
         super.stateDidChange();
         recreateGlyphs();
     }
 
+    @Override
     // documentation inherited
     protected void renderComponent(Renderer renderer) {
         super.renderComponent(renderer);
@@ -331,6 +349,7 @@ public class BTextField extends BTextComponent implements EditCommands,
         }
     }
 
+    @Override
     // documentation inherited
     protected Dimension computePreferredSize(int whint,
                                              int hhint) {

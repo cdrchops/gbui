@@ -30,11 +30,13 @@ public class BCheckBox extends BToggleButton {
         super(label);
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "checkbox";
     }
 
+    @Override
     // documentation inherited
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);
@@ -45,6 +47,7 @@ public class BCheckBox extends BToggleButton {
         _label.setIcon(_icons[getState()]);
     }
 
+    @Override
     // documentation inherited
     protected void stateDidChange() {
         super.stateDidChange();
