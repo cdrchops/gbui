@@ -68,6 +68,7 @@ public class BMenuItem extends BLabel {
         return _action;
     }
 
+    @Override
     // documentation inherited
     public boolean dispatchEvent(BEvent event) {
         if (event instanceof MouseEvent) {
@@ -106,6 +107,7 @@ public class BMenuItem extends BLabel {
         return super.dispatchEvent(event);
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "menuitem";

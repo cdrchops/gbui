@@ -41,18 +41,21 @@ public class BDialogBox extends BTitledWindow {
             throw new IllegalArgumentException("The message for BDialogBox cannot be null");
         }
 
-        getComponentArea().setStyleClass("greymessagebg");
-        getComponentArea().setLayoutManager(new BorderLayout());
-        getComponentArea().add(message, BorderLayout.NORTH);
+        BContainer tmp = getComponentArea();
+
+
+        tmp.setStyleClass("greymessagebg");
+        tmp.setLayoutManager(new BorderLayout());
+        tmp.add(message, BorderLayout.NORTH);
 
         BButtonBar buttons = new BButtonBar("", options);
         buttons.setButtonListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent event) {
                 fireResponse(event);
             }
         });
-        getComponentArea().add(buttons, BorderLayout.SOUTH);
+
+        tmp.add(buttons, BorderLayout.SOUTH);
     }
 
     private void fireResponse(ActionEvent event) {

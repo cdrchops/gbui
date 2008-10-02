@@ -63,8 +63,8 @@ public class BLabel extends BTextComponent
     /**
      * Creates a label that will display the supplied icon using the specified style class.
      */
-    public BLabel (BIcon icon, String styleClass) {
-    	this(icon, null, styleClass);
+    public BLabel(BIcon icon, String styleClass) {
+        this(icon, null, styleClass);
     }
 
     /**
@@ -134,7 +134,7 @@ public class BLabel extends BTextComponent
     /**
      * Returns the current fit mode for this label.
      */
-    public Fit getFit () {
+    public Fit getFit() {
         return _label._fit;
     }
 
@@ -148,35 +148,41 @@ public class BLabel extends BTextComponent
         return _label.getText();
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "label";
     }
 
+    @Override
     // documentation inherited
     protected void wasAdded() {
         super.wasAdded();
         _label.wasAdded();
     }
 
+    @Override
     // documentation inherited
     protected void wasRemoved() {
         super.wasRemoved();
         _label.wasRemoved();
     }
 
+    @Override
     // documentation inherited
     protected void layout() {
         super.layout();
         _label.layout(getInsets(), getWidth(), getHeight());
     }
 
+    @Override
     // documentation inherited
     protected void renderComponent(Renderer renderer) {
         super.renderComponent(renderer);
         _label.render(renderer, 0, 0, getWidth(), getHeight(), _alpha);
     }
 
+    @Override
     // documentation inherited
     protected Dimension computePreferredSize(int whint,
                                              int hhint) {

@@ -40,6 +40,7 @@ public class BPasswordField extends BTextField {
         super(text, maxLength);
     }
 
+    @Override
     // documentation inherited
     protected String getDisplayText() {
         String text = super.getDisplayText();

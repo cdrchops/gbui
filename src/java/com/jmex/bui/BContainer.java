@@ -143,8 +143,7 @@ public class BContainer extends BComponent {
      *
      * @return true if the old component was replaced, false otherwise.
      */
-    public boolean replace (BComponent oldc, BComponent newc)
-    {
+    public boolean replace(BComponent oldc, BComponent newc) {
         int idx = _children.indexOf(oldc);
         if (idx >= 0) {
             remove(idx);
@@ -195,8 +194,7 @@ public class BContainer extends BComponent {
      * Returns the index of the specified component in this container or -1 if the component count
      * not be found.
      */
-    public int getComponentIndex (BComponent component)
-    {
+    public int getComponentIndex(BComponent component) {
         return _children.indexOf(component);
     }
 
@@ -209,6 +207,7 @@ public class BContainer extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     public void setAlpha(float alpha) {
         super.setAlpha(alpha);
@@ -219,6 +218,7 @@ public class BContainer extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
@@ -229,6 +229,7 @@ public class BContainer extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     public void setVisible(boolean visible) {
         super.setVisible(visible);
@@ -239,6 +240,7 @@ public class BContainer extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     public BComponent getHitComponent(int mx,
                                       int my) {
@@ -261,6 +263,7 @@ public class BContainer extends BComponent {
         return this;
     }
 
+    @Override
     // documentation inherited
     public void validate() {
         if (!_valid) {
@@ -279,11 +282,13 @@ public class BContainer extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "container";
     }
 
+    @Override
     // documentation inherited
     protected void layout() {
         if (_layout != null) {
@@ -291,6 +296,7 @@ public class BContainer extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     protected void renderComponent(Renderer renderer) {
         super.renderComponent(renderer);
@@ -301,6 +307,7 @@ public class BContainer extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     protected Dimension computePreferredSize(int whint,
                                              int hhint) {
@@ -311,6 +318,7 @@ public class BContainer extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     protected void wasAdded() {
         super.wasAdded();
@@ -325,6 +333,7 @@ public class BContainer extends BComponent {
         });
     }
 
+    @Override
     // documentation inherited
     protected void wasRemoved() {
         super.wasRemoved();

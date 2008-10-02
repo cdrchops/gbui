@@ -32,6 +32,7 @@ import org.lwjgl.opengl.GL11;
  * @since 27Apr07
  */
 public class BGlComponent extends BComponent {
+    @Override
     public void renderComponent(final Renderer renderer) {
         super.renderComponent(renderer);
 

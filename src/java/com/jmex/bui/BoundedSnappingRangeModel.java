@@ -41,12 +41,14 @@ public class BoundedSnappingRangeModel extends BoundedRangeModel {
      * Configures the value of this model.  The new value will be adjusted if it does not fall within the range of
      * <code>min <= value <= max - extent<code> or if value is not a modulus of <code>snap</code>.
      */
+    @Override
     public void setValue(int value) {
         int val = Math.min(_max - _extent, Math.max(_min, value));
         val = val - (val % _snap);
         setRange(_min, val, _extent, _max);
     }
 
+    @Override
     // documentation inherited
     public int getScrollIncrement() {
         return _snap;

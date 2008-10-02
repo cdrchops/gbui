@@ -67,6 +67,7 @@ public class BComponent {
 
     private boolean hoverEnabled = true;
     private String name;
+    private boolean consumeMouseEvents = false;
 
     public BComponent() {}
 
@@ -83,6 +84,14 @@ public class BComponent {
             }
         }
         ctx.clearCurrentStates();
+    }
+
+    public boolean isConsumeMouseEvents() {
+        return consumeMouseEvents;
+    }
+
+    public void setConsumeMouseEvents(final boolean _consumeMouseEvents) {
+        consumeMouseEvents = _consumeMouseEvents;
     }
 
     /**
@@ -142,7 +151,6 @@ public class BComponent {
         // if we have a fully specified preferred size, just use it
         if (_preferredSize != null && _preferredSize.width != -1 && _preferredSize.height != -1) {
             ps = new Dimension(_preferredSize);
-
         } else {
             // override hints with preferred size
             if (_preferredSize != null) {
@@ -400,7 +408,7 @@ public class BComponent {
      * Sets a user defined property on this component. User defined properties allow the
      * association of arbitrary additional data with a component for application specific purposes.
      */
-    public void setProperty (String key, Object value) {
+    public void setProperty(String key, Object value) {
         if (_properties == null) {
             _properties = new HashMap<String, Object>();
         }
@@ -556,7 +564,7 @@ public class BComponent {
      * Sets where to position the tooltip window.
      *
      * @param mouse if true, the window will appear relative to the mouse position, if false, the
-     * window will appear relative to the component bounds.
+     *              window will appear relative to the component bounds.
      */
     public void setTooltipRelativeToMouse(boolean mouse) {
         _tipmouse = mouse;
@@ -648,6 +656,16 @@ public class BComponent {
         return null;
     }
 
+//  // documentation inherited
+//  @Override
+//  public BComponent getHitComponent(int mx, int my) {
+//    BComponent component = super.getHitComponent(mx, my);
+//    if (component == this) {
+//      return null;
+//    }
+//    return component;
+//  }
+
     /**
      * Instructs this component to process the supplied event. If the event is not processed, it
      * will be passed up to its parent component for processing. Derived classes should thus only
@@ -678,24 +696,38 @@ public class BComponent {
         }
 
         // handle mouse hover detection
-        if (_enabled && event instanceof MouseEvent && hoverEnabled) {
+        if (_enabled
+            && event instanceof MouseEvent) {
             int ostate = getState();
             MouseEvent mev = (MouseEvent) event;
-            switch (mev.getType()) {
-                case MouseEvent.MOUSE_ENTERED:
-                    _hover = true;
-                    processed = true;
-                    break;
-                case MouseEvent.MOUSE_EXITED:
-                    _hover = false;
-                    processed = true;
-                    break;
+            if (consumeMouseEvents) {
+                switch (mev.getType()) {
+                    case MouseEvent.MOUSE_MOVED:
+                        return true;
+                    case MouseEvent.MOUSE_WHEELED:
+                        return true;
+                }
+                processed = false;
+            }
+
+            if (hoverEnabled) {
+                switch (mev.getType()) {
+                    case MouseEvent.MOUSE_ENTERED:
+                        _hover = true;
+                        processed = true;
+                        break;
+                    case MouseEvent.MOUSE_EXITED:
+                        _hover = false;
+                        processed = true;
+                        break;
+                }
             }
 
             // update our component state if necessary
             if (getState() != ostate) {
                 stateDidChange();
             }
+
             if (processed && changeCursor()) {
                 updateCursor(_cursor);
             }
@@ -729,7 +761,7 @@ public class BComponent {
      * overriding preferred size has been supplied.
      *
      * @return the computed preferred size of this component <em>in a newly created Dimension</em>
-     * instance which will be adopted (and modified) by the caller.
+     *         instance which will be adopted (and modified) by the caller.
      */
     protected Dimension computePreferredSize(int whint,
                                              int hhint) {
@@ -776,8 +808,8 @@ public class BComponent {
             }
             if (_backgrounds[ii] == null) {
                 _backgrounds[ii] = style.getBackground(this, getStatePseudoClass(ii));
+            }
         }
-    }
     }
 
     /**
@@ -865,7 +897,7 @@ public class BComponent {
      * Returns the pseudoclass identifier for the specified component state.  This string will be
      * the way that the state is identified in the associated stylesheet. For example, the {@link
      * #DISABLED} state maps to <code>disabled</code> and is configured like so:
-     *
+     * <p/>
      * <pre>
      * component:disabled {
      *    color: #CCCCCC; // etc.
@@ -949,7 +981,7 @@ public class BComponent {
      * with the event.
      *
      * @return true if the event was emitted, false if it was dropped because we are not currently
-     * added to the interface hierarchy.
+     *         added to the interface hierarchy.
      */
     protected boolean emitEvent(BEvent event) {
         BWindow window;
@@ -995,7 +1027,7 @@ public class BComponent {
      * Restores the previous scissor state after a call to {@link #intersectScissorBox}.
      *
      * @param enabled the value returned by {@link #intersectScissorBox}, indicating whether or not
-     * scissoring was enabled
+     *                scissoring was enabled
      * @param rect    the scissor box to restore
      */
     protected static void restoreScissorState(boolean enabled,

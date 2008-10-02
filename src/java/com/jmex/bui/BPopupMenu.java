@@ -84,6 +84,7 @@ public class BPopupMenu extends BPopupWindow {
         }
     }
 
+    @Override
     // documentation inherited
     public boolean dispatchEvent(BEvent event) {
         if (event instanceof MouseEvent) {
@@ -99,11 +100,13 @@ public class BPopupMenu extends BPopupWindow {
         return super.dispatchEvent(event);
     }
 
+    @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
         return "popupmenu";
     }
 
+    @Override
     // documentation inherited
     protected void packAndFit(int x,
                               int y,

@@ -30,6 +30,7 @@ import com.jmex.bui.text.BTextFactory;
 public abstract class BTextComponent extends BComponent {
     /**
      * Updates the text displayed by this component.
+     *
      * @param text String
      */
     public abstract void setText(String text);
@@ -106,6 +107,7 @@ public abstract class BTextComponent extends BComponent {
         return ColorRGBA.white;
     }
 
+    @Override
     // documentation inherited
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);

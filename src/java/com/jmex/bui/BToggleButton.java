@@ -79,17 +79,20 @@ public class BToggleButton extends BButton {
         }
     }
 
+    @Override
     // documentation inherited
     public int getState() {
         int state = super.getState();
         return _selected ? (state == DISABLED ? DISSELECTED : SELECTED) : state;
     }
 
+    @Override
     // documentation inherited
     protected int getStateCount() {
         return STATE_COUNT;
     }
 
+    @Override
     // documentation inherited
     protected String getStatePseudoClass(int state) {
         if (state >= BButton.STATE_COUNT) {
@@ -99,6 +102,7 @@ public class BToggleButton extends BButton {
         }
     }
 
+    @Override
     // documentation inherited
     protected void fireAction(long when,
                               int modifiers) {
