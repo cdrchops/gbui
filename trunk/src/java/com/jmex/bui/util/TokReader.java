@@ -15,12 +15,16 @@ import java.io.StreamTokenizer;
 public class TokReader {
     public static StreamTokenizer tokenize(final Reader reader) {
         final StreamTokenizer tok = new StreamTokenizer(new BufferedReader(reader));
+
         tok.lowerCaseMode(true);
         tok.slashSlashComments(true);
         tok.slashStarComments(true);
+
         tok.eolIsSignificant(false);
+
         tok.wordChars('#', '#');
         tok.wordChars('_', '_');
+
         return tok;
     }
 }
