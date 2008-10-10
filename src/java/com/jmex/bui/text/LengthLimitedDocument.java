@@ -33,6 +33,7 @@ public class LengthLimitedDocument extends Document {
         _maxLength = maxLength;
     }
 
+    @Override
     // documentation inherited
     protected boolean validateEdit(String oldText,
                                    String newText) {

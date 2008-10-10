@@ -42,7 +42,7 @@ import java.util.Map;
 /**
  * Formats text by using the AWT to render runs of text into a bitmap and then texturing a quad
  * with the result.  This text factory handles a simple styled text syntax:
- *
+ * <p/>
  * <pre>
  * &#064;=b(this text would be bold)
  * &#064;=i(this text would be italic)
@@ -152,7 +152,6 @@ public class AWTTextFactory extends BTextFactory {
                 texts.add(createText(origText, layout, color,
                                      effect, effectSize, effectColor, origText.length(), true));
             }
-
         } finally {
             gfx.dispose();
         }
@@ -201,10 +200,10 @@ public class AWTTextFactory extends BTextFactory {
                 size.width += effectSize * 2;
                 size.height += effectSize * 2;
                 break;
-        case GLOW:
-            size.width += effectSize*2;
-            size.height += effectSize*2;
-            break;
+            case GLOW:
+                size.width += effectSize * 2;
+                size.height += effectSize * 2;
+                break;
         }
 
         // render the text into the image
@@ -236,15 +235,14 @@ public class AWTTextFactory extends BTextFactory {
                                            effectColor.b, effectColor.a));
                     gfx.draw(layout.getOutline(null));
                 }
-
-            } else if (effect == GLOW ) {
+            } else if (effect == GLOW) {
                 // draw the background of the glow
                 char[] chars = origText.toCharArray();
                 int ox = 0;
                 for (char c : chars) {
                     BufferedImage img = getGlowBackground(c, size.height, effectColor, effectSize);
                     gfx.drawImage(img, null, ox, 0);
-                    ox += (img.getWidth() - effectSize*2);
+                    ox += (img.getWidth() - effectSize * 2);
                 }
 
                 // draw the foreground of the glow
@@ -256,7 +254,6 @@ public class AWTTextFactory extends BTextFactory {
                         ox += img.getWidth();
                     }
                 }
-
             } else {
                 // if we're antialiasing, we need to set a custom compositing rule to avoid
                 // incorrectly blending with the blank background
@@ -296,7 +293,6 @@ public class AWTTextFactory extends BTextFactory {
                     layout.draw(gfx, dx, layout.getAscent());
                 }
             }
-
         } finally {
             gfx.dispose();
         }
@@ -366,21 +362,22 @@ public class AWTTextFactory extends BTextFactory {
         };
     }
 
-    /** Helper function. */
-    protected BufferedImage getGlowBackground (char c, int height, ColorRGBA color, int effectSize)
-    {
+    /**
+     * Helper function.
+     */
+    protected BufferedImage getGlowBackground(char c, int height, ColorRGBA color, int effectSize) {
         BufferedImage image = _cachedGlowBGs.get(_gkey.init(c, color, effectSize));
         if (image != null) {
             return image;
         }
 
         image = new BufferedImage(
-            computeWidth(c) + effectSize*2, height, BufferedImage.TYPE_4BYTE_ABGR);
+                computeWidth(c) + effectSize * 2, height, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D gfx = image.createGraphics();
         try {
             gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             TextLayout layout = new TextLayout(
-                String.valueOf(c), _attrs.get(TextAttribute.FONT), gfx.getFontRenderContext());
+                    String.valueOf(c), _attrs.get(TextAttribute.FONT), gfx.getFontRenderContext());
             float alphaScale = Math.max(effectSize, 2f) / 2f;
             gfx.setColor(new Color(color.r, color.g, color.b, color.a / alphaScale));
             gfx.translate(effectSize, layout.getAscent() + effectSize);
@@ -397,9 +394,10 @@ public class AWTTextFactory extends BTextFactory {
         return image;
     }
 
-    /** Helper function. */
-    protected BufferedImage getGlowForeground (char c, int height, ColorRGBA color, int effectSize)
-    {
+    /**
+     * Helper function.
+     */
+    protected BufferedImage getGlowForeground(char c, int height, ColorRGBA color, int effectSize) {
         BufferedImage image = _cachedGlowFGs.get(_gkey.init(c, color, effectSize));
         if (image != null) {
             return image;
@@ -410,7 +408,7 @@ public class AWTTextFactory extends BTextFactory {
         try {
             gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             TextLayout layout = new TextLayout(
-                String.valueOf(c), _attrs.get(TextAttribute.FONT), gfx.getFontRenderContext());
+                    String.valueOf(c), _attrs.get(TextAttribute.FONT), gfx.getFontRenderContext());
             gfx.setColor(new Color(color.r, color.g, color.b, color.a));
             gfx.translate(0, layout.getAscent() + effectSize);
             gfx.fill(layout.getOutline(null));
@@ -422,13 +420,14 @@ public class AWTTextFactory extends BTextFactory {
         return image;
     }
 
-    /** Helper function. */
-    protected int computeWidth (char c)
-    {
+    /**
+     * Helper function.
+     */
+    protected int computeWidth(char c) {
         Graphics2D gfx = _stub.createGraphics();
         try {
             TextLayout layout = new TextLayout(
-                String.valueOf(c), _attrs.get(TextAttribute.FONT), gfx.getFontRenderContext());
+                    String.valueOf(c), _attrs.get(TextAttribute.FONT), gfx.getFontRenderContext());
             return (int) Math.ceil(layout.getAdvance());
         } finally {
             gfx.dispose();
@@ -614,36 +613,35 @@ public class AWTTextFactory extends BTextFactory {
         }
     }
 
-    protected static class GlowKey implements Cloneable
-    {
+    protected static class GlowKey implements Cloneable {
         public char c;
         public ColorRGBA color;
         public int size;
 
-        public GlowKey init (char c, ColorRGBA color, int size) {
+        public GlowKey init(char c, ColorRGBA color, int size) {
             this.c = c;
             this.color = color;
             this.size = size;
             return this;
         }
 
-        public GlowKey cloneKey () {
+        public GlowKey cloneKey() {
             try {
-                return (GlowKey)super.clone();
+                return (GlowKey) super.clone();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
 
-        public boolean equals (Object other) {
+        public boolean equals(Object other) {
             if (!(other instanceof GlowKey)) {
                 return false;
             }
-            GlowKey okey = (GlowKey)other;
+            GlowKey okey = (GlowKey) other;
             return (c == okey.c) && (size == okey.size) && color.equals(okey.color);
         }
 
-        public int hashCode () {
+        public int hashCode() {
             return c ^ size ^ color.hashCode();
         }
     }

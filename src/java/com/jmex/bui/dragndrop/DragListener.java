@@ -20,8 +20,9 @@ public class DragListener implements EventListener {
     public void eventDispatched(BEvent event) {
         if (event instanceof MouseEvent) {
             MouseEvent e = (MouseEvent) event;
-            if (e.getType() == MouseEvent.MOUSE_ENTERED)
+            if (e.getType() == MouseEvent.MOUSE_ENTERED) {
                 DragNDrop.instance().setPotentialDrag(source, dragObject);
+            }
         }
     }
 }

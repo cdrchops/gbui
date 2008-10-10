@@ -39,14 +39,16 @@ public final class DragNDrop {
     }
 
     public void addDragNDropListener(DragNDropListener listener) {
-        if (listeners == null)
+        if (listeners == null) {
             listeners = new HashSet<DragNDropListener>();
+        }
         listeners.add(listener);
     }
 
     public void removeDragNDropListener(DragNDropListener listener) {
-        if (listeners != null)
+        if (listeners != null) {
             listeners.remove(listener);
+        }
     }
 
     private void startDrag(DragEvent event) {
@@ -57,8 +59,9 @@ public final class DragNDrop {
     }
 
     private void drop(int x, int y) {
-        if (!isDragging())
+        if (!isDragging()) {
             return;
+        }
 
         Iterable<BWindow> allWindows = BuiSystem.getRootNode().getAllWindows();
         for (BWindow allWindow : allWindows) {
@@ -78,15 +81,19 @@ public final class DragNDrop {
     }
 
     private void fireDragInitiated() {
-        if (listeners != null)
-            for (DragNDropListener listener : listeners)
+        if (listeners != null) {
+            for (DragNDropListener listener : listeners) {
                 listener.dragInitiated(this, currentDraggingEvent);
+            }
+        }
     }
 
     private void fireDropped(DropEvent event) {
-        if (listeners != null)
-            for (DragNDropListener listener : listeners)
+        if (listeners != null) {
+            for (DragNDropListener listener : listeners) {
                 listener.dropped(this, event);
+            }
+        }
     }
 
     public void setPotentialDrag(BComponent source, Object dragObject) {

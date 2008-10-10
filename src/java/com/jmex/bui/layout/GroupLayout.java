@@ -87,7 +87,9 @@ public abstract class GroupLayout extends BLayoutManager {
         }
     }
 
-    /** The default gap used by a group layout. */
+    /**
+     * The default gap used by a group layout.
+     */
     public static final int DEFAULT_GAP = 5;
 
     /**
@@ -196,7 +198,6 @@ public abstract class GroupLayout extends BLayoutManager {
                     _constraints = new HashMap<BComponent, Object>();
                 }
                 _constraints.put(comp, constraints);
-
             } else {
                 throw new RuntimeException(
                         "GroupLayout constraints object must be of type GroupLayout.Constraints");

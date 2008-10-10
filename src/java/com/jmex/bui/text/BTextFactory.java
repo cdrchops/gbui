@@ -47,7 +47,7 @@ public abstract class BTextFactory
      * and the foreground color, text effect and text effect color specified.
      *
      * @param useAdvance if true, the advance to the next insertion point will be included in the
-     * bounds of the created text (this is needed by editable text displays).
+     *                   bounds of the created text (this is needed by editable text displays).
      */
     public abstract BText createText(
             String text,

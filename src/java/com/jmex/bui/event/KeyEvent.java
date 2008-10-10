@@ -60,6 +60,7 @@ public class KeyEvent extends InputEvent {
      * however {@link #getKeyCode} works in all cases.
      */
     public char getKeyChar() {
+
         // TEMP: This is a hack to get around a bug in lwjgl's handling of
         // numpad keys in windows
         if ((int) _keyChar == 0) {
@@ -88,6 +89,7 @@ public class KeyEvent extends InputEvent {
                     return _keyChar;
             }
         }
+
         // END TEMP
         return _keyChar;
     }

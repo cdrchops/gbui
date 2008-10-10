@@ -21,8 +21,16 @@
 package com.jmex.bui.bss;
 
 import com.jmex.bui.BStyleSheet;
+import com.jmex.bui.provider.DefaultResourceProvider;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -147,17 +155,23 @@ public class BStyleSheetUtil {
         return style;
     }
 
+    /**
+     * create stylesheet from Reader
+     *
+     * @param reader Reader
+     * @return BStyleSheet instance
+     */
     private static BStyleSheet getStyleSheet(final Reader reader) {
-        BStyleSheet style = null;
+        BStyleSheet sheet = null;
 
-        try {
-            style = new BStyleSheet(reader,
-                                    new BStyleSheet.DefaultResourceProvider());
-        } catch (IOException e) {
-            e.printStackTrace();
+        sheet = new BStyleSheet(reader,
+                                new DefaultResourceProvider());
+
+        if (sheet != null) {
+            System.out.println("sheet = " + sheet);
         }
 
-        return style;
+        return sheet;
     }
 
 

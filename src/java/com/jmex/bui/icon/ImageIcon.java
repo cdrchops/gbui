@@ -41,10 +41,9 @@ public class ImageIcon extends BIcon {
     /**
      * Converts the supplied AWT icon into a BUI icon.
      */
-    public ImageIcon (Icon icon)
-    {
+    public ImageIcon(Icon icon) {
         BufferedImage cached = new BufferedImage(
-            icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+                icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D gfx = cached.createGraphics();
         try {
             icon.paintIcon(null, gfx, 0, 0);

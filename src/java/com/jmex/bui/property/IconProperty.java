@@ -5,9 +5,9 @@
 package com.jmex.bui.property;
 
 import com.jmex.bui.BImage;
-import com.jmex.bui.ResourceProvider;
 import com.jmex.bui.icon.BlankIcon;
 import com.jmex.bui.icon.ImageIcon;
+import com.jmex.bui.provider.ResourceProvider;
 
 import java.io.IOException;
 

@@ -64,6 +64,7 @@ public class Dimension {
         height = _height;
     }
 
+    @Override
     public String toString() {
         return width + "x" + height;
     }

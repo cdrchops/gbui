@@ -12,8 +12,9 @@ public class DropEvent extends BEvent {
 
     public DropEvent(BComponent source, DragEvent dragEvent) {
         super(source, BuiSystem.getRootNode().getTickStamp());
-        if (dragEvent == null)
+        if (dragEvent == null) {
             throw new IllegalArgumentException("dragEvent = null");
+        }
         this.dragEvent = dragEvent;
     }
 
