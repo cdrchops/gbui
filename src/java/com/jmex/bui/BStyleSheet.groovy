@@ -43,7 +43,7 @@ import com.jmex.bui.text.BTextFactory
 import com.jmex.bui.text.DefaultKeyMap
 import com.jmex.bui.util.Dimension
 import com.jmex.bui.util.Insets
-import com.jmex.bui.util.TokReader
+import com.jmex.bui.util.TokReader;
 
 /**
  * Defines a stylesheet which is used to configure the style (font family, font size, foreground
@@ -86,8 +86,8 @@ import com.jmex.bui.util.TokReader
  * <p/>
  * Each component is identified by its default stylesheet class, which are derived from the
  * component's Java class name: <code>window, label, textfield, component, popupmenu, etc.</code>
- * The component's stylesheet class can be overridden with a call to     {@link
- * BComponent # setStyleClass}    .
+ * The component's stylesheet class can be overridden with a call to      {@link
+ * BComponent # setStyleClass}     .
  * <p/>
  * <p> A component's style is resolved in the following manner:
  * <ul>
@@ -106,7 +106,7 @@ import com.jmex.bui.util.TokReader
  * doing the lookup every time the component is rendered (every frame) with the memory expense of
  * storing the style of every component in memory.
  */
-class BStyleSheet {
+public class BStyleSheet {
     /**
      * A font style constant.
      */
@@ -138,7 +138,11 @@ class BStyleSheet {
                        final ResourceProvider rsrcprov) {
         _rsrcprov = rsrcprov;
 
-        parse(TokReader.tokenize(reader));
+        try {
+            parse(TokReader.tokenize(reader));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public ColorRGBA getColor(BComponent component,
@@ -309,9 +313,7 @@ class BStyleSheet {
         return prop;
     }
 
-    protected void parse(StreamTokenizer tok)
-    throws IOException {
-
+    protected void parse(StreamTokenizer tok) throws IOException {
         while (tok.nextToken() != StreamTokenizer.TT_EOF) {
             Rule rule = startRule(tok);
             while (parseProperty(tok, rule)) {
