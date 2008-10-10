@@ -1,7 +1,11 @@
 package com.jmex.bui.tests;
 
-import com.jmex.bui.*;
+import com.jmex.bui.BContainer;
+import com.jmex.bui.BMultiSelectBox;
 import com.jmex.bui.BMultiSelectBox.SelectionMode;
+import com.jmex.bui.BToggleButton;
+import com.jmex.bui.BWindow;
+import com.jmex.bui.BuiSystem;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.GroupLayout;

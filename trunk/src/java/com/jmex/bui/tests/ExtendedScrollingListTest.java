@@ -20,7 +20,11 @@
 
 package com.jmex.bui.tests;
 
-import com.jmex.bui.*;
+import com.jmex.bui.BButton;
+import com.jmex.bui.BScrollMessage;
+import com.jmex.bui.BScrollingList;
+import com.jmex.bui.BWindow;
+import com.jmex.bui.BuiSystem;
 import com.jmex.bui.layout.GroupLayout;
 
 /**

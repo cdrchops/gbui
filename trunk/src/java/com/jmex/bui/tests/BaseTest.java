@@ -27,6 +27,7 @@ import com.jme.renderer.ColorRGBA;
 import com.jmex.bui.BRootNode;
 import com.jmex.bui.BStyleSheet;
 import com.jmex.bui.PolledRootNode;
+import com.jmex.bui.provider.DefaultResourceProvider;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,11 +49,10 @@ public abstract class BaseTest extends SimpleGame {
         InputStreamReader istir = null;
         try {
 
-            InputStream stin = getClass().getClassLoader().
-                    getResourceAsStream("rsrc/style2.bss");
+            InputStream stin = getClass().getClassLoader().getResourceAsStream("rsrc/style2.bss");
             istir = new InputStreamReader(stin);
             style = new BStyleSheet(istir,
-                                    new BStyleSheet.DefaultResourceProvider());
+                                    new DefaultResourceProvider());
         } catch (Exception e) {
             e.printStackTrace(System.err);
             System.exit(-1);

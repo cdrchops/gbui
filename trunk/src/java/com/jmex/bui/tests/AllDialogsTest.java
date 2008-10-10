@@ -20,7 +20,11 @@
 
 package com.jmex.bui.tests;
 
-import com.jmex.bui.*;
+import com.jmex.bui.BComponent;
+import com.jmex.bui.BDialogBox;
+import com.jmex.bui.BInputBox;
+import com.jmex.bui.BuiSystem;
+import com.jmex.bui.UserResponse;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.event.DialogListener;
 import com.jmex.bui.headlessWindows.BTitledWindow;
