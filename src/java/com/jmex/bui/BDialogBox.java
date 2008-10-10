@@ -43,7 +43,6 @@ public class BDialogBox extends BTitledWindow {
 
         BContainer tmp = getComponentArea();
 
-
         tmp.setStyleClass("greymessagebg");
         tmp.setLayoutManager(new BorderLayout());
         tmp.add(message, BorderLayout.NORTH);
@@ -59,7 +58,7 @@ public class BDialogBox extends BTitledWindow {
     }
 
     private void fireResponse(ActionEvent event) {
-        UserResponse response = UserResponse.valueOf(event.getAction());
+        UserResponse response = UserResponse.valueOf(event.getAction().toUpperCase());
         if (response != null) {
             if (listener != null) {
                 listener.responseAvailable(response, this);

@@ -24,6 +24,7 @@
 package com.jmex.bui
 
 import com.jme.renderer.ColorRGBA
+import com.jmex.bui.Rule
 import com.jmex.bui.background.BBackground
 import com.jmex.bui.background.ImageBackground
 import com.jmex.bui.border.BBorder
@@ -31,6 +32,12 @@ import com.jmex.bui.border.CompoundBorder
 import com.jmex.bui.border.EmptyBorder
 import com.jmex.bui.border.LineBorder
 import com.jmex.bui.icon.BIcon
+import com.jmex.bui.property.BackgroundProperty
+import com.jmex.bui.property.CursorProperty
+import com.jmex.bui.property.FontProperty
+import com.jmex.bui.property.IconProperty
+import com.jmex.bui.property.Property
+import com.jmex.bui.provider.ResourceProvider
 import com.jmex.bui.text.BKeyMap
 import com.jmex.bui.text.BTextFactory
 import com.jmex.bui.text.DefaultKeyMap
@@ -79,8 +86,8 @@ import com.jmex.bui.util.TokReader
  * <p/>
  * Each component is identified by its default stylesheet class, which are derived from the
  * component's Java class name: <code>window, label, textfield, component, popupmenu, etc.</code>
- * The component's stylesheet class can be overridden with a call to    {@link
- * BComponent # setStyleClass}   .
+ * The component's stylesheet class can be overridden with a call to     {@link
+ * BComponent # setStyleClass}    .
  * <p/>
  * <p> A component's style is resolved in the following manner:
  * <ul>
@@ -502,7 +509,7 @@ class BStyleSheet {
             } else {
                 throw new IllegalArgumentException("Unknown border type '" + type + "'");
             }
-        } else if (name.equals("border-left")) {
+        }/* else if (name.equals("border-left")) {
             int thickness = parseInt(args.get(0));
             String type = (String) args.get(1);
             if (type.equals("blank")) {
@@ -542,7 +549,7 @@ class BStyleSheet {
             } else {
                 throw new IllegalArgumentException("Unknown border type '" + type + "'");
             }
-        } else if (name.equals("size")) {
+        }*/ else if (name.equals("size")) {
             Dimension size = new Dimension();
             size.width = parseInt(args.get(0));
             size.height = parseInt(args.get(1));

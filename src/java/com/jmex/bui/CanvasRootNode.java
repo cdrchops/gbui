@@ -257,7 +257,7 @@ public class CanvasRootNode extends BRootNode
             case java.awt.event.KeyEvent.VK_EQUALS:
                 return e.getKeyLocation() ==
                        java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD ?
-                                                                   KeyInput.KEY_NUMPADEQUALS : KeyInput.KEY_EQUALS;
+                       KeyInput.KEY_NUMPADEQUALS : KeyInput.KEY_EQUALS;
             case java.awt.event.KeyEvent.VK_BACK_SPACE:
                 return KeyInput.KEY_BACK;
             case java.awt.event.KeyEvent.VK_TAB:
@@ -289,11 +289,11 @@ public class CanvasRootNode extends BRootNode
             case java.awt.event.KeyEvent.VK_ENTER:
                 return e.getKeyLocation() ==
                        java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD ?
-                                                                   KeyInput.KEY_NUMPADENTER : KeyInput.KEY_RETURN;
+                       KeyInput.KEY_NUMPADENTER : KeyInput.KEY_RETURN;
             case java.awt.event.KeyEvent.VK_CONTROL:
                 return e.getKeyLocation() ==
                        java.awt.event.KeyEvent.KEY_LOCATION_LEFT ?
-                                                                 KeyInput.KEY_LCONTROL : KeyInput.KEY_RCONTROL;
+                       KeyInput.KEY_LCONTROL : KeyInput.KEY_RCONTROL;
             case java.awt.event.KeyEvent.VK_A:
                 return KeyInput.KEY_A;
             case java.awt.event.KeyEvent.VK_S:
@@ -321,7 +321,7 @@ public class CanvasRootNode extends BRootNode
             case java.awt.event.KeyEvent.VK_SHIFT:
                 return e.getKeyLocation() ==
                        java.awt.event.KeyEvent.KEY_LOCATION_LEFT ?
-                                                                 KeyInput.KEY_LSHIFT : KeyInput.KEY_RSHIFT;
+                       KeyInput.KEY_LSHIFT : KeyInput.KEY_RSHIFT;
             case java.awt.event.KeyEvent.VK_BACK_SLASH:
                 return KeyInput.KEY_BACKSLASH;
             case java.awt.event.KeyEvent.VK_Z:
@@ -341,7 +341,7 @@ public class CanvasRootNode extends BRootNode
             case java.awt.event.KeyEvent.VK_COMMA:
                 return e.getKeyLocation() ==
                        java.awt.event.KeyEvent.KEY_LOCATION_NUMPAD ?
-                                                                   KeyInput.KEY_NUMPADCOMMA : KeyInput.KEY_COMMA;
+                       KeyInput.KEY_NUMPADCOMMA : KeyInput.KEY_COMMA;
             case java.awt.event.KeyEvent.VK_PERIOD:
                 return KeyInput.KEY_PERIOD;
             case java.awt.event.KeyEvent.VK_SLASH:

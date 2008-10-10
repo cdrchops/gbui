@@ -50,11 +50,15 @@ public abstract class BRootNode extends Geometry {
 
     /**
      * Returns the current timestamp used to stamp event times.
+     *
+     * @return long tickstamp
      */
     public abstract long getTickStamp();
 
     /**
      * Registers a top-level window with the input system.
+     *
+     * @param window BWindow
      */
     public void addWindow(BWindow window) {
         addWindow(window, false);
@@ -63,6 +67,7 @@ public abstract class BRootNode extends Geometry {
     /**
      * Registers a top-level window with the input system.
      *
+     * @param window   BWindow
      * @param topLayer if true, will set the window layer to the top most layer if it's current layer is less than
      *                 that.
      */
@@ -262,16 +267,14 @@ public abstract class BRootNode extends Geometry {
     /**
      * Returns the total number of windows added to this node.
      */
-    public int getWindowCount ()
-    {
+    public int getWindowCount() {
         return _windows.size();
     }
 
     /**
      * Returns the window at the specified index.
      */
-    public BWindow getWindow (int index)
-    {
+    public BWindow getWindow(int index) {
         return _windows.get(index);
     }
 
@@ -311,7 +314,7 @@ public abstract class BRootNode extends Geometry {
         if (_hcomponent == null || _tipwin != null ||
             (_lastMoveTime < getTooltipTimeout() &&
              _lastTipTime > TIP_MODE_RESET) ||
-                                            (tiptext = _hcomponent.getTooltipText()) == null) {
+            (tiptext = _hcomponent.getTooltipText()) == null) {
             if (_tipwin != null) {
                 _lastTipTime = 0;
             }
@@ -437,7 +440,7 @@ public abstract class BRootNode extends Geometry {
      * @return true if the event was dispatched, false if not.
      */
     protected boolean dispatchEvent(BComponent target,
-                                 BEvent event) {
+                                    BEvent event) {
         // notify our global listeners if we have any
         for (int ii = 0, ll = _globals.size(); ii < ll; ii++) {
             try {
