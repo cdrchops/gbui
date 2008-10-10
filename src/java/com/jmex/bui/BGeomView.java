@@ -31,6 +31,9 @@ import org.lwjgl.opengl.GL11;
 
 /**
  * Displays 3D geometry (a {@link Spatial}) inside a normal user interface.
+ *
+ * @author Michael Bayne
+ * @author StandTrooper
  */
 public class BGeomView extends BComponent {
     /**
@@ -42,13 +45,17 @@ public class BGeomView extends BComponent {
 
     /**
      * Creates a view with the specified {@link Spatial} to be rendered.
+     *
+     * @param geom Spatial
      */
-    public BGeomView(Spatial geom) {
+    public BGeomView(final Spatial geom) {
         _geom = geom;
     }
 
     /**
      * Returns the camera used when rendering our geometry.
+     *
+     * @return _camera Camera
      */
     public Camera getCamera() {
         if (_camera == null) {
@@ -60,13 +67,17 @@ public class BGeomView extends BComponent {
 
     /**
      * Configures the spatial to be rendered by this view.
+     *
+     * @param geom Spatial
      */
-    public void setGeometry(Spatial geom) {
+    public void setGeometry(final Spatial geom) {
         _geom = geom;
     }
 
     /**
      * Returns the geometry rendered by this view.
+     *
+     * @return _geom Spatial
      */
     public Spatial getGeometry() {
         return _geom;
@@ -74,32 +85,47 @@ public class BGeomView extends BComponent {
 
     /**
      * Called every frame (while we're added to the view hierarchy) by the {@link BRootNode}.
+     *
+     * @param frameTime float
      */
-    public void update(float frameTime) {
+    public void update(final float frameTime) {
         if (_geom != null) {
             _geom.updateGeometricState(frameTime, true);
         }
     }
 
+    /**
+     * Documentation Inherited
+     *
+     * @see BComponent#wasAdded
+     */
     @Override
-    // documentation inherited
     protected void wasAdded() {
         super.wasAdded();
         _root = getWindow().getRootNode();
         _root.registerGeomView(this);
     }
 
+    /**
+     * Documentation Inherited
+     *
+     * @see BComponent#wasRemoved
+     */
     @Override
-    // documentation inherited
     protected void wasRemoved() {
         super.wasRemoved();
         _root.unregisterGeomView(this);
         _root = null;
     }
 
+    /**
+     * Documentation Inherited
+     *
+     * @param renderer Renderer
+     * @see BComponent#renderComponent
+     */
     @Override
-    // documentation inherited
-    protected void renderComponent(Renderer renderer) {
+    protected void renderComponent(final Renderer renderer) {
         super.renderComponent(renderer);
         if (_geom == null) {
             return;
@@ -184,17 +210,21 @@ public class BGeomView extends BComponent {
 
     /**
      * Called to create and configure the camera that we'll use when rendering our geometry.
+     *
+     * @param ds DisplaySystem
+     * @return camera Camera
      */
-    protected Camera createCamera(DisplaySystem ds) {
+    protected Camera createCamera(final DisplaySystem ds) {
         // create a standard camera and frustum
-        Camera camera = ds.getRenderer().createCamera(_swidth, _sheight);
+        final Camera camera = ds.getRenderer().createCamera(_swidth, _sheight);
         camera.setParallelProjection(false);
 
         // put and point it somewhere sensible by default
-        Vector3f loc = new Vector3f(0.0f, 0.0f, 25.0f);
-        Vector3f left = new Vector3f(-1.0f, 0.0f, 0.0f);
-        Vector3f up = new Vector3f(0.0f, 1.0f, 0.0f);
-        Vector3f dir = new Vector3f(0.0f, 0f, -1.0f);
+        final Vector3f loc = new Vector3f(0.0f, 0.0f, 25.0f);
+        final Vector3f left = new Vector3f(-1.0f, 0.0f, 0.0f);
+        final Vector3f up = new Vector3f(0.0f, 1.0f, 0.0f);
+        final Vector3f dir = new Vector3f(0.0f, 0f, -1.0f);
+
         camera.setFrame(loc, left, up, dir);
 
         return camera;
