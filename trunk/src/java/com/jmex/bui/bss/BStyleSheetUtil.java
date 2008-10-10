@@ -167,9 +167,7 @@ public class BStyleSheetUtil {
         sheet = new BStyleSheet(reader,
                                 new DefaultResourceProvider());
 
-        if (sheet != null) {
-            System.out.println("sheet = " + sheet);
-        }
+        assert sheet != null;
 
         return sheet;
     }
