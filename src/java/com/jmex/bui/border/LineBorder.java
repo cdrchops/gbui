@@ -51,10 +51,8 @@ public class LineBorder extends BBorder {
     @Override
     // from BBorder
     public Insets adjustInsets(Insets insets) {
-        return new Insets(_width + insets.left, _width + insets.top,
-                          _width + insets.right, _width + insets.bottom);
-//        return new Insets(_left + insets.left, _top + insets.top,
-//                          _right + insets.right, _bottom + insets.bottom);
+        return new Insets(_left + insets.left, _top + insets.top,
+                          _right + insets.right, _bottom + insets.bottom);
     }
 
     @Override
@@ -72,52 +70,42 @@ public class LineBorder extends BBorder {
 
         if (_width > 0) {
             RenderContext ctx = DisplaySystem.getDisplaySystem().getCurrentContext();
-            ((LineRecord) ctx.getLineRecord()).applyLineWidth(_width);
-            float offset = _width / 2f;
             GL11.glColor4f(_color.r, _color.g, _color.b, _color.a * alpha);
-            GL11.glBegin(GL11.GL_LINE_STRIP);
-            GL11.glVertex2f(x + offset, y + offset);
-            GL11.glVertex2f(x + width - offset, y + offset);
-            GL11.glVertex2f(x + width - offset, y + height - offset);
-            GL11.glVertex2f(x + offset, y + height - offset);
-            GL11.glVertex2f(x + offset, y + offset);
-            GL11.glEnd();
-//            GL11.glColor4f(_color.r, _color.g, _color.b, _color.a * alpha);
-//      		// First draw the bottom line.
-//      		if(_bottom > 0) {
-//      			((LineRecord) ctx.getLineRecord()).applyLineWidth(_bottom);
-//      			float offset = _bottom / 2f;
-//                GL11.glBegin(GL11.GL_LINE_STRIP);
-//                GL11.glVertex2f(x - offset, y);
-//                GL11.glVertex2f(x + width, y);
-//      			GL11.glEnd();
-//      		}
-//      		// Next draw the right hand side.
-//      		if(_right > 0) {
-//                ((LineRecord) ctx.getLineRecord()).applyLineWidth(_right);
-//                float offset = _right / 2f;
-//                GL11.glBegin(GL11.GL_LINE_STRIP);
-//      			GL11.glVertex2f(x + width - offset, y);
-//      			GL11.glVertex2f(x + width - offset, y + height);
-//      			GL11.glEnd();
-//      		}
-//      		// Next draw the top line.
-//      		if(_top > 0) {
-//      			((LineRecord) ctx.getLineRecord()).applyLineWidth(_top);
-//                float offset = _top / 2f;
-//                GL11.glBegin(GL11.GL_LINE_STRIP);
-//      			GL11.glVertex2f(x + width, y + height - offset);
-//      	        GL11.glVertex2f(x - offset, y + height - offset);
-//      			GL11.glEnd();
-//      		}
-//      		// Last draw the left hand side.
-//      		if(_left > 0) {
-//      		((LineRecord) ctx.getLineRecord()).applyLineWidth(_left);
-//                GL11.glBegin(GL11.GL_LINE_STRIP);
-//      			GL11.glVertex2f(x, y + height);
-//      			GL11.glVertex2f(x, y);
-//      			GL11.glEnd();
-//      		}
+            // First draw the bottom line.
+            if (_bottom > 0) {
+                ((LineRecord) ctx.getLineRecord()).applyLineWidth(_bottom);
+                float offset = _bottom / 2f;
+                GL11.glBegin(GL11.GL_LINE_STRIP);
+                GL11.glVertex2f(x - offset, y);
+                GL11.glVertex2f(x + width, y);
+                GL11.glEnd();
+            }
+            // Next draw the right hand side.
+            if (_right > 0) {
+                ((LineRecord) ctx.getLineRecord()).applyLineWidth(_right);
+                float offset = _right / 2f;
+                GL11.glBegin(GL11.GL_LINE_STRIP);
+                GL11.glVertex2f(x + width - offset, y);
+                GL11.glVertex2f(x + width - offset, y + height);
+                GL11.glEnd();
+            }
+            // Next draw the top line.
+            if (_top > 0) {
+                ((LineRecord) ctx.getLineRecord()).applyLineWidth(_top);
+                float offset = _top / 2f;
+                GL11.glBegin(GL11.GL_LINE_STRIP);
+                GL11.glVertex2f(x + width, y + height - offset);
+                GL11.glVertex2f(x - offset, y + height - offset);
+                GL11.glEnd();
+            }
+            // Last draw the left hand side.
+            if (_left > 0) {
+                ((LineRecord) ctx.getLineRecord()).applyLineWidth(_left);
+                GL11.glBegin(GL11.GL_LINE_STRIP);
+                GL11.glVertex2f(x, y + height);
+                GL11.glVertex2f(x, y);
+                GL11.glEnd();
+            }
         }
     }
 
