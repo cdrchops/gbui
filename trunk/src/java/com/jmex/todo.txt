@@ -40,3 +40,9 @@ I'll get started looking at these changes and trying to get them in.
 I also relooked at the multiple scrolling list you wrote.  Leave the BtoggleButton...
 there's no other way to do it without rewriting the BComponent to do the same thing,
 then the BComponent implementation is pretty much extended beyond it's purpose.
+
+Actual unit tests
+
+Build files
+
+More Groovy way of doing things
