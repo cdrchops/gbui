@@ -49,12 +49,14 @@ public abstract class BaseTest2 extends SimpleGame {
 
         createWindows();
 
+        KeyBindingManager kb = KeyBindingManager.getKeyBindingManager();
+
         // these just get in the way
-        KeyBindingManager.getKeyBindingManager().remove("toggle_pause");
-        KeyBindingManager.getKeyBindingManager().remove("toggle_wire");
-        KeyBindingManager.getKeyBindingManager().remove("toggle_lights");
-        KeyBindingManager.getKeyBindingManager().remove("toggle_bounds");
-        KeyBindingManager.getKeyBindingManager().remove("camera_out");
+        kb.remove("toggle_pause");
+        kb.remove("toggle_wire");
+        kb.remove("toggle_lights");
+        kb.remove("toggle_bounds");
+        kb.remove("camera_out");
 
         lightState.setEnabled(false);
 

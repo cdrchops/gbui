@@ -20,7 +20,13 @@
 
 package com.jmex.bui.tests;
 
-import com.jmex.bui.*;
+import com.jmex.bui.BButton;
+import com.jmex.bui.BConstants;
+import com.jmex.bui.BDecoratedWindow;
+import com.jmex.bui.BRootNode;
+import com.jmex.bui.BScrollingList;
+import com.jmex.bui.BStyleSheet;
+import com.jmex.bui.BWindow;
 import com.jmex.bui.layout.GroupLayout;
 
 import java.util.logging.Level;
@@ -32,6 +38,7 @@ public class ScrollingListTest extends BaseTest
     protected void createWindows(BRootNode root,
                                  BStyleSheet style) {
         BWindow window = new BDecoratedWindow(style, null);
+
         window.setLayoutManager(GroupLayout.makeVStretch());
 
         BScrollingList<String, BButton> list =
