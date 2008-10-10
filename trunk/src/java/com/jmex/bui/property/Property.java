@@ -4,7 +4,7 @@
  */
 package com.jmex.bui.property;
 
-import com.jmex.bui.ResourceProvider;
+import com.jmex.bui.provider.ResourceProvider;
 
 /**
  * Removed from BStyleSheet and made into its own class

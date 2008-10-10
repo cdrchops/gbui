@@ -48,6 +48,7 @@ public class Point {
     public Point() {
     }
 
+    @Override
     public String toString() {
         return (x >= 0 ? "+" : "") + x + (y >= 0 ? "+" : "") + y;
     }

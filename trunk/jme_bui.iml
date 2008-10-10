@@ -10,42 +10,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../currentLibs/lwjgl.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../currentLibs/jme.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../currentLibs/jme-awt.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../currentLibs/junit-4.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="jinput" level="project" />
+    <orderEntry type="library" name="jme" level="project" />
+    <orderEntry type="library" name="jmetest" level="project" />
+    <orderEntry type="library" name="joal" level="project" />
+    <orderEntry type="library" name="jogl" level="project" />
+    <orderEntry type="library" name="jorbis" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="lwjgl" level="project" />
     <orderEntryProperties />
   </component>
 </module>

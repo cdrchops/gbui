@@ -27,8 +27,13 @@ import com.jmex.bui.Log;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.Position;
+import javax.swing.text.View;
+import javax.swing.text.ViewFactory;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
@@ -187,6 +192,7 @@ public class HTMLView extends BComponent {
         _rendered.reference();
     }
 
+    @Override
     // documentation inherited
     protected void renderComponent(Renderer renderer) {
         super.renderComponent(renderer);
@@ -197,6 +203,7 @@ public class HTMLView extends BComponent {
         }
     }
 
+    @Override
     // documentation inherited
     protected Dimension computePreferredSize(int whint,
                                              int hhint) {
@@ -266,6 +273,7 @@ public class HTMLView extends BComponent {
             return _target;
         }
 
+        @Override
         public AttributeSet getAttributes() {
             return null;
         }
@@ -274,20 +282,24 @@ public class HTMLView extends BComponent {
             return _target.getPreferredSpan(axis);
         }
 
+        @Override
         public float getMinimumSpan(int axis) {
             return _target.getMinimumSpan(axis);
         }
 
+        @Override
         public float getMaximumSpan(int axis) {
             return Integer.MAX_VALUE;
         }
 
+        @Override
         public void preferenceChanged(View child,
                                       boolean width,
                                       boolean height) {
             forceRelayout();
         }
 
+        @Override
         public float getAlignment(int axis) {
             return _target.getAlignment(axis);
         }
@@ -299,14 +311,17 @@ public class HTMLView extends BComponent {
             _target.paint(g, allocation);
         }
 
+        @Override
         public void setParent(View parent) {
             throw new Error("Whatchu talkin' 'bout Willis?");
         }
 
+        @Override
         public int getViewCount() {
             return 1;
         }
 
+        @Override
         public View getView(int n) {
             return _target;
         }
@@ -318,6 +333,7 @@ public class HTMLView extends BComponent {
             return _target.modelToView(pos, a, b);
         }
 
+        @Override
         public Shape modelToView(int p0,
                                  Position.Bias b0,
                                  int p1,
@@ -334,31 +350,38 @@ public class HTMLView extends BComponent {
             return _target.viewToModel(x, y, a, bias);
         }
 
+        @Override
         public Document getDocument() {
             return _target.getDocument();
         }
 
+        @Override
         public int getStartOffset() {
             return _target.getStartOffset();
         }
 
+        @Override
         public int getEndOffset() {
             return _target.getEndOffset();
         }
 
+        @Override
         public Element getElement() {
             return _target.getElement();
         }
 
+        @Override
         public void setSize(float width,
                             float height) {
             _target.setSize(width, height);
         }
 
+        @Override
         public Container getContainer() {
             return null;
         }
 
+        @Override
         public ViewFactory getViewFactory() {
             return _kit.getViewFactory();
         }

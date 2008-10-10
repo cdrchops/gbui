@@ -87,6 +87,7 @@ public class Rectangle {
         this.height = fy - this.y;
     }
 
+    @Override
     // documentation inherited
     public boolean equals(Object other) {
         if (other instanceof Rectangle) {
@@ -97,11 +98,13 @@ public class Rectangle {
         return false;
     }
 
+    @Override
     // documentation inherited
     public int hashCode() {
         return x ^ y ^ width ^ height;
     }
 
+    @Override
     /**
      * Generates a string representation of this instance.
      */

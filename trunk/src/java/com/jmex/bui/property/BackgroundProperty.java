@@ -6,10 +6,10 @@ package com.jmex.bui.property;
 
 import com.jme.renderer.ColorRGBA;
 import com.jmex.bui.BImage;
-import com.jmex.bui.ResourceProvider;
 import com.jmex.bui.background.BlankBackground;
 import com.jmex.bui.background.ImageBackground;
 import com.jmex.bui.background.TintedBackground;
+import com.jmex.bui.provider.ResourceProvider;
 import com.jmex.bui.util.Insets;
 
 import java.io.IOException;

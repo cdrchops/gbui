@@ -1,107 +1,124 @@
 <!-- build configuration -->
 <project name="jme-bui" default="compile" basedir=".">
 
-  <property name="lib.name"    value="jme-bui"/>
-  <property name="src.dir"     value="src/java"/>
-  <property name="dist.dir"		 value="dist"/>
-  <property name="dist.jar"    value="${lib.name}.jar"/>
-  <property name="classes.dir" value="build"/>
+    <property name="lib.name" value="jme-bui"/>
+    <property name="src.dir" value="src/java"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="dist.jar" value="${lib.name}.jar"/>
+    <property name="classes.dir" value="build"/>
 
-  <!-- javadoc bits -->
-  <property name="javadoc.dir"      value="docs"/>
-  <property name="doc.packages"     value="com.jme.bui.*"/>
-  <property name="copyright.holder" value="Michael Bayne"/>
+    <!-- javadoc bits -->
+    <property name="javadoc.dir" value="docs"/>
+    <property name="doc.packages" value="com.jme.bui.*"/>
+    <property name="copyright.holder" value="Michael Bayne"/>
 
-  <!-- import some targets to enumerate library dependencies -->
-  <property name="libs.dir" value="lib"/>
-  <import file="libs-incl.xml"/>
+    <!-- import some targets to enumerate library dependencies -->
+    <property name="libs.dir" value="lib"/>
+    <import file="libs-incl.xml"/>
 
-  <!-- declare our classpath -->
-  <path id="classpath">
-    <pathelement location="${classes.dir}"/>
-    <fileset dir="lib" includes="**/*.jar"/>
-  </path>
+    <!-- declare our classpath -->
+    <path id="classpath">
+        <pathelement location="${classes.dir}"/>
+        <fileset dir="lib" includes="**/*.jar"/>
+    </path>
 
-  <!-- prepares the application directories -->
-  <target name="prepare">
-  	<mkdir dir="${classes.dir}"/>
-  	<mkdir dir="${classes.dir}/rsrc"/>
-    <mkdir dir="${dist.dir}"/>
-    <mkdir dir="${javadoc.dir}"/>
-  </target>
-	
-	<!-- copy media and properties into the build directory -->
-	<target name="resourcecopy">
-    <copy todir="${classes.dir}/rsrc">
-      <fileset dir="rsrc" includes="**/*"/>
-    </copy>
-	</target>
+    <!-- prepares the application directories -->
+    <target name="prepare">
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${classes.dir}/rsrc"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${javadoc.dir}"/>
+    </target>
 
-  <!-- cleans out the intermediate build files -->
-  <target name="clean">
-  	<delete dir="${classes.dir}/"/>
-  	<delete dir="${javadoc.dir}"/>
-  </target>
+    <!-- copy media and properties into the build directory -->
+    <target name="resourcecopy">
+        <copy todir="${classes.dir}/rsrc">
+            <fileset dir="rsrc" includes="**/*"/>
+        </copy>
+    </target>
 
-  <!-- cleans out the built application -->
-  <target name="distclean">
-    <delete dir="${dist.dir}"/>
-  </target>
+    <!-- cleans out the intermediate build files -->
+    <target name="clean">
+        <delete dir="${classes.dir}/"/>
+        <delete dir="${javadoc.dir}"/>
+    </target>
 
-  <!-- build the java class files -->
-  <target name="compile" depends="prepare,resourcecopy">
-    <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false"
-           debug="on" optimize="on" deprecation="on" source="1.5">
-      <classpath refid="classpath"/>
-      <compilerarg value="-Xlint"/>
-      <compilerarg value="-Xlint:-serial"/>
-    </javac>
-  </target>
+    <!-- cleans out the built application -->
+    <target name="distclean">
+        <delete dir="${dist.dir}"/>
+    </target>
 
-  <!-- build the javadoc documentation -->
-  <target name="javadoc" depends="prepare">
-    <tstamp><format property="year" pattern="yyyy" /></tstamp>
-    <javadoc windowtitle="BUI API" doctitle="BUI API"
-             destdir="${javadoc.dir}" additionalparam="-breakiterator">
-      <packageset dir="${src.dir}"/>
-      <bottom>Copyright &#169; ${year} ${copyright.holder}.
-              All Rights Reserved.</bottom>
-      <classpath refid="classpath"/>
-      <link href="http://java.sun.com/j2se/1.5/docs/api/"/>
-      <link href="http://www.jmonkeyengine.com/doc/"/>
-    </javadoc>
-  </target>
-
-  <!-- runs our unit tests -->
-  <target name="tests" depends="compile,resourcecopy" description="Runs unit tests.">
-    <junit printsummary="no" haltonfailure="yes" fork="false">
-      <classpath refid="classpath"/>
-      <formatter type="brief" usefile="false"/>
-      <batchtest>
-        <fileset dir="${src.dir}">
-          <include name="**/*UTest.java"/>
+    <path id="groovy.classpath">
+        <pathelement path="${libs.dir}"/>
+        <fileset dir="${libs.dir}">
+            <include name="**/*.jar"/>
         </fileset>
-      </batchtest>
-    </junit>
-  </target>
+    </path>
 
-  <!-- builds our distribution files (war and jar) -->
-  <target name="dist" depends="prepare,resourcecopy,compile">
-    <jar destfile="${dist.dir}/${dist.jar}"
-         basedir="${classes.dir}">
-    	<include name="**/*.class"/>
-  	</jar>
-    <!-- copy native libraries into dist/lib -->
-    <copy todir="${dist.dir}/lib">
-      <fileset dir="lib/" includes="**/*.so"/>
-      <fileset dir="lib/" includes="**/*.jnilib"/>
-      <fileset dir="lib/" includes="**/*.dylib"/>
-    	<fileset dir="lib/" includes="**/*.jar"/>
-    </copy>
-  </target>
+    <taskdef name="groovyc"
+             classname="org.codehaus.groovy.ant.Groovyc"
+             classpathref="groovy.classpath"/>
 
-  <target name="distsrc">
-    <jar destfile="${dist.dir}/jme-bui-src.jar"
-         basedir="${src.dir}"/>
-  </target>
+    <!-- build the java class files -->
+    <target name="compile" depends="prepare,resourcecopy">
+        <groovyc srcdir="${src.dir}"
+                 destdir="${classes.dir}">
+            <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false"
+                   debug="on" optimize="on" deprecation="on" source="1.5">
+                <classpath refid="classpath"/>
+                <compilerarg value="-Xlint"/>
+                <compilerarg value="-Xlint:-serial"/>
+            </javac>
+        </groovyc>
+    </target>
+
+    <!-- build the javadoc documentation -->
+    <target name="javadoc" depends="prepare">
+        <tstamp>
+            <format property="year" pattern="yyyy"/>
+        </tstamp>
+        <javadoc windowtitle="BUI API" doctitle="BUI API"
+                 destdir="${javadoc.dir}" additionalparam="-breakiterator">
+            <packageset dir="${src.dir}"/>
+            <bottom>Copyright &#169; ${year} ${copyright.holder}.
+                All Rights Reserved.
+            </bottom>
+            <classpath refid="classpath"/>
+            <link href="http://java.sun.com/j2se/1.5/docs/api/"/>
+            <link href="http://www.jmonkeyengine.com/doc/"/>
+        </javadoc>
+    </target>
+
+    <!-- runs our unit tests -->
+    <target name="tests" depends="compile,resourcecopy" description="Runs unit tests.">
+        <junit printsummary="no" haltonfailure="yes" fork="false">
+            <classpath refid="classpath"/>
+            <formatter type="brief" usefile="false"/>
+            <batchtest>
+                <fileset dir="${src.dir}">
+                    <include name="**/*UTest.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- builds our distribution files (war and jar) -->
+    <target name="dist" depends="prepare,resourcecopy,compile">
+        <jar destfile="${dist.dir}/${dist.jar}"
+             basedir="${classes.dir}">
+            <include name="**/*.class"/>
+        </jar>
+        <!-- copy native libraries into dist/lib -->
+        <copy todir="${dist.dir}/lib">
+            <fileset dir="lib/" includes="**/*.so"/>
+            <fileset dir="lib/" includes="**/*.jnilib"/>
+            <fileset dir="lib/" includes="**/*.dylib"/>
+            <fileset dir="lib/" includes="**/*.jar"/>
+        </copy>
+    </target>
+
+    <target name="distsrc">
+        <jar destfile="${dist.dir}/jme-bui-src.jar"
+             basedir="${src.dir}"/>
+    </target>
 </project>

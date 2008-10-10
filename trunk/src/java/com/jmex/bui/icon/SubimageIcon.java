@@ -78,7 +78,7 @@ public class SubimageIcon extends BIcon {
                        float alpha) {
         super.render(renderer, x, y, alpha);
         _image.render(renderer, _region.x, _region.y,
-                _region.width, _region.height, x, y, alpha);
+                      _region.width, _region.height, x, y, alpha);
     }
 
     protected BImage _image;

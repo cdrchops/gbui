@@ -18,14 +18,14 @@
 //// License along with this library; if not, write to the Free Software
 //// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 //
-//package com.jmex.bui.event;
-//
-///**
-// * Dispatches action events to interested parties.
-// */
-//public interface ActionListener extends ComponentListener {
-//    /**
-//     * Dispatched when a component has generated an "action".
-//     */
-//    public void actionPerformed(ActionEvent event);
-//}
+package com.jmex.bui.event;
+
+/**
+ * Dispatches action events to interested parties.
+ */
+public interface ActionListener extends ComponentListener {
+    /**
+     * Dispatched when a component has generated an "action".
+     */
+    public void actionPerformed(ActionEvent event);
+}

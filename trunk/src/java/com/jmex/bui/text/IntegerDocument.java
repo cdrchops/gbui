@@ -44,6 +44,7 @@ public class IntegerDocument extends Document {
         _positive = positive;
     }
 
+    @Override
     // documentation inherited
     protected boolean validateEdit(String oldText,
                                    String newText) {

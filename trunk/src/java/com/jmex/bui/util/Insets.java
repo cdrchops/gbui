@@ -98,6 +98,7 @@ public class Insets {
         }
     }
 
+    @Override
     // documentation inherited
     public boolean equals(Object other) {
         Insets oi = (Insets) other;
@@ -105,6 +106,7 @@ public class Insets {
                (right == oi.right) && (bottom == oi.bottom);
     }
 
+    @Override
     public String toString() {
         return "l:" + left + " t:" + top + " r:" + right + " b:" + bottom;
     }
