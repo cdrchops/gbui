@@ -86,8 +86,8 @@ import com.jmex.bui.util.TokReader;
  * <p/>
  * Each component is identified by its default stylesheet class, which are derived from the
  * component's Java class name: <code>window, label, textfield, component, popupmenu, etc.</code>
- * The component's stylesheet class can be overridden with a call to      {@link
- * BComponent # setStyleClass}     .
+ * The component's stylesheet class can be overridden with a call to       {@link
+ * BComponent # setStyleClass}      .
  * <p/>
  * <p> A component's style is resolved in the following manner:
  * <ul>
@@ -106,7 +106,7 @@ import com.jmex.bui.util.TokReader;
  * doing the lookup every time the component is rendered (every frame) with the memory expense of
  * storing the style of every component in memory.
  */
-public class BStyleSheet {
+public class BStyleSheet implements BStyleConstants {
     /**
      * A font style constant.
      */
@@ -127,6 +127,13 @@ public class BStyleSheet {
      */
     public static final String BOLD_ITALIC = "bolditalic";
 
+//    public static final int END_BRACE = (('}' as char) as int)
+//    public static final int START_BRACE = (('{' as char) as int)
+//    public static final int SEMI_COLON = ((';' as char) as int)
+//    public static final int SINGLE_QUOTE = (('\'' as char) as int)
+//    public static final int DOUBLE_QUOTE = (('\"' as char) as int)
+//    public static final int COLON = ((':' as char) as int)
+
     /**
      * Creates a stylesheet from the specified textual source.
      *
@@ -139,7 +146,7 @@ public class BStyleSheet {
         _rsrcprov = rsrcprov;
 
         try {
-            parse(TokReader.tokenize(reader));
+            TokReader.parse(reader, this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -265,7 +272,7 @@ public class BStyleSheet {
 
         // first try this component's configured style class
         String styleClass = component.getStyleClass();
-        String fqClass = makeFQClass(styleClass, pseudoClass);
+        String fqClass = TokReader.makeFQClass(styleClass, pseudoClass);
         if ((value = getProperty(fqClass, property)) != null) {
             return value;
         }
@@ -286,7 +293,7 @@ public class BStyleSheet {
         }
 
         // finally check the "root" class
-        fqClass = makeFQClass("root", pseudoClass);
+        fqClass = TokReader.makeFQClass("root", pseudoClass);
         if ((value = getProperty(fqClass, property)) != null) {
             return value;
         }
@@ -313,93 +320,9 @@ public class BStyleSheet {
         return prop;
     }
 
-    protected void parse(StreamTokenizer tok) throws IOException {
-        while (tok.nextToken() != StreamTokenizer.TT_EOF) {
-            Rule rule = startRule(tok);
-            while (parseProperty(tok, rule)) {
-            }
-            _rules.put(makeFQClass(rule.styleClass, rule.pseudoClass), rule);
-        }
-    }
 
-    protected Rule startRule(StreamTokenizer tok)
-    throws IOException {
-        if (tok.ttype != StreamTokenizer.TT_WORD) {
-            fail(tok, "style-class");
-        }
-
-        Rule rule = new Rule();
-        rule.styleClass = tok.sval;
-
-        switch (tok.nextToken()) {
-            case '{':
-                return rule;
-
-            case ':':
-                if (tok.nextToken() != StreamTokenizer.TT_WORD) {
-                    fail(tok, "pseudo-class");
-                }
-                rule.pseudoClass = tok.sval;
-                if (tok.nextToken() != '{') {
-                    fail(tok, "{");
-                }
-                return rule;
-
-            default:
-                fail(tok, "{ or :");
-                return null; // not reachable
-        }
-    }
-
-    protected boolean parseProperty(StreamTokenizer tok,
-                                    Rule rule)
-    throws IOException {
-        if (tok.nextToken() == '}') {
-            return false;
-        } else if (tok.ttype != StreamTokenizer.TT_WORD) {
-            fail(tok, "property-name");
-        }
-
-        int sline = tok.lineno();
-        String name = tok.sval;
-
-        if (tok.nextToken() != ':') {
-            fail(tok, ":");
-        }
-
-        ArrayList<Comparable> args = new ArrayList<Comparable>();
-        while (tok.nextToken() != ';' && tok.ttype != '}') {
-            switch (tok.ttype) {
-                case '\'':
-                case '"':
-                case StreamTokenizer.TT_WORD:
-                    args.add(tok.sval);
-                    break;
-                case StreamTokenizer.TT_NUMBER:
-                    args.add(tok.nval);
-                    break;
-                default:
-                    System.err.println(
-                            "Unexpected token: '" + (char) tok.ttype + "'. Line " + tok.lineno() + ".");
-                    break;
-            }
-        }
-
-        try {
-            rule.properties.put(name, createProperty(name, args));
-//             System.out.println("  " + name + " -> " + rule.get(name));
-        } catch (Exception e) {
-            System.err.println(
-                    "Failure parsing property '" + name + "' line " + sline + ": " + e.getMessage());
-            if (!(e instanceof IllegalArgumentException)) {
-                e.printStackTrace(System.err);
-            }
-        }
-        return true;
-    }
-
-    protected Object createProperty(String name,
-                                    ArrayList args) {
+    public Object createProperty(String name,
+                                 ArrayList args) {
         if (name.equals("color") || name.equals("effect-color")) {
             return parseColor((String) args.get(0));
         } else if (name.equals("background")) {
@@ -511,7 +434,7 @@ public class BStyleSheet {
             } else {
                 throw new IllegalArgumentException("Unknown border type '" + type + "'");
             }
-        }/* else if (name.equals("border-left")) {
+        } else if (name.equals("border-left")) {
             int thickness = parseInt(args.get(0));
             String type = (String) args.get(1);
             if (type.equals("blank")) {
@@ -551,7 +474,7 @@ public class BStyleSheet {
             } else {
                 throw new IllegalArgumentException("Unknown border type '" + type + "'");
             }
-        }*/ else if (name.equals("size")) {
+        } else if (name.equals("size")) {
             Dimension size = new Dimension();
             size.width = parseInt(args.get(0));
             size.height = parseInt(args.get(1));
@@ -567,27 +490,6 @@ public class BStyleSheet {
         } else {
             throw new IllegalArgumentException("Unknown property '" + name + "'");
         }
-    }
-
-    protected void fail(StreamTokenizer tok,
-                        String expected)
-    throws IOException {
-        String err = "Parse failure line: " + tok.lineno() +
-                     " expected: '" + expected + "' found: '";
-        switch (tok.ttype) {
-            case StreamTokenizer.TT_WORD:
-                err += tok.sval;
-                break;
-            case StreamTokenizer.TT_NUMBER:
-                err += tok.nval;
-                break;
-            case StreamTokenizer.TT_EOF:
-                err += "EOF";
-                break;
-            default:
-                err += (char) tok.ttype;
-        }
-        throw new IOException(err + "'");
     }
 
     protected ColorRGBA parseColor(String hex) {
@@ -609,14 +511,8 @@ public class BStyleSheet {
         return (int) ((Double) arg).doubleValue();
     }
 
-    protected static String makeFQClass(String styleClass,
-                                        String pseudoClass) {
-        return (pseudoClass == null) ? styleClass : (styleClass + ":" + pseudoClass);
-    }
-
-
     protected ResourceProvider _rsrcprov;
-    protected HashMap<String, Rule> _rules = new HashMap<String, Rule>();
+    public HashMap<String, Rule> _rules = new HashMap<String, Rule>();
 
     protected static HashMap<String, Integer> _taconsts = new HashMap<String, Integer>();
     protected static HashMap<String, Integer> _vaconsts = new HashMap<String, Integer>();
