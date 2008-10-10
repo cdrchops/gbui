@@ -59,6 +59,8 @@ public class BoundedRangeModel {
 
     /**
      * Adds a listener to this model.
+     *
+     * @param
      */
     public void addChangeListener(ChangeListener listener) {
         _listeners.add(listener);
@@ -109,9 +111,8 @@ public class BoundedRangeModel {
     /**
      * Returns the value of the model mapped into the range [0-1]: (value - minumum) / range.
      */
-    public float getRatio ()
-    {
-        return (getValue() - getMinimum()) / (float)getRange();
+    public float getRatio() {
+        return (getValue() - getMinimum()) / (float) getRange();
     }
 
     /**
