@@ -58,10 +58,18 @@ public class BTextArea extends BContainer {
      */
     public static final int UNDERLINE = 3;
 
+    /**
+     * Constructor
+     */
     public BTextArea() {
         this(null);
     }
 
+    /**
+     * Constructor
+     *
+     * @param text String
+     */
     public BTextArea(String text) {
         _model.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent event) {
@@ -75,6 +83,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Returns the horizontal alignment for this component's text.
+     *
+     * @return BConstants
      */
     public int getHorizontalAlignment() {
         if (_haligns != null) {
@@ -86,6 +96,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Returns the vertical alignment for this component's text.
+     *
+     * @return BConstants
      */
     public int getVerticalAlignment() {
         if (_valigns != null) {
@@ -97,6 +109,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Configures the preferred width of this text area (the preferred height will be calculated from the font).
+     *
+     * @param width int
      */
     public void setPreferredWidth(int width) {
         _prefWidth = width;
@@ -105,6 +119,8 @@ public class BTextArea extends BContainer {
     /**
      * Returns a model that can be wired to a scroll bar to allow scrolling up and down through the lines in this text
      * area.
+     *
+     * @return BoundedRangeModel
      */
     public BoundedRangeModel getScrollModel() {
         return _model;
@@ -112,6 +128,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Clears any text in this text area and appends the supplied text.
+     *
+     * @param text String
      */
     public void setText(String text) {
         clearText();
@@ -120,6 +138,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Appends text with the foreground color in the plain style.
+     *
+     * @param text String
      */
     public void appendText(String text) {
         appendText(text, null);
@@ -127,6 +147,9 @@ public class BTextArea extends BContainer {
 
     /**
      * Appends text with the specified color in the plain style.
+     *
+     * @param text  String
+     * @param color ColorRGBA
      */
     public void appendText(String text,
                            ColorRGBA color) {
@@ -135,6 +158,9 @@ public class BTextArea extends BContainer {
 
     /**
      * Appends text with the foreground color in the specified style.
+     *
+     * @param text  String
+     * @param style int
      */
     public void appendText(String text,
                            int style) {
@@ -143,6 +169,10 @@ public class BTextArea extends BContainer {
 
     /**
      * Appends text with the specified color and style.
+     *
+     * @param text  String
+     * @param color ColorRGBA
+     * @param style int
      */
     public void appendText(String text,
                            ColorRGBA color,
@@ -170,6 +200,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Scrolls our display such that the sepecified line is visible.
+     *
+     * @param line int
      */
     public void scrollToLine(int line) {
         // TODO
@@ -177,6 +209,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Returns the number of lines of text contained in this area.
+     *
+     * @return int
      */
     public int getLineCount() {
         return _lines.size();
@@ -184,6 +218,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Returns a text factory suitable for creating text in the style defined by the component's current state.
+     *
+     * @return BTextFactory
      */
     public BTextFactory getTextFactory() {
         BTextFactory textfact = _textfacts[getState()];
@@ -192,6 +228,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Returns the effect for this component's text.
+     *
+     * @return BConstants
      */
     public int getTextEffect() {
         if (_teffects != null) {
@@ -203,6 +241,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Returns the effect size for this component's text.
+     *
+     * @return BConstants
      */
     public int getEffectSize() {
         if (_effsizes != null) {
@@ -214,6 +254,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Returns the color to use for our text effect.
+     *
+     * @return ColorRGBA
      */
     public ColorRGBA getEffectColor() {
         if (_effcols != null) {
@@ -223,24 +265,39 @@ public class BTextArea extends BContainer {
         return ColorRGBA.white;
     }
 
+
+    /**
+     * from BTextArea
+     *
+     * @param enabled boolean
+     * @see BContainer#setEnabled
+     */
     @Override
-    // from BTextArea
     public void setEnabled(boolean enabled) {
         boolean wasEnabled = isEnabled();
         super.setEnabled(enabled);
-        if (isAdded() && wasEnabled != isEnabled()) {
+        if (isAdded() && wasEnabled != enabled) {
             refigureContents(getWidth());
         }
     }
 
+    /**
+     * from BTextArea
+     *
+     * @return String
+     * @see BContainer#getDefaultStyleClass
+     */
     @Override
-    // from BTextArea
     protected String getDefaultStyleClass() {
         return "textarea";
     }
 
+    /**
+     * from BTextArea
+     *
+     * @see BContainer#wasAdded()
+     */
     @Override
-    // from BTextArea
     protected void wasAdded() {
         super.wasAdded();
 
@@ -249,8 +306,12 @@ public class BTextArea extends BContainer {
         }
     }
 
+    /**
+     * documentation inherited
+     *
+     * @see BContainer#wasRemoved
+     */
     @Override
-    // documentation inherited
     protected void wasRemoved() {
         super.wasRemoved();
 
@@ -259,45 +320,50 @@ public class BTextArea extends BContainer {
         }
     }
 
+    /**
+     * documentation inherited
+     *
+     * @param style BStyleSheet
+     * @see BComponent#configureStyle
+     */
     @Override
-    // documentation inherited
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);
+        final int stateCount = getStateCount();
+        int[] haligns = new int[stateCount];
 
-        int[] haligns = new int[getStateCount()];
-
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        for (int ii = 0; ii < stateCount; ii++) {
             _textfacts[ii] = style.getTextFactory(
                     this, getStatePseudoClass(ii));
         }
 
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        for (int ii = 0; ii < stateCount; ii++) {
             haligns[ii] = style.getTextAlignment(this, getStatePseudoClass(ii));
         }
         _haligns = checkNonDefault(haligns, BConstants.LEFT);
 
-        int[] valigns = new int[getStateCount()];
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        int[] valigns = new int[stateCount];
+        for (int ii = 0; ii < stateCount; ii++) {
             valigns[ii] = style.getVerticalAlignment(
                     this, getStatePseudoClass(ii));
         }
         _valigns = checkNonDefault(valigns, BConstants.CENTER);
 
-        int[] teffects = new int[getStateCount()];
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        int[] teffects = new int[stateCount];
+        for (int ii = 0; ii < stateCount; ii++) {
             teffects[ii] = style.getTextEffect(this, getStatePseudoClass(ii));
         }
         _teffects = checkNonDefault(teffects, BConstants.NORMAL);
 
-        int[] effsizes = new int[getStateCount()];
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        int[] effsizes = new int[stateCount];
+        for (int ii = 0; ii < stateCount; ii++) {
             effsizes[ii] = style.getEffectSize(this, getStatePseudoClass(ii));
         }
         _effsizes = checkNonDefault(effsizes, BConstants.DEFAULT_SIZE);
 
-        ColorRGBA[] effcols = new ColorRGBA[getStateCount()];
+        ColorRGBA[] effcols = new ColorRGBA[stateCount];
         boolean nondef = false;
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        for (int ii = 0; ii < stateCount; ii++) {
             effcols[ii] = style.getEffectColor(this, getStatePseudoClass(ii));
             nondef = nondef || (effcols[ii] != null);
         }
@@ -305,30 +371,44 @@ public class BTextArea extends BContainer {
             _effcols = effcols;
         }
 
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        for (int ii = 0; ii < stateCount; ii++) {
             _textfacts[ii] = style.getTextFactory(this, getStatePseudoClass(ii));
         }
     }
 
+    /**
+     * @param styles int[]
+     * @param defval int
+     * @return int[]
+     */
     protected int[] checkNonDefault(int[] styles, int defval) {
-        for (int ii = 0; ii < styles.length; ii++) {
-            if (styles[ii] != -1 && styles[ii] != defval) {
+        for (int style : styles) {
+            if (style != -1 && style != defval) {
                 return styles;
             }
         }
         return null;
     }
 
+    /**
+     * documentation inherited
+     *
+     * @see BContainer#layout
+     */
     @Override
-    // documentation inherited
     protected void layout() {
         super.layout();
 
         refigureContents(getWidth());
     }
 
+    /**
+     * documentation inherited
+     *
+     * @param renderer Renderer
+     * @see BContainer#renderComponent
+     */
     @Override
-    // documentation inherited
     protected void renderComponent(Renderer renderer) {
         super.renderComponent(renderer);
 
@@ -336,23 +416,25 @@ public class BTextArea extends BContainer {
                 valign = getVerticalAlignment();
 
         // compute the total height of the lines
-        int start = _model.getValue(), stop = start + _model.getExtent(),
-                lheight = 0;
+        int start = _model.getValue(), stop = start + _model.getExtent(), lheight = 0;
         for (int ii = start; ii < stop; ii++) {
             lheight += _lines.get(ii).height;
         }
 
-        int x = getInsets().left, y;
-        Insets insets = getInsets();
+        final Insets insets = getInsets();
+
+        int x = insets.left, y;
+
         if (valign == BConstants.TOP) {
             y = _height - insets.top;
         } else if (valign == BConstants.BOTTOM) {
             y = lheight + insets.bottom;
         } else { // valign == BConstants.CENTER
             y = lheight + insets.bottom +
-                (_height - insets.getVertical() - lheight) / 2;
+                    (_height - insets.getVertical() - lheight) / 2;
         }
 
+        final int horizontal = insets.getHorizontal();
         // render the lines
         for (int ii = start; ii < stop; ii++) {
             Line line = _lines.get(ii);
@@ -361,14 +443,21 @@ public class BTextArea extends BContainer {
                 x = _width - line.getWidth() - insets.right;
             } else if (halign == BConstants.CENTER) {
                 x = insets.left +
-                    (_width - insets.getHorizontal() - line.getWidth()) / 2;
+                        (_width - horizontal - line.getWidth()) / 2;
             }
             line.render(renderer, x, y, _alpha);
         }
     }
 
+    /**
+     * documentation inherited
+     *
+     * @param whint int
+     * @param hhint int
+     * @return Dimension
+     * @see BContainer#computePreferredSize
+     */
     @Override
-    // documentation inherited
     protected Dimension computePreferredSize(int whint,
                                              int hhint) {
         // lay out our text if we have not yet done so
@@ -397,6 +486,8 @@ public class BTextArea extends BContainer {
 
     /**
      * Reflows the entirety of our text.
+     *
+     * @param width int
      */
     protected void refigureContents(int width) {
         // if we're not yet added to the heirarchy, we can stop now
@@ -410,8 +501,10 @@ public class BTextArea extends BContainer {
         }
         _lines.clear();
 
-        int insets = getInsets().getHorizontal();
-        int maxWidth = (width - insets);
+        final Insets insets = getInsets();
+
+        final int horizontalInsets = insets.getHorizontal();
+        final int maxWidth = (width - horizontalInsets);
 
         // wrap our text into lines
         Line current = null;
@@ -432,13 +525,13 @@ public class BTextArea extends BContainer {
         }
 
         // determine how many lines we can display in total
-        insets = getInsets().getVertical();
+        final int verticalInsets = insets.getVertical();
 
         // start at the last line and see how many we can fit
         int lines = 0, lheight = 0;
         for (int ll = _lines.size() - 1; ll >= 0; ll--) {
             lheight += _lines.get(ll).height;
-            if (lheight > _height - insets) {
+            if (lheight > _height - verticalInsets) {
                 break;
             }
             lines++;
@@ -512,6 +605,16 @@ public class BTextArea extends BContainer {
         /**
          * Adds the supplied run to the line using the supplied text factory, returns the offset into the run that must
          * be appeneded to a new line or -1 if the entire run was appended.
+         *
+         * @param tfact       BTextFactory
+         * @param run         Run
+         * @param color       ColorRGBA
+         * @param effect      int
+         * @param effectSize  int
+         * @param effectColor ColorRGBA
+         * @param maxWidth    int
+         * @param offset      int
+         * @return int
          */
         public int addRun(BTextFactory tfact,
                           Run run,
@@ -524,22 +627,34 @@ public class BTextArea extends BContainer {
             if (dx == 0) {
                 start = run;
             }
-            String rtext = run.text.substring(offset);
-            // TODO: this could perhaps be done more efficiently now that the
-            // text factory breaks things down into multiple lines for us
-            BText[] text = tfact.wrapText(
+
+            final String rtext = run.text.substring(offset);
+
+            // TODO: this could perhaps be done more efficiently now that the text factory breaks things down into multiple lines for us
+            final BText[] text = tfact.wrapText(
                     rtext, color, effect, effectSize, effectColor, maxWidth - dx);
-            segments.add(text[0]);
+            final BText tone = text[0];
+            segments.add(tone);
             // we only ever add runs when we're added
-            text[0].wasAdded();
-            int remainder = rtext.length() - text[0].getLength();
-            height = Math.max(height, text[0].getSize().height);
-            dx += text[0].getSize().width;
-            return (remainder == 0) ? -1 : run.text.length() - remainder;
+            tone.wasAdded();
+            final int remainder = rtext.length() - tone.getLength();
+
+            final Dimension size = tone.getSize();
+
+            height = Math.max(height, size.height);
+            dx += size.width;
+            return (remainder == 0)
+                    ? -1
+                    : run.text.length() - remainder;
         }
 
         /**
          * Renders this line of text.
+         *
+         * @param renderer Renderer
+         * @param x        int
+         * @param y        int
+         * @param alpha    float
          */
         public void render(Renderer renderer,
                            int x,
@@ -555,6 +670,8 @@ public class BTextArea extends BContainer {
 
         /**
          * Returns the width of this line.
+         *
+         * @return int
          */
         public int getWidth() {
             int width = 0;
@@ -564,12 +681,18 @@ public class BTextArea extends BContainer {
             return width;
         }
 
+        /**
+         *
+         */
         public void wasAdded() {
             for (int ii = 0, ll = segments.size(); ii < ll; ii++) {
                 segments.get(ii).wasAdded();
             }
         }
 
+        /**
+         *
+         */
         public void wasRemoved() {
             for (int ii = 0, ll = segments.size(); ii < ll; ii++) {
                 segments.get(ii).wasRemoved();
