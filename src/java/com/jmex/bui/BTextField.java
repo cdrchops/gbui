@@ -22,17 +22,8 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
-import com.jmex.bui.event.ActionEvent;
-import com.jmex.bui.event.BEvent;
-import com.jmex.bui.event.FocusEvent;
-import com.jmex.bui.event.KeyEvent;
-import com.jmex.bui.event.MouseEvent;
-import com.jmex.bui.event.TextEvent;
-import com.jmex.bui.text.BKeyMap;
-import com.jmex.bui.text.BText;
-import com.jmex.bui.text.Document;
-import com.jmex.bui.text.EditCommands;
-import com.jmex.bui.text.LengthLimitedDocument;
+import com.jmex.bui.event.*;
+import com.jmex.bui.text.*;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Insets;
 import com.jmex.bui.util.Rectangle;
@@ -42,7 +33,7 @@ import org.lwjgl.opengl.GL11;
  * Displays and allows for the editing of a single line of text.
  */
 public class BTextField extends BTextComponent implements EditCommands,
-                                                          Document.Listener {
+        Document.Listener {
     /**
      * Creates a blank text field.
      */
@@ -53,6 +44,8 @@ public class BTextField extends BTextComponent implements EditCommands,
     /**
      * Creates a blank text field with maximum input length.  The maximum input length is controlled by a {@link
      * LengthLimitedDocument}, changing the document will remove the length control.
+     *
+     * @param maxLength int
      */
     public BTextField(int maxLength) {
         this("", maxLength);
@@ -60,6 +53,8 @@ public class BTextField extends BTextComponent implements EditCommands,
 
     /**
      * Creates a text field with the specified starting text.
+     *
+     * @param text String
      */
     public BTextField(String text) {
         this(text, 0);
@@ -68,6 +63,9 @@ public class BTextField extends BTextComponent implements EditCommands,
     /**
      * Creates a text field with the specified starting text and max length. The maximum input length is controlled by a
      * {@link LengthLimitedDocument}, changing the document will remove the length control.
+     *
+     * @param text      String
+     * @param maxLength int
      */
     public BTextField(String text,
                       int maxLength) {
@@ -96,6 +94,8 @@ public class BTextField extends BTextComponent implements EditCommands,
     /**
      * Configures the maximum length of this text field. This will replace any currently set document with a
      * LengthLimitedDocument (or no document at all if maxLength is <= 0).
+     *
+     * @param maxLength int
      */
     public void setMaxLength(int maxLength) {
         if (maxLength > 0) {
@@ -107,6 +107,8 @@ public class BTextField extends BTextComponent implements EditCommands,
 
     /**
      * Configures this text field with a custom document.
+     *
+     * @param document Document
      */
     public void setDocument(Document document) {
         _text = document;
@@ -116,6 +118,8 @@ public class BTextField extends BTextComponent implements EditCommands,
     /**
      * Returns the underlying document used by this text field to maintain its state. Changes to the document will be
      * reflected in the text field display.
+     *
+     * @return Document
      */
     public Document getDocument() {
         return _text;
@@ -123,6 +127,8 @@ public class BTextField extends BTextComponent implements EditCommands,
 
     /**
      * Configures the preferred width of this text field (the preferred height will be calculated from the font).
+     *
+     * @param width int
      */
     public void setPreferredWidth(int width) {
         _prefWidth = width;
@@ -145,9 +151,10 @@ public class BTextField extends BTextComponent implements EditCommands,
     public void textRemoved(Document document,
                             int offset,
                             int length) {
+        final int len = _text.getLength();
         // confine the cursor to the new text
-        if (_cursp > _text.getLength()) {
-            setCursorPos(_text.getLength());
+        if (_cursp > len) {
+            setCursorPos(len);
         }
 
         // if we're already part of the hierarchy, recreate our glyps
@@ -168,13 +175,19 @@ public class BTextField extends BTextComponent implements EditCommands,
     @Override
     // documentation inherited
     public boolean dispatchEvent(BEvent event) {
+        final int len = _text.getLength();
+
         if (event instanceof KeyEvent) {
             KeyEvent kev = (KeyEvent) event;
+
+            final int modifiers = kev.getModifiers();
+
             if (kev.getType() == KeyEvent.KEY_PRESSED) {
-                int modifiers = kev.getModifiers(), keyCode = kev.getKeyCode();
+
+                int keyCode = kev.getKeyCode();
                 switch (_keymap.lookupMapping(modifiers, keyCode)) {
                     case BACKSPACE:
-                        if (_cursp > 0 && _text.getLength() > 0) {
+                        if (_cursp > 0 && len > 0) {
                             int pos = _cursp - 1;
                             if (_text.remove(pos, 1)) { // might change _cursp
                                 setCursorPos(pos);
@@ -183,7 +196,7 @@ public class BTextField extends BTextComponent implements EditCommands,
                         break;
 
                     case DELETE:
-                        if (_cursp < _text.getLength()) {
+                        if (_cursp < len) {
                             _text.remove(_cursp, 1);
                         }
                         break;
@@ -193,7 +206,7 @@ public class BTextField extends BTextComponent implements EditCommands,
                         break;
 
                     case CURSOR_RIGHT:
-                        setCursorPos(Math.min(_text.getLength(), _cursp + 1));
+                        setCursorPos(Math.min(len, _cursp + 1));
                         break;
 
                     case START_OF_LINE:
@@ -201,12 +214,12 @@ public class BTextField extends BTextComponent implements EditCommands,
                         break;
 
                     case END_OF_LINE:
-                        setCursorPos(_text.getLength());
+                        setCursorPos(len);
                         break;
 
                     case ACTION:
                         emitEvent(new ActionEvent(
-                                this, kev.getWhen(), kev.getModifiers(), ""));
+                                this, kev.getWhen(), modifiers, ""));
                         break;
 
                     case RELEASE_FOCUS:
@@ -221,8 +234,8 @@ public class BTextField extends BTextComponent implements EditCommands,
                         // insert printable and shifted printable characters
                         char c = kev.getKeyChar();
                         if ((modifiers & ~KeyEvent.SHIFT_DOWN_MASK) == 0 &&
-                            !Character.isISOControl(c)) {
-                            String text = String.valueOf(kev.getKeyChar());
+                                !Character.isISOControl(c)) {
+                            String text = String.valueOf(c);
                             if (_text.insert(_cursp, text)) {
                                 setCursorPos(_cursp + 1);
                             }
@@ -237,8 +250,8 @@ public class BTextField extends BTextComponent implements EditCommands,
         } else if (event instanceof MouseEvent) {
             MouseEvent mev = (MouseEvent) event;
             if (mev.getType() == MouseEvent.MOUSE_PRESSED &&
-                // don't adjust the cursor if we have no text
-                _text.getLength() > 0) {
+                    // don't adjust the cursor if we have no text
+                    len > 0) {
                 Insets insets = getInsets();
                 int mx = mev.getX() - getAbsoluteX() - insets.left + _txoff,
                         my = mev.getY() - getAbsoluteY() - insets.bottom;
@@ -323,13 +336,13 @@ public class BTextField extends BTextComponent implements EditCommands,
         if (_glyphs != null) {
             // clip the text to our visible text region
             boolean scissored = intersectScissorBox(_srect,
-                                                    getAbsoluteX() + insets.left,
-                                                    getAbsoluteY() + insets.bottom,
-                                                    _width - insets.getHorizontal(),
-                                                    _height - insets.getVertical());
+                    getAbsoluteX() + insets.left,
+                    getAbsoluteY() + insets.bottom,
+                    _width - insets.getHorizontal(),
+                    _height - insets.getVertical());
             try {
                 _glyphs.render(renderer, insets.left - _txoff,
-                               insets.bottom, _alpha);
+                        insets.bottom, _alpha);
             } finally {
                 restoreScissorState(scissored, _srect);
             }
@@ -354,8 +367,8 @@ public class BTextField extends BTextComponent implements EditCommands,
     protected Dimension computePreferredSize(int whint,
                                              int hhint) {
         Dimension d = (_glyphs == null) ?
-                      new Dimension(0, getTextFactory().getHeight()) :
-                      new Dimension(_glyphs.getSize());
+                new Dimension(0, getTextFactory().getHeight()) :
+                new Dimension(_glyphs.getSize());
         if (_prefWidth != -1) {
             d.width = _prefWidth;
         }
@@ -412,6 +425,8 @@ public class BTextField extends BTextComponent implements EditCommands,
     /**
      * This method allows a derived class (specifically {@link BPasswordField}) to display something other than the
      * actual contents of the text field.
+     *
+     * @return String
      */
     protected String getDisplayText() {
         return _text.getText();
@@ -419,6 +434,8 @@ public class BTextField extends BTextComponent implements EditCommands,
 
     /**
      * Updates the cursor position, moving the visible representation as well as the insertion and deletion point.
+     *
+     * @param cursorPos int
      */
     protected void setCursorPos(int cursorPos) {
         // note the new cursor character position
@@ -439,7 +456,7 @@ public class BTextField extends BTextComponent implements EditCommands,
             if (_cursx > _txoff + avail) {
                 _txoff = _cursx - avail;
             } else if (_glyphs != null &&
-                       _glyphs.getSize().width - _txoff < avail) {
+                    _glyphs.getSize().width - _txoff < avail) {
                 _txoff = Math.max(0, _cursx - avail);
             }
         }

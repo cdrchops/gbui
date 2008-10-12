@@ -183,9 +183,11 @@ public class BTextArea extends BContainer {
             _runs.add(new Run(line, color, style, true));
             offset = nlidx + 1;
         }
+
         if (offset < text.length()) {
             _runs.add(new Run(text.substring(offset), color, style, false));
         }
+
         // TODO: optimize appending
         invalidate();
     }
@@ -439,11 +441,12 @@ public class BTextArea extends BContainer {
         for (int ii = start; ii < stop; ii++) {
             Line line = _lines.get(ii);
             y -= line.height;
+            final int width = line.getWidth();
             if (halign == BConstants.RIGHT) {
-                x = _width - line.getWidth() - insets.right;
+                x = _width - width - insets.right;
             } else if (halign == BConstants.CENTER) {
                 x = insets.left +
-                        (_width - horizontal - line.getWidth()) / 2;
+                        (_width - horizontal - width) / 2;
             }
             line.render(renderer, x, y, _alpha);
         }
