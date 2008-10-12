@@ -40,6 +40,8 @@ public class Label implements BConstants {
 
     /**
      * Updates the text displayed by this label.
+     *
+     * @param text String
      */
     public void setText(String text) {
         if (_value != null && _value.equals(text)) {
@@ -56,6 +58,8 @@ public class Label implements BConstants {
 
     /**
      * Returns the text currently being displayed by this label.
+     *
+     * @return String
      */
     public String getText() {
         return _value;
@@ -63,6 +67,8 @@ public class Label implements BConstants {
 
     /**
      * Configures the label to display the specified icon.
+     *
+     * @param icon BIcon
      */
     public void setIcon(BIcon icon) {
         if (_icon == icon) {
@@ -97,6 +103,8 @@ public class Label implements BConstants {
 
     /**
      * Returns the icon being displayed by this label.
+     *
+     * @return BIcon
      */
     public BIcon getIcon() {
         return _icon;
@@ -104,6 +112,8 @@ public class Label implements BConstants {
 
     /**
      * Configures the gap between the icon and the text.
+     *
+     * @param gap int
      */
     public void setIconTextGap(int gap) {
         _gap = gap;
@@ -111,6 +121,8 @@ public class Label implements BConstants {
 
     /**
      * Returns the gap between the icon and the text.
+     *
+     * @return int
      */
     public int getIconTextGap() {
         return _gap;
@@ -119,6 +131,8 @@ public class Label implements BConstants {
     /**
      * Sets the orientation of this label with respect to its icon. If the horizontal (the default) the text is
      * displayed to the right of the icon, if vertical the text is displayed below it.
+     *
+     * @param orient int
      */
     public void setOrientation(int orient) {
         _orient = orient;
@@ -130,6 +144,8 @@ public class Label implements BConstants {
     /**
      * Configures whether this label will wrap, truncate or scale if it cannot fit text into its allotted width. The
      * default is to wrap.
+     *
+     * @param mode BLabel.Fit
      */
     public void setFit(BLabel.Fit mode) {
         _fit = mode;
@@ -161,6 +177,10 @@ public class Label implements BConstants {
 
     /**
      * Computes the preferred size of the label.
+     *
+     * @param whint int
+     * @param hhint int
+     * @return Dimension
      */
     public Dimension computePreferredSize(int whint,
                                           int hhint) {
@@ -173,6 +193,10 @@ public class Label implements BConstants {
 
     /**
      * Lays out the label text and icon.
+     *
+     * @param insets     Insets
+     * @param contWidth  int
+     * @param contHeight int
      */
     public void layout(Insets insets,
                        int contWidth,
@@ -235,6 +259,13 @@ public class Label implements BConstants {
 
     /**
      * Renders the label text and icon.
+     *
+     * @param renderer   Renderer
+     * @param x          int
+     * @param y          int
+     * @param contWidth  int
+     * @param contHeight int
+     * @param alpha      float
      */
     public void render(Renderer renderer,
                        int x,
@@ -255,13 +286,20 @@ public class Label implements BConstants {
         }
     }
 
+    /**
+     * @param renderer   Renderer
+     * @param contWidth  int
+     * @param contHeight int
+     * @param alpha      float
+     */
     protected void renderText(Renderer renderer,
                               int contWidth,
                               int contHeight,
                               float alpha) {
+        final int horzAlignment = _container.getHorizontalAlignment();
         if (_fit == BLabel.Fit.WRAP) {
             _config.glyphs.render(
-                    renderer, _tx, _ty, _container.getHorizontalAlignment(), alpha, _config.spacing);
+                    renderer, _tx, _ty, horzAlignment, alpha, _config.spacing);
             return;
         }
 
@@ -274,7 +312,7 @@ public class Label implements BConstants {
 
         if (_fit == BLabel.Fit.SCALE) {
             _config.glyphs.render(
-                    renderer, _tx, _ty, width, height, _container.getHorizontalAlignment(), alpha);
+                    renderer, _tx, _ty, width, height, horzAlignment, alpha);
             return;
         }
 
@@ -283,12 +321,16 @@ public class Label implements BConstants {
                 _container.getAbsoluteY() + insets.bottom, width, height);
         try {
             _config.glyphs.render(
-                    renderer, _tx, _ty, _container.getHorizontalAlignment(), alpha, _config.spacing);
+                    renderer, _tx, _ty, horzAlignment, alpha, _config.spacing);
         } finally {
             BComponent.restoreScissorState(scissored, _srect);
         }
     }
 
+    /**
+     * @param config Config
+     * @return Dimension
+     */
     protected Dimension computeSize(Config config) {
         int iwidth = 0, iheight = 0, twidth = 0, theight = 0, gap = 0;
         if (_icon != null) {
@@ -323,6 +365,12 @@ public class Label implements BConstants {
         return new Dimension(width, height);
     }
 
+    /**
+     * @param insets    Insets
+     * @param contWidth int
+     * @param width     int
+     * @return int
+     */
     protected int getXOffset(Insets insets,
                              int contWidth,
                              int width) {
@@ -337,6 +385,12 @@ public class Label implements BConstants {
         }
     }
 
+    /**
+     * @param insets     Insets
+     * @param contHeight int
+     * @param height     int
+     * @return int
+     */
     protected int getYOffset(Insets insets,
                              int contHeight,
                              int height) {
@@ -353,6 +407,10 @@ public class Label implements BConstants {
 
     /**
      * Creates glyphs for the current text at the specified target width.
+     *
+     * @param oconfig Config
+     * @param twidth  int
+     * @return Config
      */
     protected Config layoutConfig(Config oconfig,
                                   int twidth) {
@@ -383,26 +441,27 @@ public class Label implements BConstants {
         // sanity check
         if (twidth < 0) {
             Log.log.warning("Requested to layout with negative target width [text=" + _value +
-                            ", twidth=" + twidth + "].");
+                    ", twidth=" + twidth + "].");
             Thread.dumpStack();
             return config;
         }
 
         // render up some new text
-        BTextFactory tfact = _container.getTextFactory(this);
+        BTextFactory tfact = _container.getTextFactory();
         Text text = new Text();
         text.lines = tfact.wrapText(
                 _value, config.color, config.effect, config.effectSize, config.effectColor, twidth);
         for (int ii = 0; ii < text.lines.length; ii++) {
-            text.size.width = Math.max(text.size.width, text.lines[ii].getSize().width);
-            text.size.height += text.lines[ii].getSize().height + (ii > 0 ? config.spacing : 0);
+            final Dimension size = text.lines[ii].getSize();
+            text.size.width = Math.max(text.size.width, size.width);
+            text.size.height += size.height + (ii > 0 ? config.spacing : 0);
         }
         config.glyphs = text;
 
         // if our old config is the same number of lines as our new config, expand the width region
         // that this configuration will match
         if (oconfig != null && oconfig.glyphs != null &&
-            oconfig.glyphs.lines.length == config.glyphs.lines.length) {
+                oconfig.glyphs.lines.length == config.glyphs.lines.length) {
             config.minwidth = Math.min(config.minwidth, oconfig.minwidth);
             config.maxwidth = Math.max(config.maxwidth, oconfig.maxwidth);
         }
@@ -410,6 +469,9 @@ public class Label implements BConstants {
         return config;
     }
 
+    /**
+     * @param config Config
+     */
     protected void useConfig(Config config) {
         // make sure it's not the one we're already using
         if (_config == config) {
@@ -427,6 +489,9 @@ public class Label implements BConstants {
         }
     }
 
+    /**
+     *
+     */
     protected static class Config {
         public String text;
         public ColorRGBA color;
@@ -437,6 +502,11 @@ public class Label implements BConstants {
         public Text glyphs;
         public int spacing;
 
+        /**
+         * @param other  Config
+         * @param twidth int
+         * @return boolean
+         */
         public boolean matches(Config other,
                                int twidth) {
             if (other == null) {
@@ -447,16 +517,22 @@ public class Label implements BConstants {
             if (effect != other.effect) {
                 return false;
             }
+
+            //Is this trying to do an object comparison?
+            //todo: re-review
             if (text != other.text && (text == null || !text.equals(other.text))) {
                 return false;
             }
+
             if (!color.equals(other.color)) {
                 return false;
             }
+
             if (effectColor != other.effectColor &&
-                (effectColor == null || !effectColor.equals(other.effectColor))) {
+                    (effectColor == null || !effectColor.equals(other.effectColor))) {
                 return false;
             }
+
             if (effectSize != other.effectSize || spacing != other.spacing) {
                 return false;
             }
@@ -471,11 +547,19 @@ public class Label implements BConstants {
             return (minwidth <= twidth) && (twidth <= maxwidth);
         }
 
+        /**
+         * @return String
+         */
+        @Override
         public String toString() {
             return text + "(" + toString(color) + "," + effect + "," + toString(effectColor) + "," +
-                   minwidth + "<>" + maxwidth + ")";
+                    minwidth + "<>" + maxwidth + ")";
         }
 
+        /**
+         * @param color ColorRGBA
+         * @return String
+         */
         protected String toString(ColorRGBA color) {
             return color == null ? "null" : Integer.toHexString(color.hashCode());
         }
@@ -485,24 +569,46 @@ public class Label implements BConstants {
         public BText[] lines;
         public Dimension size = new Dimension();
 
+        /**
+         * @param renderer Renderer
+         * @param tx       int
+         * @param ty       int
+         * @param halign   int
+         * @param alpha    float
+         * @param spacing  int
+         */
         public void render(Renderer renderer,
                            int tx,
                            int ty,
                            int halign,
-                           float alpha, int spacing) {
+                           float alpha,
+                           int spacing) {
             // render the lines from the bottom up
             for (int ii = lines.length - 1; ii >= 0; ii--) {
                 int lx = tx;
+                final BText line = lines[ii];
+                final Dimension lineSize = line.getSize();
+
                 if (halign == RIGHT) {
-                    lx += size.width - lines[ii].getSize().width;
+                    lx += size.width - lineSize.width;
                 } else if (halign == CENTER) {
-                    lx += (size.width - lines[ii].getSize().width) / 2;
+                    lx += (size.width - lineSize.width) / 2;
                 }
-                lines[ii].render(renderer, lx, ty, alpha);
-                ty += lines[ii].getSize().height + (ii > 0 ? spacing : 0);
+
+                line.render(renderer, lx, ty, alpha);
+                ty += lineSize.height + (ii > 0 ? spacing : 0);
             }
         }
 
+        /**
+         * @param renderer Renderer
+         * @param tx       int
+         * @param ty       int
+         * @param width    int
+         * @param height   int
+         * @param halign   int
+         * @param alpha    float
+         */
         public void render(Renderer renderer,
                            int tx,
                            int ty,
@@ -531,15 +637,21 @@ public class Label implements BConstants {
             lines[0].render(renderer, tx, ty, width, height, alpha);
         }
 
+        /**
+         *
+         */
         public void wasAdded() {
-            for (int ii = 0; ii < lines.length; ii++) {
-                lines[ii].wasAdded();
+            for (BText line : lines) {
+                line.wasAdded();
             }
         }
 
+        /**
+         *
+         */
         public void wasRemoved() {
-            for (int ii = 0; ii < lines.length; ii++) {
-                lines[ii].wasRemoved();
+            for (BText line : lines) {
+                line.wasRemoved();
             }
         }
     }
