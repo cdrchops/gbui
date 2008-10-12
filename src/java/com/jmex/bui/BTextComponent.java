@@ -54,6 +54,8 @@ public abstract class BTextComponent extends BComponent {
 
     /**
      * Returns the horizontal alignment for this component's text.
+     *
+     * @return int BConstants
      */
     public int getHorizontalAlignment() {
         if (_haligns != null) {
@@ -65,6 +67,8 @@ public abstract class BTextComponent extends BComponent {
 
     /**
      * Returns the vertical alignment for this component's text.
+     *
+     * @return int BConstants
      */
     public int getVerticalAlignment() {
         if (_valigns != null) {
@@ -76,6 +80,8 @@ public abstract class BTextComponent extends BComponent {
 
     /**
      * Returns the effect for this component's text.
+     *
+     * @return int BConstants
      */
     public int getTextEffect() {
         if (_teffects != null) {
@@ -87,6 +93,8 @@ public abstract class BTextComponent extends BComponent {
 
     /**
      * Returns the effect size for this component's text.
+     *
+     * @return int BConstants
      */
     public int getEffectSize() {
         if (_effsizes != null) {
@@ -98,6 +106,8 @@ public abstract class BTextComponent extends BComponent {
 
     /**
      * Returns the color to use for our text effect.
+     *
+     * @return ColorRGBA white
      */
     public ColorRGBA getEffectColor() {
         if (_effcols != null) {
@@ -107,60 +117,74 @@ public abstract class BTextComponent extends BComponent {
         return ColorRGBA.white;
     }
 
+    /**
+     * documentation inherited
+     *
+     * @param style BStyleSheet
+     * @see BComponent#configureStyle
+     */
     @Override
-    // documentation inherited
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);
-
-        int[] haligns = new int[getStateCount()];
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        final int stateCount = getStateCount();
+        int[] haligns = new int[stateCount];
+        for (int ii = 0; ii < stateCount; ii++) {
             haligns[ii] = style.getTextAlignment(this, getStatePseudoClass(ii));
         }
         _haligns = checkNonDefault(haligns, BConstants.LEFT);
 
-        int[] valigns = new int[getStateCount()];
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        int[] valigns = new int[stateCount];
+        for (int ii = 0; ii < stateCount; ii++) {
             valigns[ii] = style.getVerticalAlignment(
                     this, getStatePseudoClass(ii));
         }
         _valigns = checkNonDefault(valigns, BConstants.CENTER);
 
-        int[] teffects = new int[getStateCount()];
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        int[] teffects = new int[stateCount];
+        for (int ii = 0; ii < stateCount; ii++) {
             teffects[ii] = style.getTextEffect(this, getStatePseudoClass(ii));
         }
         _teffects = checkNonDefault(teffects, BConstants.NORMAL);
 
-        int[] effsizes = new int[getStateCount()];
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        int[] effsizes = new int[stateCount];
+        for (int ii = 0; ii < stateCount; ii++) {
             effsizes[ii] = style.getEffectSize(this, getStatePseudoClass(ii));
         }
         _effsizes = checkNonDefault(effsizes, BConstants.DEFAULT_SIZE);
 
-        ColorRGBA[] effcols = new ColorRGBA[getStateCount()];
         boolean nondef = false;
-        for (int ii = 0; ii < getStateCount(); ii++) {
+        ColorRGBA[] effcols = new ColorRGBA[stateCount];
+        for (int ii = 0; ii < stateCount; ii++) {
             effcols[ii] = style.getEffectColor(this, getStatePseudoClass(ii));
             nondef = nondef || (effcols[ii] != null);
             _textfacts[ii] =
                     style.getTextFactory(this, getStatePseudoClass(ii));
         }
+
         if (nondef) {
             _effcols = effcols;
         }
     }
 
-    /**
-     * Returns the text factory that should be used by the supplied label (for which we are by definition acting as
-     * container) to generate its text.
-     * //todo: what was this supposed to do and is it out of sync with the BUI project? -- timo 18Mar08
-     */
-    protected BTextFactory getTextFactory(Label forLabel) {
-        return getTextFactory();
-    }
+//    /**
+//     * Returns the text factory that should be used by the supplied label (for which we are by definition acting as
+//     * container) to generate its text.
+//     * //todo: what was this supposed to do and is it out of sync with the BUI project? -- timo 18Mar08
+//     *
+//     * @param forLabel Label
+//     *
+//     * @return textFactory BTextFactory
+//     */
+//    protected BTextFactory getTextFactory(Label forLabel) {
+//        return getTextFactory();
+//    }
 
     /**
      * Creates a text configuration for the supplied label (for which we are by definition acting as container).
+     *
+     * @param forLabel Label
+     * @param twidth   int
+     * @return config Label.Config
      */
     protected Label.Config getLabelConfig(Label forLabel,
                                           int twidth) {
@@ -176,8 +200,8 @@ public abstract class BTextComponent extends BComponent {
 
     protected int[] checkNonDefault(int[] styles,
                                     int defval) {
-        for (int ii = 0; ii < styles.length; ii++) {
-            if (styles[ii] != -1 && styles[ii] != defval) {
+        for (int style : styles) {
+            if (style != -1 && style != defval) {
                 return styles;
             }
         }
