@@ -188,6 +188,7 @@ public class BGeomView extends BComponent {
 
                 // now set up the custom camera and render our geometry
                 renderer.setCamera(_camera);
+                _camera.apply();
                 _camera.update();
             }
 
@@ -197,8 +198,8 @@ public class BGeomView extends BComponent {
             if (!useOrtho) {
                 // restore the camera
                 renderer.setCamera(cam);
+                cam.apply();
                 cam.update();
-//            cam.apply();
                 renderer.setOrtho();
 
                 // we need to restore the GL translation as that got wiped out when we left and

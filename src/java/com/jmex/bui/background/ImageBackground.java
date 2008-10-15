@@ -84,7 +84,7 @@ public class ImageBackground extends BBackground {
 
         // compute the frame for our framed mode if one was not specially provided
         if (_frame == null && (_mode == FRAME_X || _mode == FRAME_Y || _mode == FRAME_XY)) {
-            int twidth = _image.getWidth(), theight = _image.getHeight();
+            int twidth = _image.getImageWidth(), theight = _image.getImageHeight();
             _frame = new Insets();
             _frame.left = twidth / 3;
             _frame.right = twidth / 3;
@@ -95,16 +95,18 @@ public class ImageBackground extends BBackground {
 
     // documentation inherited
     public int getMinimumWidth() {
-        return (_mode == FRAME_XY || _mode == FRAME_X) ?
-               (_frame.left + _frame.right) : _image.getWidth();
+        return (_mode == FRAME_XY || _mode == FRAME_X)
+               ? (_frame.left + _frame.right)
+               : _image.getImageWidth();
     }
 
     /**
      * Returns the minimum height allowed by this background.
      */
     public int getMinimumHeight() {
-        return (_mode == FRAME_XY || _mode == FRAME_Y) ?
-               _frame.top + _frame.bottom : _image.getHeight();
+        return (_mode == FRAME_XY || _mode == FRAME_Y)
+               ? _frame.top + _frame.bottom
+               : _image.getImageHeight();
     }
 
     // documentation inherited
@@ -172,12 +174,12 @@ public class ImageBackground extends BBackground {
             float alpha) {
         switch (_mode) {
             case SCALE_X:
-                y = (height - _image.getHeight()) / 2;
-                height = _image.getHeight();
+                y = (height - _image.getImageHeight()) / 2;
+                height = _image.getImageHeight();
                 break;
             case SCALE_Y:
-                x = (width - _image.getWidth()) / 2;
-                width = _image.getWidth();
+                x = (width - _image.getImageWidth()) / 2;
+                width = _image.getImageWidth();
                 break;
         }
         _image.render(renderer, x, y, width, height, alpha);
@@ -190,7 +192,7 @@ public class ImageBackground extends BBackground {
             int width,
             int height,
             float alpha) {
-        int iwidth = _image.getWidth(), iheight = _image.getHeight();
+        int iwidth = _image.getImageWidth(), iheight = _image.getImageHeight();
         if (_mode == TILE_X) {
             renderRow(renderer, x, y, width, Math.min(height, iheight), alpha);
         } else if (_mode == TILE_Y) {
@@ -224,7 +226,7 @@ public class ImageBackground extends BBackground {
             int width,
             int iheight,
             float alpha) {
-        int iwidth = _image.getWidth();
+        int iwidth = _image.getImageWidth();
         int across = width / iwidth;
         for (int xx = 0; xx < across; xx++) {
             _image.render(renderer, 0, 0, iwidth, iheight,
@@ -245,7 +247,7 @@ public class ImageBackground extends BBackground {
             int height,
             float alpha) {
         // render each of our image sections appropriately
-        int twidth = _image.getWidth(), theight = _image.getHeight();
+        int twidth = _image.getImageWidth(), theight = _image.getImageHeight();
 
         // draw the corners
         _image.render(renderer, 0, 0, _frame.left, _frame.bottom, x, y, alpha);

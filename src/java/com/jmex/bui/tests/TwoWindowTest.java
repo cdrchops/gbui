@@ -82,7 +82,7 @@ public class TwoWindowTest extends BaseTest2 {
 
     public static void main(String[] args) {
         TwoWindowTest app = new TwoWindowTest();
-        app.setDialogBehaviour(ALWAYS_SHOW_PROPS_DIALOG);
+        app.setConfigShowMode(ConfigShowMode.AlwaysShow);
         app.start();
     }
 
