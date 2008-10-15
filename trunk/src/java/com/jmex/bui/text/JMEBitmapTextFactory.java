@@ -24,8 +24,9 @@ import com.jme.image.Texture;
 import com.jme.math.Vector3f;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
+import com.jme.scene.Spatial;
 import com.jme.scene.Text;
-import com.jme.scene.state.AlphaState;
+import com.jme.scene.state.BlendState;
 import com.jme.scene.state.TextureState;
 import com.jme.system.DisplaySystem;
 import com.jme.util.TextureManager;
@@ -47,8 +48,9 @@ public class JMEBitmapTextFactory extends BTextFactory {
         _height = height;
 
         // create a texture from our font image
-        Texture texture = TextureManager.loadTexture(
-                font, Texture.MM_NONE, Texture.FM_NEAREST);
+        Texture texture = TextureManager.loadTexture(font,
+                                                     Texture.MinificationFilter.NearestNeighborNoMipMaps,
+                                                     Texture.MagnificationFilter.NearestNeighbor);
         _tstate = DisplaySystem.getDisplaySystem().getRenderer().
                 createTextureState();
         _tstate.setEnabled(true);
@@ -56,11 +58,10 @@ public class JMEBitmapTextFactory extends BTextFactory {
 
         // create an alpha state that we'll use to blend our font over the
         // background
-        _astate = DisplaySystem.getDisplaySystem().getRenderer().
-                createAlphaState();
+        _astate = DisplaySystem.getDisplaySystem().getRenderer().createBlendState();
         _astate.setBlendEnabled(true);
-        _astate.setSrcFunction(AlphaState.SB_SRC_ALPHA);
-        _astate.setDstFunction(AlphaState.DB_ONE);
+        _astate.setSourceFunction(BlendState.SourceFunction.SourceAlpha);
+        _astate.setDestinationFunction(BlendState.DestinationFunction.One);
         _astate.setEnabled(true);
     }
 
@@ -81,8 +82,7 @@ public class JMEBitmapTextFactory extends BTextFactory {
 
         // create a text object to display it
         final Text tgeom = new Text("text", text);
-        tgeom.setCullMode(Text.CULL_NEVER);
-        tgeom.setTextureCombineMode(TextureState.REPLACE);
+        tgeom.setTextureCombineMode(Spatial.TextureCombineMode.Replace);
         tgeom.setRenderState(_tstate);
         tgeom.setRenderState(_astate);
         tgeom.setTextColor(new ColorRGBA(color));
@@ -164,5 +164,5 @@ public class JMEBitmapTextFactory extends BTextFactory {
 
     protected int _width, _height;
     protected TextureState _tstate;
-    protected AlphaState _astate;
+    protected BlendState _astate;
 }
