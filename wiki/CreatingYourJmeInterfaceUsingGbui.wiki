@@ -1,0 +1,81 @@
+#summary From Getting Started through creating a real application
+
+= Creating your jME interface using GBUI=
+1. Getting started with GBUI in Eclipse
+
+  {{{  1.1 }}}[http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique1.1.mht Caveat Emptor]
+
+  {{{  1.2 }}}[http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique1.2.mht Tools]
+
+  {{{  1.3 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique1.3.mht Getting the GBUI source]
+
+  {{{  1.4 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique1.4.mht Installing the Groovy plug-in]
+
+  {{{  1.5 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique1.5.mht Compiling the project]
+
+  {{{  1.5.1 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique1.5.1.mht Troubleshooting]
+
+  {{{  1.6 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique1.6.mht Running the tests/demos]
+
+  {{{  1.7 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique1.7.mht Building a jar file]
+
+2. "GBUI 101"
+
+  {{{  2.1 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique2.1.mht Orientation]
+
+  {{{  2.2 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique2.2.mht Component Hierarchy (or, "Why Understanding Swing Will Be Helpful")]
+
+  {{{  2.3 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.mht Style Hierarchy (or, "Why Understanding CSS Will Be Helpful")]
+
+3. Creating your own "look-and-feel"
+
+4. Layout Managers
+
+5. Putting it all together: "A Technique"
+
+  {{{  5.1 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.mht Required Reading]
+
+  {{{  5.1.1 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.1.mht Model-View-Controller/Model-View-Presenter/State-View-Controller]
+
+  {{{  5.1.2 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.2.mht Presenter-First]
+
+  {{{  5.1.3 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.3.mht Inversion-of-control/Direct-Injection]
+
+  {{{  5.1.4 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.4.mht Game States]
+
+  {{{  5.1.5 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.5.mht Standard Game]
+
+  {{{  5.2 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.2.mht "A Technique"]
+
+  {{{  5.3 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.3.mht What we're going to create]
+
+  {{{  5.4 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.mht How we're going to do it]
+
+  {{{  5.4.1 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.1.mht Main]
+
+  {{{  5.4.2 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.2.mht ClassFactory]
+
+  {{{  5.4.3 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.3.mht GameManager]
+
+  {{{  5.4.4 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.4.mht Translator]
+
+  {{{  5.4.5 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.5.mht Main Menu]
+
+  {{{  5.4.6 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.6.mht Select Campaign]
+
+  {{{  5.4.7 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.7.mht Start Server]
+
+  {{{  5.4.8 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.8.mht InGame]
+
+  {{{  5.4.9 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.9.mht InGamePause]
+
+  {{{  5.4.10 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.10.mht Settings]
+
+  {{{  5.5 }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/ATechnique5.5.mht What's Next?]
+
+{{{ Appendix A: }}} [http://heavylead.googlecode.com/svn/wiki/ATechnique/AppendixA.mht References]
+
+== Downloads ==
+[http://heavylead.googlecode.com/svn/wiki/ATechnique/atechnique0.1.0.pdf Download this entire tutorial]
+[http://heavylead.googlecode.com/svn/wiki/ATechnique/atechnique_src_0.1.0.zip Source Code for this tutorial]
+[http://heavylead.googlecode.com/svn/wiki/ATechnique/atechnique_data_0.1.0.zip Media Data]
