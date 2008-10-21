@@ -3,29 +3,45 @@
 = Creating your jME interface using GBUI=
 1. Getting started with GBUI in Eclipse
 
-  {{{  1.1 }}}[http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.1.mht Caveat Emptor]
+  {{{  1.1 }}}[http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.1.htm Caveat Emptor]
 
-  {{{  1.2 }}}[http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.2.mht Tools]
+  {{{  1.2 }}}[http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.2.htm Tools]
 
-  {{{  1.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.3.mht Getting the GBUI source]
+  {{{  1.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.3.htm Getting the GBUI source]
 
-  {{{  1.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.4.mht Installing the Groovy plug-in]
+  {{{  1.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.4.htm Installing the Groovy plug-in]
 
-  {{{  1.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.5.mht Compiling the project]
+  {{{  1.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.5.htm Compiling the project]
 
-  {{{  1.5.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.5.1.mht Troubleshooting]
+  {{{  1.5.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.5.1.htm Troubleshooting]
 
-  {{{  1.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.6.mht Running the tests/demos]
+  {{{  1.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.6.htm Running the tests/demos]
 
-  {{{  1.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.7.mht Building a jar file]
+  {{{  1.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.7.htm Building a jar file]
 
 2. "GBUI 101"
 
-  {{{  2.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.1.mht Orientation]
+  {{{  2.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.1.htm Orientation]
 
-  {{{  2.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.2.mht Component Hierarchy (or, "Why Understanding Swing Will Be Helpful")]
+  {{{  2.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.2.htm Component Hierarchy (or, "Why Understanding Swing Will Be Helpful")]
 
-  {{{  2.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.mht Style Hierarchy (or, "Why Understanding CSS Will Be Helpful")]
+  {{{  2.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.htm Style Hierarchy (or, "Why Understanding CSS Will Be Helpful")]
+
+  {{{  2.3.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.1.htm States]
+
+  {{{  2.3.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.2.htm Styles]
+
+  {{{  2.3.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.3.htm Determining a component's style]
+
+  {{{  2.3.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.4.htm Styles without classes]
+
+  {{{  2.3.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.5.htm Overriding the default class style]
+
+  {{{  2.3.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.6.htm Windows and their buttons]
+
+  {{{  2.3.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.7.htm Custom style classes]
+
+  {{{  2.3.8 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.8.htm Scrollbars]
 
 3. Creating your own "look-and-feel"
 
