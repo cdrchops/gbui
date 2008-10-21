@@ -1,0 +1,139 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=Generator content="Microsoft Word 12 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:11.0pt;
+	font-family:"Calibri","sans-serif";}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-top:10.0pt;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	page-break-after:avoid;
+	font-size:11.0pt;
+	font-family:"Cambria","serif";
+	color:#4F81BD;}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";}
+.MsoChpDefault
+	{font-size:10.0pt;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<div class=Section1>
+
+<h3><a name="_Toc212306146">1.3 Getting the GBUI source</a></h3>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>The
+</span><a href="http://code.google.com/p/gbui/downloads/list"
+title="http://code.google.com/p/gbui/downloads/list"><span style='font-size:
+12.0pt;font-family:"Times New Roman","serif"'>Download</span></a><span
+style='font-size:12.0pt;font-family:"Times New Roman","serif"'> tab of the GBUI
+site offers some pre-compiled jars you can download for GBUI. However, I want
+to work with the source code because: </span></p>
+
+<ol start=1 type=1>
+ <li class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>it's
+     the most up-to-date</span></li>
+ <li class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>it
+     contains the source code for the examples</span></li>
+ <li class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>when
+     debugging, I can step into the source to help determine the root cause of
+     any errors I encounter</span></li>
+</ol>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>When
+working with SVN repositories, I prefer to use </span><a
+href="http://tortoisesvn.tigris.org/" title="http://tortoisesvn.tigris.org/"><span
+style='font-size:12.0pt;font-family:"Times New Roman","serif"'>TortoiseSVN</span></a><span
+style='font-size:12.0pt;font-family:"Times New Roman","serif"'>. I know I've
+heard people rave about Subclipse, but I never had much luck with it, and I
+prefer the control that TortoiseSVN gives me. So if you haven't already done
+so, download and install TortoiseSVN. (Go ahead; I'll wait :) </span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>After
+TortoiseSVN has been installed, use Windows Explorer to view your Eclipse
+workspace directory. Mine is C:\eclipse\workspace. Create a new folder there
+called &#8220;gbui&#8221;. Right-click on that newly-created directory and
+select &#8220;SVN Checkout&#8221; (notice how TortoiseSVN nicely integrates
+itself?). In the &#8220;URL of repository&#8221; field of the Checkout dialog,
+enter &#8220;</span><a href="http://gbui.googlecode.com/svn/trunk"
+title="http://gbui.googlecode.com/svn/trunk"><span style='font-size:12.0pt;
+font-family:"Times New Roman","serif"'>http://gbui.googlecode.com/svn/trunk</span></a><span
+style='font-size:12.0pt;font-family:"Times New Roman","serif"'>&#8221; (without
+the quotes). The &#8220;Checkout Directory&#8221; should already be the
+directory you just created (&#8220;C:\eclipse\workspace\gbui&#8221; in my
+case), but correct it if it's not. </span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'><img
+border=0 width=456 height=357 id="Picture 7"
+src="ATechnique1.3_files/image001.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>Click
+the &#8220;OK&#8221; button, then take a break while it downloads the source.
+The checkout status window will update as each file is downloaded so you can
+verify that something is happening. Wait until the last message is
+&#8220;Completed&#8221; and the &#8220;OK&#8221; button is enabled.</span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'><img
+border=0 width=659 height=302 id="Picture 10"
+src="ATechnique1.3_files/image002.jpg"></span></p>
+
+<p class=MsoNormal><span style='font-size:12.0pt;font-family:"Times New Roman","serif"'>Click
+&#8220;OK&#8221; to close the dialog. </span></p>
+
+</div>
+
+</body>
+
+</html>
