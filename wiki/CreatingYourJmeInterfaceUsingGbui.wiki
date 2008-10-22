@@ -91,9 +91,13 @@ Congratulations! You've just gotten GBUI to work, and can now run all the tests 
 As I mentioned at the beginning, I prefer to work with the latest version of the source, rather than a pre-built distribution.  However, the reality is that once I have the source downloaded and working, I usually ignore that code while I work on whatever application I’m writing that uses the library.  Everything works well until I run into a bug that’s fixed in a later version than I have, or a feature is added, or whatever.  So I update the source of the library, and then the compile fails.  Now my “real” application is dead in the water.  My solution to this is to download the source of the library, and if it compiles, build a jar that I use for developing against.  Then, when I update the source of the library, I can continue developing against the jar if the latest source doesn’t compile for some reason.  If the updated code does compile, then I change the reference in my project from the jar of the library to the actual project containing the source of the library.  If my “real” application still runs and behaves as expected, I build a new jar and develop against that.  If any type of error or unexpected behavior happens, I can either dig into the library to see what changed, or I can revert to the jar.
 
 To create a jar of the GBUI library, just right-click on the build.xml file in the root directory of the source code.  “Run As…” “2 Ant Build…”.
+
 [http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure1.7.1.jpg]
+
 Select the “dist” option.
+
 [http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure1.7.2.jpg]
+
 Press the “Run” button and watch the console.  If the build is successful (which it should be), you will now have a jme-bui.jar file in your gbui\dist directory that you can reference from any other application without worrying that changes to the gbui source will break anything before you’ve had a chance to test it.
 
 2. "GBUI 101"
