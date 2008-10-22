@@ -3,7 +3,7 @@
 = Creating your jME interface using GBUI=
 1. Getting started with GBUI in Eclipse
 
-  {{{  1.1 }}}[http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.1.html Caveat Emptor]
+  {{{  1.1 }}}[http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.1.htm Caveat Emptor]
 
   {{{  1.2 }}}[http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.2.htm Tools]
 
