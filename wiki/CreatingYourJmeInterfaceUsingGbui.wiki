@@ -91,6 +91,31 @@
 
 {{{ Appendix A: }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/AppendixA.mht References]
 
+= 1.	Getting started with GBUI in Eclipse =
+== 1.1 Caveat Emptor ==
+In the words of “standtrooper”: “When BUI was written BSS was, as best I can tell a “streamlined” or thinner version of CSS. It never occurred to me, a web developer, that there would be Swing developers who don't know CSS (just as there are Swing developers who don't think that there are web developers that don't think like them  ;-).” 
+
+I don't consider myself to be either a web developer, or a Swing developer. I've used CSS and am generally familiar with the concept, if not the implementation. I've also used Swing, but not much in the last 9 years, so my recent work with JMEDesktop was a crash-course getting reacquainted with that. So if you don't know CSS and you don't know Swing, don't worry: that knowledge will probably help, but I think I've got it figured out so it can't be that hard. :-)
+
+== 1.2 Tools ==
+As a starting point, I'm going to assume the following:
+  * you already have Eclipse installed and running (you can create, compile, and execute Java projects)
+  * you have a project named “jME” in your Eclipse workspace. This project is a compiled and running version of the jME 2.0 source code. If you have any problems getting to this point, reference some of the other available “Setting up Eclipse to build jME 2” tutorials.
+
+== 1.3 Getting the GBUI source ==
+The [http://code.google.com/p/gbui/downloads/list Download] tab of the GBUI site offers some pre-compiled jars you can download for GBUI. However, I want to work with the source code because: 
+  # it's the most up-to-date
+  # it contains the source code for the examples
+  # when debugging, I can step into the source to help determine the root cause of any errors I encounter
+
+working with SVN repositories, I prefer to use [http://tortoisesvn.tigris.org/ TortoiseSVN]. I know I've heard people rave about Subclipse, but I never had much luck with it, and I prefer the control that TortoiseSVN gives me. So if you haven't already done so, download and install TortoiseSVN. (Go ahead; I'll wait :) 
+
+After TortoiseSVN has been installed, use Windows Explorer to view your Eclipse workspace directory. Mine is C:\eclipse\workspace. Create a new folder there called “gbui”. Right-click on that newly-created directory and select “SVN Checkout” (notice how TortoiseSVN nicely integrates itself?). In the “URL of repository” field of the Checkout dialog, enter “[http://gbui.googlecode.com/svn/trunk]” (without the quotes). The “Checkout Directory” should already be the directory you just created (“C:\eclipse\workspace\gbui” in my case), but correct it if it's not. 
+
+
+
+
+
 == Downloads ==
 [http://gbui.googlecode.com/svn/wiki/ATechnique/atechnique0.1.0.pdf Download this entire tutorial]
 
