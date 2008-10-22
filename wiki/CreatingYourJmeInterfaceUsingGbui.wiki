@@ -1,96 +1,6 @@
 #summary From Getting Started through creating a real application
 
 = Creating your jME interface using GBUI=
-1. Getting started with GBUI in Eclipse
-
-  {{{  1.1 }}}[http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.1.htm Caveat Emptor]
-
-  {{{  1.2 }}}[http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.2.htm Tools]
-
-  {{{  1.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.3.htm Getting the GBUI source]
-
-  {{{  1.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.4.htm Installing the Groovy plug-in]
-
-  {{{  1.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.5.htm Compiling the project]
-
-  {{{  1.5.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.5.1.htm Troubleshooting]
-
-  {{{  1.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.6.htm Running the tests/demos]
-
-  {{{  1.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique1.7.htm Building a jar file]
-
-2. "GBUI 101"
-
-  {{{  2.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.1.htm Orientation]
-
-  {{{  2.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.2.htm Component Hierarchy (or, "Why Understanding Swing Will Be Helpful")]
-
-  {{{  2.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.htm Style Hierarchy (or, "Why Understanding CSS Will Be Helpful")]
-
-  {{{  2.3.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.1.htm States]
-
-  {{{  2.3.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.2.htm Styles]
-
-  {{{  2.3.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.3.htm Determining a component's style]
-
-  {{{  2.3.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.4.htm Styles without classes]
-
-  {{{  2.3.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.5.htm Overriding the default class style]
-
-  {{{  2.3.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.6.htm Windows and their buttons]
-
-  {{{  2.3.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.7.htm Custom style classes]
-
-  {{{  2.3.8 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.8.htm Scrollbars]
-
-3. Creating your own "look-and-feel"
-
-4. Layout Managers
-
-5. Putting it all together: "A Technique"
-
-  {{{  5.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.mht Required Reading]
-
-  {{{  5.1.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.1.mht Model-View-Controller/Model-View-Presenter/State-View-Controller]
-
-  {{{  5.1.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.2.mht Presenter-First]
-
-  {{{  5.1.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.3.mht Inversion-of-control/Direct-Injection]
-
-  {{{  5.1.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.4.mht Game States]
-
-  {{{  5.1.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.5.mht Standard Game]
-
-  {{{  5.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.2.mht "A Technique"]
-
-  {{{  5.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.3.mht What we're going to create]
-
-  {{{  5.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.mht How we're going to do it]
-
-  {{{  5.4.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.1.mht Main]
-
-  {{{  5.4.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.2.mht ClassFactory]
-
-  {{{  5.4.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.3.mht GameManager]
-
-  {{{  5.4.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.4.mht Translator]
-
-  {{{  5.4.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.5.mht Main Menu]
-
-  {{{  5.4.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.6.mht Select Campaign]
-
-  {{{  5.4.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.7.mht Start Server]
-
-  {{{  5.4.8 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.8.mht InGame]
-
-  {{{  5.4.9 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.9.mht InGamePause]
-
-  {{{  5.4.10 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.10.mht Settings]
-
-  {{{  5.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.5.mht What's Next?]
-
-{{{ Appendix A: }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/AppendixA.mht References]
-
 = 1.	Getting started with GBUI in Eclipse =
 == 1.1 Caveat Emptor ==
 In the words of “standtrooper”: “When BUI was written BSS was, as best I can tell a “streamlined” or thinner version of CSS. It never occurred to me, a web developer, that there would be Swing developers who don't know CSS (just as there are Swing developers who don't think that there are web developers that don't think like them  ;-).” 
@@ -185,6 +95,78 @@ To create a jar of the GBUI library, just right-click on the build.xml file in t
 Select the “dist” option.
 [http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure1.7.2.jpg]
 Press the “Run” button and watch the console.  If the build is successful (which it should be), you will now have a jme-bui.jar file in your gbui\dist directory that you can reference from any other application without worrying that changes to the gbui source will break anything before you’ve had a chance to test it.
+
+2. "GBUI 101"
+
+  {{{  2.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.1.htm Orientation]
+
+  {{{  2.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.2.htm Component Hierarchy (or, "Why Understanding Swing Will Be Helpful")]
+
+  {{{  2.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.htm Style Hierarchy (or, "Why Understanding CSS Will Be Helpful")]
+
+  {{{  2.3.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.1.htm States]
+
+  {{{  2.3.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.2.htm Styles]
+
+  {{{  2.3.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.3.htm Determining a component's style]
+
+  {{{  2.3.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.4.htm Styles without classes]
+
+  {{{  2.3.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.5.htm Overriding the default class style]
+
+  {{{  2.3.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.6.htm Windows and their buttons]
+
+  {{{  2.3.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.7.htm Custom style classes]
+
+  {{{  2.3.8 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.8.htm Scrollbars]
+
+3. Creating your own "look-and-feel"
+
+4. Layout Managers
+
+5. Putting it all together: "A Technique"
+
+  {{{  5.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.mht Required Reading]
+
+  {{{  5.1.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.1.mht Model-View-Controller/Model-View-Presenter/State-View-Controller]
+
+  {{{  5.1.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.2.mht Presenter-First]
+
+  {{{  5.1.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.3.mht Inversion-of-control/Direct-Injection]
+
+  {{{  5.1.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.4.mht Game States]
+
+  {{{  5.1.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.5.mht Standard Game]
+
+  {{{  5.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.2.mht "A Technique"]
+
+  {{{  5.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.3.mht What we're going to create]
+
+  {{{  5.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.mht How we're going to do it]
+
+  {{{  5.4.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.1.mht Main]
+
+  {{{  5.4.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.2.mht ClassFactory]
+
+  {{{  5.4.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.3.mht GameManager]
+
+  {{{  5.4.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.4.mht Translator]
+
+  {{{  5.4.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.5.mht Main Menu]
+
+  {{{  5.4.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.6.mht Select Campaign]
+
+  {{{  5.4.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.7.mht Start Server]
+
+  {{{  5.4.8 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.8.mht InGame]
+
+  {{{  5.4.9 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.9.mht InGamePause]
+
+  {{{  5.4.10 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.10.mht Settings]
+
+  {{{  5.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.5.mht What's Next?]
+
+{{{ Appendix A: }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/AppendixA.mht References]
 
 
 
