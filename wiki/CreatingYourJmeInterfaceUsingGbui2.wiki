@@ -166,13 +166,79 @@ A component's “Style” is determined by the values of the properties for that
 || Examples: || *vertical-align: top;* ||
 || Default: || *vertical-align: center;* ||
 
-  {{{  2.3.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.2.htm Styles]
+=== 2.3.3 Determining a component’s style ===
+In “typical” (ie. VB-style) GUI programming, a widget will have a standard look, and then you can modify the appearance of each instance by modifying the text displayed, the back color, etc. The problem with this is that each application made with the same widgets tends to look very similar, since implementing a common look-and-feel across an entire application is no small task. With GBUI, just as with CSS, each widget class (button, window, etc) can be given the same look-and-feel with relatively little work, making it easy to implement an application-specific look-and-feel that is different from another application built with the same widgets. As an added bonus, the “cascading” feature means that if a particular component type does not define a value for a property, GBUI will traverse up the style hierachy looking for the next-lowest component that does define a value. By default, the style hierarchy is the same as the class hierarchy, but that can be modified by explicitly defining the style class a component should use, and/or by using the “parent” property. On top of everything, a “root” style class exists that will be checked after all other components in the hierarchy.
 
-  {{{  2.3.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.3.htm Determining a component's style]
+A component’s style is resolved in the following manner:
+  * First by looking up the property using the component’s stylesheet class (either the default, or the one explicitly set) and state
+  * For certain properties, the interface hierarchy is the climbed and each parent’s stylesheet class is checked for the property in question.  The properties for which this applies are: color, font, text-align, vertical-align
+  * Finally, the root stylesheet class is checked (for all properties, not just those for which we climb the interface hierarchy)
 
-  {{{  2.3.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.4.htm Styles without classes]
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.3.1.gif]
 
-  {{{  2.3.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.5.htm Overriding the default class style]
+Figure 2.3.3.1:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.3.2.gif]
+
+Figure 2.3.3.2:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.3.3.gif]
+
+Figure 2.3.3.3:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.3.4.gif]
+
+Figure 2.3.3.4:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.3.5.gif]
+
+Figure 2.3.3.5:
+
+=== 2.3.4 Styles without classes ===
+
+=== 2.3.5 Overriding the default class style ===
+
+=== 2.3.6 Windows and their buttons ===
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.6.1.gif]
+
+Figure 2.3.6.1:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.6.2.gif]
+
+Figure 2.3.6.2:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.6.3.gif]
+
+Figure 2.3.6.3:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.6.4.gif]
+
+Figure 2.3.6.4:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.6.5.gif]
+
+Figure 2.3.6.5:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.6.6.gif]
+
+Figure 2.3.6.6:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.6.7.gif]
+
+Figure 2.3.6.7:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.6.8.gif]
+
+Figure 2.3.6.8:
+
+
+
+
+
+
+
+
 
   {{{  2.3.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.6.htm Windows and their buttons]
 
