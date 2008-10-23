@@ -232,16 +232,22 @@ Figure 2.3.6.7:
 
 Figure 2.3.6.8:
 
+=== 2.3.7 Custom style classes ===
 
+=== 2.3.8 Scrollbars === 
 
+Figure 2.3.8.1:
 
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.8.1.gif]
 
+Figure 2.3.8.2:
 
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.8.2.gif]
 
+Figure 2.3.8.3:
 
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.8.3.gif]
 
-  {{{  2.3.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.6.htm Windows and their buttons]
+Figure 2.3.8.4:
 
-  {{{  2.3.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.7.htm Custom style classes]
-
-  {{{  2.3.8 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.8.htm Scrollbars]
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.3.8.4.gif]
