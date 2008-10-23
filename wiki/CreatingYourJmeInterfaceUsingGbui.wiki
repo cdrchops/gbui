@@ -7,16 +7,12 @@
 == [CreatingYourJmeInterfaceUsingGbui4 4. Layout Managers] ==
 == [CreatingYourJmeInterfaceUsingGbui5 5. Putting it all together: "A Technique"] ==
 
+== Appendix A: References ==
+  * [http://www.banghowdy.com/ Bang! Howdy] – created by [http://www.threerings.com/ Three Rings Design]
+  * [http://samskivert.com/code/jme-bui/ BUI] – the “original” BUI (Banana User Interface) library, used by Bang! Howdy
+  * [http://code.google.com/p/jmeaddons/ StrategicHandler]
 
-{{{ Appendix A: }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/AppendixA.mht References]
-
-
-
-
-
-
-
-== Downloads ==
+= Downloads =
 [http://gbui.googlecode.com/svn/wiki/ATechnique/atechnique0.1.0.pdf Download this entire tutorial]
 
 [http://gbui.googlecode.com/svn/wiki/ATechnique/atechnique_src_0.1.0.zip Source Code for this tutorial]
