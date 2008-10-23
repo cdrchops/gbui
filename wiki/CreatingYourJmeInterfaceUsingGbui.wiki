@@ -133,7 +133,7 @@ A component's “Style” is determined by the values of the properties for that
 
 || Name: || *background* ||
 || Description: || This property defines what the main body of the component looks like. This may be a solid color, an image, or a blank (which basically means the component is invisible). ||
-|| Format: || type path/color [scale] [insets] ||
+|| Format: || type path/color {{{[scale]}}} {{{[insets]}}} ||
 || Valid values: || type: image/solid/blank ||
 ||               || path/color:             ||
 ||               || scale: centerxy, centerx, centery, scalexy, scalex, scaley, tilexy, tilex, tiley, framexy, framex, framey  ||
