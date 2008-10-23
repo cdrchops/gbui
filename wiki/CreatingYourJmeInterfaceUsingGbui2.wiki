@@ -81,7 +81,7 @@ A component's “Style” is determined by the values of the properties for that
 || Valid values: || ||
 || _Examples:_ || *effect-color: #442288;* ||
 || _Default:_ || n/a? ||
- 
+
 || Name: || *effect-size* ||
 || Description: || ||
 || Format: || size ||
@@ -108,90 +108,63 @@ A component's “Style” is determined by the values of the properties for that
 ||             || *icon: image “rsrc/textures/checkbox.png”;* ||
 || _Default:_ || *icon: blank 10 10;* ||
 
-Name: line-spacing
-Description: Amount of space to add or remove between lines.
-Format: spacing
-Valid values: 
-  * spacing: (integer value)
-Examples:
-  * line-spacing: -2;
-Default:
-  * line-spacing: 0;
+|| Name: || *line-spacing* ||
+|| Description: || Amount of space to add or remove between lines. ||
+|| Format: || spacing ||
+|| Valid values: || spacing: (integer value) ||
+|| _Examples:_ || *line-spacing: -2;* ||
+|| _Default:_ || *line-spacing: 0;* ||
 
- 
-Name: padding
-Description: 
-Format: top [right] [bottom] [left]
-Valid values: 
-  * 
-Examples:
-  * padding: 5;		// top = 5; right = top; bottom = top; left = top
-  * padding: 3 5;		// top = 3; right = 5; bottom = top; left = right
-  * padding 4 6 2 4;
-Default:
-  * padding 0;
+|| Name: || *padding* ||
+|| Description: || ||
+|| Format: || top {{{[right]}}} {{{[bottom]}}} {{{[left]}}} ||
+|| Valid values: || ||
+|| _Examples:_ || *padding: 5;		// top = 5; right = top; bottom = top; left = top* ||
+||             || *padding: 3 5;		// top = 3; right = 5; bottom = top; left = right* ||
+||             || *padding 4 6 2 4;* ||
+|| _Default:_ || *padding 0;* ||
 
-Name: parent
-Description: Establishes an explicit inheritance.  The class being extended must be defined before this one.
-Format: 
-Valid values: 
-  * 
-Examples:
-  * parent: titlebutton;
-Default:
-  * 
+|| Name: || *parent* ||
+|| Description: || Establishes an explicit inheritance.  The class being extended must be defined before this one. ||
+|| Format: ||
+|| Valid values: || ||
+|| _Examples:_ || *parent: titlebutton;* ||
+|| _Default:_ || ||
 
-Name: size
-Description: Overrides the component’s preferred size.
-Format: width height
-Valid values: 
-  * 
-Examples:
-  * 
-Default:
-  * 
+|| Name: || *size* ||
+|| Description: || Overrides the component’s preferred size. ||
+|| Format: || width height ||
+|| Valid values: || ||
+|| _Examples:_ || ||
+|| _Default:_ || ||
 
-Name: text-align
-Description: Specifies the horizontal alignment of text on the component.
-Format: alignment
-Valid values: 
-  * alignment: left/right/center
-Examples:
-  * text-align: center;
-Default:
-  * text-align: left;
+|| Name: || *text-align* ||
+|| Description: || Specifies the horizontal alignment of text on the component. ||
+|| Format: || alignment ||
+|| Valid values: || alignment: left/right/center ||
+|| _Examples:_ || *text-align: center;* ||
+|| _Default:_ || *text-align: left;* ||
 
-Name: text-effect
-Description: 
-Format: effect
-Valid values: 
-  * Effect: none/shadow/outline/plain
-Examples:
-  * text-effect: outline;
-Default:
-  * text-effect: none;
+|| Name: || *text-effect* ||
+|| Description: || ||
+|| Format: || effect ||
+|| Valid values: || effect: none/shadow/outline/plain ||
+|| _Examples:_ || *text-effect: outline;* ||
+|| _Default:_ || *text-effect: none;* ||
 
-Name: tooltip
-Description: Used to define the style class for the tooltip.
-Format: other_class
-Valid values: 
-  * 
-Examples:
-  * 
-Default:
-  * 
+|| Name: || *tooltip* ||
+|| Description: || Used to define the style class for the tooltip. ||
+|| Format: || other_class ||
+|| Valid values: || ||
+|| Examples: || ||
+|| Default: || ||
 
-Name: vertical-align
-Description: Specifies the vertical alignment of text on the component.
-Format: alignment
-Valid values: 
-  * alignment: center/top/bottom
-Examples:
-  * vertical-align: top;
-Default:
-  * vertical-align: center;
-
-
+|| Name: || *vertical-align* ||
+|| Description: || Specifies the vertical alignment of text on the component. ||
+|| Format: || alignment ||
+|| Valid values: || alignment: center/top/bottom ||
+|| Examples: || *vertical-align: top;* ||
+|| Default: || *vertical-align: center;* ||
 
   {{{  2.3.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.2.htm Styles]
 
