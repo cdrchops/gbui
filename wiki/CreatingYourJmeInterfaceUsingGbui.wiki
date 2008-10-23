@@ -131,9 +131,12 @@ If you've looked at the GBUI source at all, I'm sure you've seen the *.bss files
 === 2.3.2 Styles ===
 A component's “Style” is determined by the values of the properties for that component. The properties that can be set, their format and allowed values, and the defaults if that property is not explicitly set are:
 
-Name: *background* 
+Name: *background*
+
 Description: This property defines what the main body of the component looks like. This may be a solid color, an image, or a blank (which basically means the component is invisible).
+
 Format: type path/color [scale] [insets]
+
 Valid values: 
   * type: image/solid/blank
   * path/color: 
@@ -144,14 +147,31 @@ Note:
   * the second parameter is a path only if the type is “path”
   * the third parameter is used only if the type is “path”, and is optional.  The default value is scalexy.
   * the insets are used only if the third parameter is framexy.  See padding for a description of the expected format.
+
 _Examples:_ 
   * *background: image “rsrc/textures/button_up.png” tilexy;* 
   * *background: image “rsrc/textures/button_up.png” framexy 1 2 3 4;* 
   * *background: solid #00000088;* 
+
 _Default:_ 
   * n/a?
 
- 
+|| Name: || *background* ||
+|| Description: || This property defines what the main body of the component looks like. This may be a solid color, an image, or a blank (which basically means the component is invisible). ||
+|| Format: || type path/color [scale] [insets] ||
+|| Valid values: ||  * type: image/solid/blank ||
+||               ||  * path/color:             ||
+||               ||  * scale: centerxy, centerx, centery, scalexy, scalex, scaley, tilexy, tilex, tiley, framexy, framex, framey  ||
+|| Note: ||  * the second parameter is ignored if the type is “blank” ||
+||       ||  * the second parameter is a color only if the type is “solid” ||
+||       ||  * the second parameter is a path only if the type is “path” ||
+||       ||  * the third parameter is used only if the type is “path”, and is optional.  The default value is scalexy. ||
+||       ||  * the insets are used only if the third parameter is framexy.  See padding for a description of the expected format. ||
+|| _Examples:_ ||  * *background: image “rsrc/textures/button_up.png” tilexy;* ||
+||             ||  * *background: image “rsrc/textures/button_up.png” framexy 1 2 3 4;* ||
+||             ||  * *background: solid #00000088;* ||
+|| _Default:_ ||  * n/a? ||
+
 Name: border, border-left, border-top, border-right, border-bottom
 Description: 
 Format: thickness type [color]
