@@ -1,7 +1,7 @@
 #summary From Getting Started through creating a real application
 
 = Creating your jME interface using GBUI=
-[CreatingYourJmeInterfaceUsingGbui 1. Getting started with GBUI in Eclipse]
+[CreatingYourJmeInterfaceUsingGbui1 1. Getting started with GBUI in Eclipse]
 
 = 2. "GBUI 101" =
 == 2.1 Orientation ==
