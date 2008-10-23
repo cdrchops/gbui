@@ -17,7 +17,7 @@ Once again, don’t get too hung up on understanding everything in this article;
 === 5.1.4 Game States ===
 When I started working with jMonkeyEngine, this was my understanding of game states: [http://gamedevgeek.com/tutorials/managing-game-states-in-c/ Managing Game States in C++].  I was led to this article during my work with Ogre3D and this article: [http://www.ogre3d.org/wiki/index.php/Managing_Game_States_with_OGRE Managing Game States with Ogre].  Yet again, don’t obsess with the details, just understand that these articles use a different understanding of game states than jME.  These articles use the more traditional software engineering definition of a states as being mutually exclusive of each other; only one state is active at a time.
 
-=== 5.1.5 StandardGame ===
+=== 5.1.5 !StandardGame ===
 Hopefully you’re already familiar with StandardGame and it’s definition of GameStates (that are different from the definition of GameState in the previous reference).  If not, there are a number of tutorials on the jME Wiki:
   * [http://www.jmonkeyengine.com/wiki/doku.php?id=standardgame_gamestates_and_multithreading_a_new_way_of_thinking StandardGame, GameStates, and Multithreading (A New Way of Thinking)]
   * [http://www.jmonkeyengine.com/wiki/doku.php?id=simplegame_to_standardgame SimpleGame to StandardGame - An effort to gain mindshare by darkfrog]
@@ -30,3 +30,77 @@ Here’s the premise of this sample application: we’re going to create a 3D, o
 
 == 5.4 How we’re going to do it ==
 I’ve separated my code and the media resources so I can hopefully update the code at a later date and save you the bandwidth of downloading the media again.  I’m not going to go into a lot of detail on setting up the project here.  Refer to the chapter on setting up GBUI and understand this project is practically a parallel to that.  Once that’s been done successfully, your Eclipse project should resemble the following:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.1.jpg]
+
+=== 5.4.1 Main ===
+{{{
+package atechnique;
+
+import com.jme.renderer.ColorRGBA;
+import com.jmex.game.StandardGame;
+
+import atechnique.classfactory.ClassFactory;
+import atechnique.game.state.GameManager;
+
+public class Main {
+	private static StandardGame _game;
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) throws InterruptedException {		
+		_game = new StandardGame("ATechnique", StandardGame.GameType.GRAPHICAL, ClassFactory.getGameSettings());
+		_game.setBackgroundColor(ColorRGBA.darkGray);
+		_game.start();
+		
+		ClassFactory.initialize(_game.getCamera());
+		
+		GameManager.getInstance().start(ClassFactory.getMainMenuPresenter());
+	}
+
+    public static void exit() {    	
+        _game.shutdown();
+    }
+
+    public static void changeResolution() {
+    	_game.recreateGraphicalContext();
+    }
+} 
+}}}
+
+Let’s look at what we have here: at first glance, this looks like a fairly standard (no pun intended) start of a StandardGame application.  We declare a class-level StandardGame instance, then create it, set a background color, and start the game.  But what’s with the references to ClassFactory and GameManager?  I’ll go into more detail later, but for now let me just say that ClassFactory is my implementation of a Direct Injection container.  It is a Singleton object that provides access to all of the shared objects that will be referenced throughout the application.  More than just providing access to these objects, the ClassFactory is responsible for creating them.  The GameManager is my implementation of my game state machine, as described in the above required reading.  The call to the start method is initiating the state machine.  The two public methods ({{{exit}}} and {{{changeResolution}}})  are here because it’s the only way I could find to provide access to the instance of StandardGame.  I don’t really like it, it doesn’t feel right, but it is what it is.
+
+=== 5.4.2 ClassFactory ===
+For reasons of space, I’m not going to reprint the entire class here.  Follow along in the source as I describe each item:
+
+{{{package atechnique.classfactory;}}}
+The package declaration.  If you found the source file, you already knew this.  If not, now you do! :-)
+I don’t think there’s anything in the imports section or class declaration that needs to be explained.  Just after the declaration for the class are the declarations for all the class member variables.  You may notice that the vast majority are {{{private}}} and {{{static}}}.  There is one that is {{{public}}}, but I generally believe that {{{public}}}, and even {{{protected}}}, member variables are a bad idea.  When I violate this guideline, it’s generally a shortcut to what I consider to be a “proper” solution, and I usually regret it later.  This {{{public}}} variable is no exception: I haven’t yet regretted it, but it’s definitely a shortcut.
+
+Before I go further, let me explain the principle behind this entire class: in the required reading section, I referred to Inversion-of-Control and Direct-Injection.  This class is my implantation of a Direct Injection container; it’s job is to construct objects and make them available to the application.  It also lets me use the concepts of global variables and singleton objects, while also avoiding implementing the objects I need as singletons, so I can actually use automated unit tests on them.  (In case you haven’t already encountered the issue, singleton objects are notoriously difficult to test with automated unit test suites).  I’ve used Spring.NET in a previous application, but ended up ripping it out and replacing it with a class similar to what I have here.  Using Spring just required too much overhead, and caused problems during debugging.  I prefer to have my mistakes pointed out to me by the compiler, rather than at run-time.  When other developers (not familiar with Spring, or how to configure it) tried to work on the application, they just got confused and stumped.  So maybe I’m just not smart enough to see the benefit of a container that puts together objects at run-time based on a configuration file, even though I know exactly how I want the objects constructed at compile time and I won’t ever change that,  but it wasn’t worth the hassle.  I’m still not really happy with the name of this class but I haven’t found a better one yet, so it stands.
+
+Now to continue with the code: with this type of container, I have some control over exactly when and how I create all the objects I need, but eventually they do need to be created before they can be used.  One simple technique would be to create all the objects in the constructor of the class.  But this doesn’t work so well with a bunch of {{{static}}} members.  One way to work around this is to include an {{{Initialize}}} method that can be called to do all necessary creation.  This gives us explicit control over when we do that creation.  But here was the problem I ran into: I knew that the game settings was going to be an object that I wanted to have access to through this container.  I also knew I wanted to use the StrategicHandler in my main game state.  StrategicHandler requires an instance of the camera when it is created.  The StandardGame creates the camera, but requires a reference to the game settings when it is created.  So if the {{{initialize}}} method was going to create the StrategicHandler object, it would need a reference to the camera created by the StandardGame.  We should call {{{initialize}}} after we create the StandardGame.  But since StandardGame requires the game settings, now we need to call {{{initialize}}} before we create the StandardGame.  Since we can’t call {{{initialize}}} both before and after we create the StandardGame, we have a problem.  The solution I chose was to use a static initializor to create the game settings so we could use that when we create the StandardGame, and we then use the camera created to call {{{ClassFactory.initialize()}}}.  This explains the static initializor you see in the ClassFactory declaration, as well as most of the Main method.
+
+In the {{{initialize}}} method, you can see a lot of reference to the mouse and cursors.  The reason for this is that I wanted to control the appearance of the mouse cursor consistently throughout the entire application so I don’t have to recreate the same logic all through the application.
+
+Finally, we get to some real meat.  The rest of the {{{initialize}}} method creates the actual states (in the StandardGame sense) we will use in our application.  Note that for each triplet, the declarations of the view and model are for interfaces, but here we specify concrete objects that implement those interfaces.  We then pass those to the constructor of the presenter.  Finally, we add the new state to the GameStateManager, but this is typical for any StandardGame application.  Why do I specify the complete path for the view object when an {{{imports}}} statement could have done the same thing?  Because this is where I have changed the actual view class.  When learning jME GUIs, I started with FengGUI, moved to JMEDesktop, then to a custom hud implementation, and finally GBUI.  By creating different packages, I could (and did!) have a view class for each of the above libraries, all implementing the same interface.  As I moved from one library to another, I could do it one view at a time simply by modifying the class path to the view I wanted.
+
+The rest of the class is fairly straight-forward: public accessors to the private member variables.  The notable exception is at the end of the class:
+{{{
+	public static InGamePausePresenter getInGamePausePresenter() {
+		return _inGamePausePresenter;
+	}
+	
+	public static InGameState getInGameState() {
+		if (_inGameState == null) {
+	        _inGameState = new InGameState(_camera);
+	        GameStateManager.getInstance().attachChild(_inGameState);
+		}
+		
+		return _inGameState;
+	}
+}}}
+
+You’ll notice that {{{getInGamePausePresenter}}} merely returns the class that we created in the {{{initialize}}} method.  On the other hand, the _inGameState object is not created in the initialize method: rather, the {{{getInGameState}}} method checks if the {{{_inGameState}}} method has been created yet, and creates it if it has not.  I think of this as “lazy” instantiation, deferring the creation of the object until it is first needed.  The trade-off of lazy instantiation versus the {{{initialize}}} method is merely a matter of when we will make the user wait for the object(s) to be created: at the game’s startup, or during play of the game.  I started with lazy instantiation for all objects, but didn’t like the delay during menu navigation, so I create the GUI states when the game starts up.  Since I expect the {{{_inGameState}}} to have to load data specific to the selected scenario, which won’t be known until the user selects it, I use lazy instantiation for that object.
+ 
