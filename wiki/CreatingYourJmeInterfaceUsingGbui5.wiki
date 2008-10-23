@@ -1,43 +1,32 @@
 #summary Chapter 5 - Putting it all together: "A Technique"
 
-5. Putting it all together: "A Technique"
+== 5.1 Required Reading ==
+Many times, academic articles will be sprinkled with a long series of footnotes throughout the text, referring the user to other articles that pertain to what the author is saying.  In this article, I’m going to reverse the article by listing reference works first, before I say anything that’s at all original.  The reason for this is simple: the work I’ve done is built on the foundations laid by many other people, and I believe understanding where I got my ideas from will help better explain what I’ve done.
 
-  {{{  5.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.mht Required Reading]
+=== 5.1.1 Model-View-Controller/Model-View-Presenter/State-View-Controller ===
+This is a software-engineering design pattern that goes by a variety of names, but what they have in common is a formal separation of data (“model” or “state”), the way that data is presented to the user (“view”), and the way the user interacts with that data (“controller” or “presenter”).  It’s such a widely covered topic that any Google search will turn up enough references to keep you busy reading for the next year, so I’m not going to include links to any specific articles.  Besides, the next item takes this general pattern, and puts enough meat on the concept to make it very useable.
 
-  {{{  5.1.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.1.mht Model-View-Controller/Model-View-Presenter/State-View-Controller]
+=== 5.1.2 Presenter-First ===
+This is a variation of the MVC/MVP/SVC pattern published by [http://www.atomicobject.com/ Atomic Object].  Their include a great number of articles and examples explaining it on their [http://www.atomicobject.com/pages/Presenter+First site], and I definitely recommend you spend some time studying them.  Just in case you don’t, here’s my quick summary: in Presenter-First, the presenter knows about the model and the view only through interfaces.  The presenter is constructed with an instance of an object that implements the view interface, and an instance of an object that implements the model interface.  The presenter interacts with the view and model by calling methods of their interfaces.  Neither the view nor the model know anything about each other or the presenter; they can interact with the presenter only by firing events.  This architecture makes it very simple to test the presenter (assumed to contain the bulk of the program’s logic) by simply creating test mock objects that implement the appropriate interface.  
 
-  {{{  5.1.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.2.mht Presenter-First]
+=== 5.1.3 Inversion-of-control/Direct-Injection ===
+I’m not going to spend any time explaining either of these topics; I’m just going to direct you to what I consider to be *_the_* classic article on the topic: [http://martinfowler.com/articles/injection.html Inversion of Control Containers and the Dependency Injection pattern].
 
-  {{{  5.1.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.3.mht Inversion-of-control/Direct-Injection]
+Once again, don’t get too hung up on understanding everything in this article; if you do a quick skim to get the basic ideas, you’ll be good to go.
 
-  {{{  5.1.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.4.mht Game States]
+=== 5.1.4 Game States ===
+When I started working with jMonkeyEngine, this was my understanding of game states: [http://gamedevgeek.com/tutorials/managing-game-states-in-c/ Managing Game States in C++].  I was led to this article during my work with Ogre3D and this article: [http://www.ogre3d.org/wiki/index.php/Managing_Game_States_with_OGRE Managing Game States with Ogre].  Yet again, don’t obsess with the details, just understand that these articles use a different understanding of game states than jME.  These articles use the more traditional software engineering definition of a states as being mutually exclusive of each other; only one state is active at a time.
 
-  {{{  5.1.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.1.5.mht Standard Game]
+=== 5.1.5 StandardGame ===
+Hopefully you’re already familiar with StandardGame and it’s definition of GameStates (that are different from the definition of GameState in the previous reference).  If not, there are a number of tutorials on the jME Wiki:
+  * [http://www.jmonkeyengine.com/wiki/doku.php?id=standardgame_gamestates_and_multithreading_a_new_way_of_thinking StandardGame, GameStates, and Multithreading (A New Way of Thinking)]
+  * [http://www.jmonkeyengine.com/wiki/doku.php?id=simplegame_to_standardgame SimpleGame to StandardGame - An effort to gain mindshare by darkfrog]
 
-  {{{  5.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.2.mht "A Technique"]
+== 5.2 “A Technique” ==
+Why do I call this “A Technique”?  Blame it on my military schooling and the instructors that say “Gentlemen, what I’m about to teach you is merely ‘A Technique’”.  What it means is that I’m going to show you one way of doing something.  I’m not going to claim that it’s the “One True Way”, or that it’s the best way.  I’m not even going to claim that it’s a correct way.  I will say that it “Works For Me”.  Try it for yourself and learn from it.  I can almost guarantee there will be parts of it that you don’t like.  I hope there are parts you do like but it won’t hurt my feelings if you don’t.  Take what you like, find your own way for the parts you don’t, and move forward.
 
-  {{{  5.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.3.mht What we're going to create]
+== 5.3 What we’re going to create ==
+Here’s the premise of this sample application: we’re going to create a 3D, online version of a tabletop [http://en.wikipedia.org/wiki/Miniatures_wargame miniatures wargame].  One player will start the application and select a campaign.  A campaign is a series of related battles or scenarios, the results of each one influencing the others.  For this game, campaigns and their scenarios will either ship with the game, players can purchase them as expansion packs, or they can create their own (if an appropriate editor is provided).  The player can either start a new campaign from the beginning, or resume one that they have already progressed in.  After the campaign and scenario have been selected, the player will start a server connection.  They will specify what their username will be, what port the server will listen on for incoming connections, and which faction (defined in the scenario) they will play in the upcoming battle.  The game will then load and display the appropriate terrain and wait for incoming connections.  Another player will start the game, connect to an existing game, and enter the server address and port, and their username.  Once their client connects to the server, they will select which faction they will play.  Now that everyone has connected and sides chosen, the players will play their game.  At any point, they can save the game where they are, to resume at a later time.
 
-  {{{  5.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.mht How we're going to do it]
-
-  {{{  5.4.1 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.1.mht Main]
-
-  {{{  5.4.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.2.mht ClassFactory]
-
-  {{{  5.4.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.3.mht GameManager]
-
-  {{{  5.4.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.4.mht Translator]
-
-  {{{  5.4.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.5.mht Main Menu]
-
-  {{{  5.4.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.6.mht Select Campaign]
-
-  {{{  5.4.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.7.mht Start Server]
-
-  {{{  5.4.8 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.8.mht InGame]
-
-  {{{  5.4.9 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.9.mht InGamePause]
-
-  {{{  5.4.10 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.4.10.mht Settings]
-
-  {{{  5.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique5.5.mht What's Next?]
+== 5.4 How we’re going to do it ==
+I’ve separated my code and the media resources so I can hopefully update the code at a later date and save you the bandwidth of downloading the media again.  I’m not going to go into a lot of detail on setting up the project here.  Refer to the chapter on setting up GBUI and understand this project is practically a parallel to that.  Once that’s been done successfully, your Eclipse project should resemble the following:
