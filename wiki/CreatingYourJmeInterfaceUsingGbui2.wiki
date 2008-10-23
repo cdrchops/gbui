@@ -23,7 +23,7 @@ Figure 2.2.4: This shows the variety of Window and Dialog components that derive
 Note: a BWindow may only be added to BRootNode; it may not be the child of any other component.
 
 == 2.3 Style Hierarchy (or, "Why Understanding CSS Will Be Helpful") ==
-If you've looked at the GBUI source at all, I'm sure you've seen the *.bss files that define how your GUI will look. You can see widget types, and some obvious properties that relate to appearance: font size, background image, etc. When GBUI renders each component on the screen, it decides how each widget should look based upon it's component type, and it's state. 
+If you've looked at the GBUI source at all, I'm sure you've seen the {{{*}}}.bss files that define how your GUI will look. You can see widget types, and some obvious properties that relate to appearance: font size, background image, etc. When GBUI renders each component on the screen, it decides how each widget should look based upon it's component type, and it's state. 
 
 === 2.3.1 States ===
 “State” is an easy-to-understand concept that is used to describe what the component is doing: BComponent defines three states common to all widgets: 
@@ -50,87 +50,63 @@ A component's “Style” is determined by the values of the properties for that
 ||             || *background: solid #00000088;* ||
 || _Default:_ || n/a? ||
 
-Name: border, border-left, border-top, border-right, border-bottom
-Description: 
-Format: thickness type [color]
-Valid values: 
-  * thickness: (integer value)
-  * type: solid/blank
-  * color: #RRGGBB or #RRGGBBAA
-Note: 
-  * if a border class is defined, it will be used.  If one is not defined, the border will be constructed by compiling the definitions of the individual sides.
-  * the color parameter will only be read if the type is “solid”.
-Examples:
-  * border: 1 solid #FFFFFF;
-Default:
-  * 
+|| Name: || *border, border-left, border-top, border-right, border-bottom* ||
+|| Description: || ||
+|| Format: || thickness type {{{[color]}}} ||
+|| Valid values: || thickness: (integer value) ||
+||               || type: solid/blank ||
+||               || color: #RRGGBB or #RRGGBBAA ||
+|| Note: || if a border class is defined, it will be used.  If one is not defined, the border will be constructed by compiling the definitions of the individual sides. ||
+||       || the color parameter will only be read if the type is “solid”. ||
+|| _Examples:_ || *border: 1 solid #FFFFFF;* ||
+|| _Default:_ || ||
 
-Name: color
-Description: 
-Format: color
-Valid values: 
-  * color: #RRGGBB or #RRGGBBAA
-Examples:
-  * color #BBBBBB;
-Default:
-  * n/a?
+|| Name: || *color* ||
+|| Description: || ||
+|| Format: || color ||
+|| Valid values: || color: #RRGGBB or #RRGGBBAA ||
+|| _Examples:_ || *color #BBBBBB;* ||
+|| _Default:_ || n/a? ||
 
-Name: cursor
-Description: 
-Format: name
-Valid values: 
-  * 
-Examples:
-  * 
-Default:
-  * n/a?
+|| Name: || *cursor* ||
+|| Description: || ||
+|| Format: || name ||
+|| Valid values: || ||
+|| _Examples:_ || ||
+|| _Default:_ || n/a? ||
 
-Name: effect-color
-Description: 
-Format: 
-Valid values: 
-  * 
-Examples:
-  * effect-color: #442288;
-Default:
-  * n/a?
-
+|| Name: || *effect-color* ||
+|| Description: || ||
+|| Format: || ||
+|| Valid values: || ||
+|| _Examples:_ || *effect-color: #442288;* ||
+|| _Default:_ || n/a? ||
  
-Name: effect-size
-Description: 
-Format: size
-Valid values: 
-  * size: (integer value)
-Examples:
-  * 
-Default:
-  * effect-size: 1;
+|| Name: || *effect-size* ||
+|| Description: || ||
+|| Format: || size ||
+|| Valid values: || size: (integer value) ||
+|| _Examples:_ || ||
+|| _Default:_ || *effect-size: 1;* ||
 
-Name: font
-Description: 
-Format: family style size
-Valid values: 
-  * family: “Dialog”, “Helvetica”
-  * style: plain/bold/italic/bolditalic
-  * size: (integer value)
-Examples:
-  * font: “Dialog” plain 16;
-Default:
-  * n/a?
+|| Name: || *font* ||
+|| Description: || ||
+|| Format: || family style size ||
+|| Valid values: || family: “Dialog”, “Helvetica” ||
+||               || style: plain/bold/italic/bolditalic ||
+||               || size: (integer value) ||
+|| _Examples:_ || *font: “Dialog” plain 16;* ||
+|| _Default:_ || n/a? ||
 
-Name: icon
-Description: 
-Format: type path/width [height]
-Valid values: 
-  * type: blank/image
-Note: 
-  * if the type is “blank”, the second parameter is the width and the third parameter is the height.
-  * if the type is “image”, the second parameter specifies the path to the image file.  If any error is encountered loading the specified file, the icon will default to blank 10 10.
-Examples:
-  * icon: blank 7 7;
-  * icon: image “rsrc/textures/checkbox.png”;
-Default:
-  * icon: blank 10 10;
+|| Name: || *icon* ||
+|| Description: || ||
+|| Format: || type path/width {{{[height]}}} ||
+|| Valid values: || type: blank/image ||
+|| Note: || if the type is “blank”, the second parameter is the width and the third parameter is the height.||
+||       || if the type is “image”, the second parameter specifies the path to the image file.  If any error is encountered loading the specified file, the icon will default to blank 10 10. ||
+|| _Examples:_ || *icon: blank 7 7;* ||
+||             || *icon: image “rsrc/textures/checkbox.png”;* ||
+|| _Default:_ || *icon: blank 10 10;* ||
 
 Name: line-spacing
 Description: Amount of space to add or remove between lines.
