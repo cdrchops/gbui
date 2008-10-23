@@ -1,0 +1,232 @@
+#summary Chapter 2 - "GBUI 101"
+
+== 2.1 Orientation ==
+== 2.2 Component Hierarchy (or, "Why Understanding Swing Will Be Helpful") ==
+As a developer, when I started working with GBUI, my primary interest was in what the library can offer me; what widgets are available? What events can they respond to? How easy is it to use? From that perspective, I can say that the library offers an excellent selection of widgets, and the implementation reminds me of Swing. At the top is BComponent (think “JComponent”), from which everything derives. 
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.2.1.gif]
+
+Figure 2.2.1: This shows BComponent down to some of the more common widgets such as text components, labels, buttons, menu items, combo box, etc.
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.2.2.gif]
+
+Figure 2.2.2: This shows BContainer deriving from BComponent, and then some of the more common container-type widgets. Again, think of parallels to Swing components with similar names.
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.2.3.gif]
+
+Figure 2.2.3:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.2.4.gif]
+
+Figure 2.2.4: This shows the variety of Window and Dialog components that derive from BContainer.
+
+Note: a BWindow may only be added to BRootNode; it may not be the child of any other component.
+
+== 2.3 Style Hierarchy (or, "Why Understanding CSS Will Be Helpful") ==
+If you've looked at the GBUI source at all, I'm sure you've seen the *.bss files that define how your GUI will look. You can see widget types, and some obvious properties that relate to appearance: font size, background image, etc. When GBUI renders each component on the screen, it decides how each widget should look based upon it's component type, and it's state. 
+
+=== 2.3.1 States ===
+“State” is an easy-to-understand concept that is used to describe what the component is doing: BComponent defines three states common to all widgets: 
+  * Disabled: most components that are disabled have a darker than normal appearance used to indicate that the user can not interact with those components
+  * Hover: a component is in this state when the mouse cursor is within the bounds of the component. Often this is used to give a visual cue to the user that pressing the mouse button will do something
+  * Default: this state applies to any component that is not disabled, and the mouse is not hovering over it.
+
+=== 2.3.2 Styles ===
+A component's “Style” is determined by the values of the properties for that component. The properties that can be set, their format and allowed values, and the defaults if that property is not explicitly set are:
+
+|| Name: || *background* ||
+|| Description: || This property defines what the main body of the component looks like. This may be a solid color, an image, or a blank (which basically means the component is invisible). ||
+|| Format: || type path/color {{{[scale]}}} {{{[insets]}}} ||
+|| Valid values: || type: image/solid/blank ||
+||               || path/color:             ||
+||               || scale: centerxy, centerx, centery, scalexy, scalex, scaley, tilexy, tilex, tiley, framexy, framex, framey  ||
+|| Note: || the second parameter is ignored if the type is “blank” ||
+||       || the second parameter is a color only if the type is “solid” ||
+||       || the second parameter is a path only if the type is “path” ||
+||       || the third parameter is used only if the type is “path”, and is optional.  The default value is scalexy. ||
+||       || the insets are used only if the third parameter is framexy.  See padding for a description of the expected format. ||
+|| _Examples:_ || *background: image “rsrc/textures/button_up.png” tilexy;* ||
+||             || *background: image “rsrc/textures/button_up.png” framexy 1 2 3 4;* ||
+||             || *background: solid #00000088;* ||
+|| _Default:_ || n/a? ||
+
+Name: border, border-left, border-top, border-right, border-bottom
+Description: 
+Format: thickness type [color]
+Valid values: 
+  * thickness: (integer value)
+  * type: solid/blank
+  * color: #RRGGBB or #RRGGBBAA
+Note: 
+  * if a border class is defined, it will be used.  If one is not defined, the border will be constructed by compiling the definitions of the individual sides.
+  * the color parameter will only be read if the type is “solid”.
+Examples:
+  * border: 1 solid #FFFFFF;
+Default:
+  * 
+
+Name: color
+Description: 
+Format: color
+Valid values: 
+  * color: #RRGGBB or #RRGGBBAA
+Examples:
+  * color #BBBBBB;
+Default:
+  * n/a?
+
+Name: cursor
+Description: 
+Format: name
+Valid values: 
+  * 
+Examples:
+  * 
+Default:
+  * n/a?
+
+Name: effect-color
+Description: 
+Format: 
+Valid values: 
+  * 
+Examples:
+  * effect-color: #442288;
+Default:
+  * n/a?
+
+ 
+Name: effect-size
+Description: 
+Format: size
+Valid values: 
+  * size: (integer value)
+Examples:
+  * 
+Default:
+  * effect-size: 1;
+
+Name: font
+Description: 
+Format: family style size
+Valid values: 
+  * family: “Dialog”, “Helvetica”
+  * style: plain/bold/italic/bolditalic
+  * size: (integer value)
+Examples:
+  * font: “Dialog” plain 16;
+Default:
+  * n/a?
+
+Name: icon
+Description: 
+Format: type path/width [height]
+Valid values: 
+  * type: blank/image
+Note: 
+  * if the type is “blank”, the second parameter is the width and the third parameter is the height.
+  * if the type is “image”, the second parameter specifies the path to the image file.  If any error is encountered loading the specified file, the icon will default to blank 10 10.
+Examples:
+  * icon: blank 7 7;
+  * icon: image “rsrc/textures/checkbox.png”;
+Default:
+  * icon: blank 10 10;
+
+Name: line-spacing
+Description: Amount of space to add or remove between lines.
+Format: spacing
+Valid values: 
+  * spacing: (integer value)
+Examples:
+  * line-spacing: -2;
+Default:
+  * line-spacing: 0;
+
+ 
+Name: padding
+Description: 
+Format: top [right] [bottom] [left]
+Valid values: 
+  * 
+Examples:
+  * padding: 5;		// top = 5; right = top; bottom = top; left = top
+  * padding: 3 5;		// top = 3; right = 5; bottom = top; left = right
+  * padding 4 6 2 4;
+Default:
+  * padding 0;
+
+Name: parent
+Description: Establishes an explicit inheritance.  The class being extended must be defined before this one.
+Format: 
+Valid values: 
+  * 
+Examples:
+  * parent: titlebutton;
+Default:
+  * 
+
+Name: size
+Description: Overrides the component’s preferred size.
+Format: width height
+Valid values: 
+  * 
+Examples:
+  * 
+Default:
+  * 
+
+Name: text-align
+Description: Specifies the horizontal alignment of text on the component.
+Format: alignment
+Valid values: 
+  * alignment: left/right/center
+Examples:
+  * text-align: center;
+Default:
+  * text-align: left;
+
+Name: text-effect
+Description: 
+Format: effect
+Valid values: 
+  * Effect: none/shadow/outline/plain
+Examples:
+  * text-effect: outline;
+Default:
+  * text-effect: none;
+
+Name: tooltip
+Description: Used to define the style class for the tooltip.
+Format: other_class
+Valid values: 
+  * 
+Examples:
+  * 
+Default:
+  * 
+
+Name: vertical-align
+Description: Specifies the vertical alignment of text on the component.
+Format: alignment
+Valid values: 
+  * alignment: center/top/bottom
+Examples:
+  * vertical-align: top;
+Default:
+  * vertical-align: center;
+
+
+
+  {{{  2.3.2 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.2.htm Styles]
+
+  {{{  2.3.3 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.3.htm Determining a component's style]
+
+  {{{  2.3.4 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.4.htm Styles without classes]
+
+  {{{  2.3.5 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.5.htm Overriding the default class style]
+
+  {{{  2.3.6 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.6.htm Windows and their buttons]
+
+  {{{  2.3.7 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.7.htm Custom style classes]
+
+  {{{  2.3.8 }}} [http://gbui.googlecode.com/svn/wiki/ATechnique/ATechnique2.3.8.htm Scrollbars]
