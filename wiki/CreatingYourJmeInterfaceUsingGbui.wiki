@@ -106,15 +106,19 @@ Press the “Run” button and watch the console.  If the build is successful (w
 As a developer, when I started working with GBUI, my primary interest was in what the library can offer me; what widgets are available? What events can they respond to? How easy is it to use? From that perspective, I can say that the library offers an excellent selection of widgets, and the implementation reminds me of Swing. At the top is BComponent (think “JComponent”), from which everything derives. 
 
 [http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.2.1.gif]
+
 Figure 2.2.1: This shows BComponent down to some of the more common widgets such as text components, labels, buttons, menu items, combo box, etc.
 
 [http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.2.2.gif]
+
 Figure 2.2.2: This shows BContainer deriving from BComponent, and then some of the more common container-type widgets. Again, think of parallels to Swing components with similar names.
 
 [http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.2.3.gif]
+
 Figure 2.2.3:
 
 [http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure2.2.4.gif]
+
 Figure 2.2.4: This shows the variety of Window and Dialog components that derive from BContainer.
 
 Note: a BWindow may only be added to BRootNode; it may not be the child of any other component.
