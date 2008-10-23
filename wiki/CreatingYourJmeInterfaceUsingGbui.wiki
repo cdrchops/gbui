@@ -3,12 +3,9 @@
 = Creating your jME interface using GBUI=
 == [CreatingYourJmeInterfaceUsingGbui1 1. Getting started with GBUI in Eclipse] ==
 == [CreatingYourJmeInterfaceUsingGbui2 2. "GBUI 101"] ==
-
-
-
-3. Creating your own "look-and-feel"
-
-4. Layout Managers
+== [CreatingYourJmeInterfaceUsingGbui3 3. Creating your own "look-and-feel"] ==
+== [CreatingYourJmeInterfaceUsingGbui4 4. Layout Managers] ==
+== [CreatingYourJmeInterfaceUsingGbui5 5. Putting it all together: "A Technique"] ==
 
 5. Putting it all together: "A Technique"
 
