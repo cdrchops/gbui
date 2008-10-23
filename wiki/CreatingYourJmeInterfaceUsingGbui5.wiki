@@ -251,7 +251,7 @@ The significance of this state (in the State Machine sense) is that it gets call
 Here’s what’s on my list of next steps, for this tutorial and for my real project:
   * Networking: you may have notices that even my limited example only covered the side of the player creating the server, but not the player connecting to a server.  I want to introduce real networking and a “chat” application.  This will also introduce the use of GBUI components at the same time as “regular” jME objects.  I believe this is going to required at least some slight modification of my architecture, but time will tell.
   * Try this: notice that the windows are centered on the display.  Now use the Edit Settings screen to change the resolution.  Notice the windows aren’t centered any more.  This is because when the screens/views are created, they use the display setting current at that time.  Many views are sized to be proportional to the display resolution.  Currently we have no mechanism to rebuild them when the resolution changes.  I think the application would be a little more “well behaved” if it did this, but this is a relatively low priority for me since it is non-critical eye-candy and there is a workaround: restart the app.
-  * Fix the mouse cursor problem in the InGame state
+  * Fix the mouse cursor problem in the !InGame state
   * Put real meat on the application: load real campaigns with real scenarios and let players play real games
 
 Good luck!
