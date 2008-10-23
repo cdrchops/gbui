@@ -103,4 +103,105 @@ The rest of the class is fairly straight-forward: public accessors to the privat
 }}}
 
 You’ll notice that {{{getInGamePausePresenter}}} merely returns the class that we created in the {{{initialize}}} method.  On the other hand, the _inGameState object is not created in the initialize method: rather, the {{{getInGameState}}} method checks if the {{{_inGameState}}} method has been created yet, and creates it if it has not.  I think of this as “lazy” instantiation, deferring the creation of the object until it is first needed.  The trade-off of lazy instantiation versus the {{{initialize}}} method is merely a matter of when we will make the user wait for the object(s) to be created: at the game’s startup, or during play of the game.  I started with lazy instantiation for all objects, but didn’t like the delay during menu navigation, so I create the GUI states when the game starts up.  Since I expect the {{{_inGameState}}} to have to load data specific to the selected scenario, which won’t be known until the user selects it, I use lazy instantiation for that object.
- 
+
+=== 5.4.3 GameManager ===
+This class is the implementation of the state machine, using the concept of mutually-exclusive states.  I know the multiple definitions of “Game State” is confusing, and I apologize for it, but I’ll try to make it clear which type I mean when I can.  This class is meant to be a singleton object and is implemented as such; hence the {{{getInstance}}} method.  I’m sure that simple static methods would work just as well, but this is a remnant of this class’s original implementation in C++.  Also, if you’re wondering why this class is implemented as a singleton, rather than being created by the ClassFactory, my stock answer is going to be that it serves as an example of the two different techniques.  Yeah, yeah, that’s the ticket…
+
+Anyway, we have created an interface called {{{ATechniqueGameState}}} as follows:
+{{{
+public interface ATechniqueGameState {
+	void enter();
+	void exit();
+	void pause();
+	void resume();
+}
+}}}
+If you need any more explanation for this interface, refer back to the “Managing Game States using C++” article.
+
+The GameManager class declares a stack of objects that implement the ATechniqueGameState interface.  The object at the top of the stack represents the current state (in the State Machine sense) of the application.  This class lets us specify a new state for the application, and it will automatically call the appropriate methods of the new and old states to ensure all transitions are done properly.  pushState lets us change to a new state, and then we can call popState to return to the original state.  We can (and will) use this feature when we have a state that we will change to from more than one other state.  This is probably a good time to describe the different game states we’ll be using during this game:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.3.1.gif]
+
+Note that if the current state is MainMenu, and we {{{pushState}}} to the EditSettings state, {{{popState}}} will return us to MainMenu.  If the current state is InGamePause and we {{{pushState}}} to the EditSettings state, {{{popState}}} will return us to InGamePause.
+
+=== 5.4.4 Translator ===
+Maybe I’m getting ahead of myself, but I’d like to think that my game will be so popular that it will be played be people all over the world, including those that don’t speak English.  Since I know that localization of strings can be a significant effort when done as an afterthought, I want to include the capability from the beginning.  Accordingly, I’m going to create an object that will be responsible for providing me with the correct text, without me needing to know what the current language is.
+
+{{{
+package atechnique.views.interfaces;
+
+import java.util.ArrayList;
+
+public interface ITranslator {
+	ArrayList<String> getTranslatedPhrases(ArrayList<String> translationTags);
+}
+}}}
+
+This interface defines a single method.  This method expect to receive an array of strings that represent the tags to be translated.  This method will return an array of phrases in the appropriate language.  My current implementation is as follows:
+
+{{{
+package atechnique.classfactory;
+
+import java.util.ArrayList;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
+import atechnique.views.interfaces.ITranslator;
+
+public class Translator implements ITranslator {
+	private Locale _currentLocale;
+      private ResourceBundle _messages;
+
+	public Translator(String language, String country) {
+        _currentLocale = new Locale(language, country);
+        _messages = ResourceBundle.getBundle("atechnique/data/languages/MessagesBundle", _currentLocale);
+	}
+
+	@Override
+	public ArrayList<String> getTranslatedPhrases(ArrayList<String> translationTags) {
+		ArrayList<String> translatedPhrases = new ArrayList<String>();
+
+		if (translationTags != null) {
+			for (int idx = 0; idx < translationTags.size(); idx++) {
+				try {
+					translatedPhrases.add(_messages.getString(translationTags.get(idx)));
+				} catch (MissingResourceException e) {
+					// Just add the tag surrounded by <>
+					translatedPhrases.add("<" + translationTags.get(idx) + ">");				
+				}
+			}
+		}
+		
+		return translatedPhrases;
+	}
+}
+}}}
+
+This uses the ResourceBundle feature of Java.  Another implementation might use a database, or even a web service.  The implementation really isn’t important.  When testing this, I found that if I tried to fetch a phrase that didn’t exist in my current bundle, and exception would be thrown.  I didn’t like that, so I modified it to return the tag surrounded by less-than/greater-than symbols so I could know I needed to add the tag and phrase to my bundle without needing to do so immediately.
+
+=== 5.4.5 Main Menu ===
+When the game is started, the user will be presented with the following screen:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.5.1.jpg]
+
+Unfortunately I can’t get the mouse cursor to appear in this screen-shot, but it is hovering over the “Exit” button, causing the text to be outlined, and a tooltip to be displayed.  Note that the “Connect to a Game” button is disabled (because I haven’t implemented that yet).
+
+In order to explain how this is created, let me display the following class diagram:
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.5.2.gif]
+
+Note the following items:
+  * GameStatePresenter provides a default implementation of the ATechniqueGameState interface
+  * MainMenuPresenter inherits from GameStatePresenter, making it a GameState (in the State Machine sense) that can be transitioned by the GameManager
+  * GameStatePresenter has a reference to IGameStateView, and MainMenuPresenter has a reference to IMainMenuView.  When the MainMenuPresenter is created, it is given a reference to a MainMenuView object
+  * Since GbuiGameState inherits from BasicGameState, MainMenuView is a GameState (in the StandardGame sense) that can be activated and deactivated by the StandardGame GameStateManager
+  * In the required reading, I mentioned that a presenter will call methods on the view’s interface, and the view will fire events that will be caught by the presenter.  The IMainMenuListener represents “events” that are “fired” by the view, since I don’t know how to do a true event/handler implementation in Java as I do in C#.  The presenter implements the IMainMenuListener interfaces and calls addMainMenuListener on the view to hand a reference to itself
+
+When we change to a new GameState (in the StateMachine sense), the {{{enter}}} method (defined by the {{{ATechniqueGameState}}} interface) of that state is called.  The default implementation by {{{GameStatePresenter}}} is to call the {{{activate}}} method of the IGameStateView interface.  GbuiGameState provides a default implementation of {{{activate}}} by calling {{{setActive(true)}}}, a GameState (in the StandardGame sense) method.  By putting this function in GbuiGameState, we can create each view without worrying about these details.
+
+If you look at the code in the constructor of {{{MainMenuView}}}, you’ll see it creates a GBUI window and controls, and displays them.  It responds to input events by calling methods of the {{{IMainMenuListener}}} interface, thus keeping all game and control logic in the presenter and out of the view.  When this view implements the {{{getTranslationTags}}} and {{{setTranslationPhrases}}} methods of the {{{IGameStateView}}} interface, the code merely needs to return a list of tags to be translated, and then display the returned text on the appropriate control, respectively.  I believe the code is fairly self-explanatory, but then me know if you have any questions about it.
+
+A note about the background image: I know I could have defined it in the style class definition.  However, I didn’t want the image in every window I created, and I was too lazy to define a custom style class.  Since that is probably a “better” solution, it will probably end up there, but it’s not there now.
+
+You may be wondering where the Model portion of the MVP triad is: simply put, it ended up being an empty interface and I didn’t anticipate it ever having anything to do.  Rather than dogmatically adhering to the architecture, I decided I would be better off just removing the interface and it’s implementation.
