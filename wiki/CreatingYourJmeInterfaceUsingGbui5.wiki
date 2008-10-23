@@ -205,3 +205,50 @@ If you look at the code in the constructor of {{{MainMenuView}}}, you’ll see i
 A note about the background image: I know I could have defined it in the style class definition.  However, I didn’t want the image in every window I created, and I was too lazy to define a custom style class.  Since that is probably a “better” solution, it will probably end up there, but it’s not there now.
 
 You may be wondering where the Model portion of the MVP triad is: simply put, it ended up being an empty interface and I didn’t anticipate it ever having anything to do.  Rather than dogmatically adhering to the architecture, I decided I would be better off just removing the interface and it’s implementation.
+
+=== 5.4.6 Select Campaign ===
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.6.1.jpg]
+
+I know what you’re thinking: it looks a little incomplete.  That’s because the implementation is very specific to my game, but it’s not critical for the architectural concepts I’m trying to explain but it might have distracted and confused you.  So just understand that on this screen, I’m going to present a scrolling list of all the campaigns in the appropriate directory.  When the user clicks on a campaign, I’ll present a narrative description, and display the “progression tree” of all the scenarios in the campaign, and how they are connected.  Each campaign will have a flag stored indicating if they’re new, or in-progress.  If new, the “Start New Game” button will be enabled.  Oterwise, the “Continue Game” button will be enabled.  For the purposes of this tutorial, this is just another state (in the State Machine sense) that the user can view and interact with.
+
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.6.2.gif]
+
+Here’s how all these classes and interfaces work together:
+  * ISelectCampaignListener again represents the events that the view would fire and the presenter would handle.  Instead, these are methods of the presenter that the view will call
+  * When the SelectCampaignModel is created, it will automatically compile a collection of the available campaigns, and all their details
+  * When the Presenter is created, it will get the collection of campaign from the model, and push them to the view for display
+  * When the user selects a campaign in the list, the view will call the {{{campaignSelected}}} method of the presenter
+  * The presenter will get then push the description to the view for display
+
+I’m expecting that when you first saw the class model for the Main Menu, the number of interfaces and states seemed somewhat daunting.  Hopefully now you can see that many of them can essentially be ignored once you understand what they are doing, and you can concentrate on the specific implementation of your game.
+
+=== 5.4.7 Start Server ===
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.7.1.jpg]
+
+=== 5.4.8 InGame ===
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.8.1.jpg]
+
+This state is essentially the StrategicHandler demo, converted to a StandardGame GameState.  I don’t have the mouse cursor working perfectly, but most of the functionality is here, or at least enough to showcase jME.
+
+=== 5.4.9 InGamePause ===
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.9.1.jpg]
+
+When the player hits the Escape key, I display this menu.  I wanted to somehow make it obvious to the user that the game is paused and disabled, and I did this by setting the GBUI window to the size of the entire display and then applying an alpha state so it looks faded.
+
+=== 5.4.10 Edit Settings ===
+Called from Main Menu:
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.10.1.jpg]
+
+Called from InGame:
+[http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure5.4.10.2.jpg]
+
+The significance of this state (in the State Machine sense) is that it gets called from two other states, and returns to the state it was called from when closed.  Because the background is transparent, we get a different appearance depending on where it is called from.  Personally, I don’t think I like that, but you might.  Also, notice that when called from the InGame state, we haven’t set the alpha blending on the rest of the display.  Now we’ve confused the player.  Oh well, we’ll just put it on the “issues” list and move on. :-)
+
+== 5.5 What’s Next? ==
+Here’s what’s on my list of next steps, for this tutorial and for my real project:
+  * Networking: you may have notices that even my limited example only covered the side of the player creating the server, but not the player connecting to a server.  I want to introduce real networking and a “chat” application.  This will also introduce the use of GBUI components at the same time as “regular” jME objects.  I believe this is going to required at least some slight modification of my architecture, but time will tell.
+  * Try this: notice that the windows are centered on the display.  Now use the Edit Settings screen to change the resolution.  Notice the windows aren’t centered any more.  This is because when the screens/views are created, they use the display setting current at that time.  Many views are sized to be proportional to the display resolution.  Currently we have no mechanism to rebuild them when the resolution changes.  I think the application would be a little more “well behaved” if it did this, but this is a relatively low priority for me since it is non-critical eye-candy and there is a workaround: restart the app.
+  * Fix the mouse cursor problem in the InGame state
+  * Put real meat on the application: load real campaigns with real scenarios and let players play real games
+
+Good luck!
