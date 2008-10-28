@@ -4,7 +4,7 @@
 
 The example that comes in BUI for the BScrollingList is very generic.  Newbies might have to work with this for hours before coming up with a solution to even part of their problem.
 
-Here's the code for ScrollingListTest
+Here's the code for !ScrollingListTest
 
 {{{
 BWindow window = new BDecoratedWindow(style, null);
@@ -28,15 +28,15 @@ for (int i = 0; i < 100; i++) {
 }
 }}}
 
-Basically this code takes a  {{{ String {{{  and makes a  {{{ BButton {{{  that is added to the  {{{ BScrollingList {{{  (list) then that is added to the window.
+Basically this code takes a  {{{ String }}}  and makes a  {{{ BButton }}}  that is added to the  {{{ BScrollingList }}}  (list) then that is added to the window.
 
-So what if you want to add something different to your  {{{ BScrollingList {{{  like a  {{{ BLabel {{{  or even a  {{{ BButton {{{  that has a title, an action and a listener?
+So what if you want to add something different to your  {{{ BScrollingList }}}  like a  {{{ BLabel }}}  or even a  {{{ BButton }}}  that has a title, an action and a listener?
 
-With this code, it's not possible... written in stone are the carvings that this must be a  {{{ String {{{  which a  {{{ BButton {{{  will display to the user.
+With this code, it's not possible... written in stone are the carvings that this must be a  {{{ String }}}  which a  {{{ BButton }}}  will display to the user.
 
-Admitedly, it's a simple test, definitely not something that looks to be intended for anyone elses example, but an internal example... a test... hence it's in the test package.
+Admittedly, it's a simple test, definitely not something that looks to be intended for anyone elses example, but an internal example... a test... hence it's in the test package.
 
-So, let's modify the  {{{ ScrollingListTest {{{  above... we'll start with a new class --  {{{ ExtendedScrollingListTest {{{
+So, let's modify the  {{{ ScrollingListTest }}}  above... we'll start with a new class --  {{{ ExtendedScrollingListTest }}}
 
 ExtendedScrollingListTest is the same as the ScrollingListTest except that the code below goes in the createWindows method and it extends [[bui:tutorials:basetest2|BaseTest2]] instead of BaseTest.
 
