@@ -64,7 +64,7 @@ My experience was that Eclipse usually does a pretty good job of automatically d
 [http://gbui.googlecode.com/svn/wiki/ATechnique/images/Figure1.5.1.2.jpg]
 
 == 1.6 Running the tests/demos ==
-I'm not a fan of full-screen applications (especially when trying to debug), so I wanted a chance to modify the default properties. In your “gbui” project, open the “src/java”, then the “com.jmex.bui.tests” package. Double-click on “AllDialogTests.java” to open it. Modify it's main method to the following: 
+I'm not a fan of full-screen applications (especially when trying to debug), so I wanted a chance to modify the default properties. In your “gbui” project, open the “src/java”, then the “com.jmex.bui.tests” package. Double-click on “!AllDialogTests.java” to open it. Modify it's main method to the following: 
 {{{
   public static void main(String[] args) {
       Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
@@ -82,7 +82,7 @@ This next step seems very kludgy, and I hope there's a more elegant solution tha
   * right-click on the “rsrc” folder and “Delete”. Yes, you're sure.
 This is the only way I've found that will let you modify the GBUI styles inside Eclipse, and still use those changes files when running the tests. 
 
-Finally, right-click on the “AllDialogsTest.java” and run as a Java application. You'll be presented with the default jME properties configuration. Un-select the “Fullscreen?” checkbox and press “OK”. You should be presented with a dialog in the middle of the window. Move the dialog to see more underneath it. 
+Finally, right-click on the “!AllDialogsTest.java” and run as a Java application. You'll be presented with the default jME properties configuration. Un-select the “Fullscreen?” checkbox and press “OK”. You should be presented with a dialog in the middle of the window. Move the dialog to see more underneath it. 
 
 Congratulations! You've just gotten GBUI to work, and can now run all the tests to see different examples of what it can do. 
 
