@@ -8,7 +8,7 @@ Here's an example flow from a login screen to the main menu.
 
 {{{
 BWindow Login
-  BButton Login (action login)
+BButton Login (action login)
 
 BWindow MainMenu
 }}}
