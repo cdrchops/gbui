@@ -1,5 +1,5 @@
 //
-// $Id: CollapsingTiledMessageWindowTest.java,v 1.8 2007/05/08 22:13:50 vivaldi Exp $
+// $Id: InputBoxTest.java,v 1.6 2007/05/04 17:36:18 vivaldi Exp $
 //
 // BUI - a user interface library for the JME 3D engine
 // Copyright (C) 2005, Michael Bayne, All Rights Reserved
@@ -18,30 +18,30 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
-import com.jmex.bui.BuiSystem;
-import com.jmex.bui.enumeratedConstants.TitleOptions;
-import com.jmex.bui.headlessWindows.BTitledWindow;
-import com.jmex.bui.headlessWindows.MessageWindowUtil;
+import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.event.DialogListener;
+import com.jmex.bui.headlessWindows.InputBoxUtil;
 
 /**
  * @author timo
  * @since 27Apr07
  */
-public class CollapsingTiledMessageWindowTest extends BaseTest2 {
-    @Override
+public class InputBoxTest extends BaseTest2 {
     protected void createWindows() {
-        for (int i = 0; i < 3; i++) {
-            BTitledWindow mw = MessageWindowUtil.
-                    createMessageBox("Window #" + i, "Window #" + i, TitleOptions.MIN_MAX_CLOSE, "Some content");
-            BuiSystem.getRootNode().addWindow(mw);
-        }
+        BInputBox box = InputBoxUtil.createInfoInputBox("inputTest1", "Message");
+        box.setDialogListener(new DialogListener() {
+            public void responseAvailable(UserResponse response, BComponent source) {
+                System.out.println(response.toString());
+                if (source instanceof BInputBox) {
+                    System.out.println(((BInputBox) source).getInputText());
+                }
+            }
+        });
     }
 
     public static void main(String[] args) {
-        CollapsingTiledMessageWindowTest test = new CollapsingTiledMessageWindowTest();
-        test.setConfigShowMode(ConfigShowMode.AlwaysShow);
-        test.start();
+        new InputBoxTest().start();
     }
 }

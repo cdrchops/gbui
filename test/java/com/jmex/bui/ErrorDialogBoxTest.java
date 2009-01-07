@@ -1,5 +1,5 @@
 //
-// $Id: TiledMessageWindowTest.java,v 1.7 2007/05/08 22:13:50 vivaldi Exp $
+// $Id: ErrorDialogBoxTest.java,v 1.4 2007/05/02 21:34:06 vivaldi Exp $
 //
 // BUI - a user interface library for the JME 3D engine
 // Copyright (C) 2005, Michael Bayne, All Rights Reserved
@@ -18,27 +18,32 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
-import com.jmex.bui.BuiSystem;
-import com.jmex.bui.headlessWindows.BTitledWindow;
-import com.jmex.bui.headlessWindows.MessageWindowUtil;
+import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.event.DialogListener;
+import com.jmex.bui.headlessWindows.DialogBoxUtil;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author timo
  * @since 27Apr07
  */
-public class TiledMessageWindowTest extends BaseTest2 {
-    @Override
+public class ErrorDialogBoxTest extends BaseTest2 {
     protected void createWindows() {
-        for (int i = 0; i < 3; i++) {
-            BTitledWindow mw = MessageWindowUtil.createMessageBox("Message box #" + i,
-                                                                  "You won't be able to dismiss this evil window.");
-            BuiSystem.getRootNode().addWindow(mw);
-        }
+        BDialogBox box = DialogBoxUtil.createErrorDialogBox("dialog1", "Error message.");
+        box.setDialogListener(new DialogListener() {
+
+            public void responseAvailable(UserResponse response, BComponent source) {
+                System.out.println(response.toString());
+            }
+        });
     }
 
     public static void main(String[] args) {
-        new TiledMessageWindowTest().start();
+        Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
+        new ErrorDialogBoxTest().start();
     }
 }

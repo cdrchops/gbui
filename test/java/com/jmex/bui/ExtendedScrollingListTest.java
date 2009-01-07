@@ -18,13 +18,9 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
-import com.jmex.bui.BButton;
-import com.jmex.bui.BScrollMessage;
-import com.jmex.bui.BScrollingList;
-import com.jmex.bui.BWindow;
-import com.jmex.bui.BuiSystem;
+import com.jmex.bui.base.BaseTest2;
 import com.jmex.bui.layout.GroupLayout;
 
 /**

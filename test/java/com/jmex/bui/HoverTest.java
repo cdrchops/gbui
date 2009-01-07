@@ -1,10 +1,7 @@
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
-import com.jmex.bui.BButton;
-import com.jmex.bui.BComboBox;
 import com.jmex.bui.BComboBox.Item;
-import com.jmex.bui.BWindow;
-import com.jmex.bui.BuiSystem;
+import com.jmex.bui.base.BaseTest2;
 import com.jmex.bui.layout.GroupLayout;
 
 public class HoverTest extends BaseTest2 {

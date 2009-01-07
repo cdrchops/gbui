@@ -1,4 +1,4 @@
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
 import com.jmex.bui.bss.BStyleSheetUtil;
 

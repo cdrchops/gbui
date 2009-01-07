@@ -19,16 +19,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
  */
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
-import com.jmex.bui.BConstants;
-import com.jmex.bui.BContainer;
-import com.jmex.bui.BDecoratedWindow;
-import com.jmex.bui.BImage;
-import com.jmex.bui.BLabel;
-import com.jmex.bui.BRootNode;
-import com.jmex.bui.BStyleSheet;
-import com.jmex.bui.BWindow;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.icon.ImageIcon;
 import com.jmex.bui.layout.GroupLayout;
 
