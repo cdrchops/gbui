@@ -1,9 +1,6 @@
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
-import com.jmex.bui.BStyleSheet;
-import com.jmex.bui.BWindow;
-import com.jmex.bui.BuiSystem;
-import com.jmex.bui.PolledRootNode;
+import com.jmex.bui.base.BaseTest2;
 import com.jmex.bui.bss.BStyleSheetUtil;
 import com.jmex.bui.layout.GroupLayout;
 

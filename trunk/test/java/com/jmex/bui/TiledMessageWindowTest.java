@@ -1,5 +1,5 @@
 //
-// $Id: WarningDialogBoxTest.java,v 1.4 2007/05/02 21:34:07 vivaldi Exp $
+// $Id: TiledMessageWindowTest.java,v 1.7 2007/05/08 22:13:50 vivaldi Exp $
 //
 // BUI - a user interface library for the JME 3D engine
 // Copyright (C) 2005, Michael Bayne, All Rights Reserved
@@ -18,35 +18,27 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
-import com.jmex.bui.BComponent;
-import com.jmex.bui.BDialogBox;
-import com.jmex.bui.UserResponse;
-import com.jmex.bui.event.DialogListener;
-import com.jmex.bui.headlessWindows.DialogBoxUtil;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.headlessWindows.BTitledWindow;
+import com.jmex.bui.headlessWindows.MessageWindowUtil;
 
 /**
  * @author timo
  * @since 27Apr07
  */
-public class WarningDialogBoxTest extends BaseTest2 {
+public class TiledMessageWindowTest extends BaseTest2 {
+    @Override
     protected void createWindows() {
-        BDialogBox box = DialogBoxUtil.createWarningDialogBox("warnMessage1", "message");
-        box.setDialogListener(new DialogListener() {
-
-            public void responseAvailable(UserResponse response,
-                                          BComponent source) {
-                System.out.println(response.toString());
-            }
-        });
+        for (int i = 0; i < 3; i++) {
+            BTitledWindow mw = MessageWindowUtil.createMessageBox("Message box #" + i,
+                                                                  "You won't be able to dismiss this evil window.");
+            BuiSystem.getRootNode().addWindow(mw);
+        }
     }
 
     public static void main(String[] args) {
-        Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
-        new WarningDialogBoxTest().start();
+        new TiledMessageWindowTest().start();
     }
 }

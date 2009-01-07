@@ -1,4 +1,4 @@
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
 import com.jme.app.SimpleGame;
 import com.jme.input.MouseInput;
@@ -13,11 +13,6 @@ import com.jme.scene.shape.Box;
 import com.jme.scene.state.LightState;
 import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
-import com.jmex.bui.BComponent;
-import com.jmex.bui.BGeomView;
-import com.jmex.bui.BWindow;
-import com.jmex.bui.BuiSystem;
-import com.jmex.bui.PolledRootNode;
 import com.jmex.bui.background.TintedBackground;
 import com.jmex.bui.headlessWindows.BDraggableWindow;
 import com.jmex.bui.layout.BorderLayout;

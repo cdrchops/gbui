@@ -1,7 +1,6 @@
-package com.jmex.bui.tests;
+package com.jmex.bui;
 
-import com.jmex.bui.BDecoratedWindow;
-import com.jmex.bui.BuiSystem;
+import com.jmex.bui.base.BaseTest2;
 
 public class DecoratedWindowTest extends BaseTest2 {
     protected void createWindows() {
