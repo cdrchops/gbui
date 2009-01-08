@@ -3,6 +3,7 @@
 
     <property name="lib.name" value="jme-bui"/>
     <property name="src.dir" value="src/java"/>
+    <property name="test.dir" value="test/java"/>
     <property name="dist.dir" value="dist"/>
     <property name="dist.jar" value="${lib.name}.jar"/>
     <property name="classes.dir" value="build"/>
@@ -64,6 +65,15 @@
         <groovyc srcdir="${src.dir}"
                  destdir="${classes.dir}">
             <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false"
+                   debug="on" optimize="on" deprecation="on" source="1.5">
+                <classpath refid="classpath"/>
+                <compilerarg value="-Xlint"/>
+                <compilerarg value="-Xlint:-serial"/>
+            </javac>
+        </groovyc>
+        <groovyc srcdir="${test.dir}"
+                 destdir="${classes.dir}">
+            <javac srcdir="${test.dir}" destdir="${classes.dir}" includeAntRuntime="false"
                    debug="on" optimize="on" deprecation="on" source="1.5">
                 <classpath refid="classpath"/>
                 <compilerarg value="-Xlint"/>
