@@ -22,6 +22,7 @@ package com.jmex.bui.text;
 
 import com.jme.renderer.ColorRGBA;
 import com.jmex.bui.BConstants;
+import com.jmex.bui.enumeratedConstants.TextEffect;
 
 /**
  * Creates instances of {@link BText} using a particular technology and a particular font configuration.
@@ -39,7 +40,7 @@ public abstract class BTextFactory
      */
     public BText createText(String text,
                             ColorRGBA color) {
-        return createText(text, color, NORMAL, DEFAULT_SIZE, null, false);
+        return createText(text, color, TextEffect.NORMAL, DEFAULT_SIZE, null, false);
     }
 
     /**
@@ -47,12 +48,11 @@ public abstract class BTextFactory
      * and the foreground color, text effect and text effect color specified.
      *
      * @param useAdvance if true, the advance to the next insertion point will be included in the
-     *                   bounds of the created text (this is needed by editable text displays).
      */
     public abstract BText createText(
             String text,
             ColorRGBA color,
-            int effect,
+            TextEffect effect,
             int effectSize,
             ColorRGBA effectColor,
             boolean useAdvance);
@@ -63,13 +63,13 @@ public abstract class BTextFactory
     public BText[] wrapText(String text,
                             ColorRGBA color,
                             int maxWidth) {
-        return wrapText(text, color, NORMAL, DEFAULT_SIZE, null, maxWidth);
+        return wrapText(text, color, TextEffect.NORMAL, DEFAULT_SIZE, null, maxWidth);
     }
 
     /**
      * Wraps a string into a set of text objects that do not exceed the specified width.
      */
-    public BText[] wrapText(String text, ColorRGBA color, int effect, int maxWidth) {
+    public BText[] wrapText(String text, ColorRGBA color, TextEffect effect, int maxWidth) {
         return wrapText(text, color, effect, DEFAULT_SIZE, null, maxWidth);
     }
 
@@ -80,7 +80,7 @@ public abstract class BTextFactory
     public abstract BText[] wrapText(
             String text,
             ColorRGBA color,
-            int effect,
+            TextEffect effect,
             int effectSize,
             ColorRGBA effectColor,
             int maxWidth);

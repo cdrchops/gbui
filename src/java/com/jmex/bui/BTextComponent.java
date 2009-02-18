@@ -22,6 +22,9 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jmex.bui.background.ComponentState;
+import com.jmex.bui.enumeratedConstants.HorizontalAlignment;
+import com.jmex.bui.enumeratedConstants.TextEffect;
+import com.jmex.bui.enumeratedConstants.VerticalAlignment;
 import com.jmex.bui.text.BTextFactory;
 
 /**
@@ -52,17 +55,21 @@ public abstract class BTextComponent extends BComponent {
         return (textfact != null) ? textfact : _textfacts[ComponentState.DEFAULT.ordinal()];
     }
 
+    // TODO in following methods, I'm not sure that checking against non-null is necessary
+    // Needs investigation to figure
+
+
     /**
      * Returns the horizontal alignment for this component's text.
      *
      * @return int BConstants
      */
-    public int getHorizontalAlignment() {
+    public HorizontalAlignment getHorizontalAlignment() {
         if (_haligns != null) {
-            int halign = _haligns[getState()];
-            return (halign != -1) ? halign : _haligns[ComponentState.DEFAULT.ordinal()];
+            HorizontalAlignment halign = _haligns[getState()];
+            return (halign != null) ? halign : _haligns[ComponentState.DEFAULT.ordinal()];
         }
-        return BConstants.LEFT;
+        return HorizontalAlignment.LEFT;
     }
 
     /**
@@ -70,12 +77,12 @@ public abstract class BTextComponent extends BComponent {
      *
      * @return int BConstants
      */
-    public int getVerticalAlignment() {
+    public VerticalAlignment getVerticalAlignment() {
         if (_valigns != null) {
-            int valign = _valigns[getState()];
-            return (valign != -1) ? valign : _valigns[ComponentState.DEFAULT.ordinal()];
+            VerticalAlignment valign = _valigns[getState()];
+            return (valign != null) ? valign : _valigns[ComponentState.DEFAULT.ordinal()];
         }
-        return BConstants.CENTER;
+        return VerticalAlignment.CENTER;
     }
 
     /**
@@ -83,12 +90,12 @@ public abstract class BTextComponent extends BComponent {
      *
      * @return int BConstants
      */
-    public int getTextEffect() {
+    public TextEffect getTextEffect() {
         if (_teffects != null) {
-            int teffect = _teffects[getState()];
-            return (teffect != -1) ? teffect : _teffects[ComponentState.DEFAULT.ordinal()];
+            TextEffect teffect = _teffects[getState()];
+            return (teffect != null) ? teffect : _teffects[ComponentState.DEFAULT.ordinal()];
         }
-        return BConstants.NORMAL;
+        return TextEffect.NORMAL;
     }
 
     /**
@@ -127,24 +134,24 @@ public abstract class BTextComponent extends BComponent {
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);
         final int stateCount = getStateCount();
-        int[] haligns = new int[stateCount];
+        HorizontalAlignment[] haligns = new HorizontalAlignment[stateCount];
         for (int ii = 0; ii < stateCount; ii++) {
             haligns[ii] = style.getTextAlignment(this, getStatePseudoClass(ii));
         }
-        _haligns = checkNonDefault(haligns, BConstants.LEFT);
+        _haligns = checkNonDefaultHorizontalAlignment(haligns);
 
-        int[] valigns = new int[stateCount];
+        VerticalAlignment[] valigns = new VerticalAlignment[stateCount];
         for (int ii = 0; ii < stateCount; ii++) {
             valigns[ii] = style.getVerticalAlignment(
                     this, getStatePseudoClass(ii));
         }
-        _valigns = checkNonDefault(valigns, BConstants.CENTER);
+        _valigns = checkNonDefaultVerticalAlignment(valigns);
 
-        int[] teffects = new int[stateCount];
+        TextEffect[] teffects = new TextEffect[stateCount];
         for (int ii = 0; ii < stateCount; ii++) {
             teffects[ii] = style.getTextEffect(this, getStatePseudoClass(ii));
         }
-        _teffects = checkNonDefault(teffects, BConstants.NORMAL);
+        _teffects = checkNonDefaultTextEffectsAlignment(teffects);
 
         int[] effsizes = new int[stateCount];
         for (int ii = 0; ii < stateCount; ii++) {
@@ -198,6 +205,33 @@ public abstract class BTextComponent extends BComponent {
         return config;
     }
 
+    private HorizontalAlignment[] checkNonDefaultHorizontalAlignment(HorizontalAlignment[] alignments) {
+        for (HorizontalAlignment style : alignments) {
+            if (style != HorizontalAlignment.LEFT) {
+                return alignments;
+            }
+        }
+        return null;
+    }
+
+    private VerticalAlignment[] checkNonDefaultVerticalAlignment(VerticalAlignment[] alignments) {
+        for (VerticalAlignment style : alignments) {
+            if (style != VerticalAlignment.CENTER) {
+                return alignments;
+            }
+        }
+        return null;
+    }
+
+    private TextEffect[] checkNonDefaultTextEffectsAlignment(TextEffect[] textEffects) {
+        for (TextEffect style : textEffects) {
+            if (style != TextEffect.NORMAL) {
+                return textEffects;
+            }
+        }
+        return null;
+    }
+
     protected int[] checkNonDefault(int[] styles,
                                     int defval) {
         for (int style : styles) {
@@ -208,9 +242,9 @@ public abstract class BTextComponent extends BComponent {
         return null;
     }
 
-    protected int[] _haligns;
-    protected int[] _valigns;
-    protected int[] _teffects;
+    protected HorizontalAlignment[] _haligns;
+    protected VerticalAlignment[] _valigns;
+    protected TextEffect[] _teffects;
     protected int[] _effsizes;
     protected ColorRGBA[] _effcols;
     protected BTextFactory[] _textfacts = new BTextFactory[getStateCount()];

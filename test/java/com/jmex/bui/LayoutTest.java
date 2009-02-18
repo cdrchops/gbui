@@ -33,6 +33,7 @@ import com.jme.scene.state.LightState;
 import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
 import com.jmex.bui.base.BaseTest;
+import com.jmex.bui.enumeratedConstants.Orientation;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.icon.ImageIcon;
@@ -94,13 +95,13 @@ public class LayoutTest extends BaseTest {
         window.setLocation(25, 25);
 
         window = new BWindow(style, new BorderLayout(5, 5));
-        window.add(new BSlider(BConstants.VERTICAL, 0, 100, 25),
+        window.add(new BSlider(Orientation.VERTICAL, 0, 100, 25),
                    BorderLayout.WEST);
         window.add(_text = new BTextArea(), BorderLayout.CENTER);
         window.add(_input = new BTextField(), BorderLayout.SOUTH);
-        window.add(new BScrollBar(BConstants.VERTICAL, _text.getScrollModel()),
+        window.add(new BScrollBar(Orientation.VERTICAL, _text.getScrollModel()),
                    BorderLayout.EAST);
-        window.add(new BScrollBar(BConstants.HORIZONTAL, 0, 25, 50, 100),
+        window.add(new BScrollBar(Orientation.HORIZONTAL, 0, 25, 50, 100),
                    BorderLayout.NORTH);
         _input.addListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -150,7 +151,7 @@ public class LayoutTest extends BaseTest {
         label.setTooltipText("This is a vertical label.");
         label.setIcon(new ImageIcon(icon));
         label.setIconTextGap(1);
-        label.setOrientation(BConstants.VERTICAL);
+        label.setOrientation(Orientation.VERTICAL);
         cont.add(label);
         cont.add(new BCheckBox("Four"));
         cont.add(new BLabel("Five"));
@@ -159,7 +160,7 @@ public class LayoutTest extends BaseTest {
         cont.add(new BLabel("Eight"));
         cont.add(new BLabel("Nine"));
         window.add(cont, BorderLayout.CENTER);
-        window.add(new BSlider(BConstants.HORIZONTAL, 0, 100, 25),
+        window.add(new BSlider(Orientation.HORIZONTAL, 0, 100, 25),
                    BorderLayout.SOUTH);
         root.addWindow(window);
         window.pack();

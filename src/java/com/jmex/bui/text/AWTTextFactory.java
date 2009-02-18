@@ -22,9 +22,9 @@ package com.jmex.bui.text;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
-import com.jmex.bui.BConstants;
 import com.jmex.bui.BImage;
 import com.jmex.bui.Log;
+import com.jmex.bui.enumeratedConstants.TextEffect;
 import com.jmex.bui.util.Dimension;
 
 import java.awt.*;
@@ -78,7 +78,7 @@ public class AWTTextFactory extends BTextFactory {
     // documentation inherited
     public BText createText(String text,
                             ColorRGBA color,
-                            int effect,
+                            TextEffect effect,
                             int effectSize,
                             ColorRGBA effectColor,
                             boolean useAdvance) {
@@ -94,7 +94,7 @@ public class AWTTextFactory extends BTextFactory {
                                      RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
             }
             layout = new TextLayout(
-                    parseStyledText(text, _attrs, null, effect != BConstants.PLAIN).getIterator(), gfx.getFontRenderContext());
+                    parseStyledText(text, _attrs, null, effect != TextEffect.PLAIN).getIterator(), gfx.getFontRenderContext());
         } finally {
             gfx.dispose();
         }
@@ -106,7 +106,7 @@ public class AWTTextFactory extends BTextFactory {
     // documentation inherited
     public BText[] wrapText(String text,
                             ColorRGBA color,
-                            int effect,
+                            TextEffect effect,
                             int effectSize,
                             ColorRGBA effectColor,
                             int maxWidth) {
@@ -125,7 +125,7 @@ public class AWTTextFactory extends BTextFactory {
             }
 
             String[] bare = new String[1];
-            AttributedString atext = parseStyledText(text, _attrs, bare, effect != BConstants.PLAIN);
+            AttributedString atext = parseStyledText(text, _attrs, bare, effect != TextEffect.PLAIN);
             LineBreakMeasurer measurer = new LineBreakMeasurer(
                     atext.getIterator(), gfx.getFontRenderContext());
             text = bare[0];
@@ -165,7 +165,7 @@ public class AWTTextFactory extends BTextFactory {
     protected BText createText(String origText,
                                final TextLayout layout,
                                ColorRGBA color,
-                               final int effect,
+                               final TextEffect effect,
                                final int effectSize,
                                ColorRGBA effectColor,
                                final int length,
@@ -176,7 +176,7 @@ public class AWTTextFactory extends BTextFactory {
 
         // MacOS font rendering is buggy, so we must compute the outline and use that for bounds
         // computation and rendering
-        if (effect == OUTLINE || effect == GLOW || _isMacOS) {
+        if (effect == TextEffect.OUTLINE || effect == TextEffect.GLOW || _isMacOS) {
             bounds = layout.getOutline(null).getBounds();
         }
         if (useAdvance) {
@@ -211,7 +211,7 @@ public class AWTTextFactory extends BTextFactory {
                                                 BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D gfx = image.createGraphics();
         try {
-            if (effect == OUTLINE) {
+            if (effect == TextEffect.OUTLINE) {
                 if (_antialias) {
                     gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                                          RenderingHints.VALUE_ANTIALIAS_ON);
@@ -235,7 +235,7 @@ public class AWTTextFactory extends BTextFactory {
                                            effectColor.b, effectColor.a));
                     gfx.draw(layout.getOutline(null));
                 }
-            } else if (effect == GLOW) {
+            } else if (effect == TextEffect.GLOW) {
                 // draw the background of the glow
                 char[] chars = origText.toCharArray();
                 int ox = 0;
@@ -269,7 +269,7 @@ public class AWTTextFactory extends BTextFactory {
                 }
 
                 int dx = 0;
-                if (effect == SHADOW) {
+                if (effect == TextEffect.SHADOW) {
                     gfx.setColor(new Color(effectColor.r, effectColor.g,
                                            effectColor.b, effectColor.a));
                     float tx = effectSize - 1;

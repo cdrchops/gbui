@@ -30,6 +30,7 @@ import com.jme.scene.state.BlendState;
 import com.jme.scene.state.TextureState;
 import com.jme.system.DisplaySystem;
 import com.jme.util.TextureManager;
+import com.jmex.bui.enumeratedConstants.TextEffect;
 import com.jmex.bui.util.Dimension;
 
 import java.net.URL;
@@ -73,7 +74,7 @@ public class JMEBitmapTextFactory extends BTextFactory {
     // documentation inherited
     public BText createText(final String text,
                             final ColorRGBA color,
-                            int effect,
+                            TextEffect effect,
                             int effectSize,
                             ColorRGBA effectColor,
                             boolean useAdvance) {
@@ -133,7 +134,7 @@ public class JMEBitmapTextFactory extends BTextFactory {
     public BText[] wrapText(
             String text,
             ColorRGBA color,
-            int effect,
+            TextEffect effect,
             int effectSize,
             ColorRGBA effectColor,
             int maxWidth

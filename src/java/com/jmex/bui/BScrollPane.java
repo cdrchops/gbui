@@ -21,6 +21,7 @@
 package com.jmex.bui;
 
 import com.jme.renderer.Renderer;
+import com.jmex.bui.enumeratedConstants.Orientation;
 import com.jmex.bui.event.MouseWheelListener;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.util.Dimension;
@@ -52,11 +53,11 @@ public class BScrollPane extends BContainer {
         add(_vport = new BViewport(child, vert, horiz, snap),
             BorderLayout.CENTER);
         if (vert) {
-            add(_vbar = new BScrollBar(BScrollBar.VERTICAL,
+            add(_vbar = new BScrollBar(Orientation.VERTICAL,
                                        _vport.getVModel()), BorderLayout.EAST);
         }
         if (horiz) {
-            add(_hbar = new BScrollBar(BScrollBar.HORIZONTAL,
+            add(_hbar = new BScrollBar(Orientation.HORIZONTAL,
                                        _vport.getHModel()), BorderLayout.SOUTH);
         }
     }

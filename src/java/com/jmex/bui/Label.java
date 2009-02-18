@@ -22,6 +22,9 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
+import com.jmex.bui.enumeratedConstants.HorizontalAlignment;
+import com.jmex.bui.enumeratedConstants.Orientation;
+import com.jmex.bui.enumeratedConstants.TextEffect;
 import com.jmex.bui.icon.BIcon;
 import com.jmex.bui.text.BText;
 import com.jmex.bui.text.BTextFactory;
@@ -132,9 +135,9 @@ public class Label implements BConstants {
      * Sets the orientation of this label with respect to its icon. If the horizontal (the default) the text is
      * displayed to the right of the icon, if vertical the text is displayed below it.
      *
-     * @param orient int
+     * @param orient {@link com.jmex.bui.enumeratedConstants.Orientation}
      */
-    public void setOrientation(int orient) {
+    public void setOrientation(Orientation orient) {
         _orient = orient;
         if (_container.isAdded()) {
             _container.layout();
@@ -296,7 +299,7 @@ public class Label implements BConstants {
                               int contWidth,
                               int contHeight,
                               float alpha) {
-        final int horzAlignment = _container.getHorizontalAlignment();
+        final HorizontalAlignment horzAlignment = _container.getHorizontalAlignment();
         if (_fit == BLabel.Fit.WRAP) {
             _config.glyphs.render(
                     renderer, _tx, _ty, horzAlignment, alpha, _config.spacing);
@@ -421,7 +424,7 @@ public class Label implements BConstants {
 
         if (_value != null) {
             // account for the space taken up by the icon
-            if (_icon != null && _orient == HORIZONTAL) {
+            if (_icon != null && _orient == Orientation.HORIZONTAL) {
                 twidth -= _gap;
                 twidth -= _icon.getWidth();
             }
@@ -495,7 +498,7 @@ public class Label implements BConstants {
     protected static class Config {
         public String text;
         public ColorRGBA color;
-        public int effect;
+        public TextEffect effect;
         public int effectSize;
         public ColorRGBA effectColor;
         public int minwidth, maxwidth;
@@ -580,7 +583,7 @@ public class Label implements BConstants {
         public void render(Renderer renderer,
                            int tx,
                            int ty,
-                           int halign,
+                           HorizontalAlignment halign,
                            float alpha,
                            int spacing) {
             // render the lines from the bottom up
@@ -589,9 +592,9 @@ public class Label implements BConstants {
                 final BText line = lines[ii];
                 final Dimension lineSize = line.getSize();
 
-                if (halign == RIGHT) {
+                if (halign == HorizontalAlignment.RIGHT) {
                     lx += size.width - lineSize.width;
-                } else if (halign == CENTER) {
+                } else if (halign == HorizontalAlignment.CENTER) {
                     lx += (size.width - lineSize.width) / 2;
                 }
 
@@ -614,7 +617,7 @@ public class Label implements BConstants {
                            int ty,
                            int width,
                            int height,
-                           int halign,
+                           HorizontalAlignment halign,
                            float alpha) {
             // render only the first line
             float scale = 1f;
@@ -629,9 +632,9 @@ public class Label implements BConstants {
             if (height < size.height) {
                 ty += (size.height - height) / 2;
             }
-            if (halign == RIGHT) {
+            if (halign == HorizontalAlignment.RIGHT) {
                 tx += size.width - width;
-            } else if (halign == CENTER) {
+            } else if (halign == HorizontalAlignment.CENTER) {
                 tx += (size.width - width) / 2;
             }
             lines[0].render(renderer, tx, ty, width, height, alpha);
@@ -659,7 +662,7 @@ public class Label implements BConstants {
     protected BTextComponent _container;
     protected String _value;
 
-    protected int _orient = HORIZONTAL;
+    protected Orientation _orient = Orientation.HORIZONTAL;
     protected int _gap = 3;
     protected BLabel.Fit _fit = BLabel.Fit.WRAP;
 

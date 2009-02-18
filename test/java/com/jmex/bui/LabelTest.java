@@ -22,6 +22,7 @@
 package com.jmex.bui;
 
 import com.jmex.bui.base.BaseTest;
+import com.jmex.bui.enumeratedConstants.Orientation;
 import com.jmex.bui.icon.ImageIcon;
 import com.jmex.bui.layout.GroupLayout;
 
@@ -50,7 +51,7 @@ public class LabelTest extends BaseTest implements BConstants {
 
         final ImageIcon icon = new ImageIcon(image);
         final String[] aligns = {"left", "center", "right"};
-        final int[] orients = {HORIZONTAL, VERTICAL, OVERLAPPING};
+        final Orientation[] orients = {Orientation.HORIZONTAL, Orientation.VERTICAL, Orientation.OVERLAPPING};
 
         for (int yy = 0; yy < 3; yy++) {
             final BContainer cont = new BContainer(GroupLayout.makeHStretch());

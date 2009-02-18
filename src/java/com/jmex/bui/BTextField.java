@@ -22,6 +22,7 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
+import com.jmex.bui.enumeratedConstants.TextEffect;
 import com.jmex.bui.event.*;
 import com.jmex.bui.text.*;
 import com.jmex.bui.util.Dimension;
@@ -404,7 +405,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 
         // format our text and determine how much of it we can display
         _glyphs = getTextFactory().createText(
-                getDisplayText(), getColor(), BConstants.PLAIN,
+                getDisplayText(), getColor(), TextEffect.PLAIN,
                 BConstants.DEFAULT_SIZE, null, true);
         if (isAdded()) {
             _glyphs.wasAdded();
