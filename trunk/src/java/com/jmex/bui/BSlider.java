@@ -21,6 +21,7 @@
 package com.jmex.bui;
 
 import com.jme.renderer.Renderer;
+import com.jmex.bui.enumeratedConstants.Orientation;
 import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.icon.BIcon;
@@ -36,9 +37,9 @@ public class BSlider extends BComponent
     /**
      * Creates a slider with the specified orientation, range and value.
      *
-     * @param orient either {@link #HORIZONTAL} or {@link #VERTICAL}.
+     * @param orient either {@link com.jmex.bui.enumeratedConstants.Orientation#HORIZONTAL} or {@link com.jmex.bui.enumeratedConstants.Orientation#VERTICAL}.
      */
-    public BSlider(int orient,
+    public BSlider(Orientation orient,
                    int min,
                    int max,
                    int value) {
@@ -48,9 +49,9 @@ public class BSlider extends BComponent
     /**
      * Creates a slider with the specified orientation and range model. Note that the extent must be set to zero.
      *
-     * @param orient either {@link #HORIZONTAL} or {@link #VERTICAL}.
+     * @param orient either {@link com.jmex.bui.enumeratedConstants.Orientation#HORIZONTAL} or {@link com.jmex.bui.enumeratedConstants.Orientation#VERTICAL}.
      */
-    public BSlider(int orient,
+    public BSlider(Orientation orient,
                    BoundedRangeModel model) {
         _orient = orient;
         _model = model;
@@ -66,7 +67,7 @@ public class BSlider extends BComponent
     @Override
     // documentation inherited
     protected String getDefaultStyleClass() {
-        return ((_orient == HORIZONTAL) ? "h" : "v") + "slider";
+        return ((_orient == Orientation.HORIZONTAL) ? "h" : "v") + "slider";
     }
 
     @Override
@@ -108,7 +109,7 @@ public class BSlider extends BComponent
                                              int hhint) {
         Dimension psize =
                 new Dimension(getFrob().getWidth(), getFrob().getHeight());
-        if (_orient == HORIZONTAL) {
+        if (_orient == Orientation.HORIZONTAL) {
             psize.width *= 2;
         } else {
             psize.height *= 2;
@@ -163,7 +164,7 @@ public class BSlider extends BComponent
         BIcon frob = getFrob();
         int x, y, range = _model.getRange();
         int offset = _model.getValue() - _model.getMinimum();
-        if (_orient == HORIZONTAL) {
+        if (_orient == Orientation.HORIZONTAL) {
             y = (getHeight() - frob.getHeight()) / 2;
             x = insets.left + (getWidth() - insets.getHorizontal() -
                                frob.getWidth()) * offset / range;
@@ -179,7 +180,7 @@ public class BSlider extends BComponent
                                int my) {
         Insets insets = getInsets();
         BIcon frob = getFrob();
-        if (_orient == HORIZONTAL) {
+        if (_orient == Orientation.HORIZONTAL) {
             int fwid = frob.getWidth();
             _model.setValue((mx - fwid / 2) * _model.getRange() /
                             (getWidth() - insets.getHorizontal() - fwid));
@@ -195,7 +196,7 @@ public class BSlider extends BComponent
         return (frob != null) ? frob : _frobs[DEFAULT];
     }
 
-    protected int _orient;
+    protected Orientation _orient;
     protected BoundedRangeModel _model;
     protected BIcon[] _frobs = new BIcon[getStateCount()];
 }

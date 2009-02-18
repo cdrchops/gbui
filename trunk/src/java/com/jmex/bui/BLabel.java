@@ -21,14 +21,14 @@
 package com.jmex.bui;
 
 import com.jme.renderer.Renderer;
+import com.jmex.bui.enumeratedConstants.Orientation;
 import com.jmex.bui.icon.BIcon;
 import com.jmex.bui.util.Dimension;
 
 /**
  * A simple component for displaying a textual label.
  */
-public class BLabel extends BTextComponent
-        implements BConstants {
+public class BLabel extends BTextComponent {
     /**
      * Configures the label's strategy when it does not fit into its allocated space.
      */
@@ -119,7 +119,7 @@ public class BLabel extends BTextComponent
      * Sets the orientation of this label with respect to its icon. If the horizontal (the default) the text is
      * displayed to the right of the icon, if vertical the text is displayed below it.
      */
-    public void setOrientation(int orient) {
+    public void setOrientation(Orientation orient) {
         _label.setOrientation(orient);
     }
 

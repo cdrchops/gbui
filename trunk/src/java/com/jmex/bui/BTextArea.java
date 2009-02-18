@@ -22,6 +22,9 @@ package com.jmex.bui;
 
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
+import com.jmex.bui.enumeratedConstants.HorizontalAlignment;
+import com.jmex.bui.enumeratedConstants.TextEffect;
+import com.jmex.bui.enumeratedConstants.VerticalAlignment;
 import com.jmex.bui.event.ChangeEvent;
 import com.jmex.bui.event.ChangeListener;
 import com.jmex.bui.text.BText;
@@ -86,12 +89,12 @@ public class BTextArea extends BContainer {
      *
      * @return BConstants
      */
-    public int getHorizontalAlignment() {
+    public HorizontalAlignment getHorizontalAlignment() {
         if (_haligns != null) {
-            int halign = _haligns[getState()];
-            return (halign != -1) ? halign : _haligns[DEFAULT];
+            HorizontalAlignment halign = _haligns[getState()];
+            return (halign != null) ? halign : _haligns[DEFAULT];
         }
-        return BConstants.LEFT;
+        return HorizontalAlignment.LEFT;
     }
 
     /**
@@ -99,12 +102,12 @@ public class BTextArea extends BContainer {
      *
      * @return BConstants
      */
-    public int getVerticalAlignment() {
+    public VerticalAlignment getVerticalAlignment() {
         if (_valigns != null) {
-            int valign = _valigns[getState()];
-            return (valign != -1) ? valign : _valigns[DEFAULT];
+            VerticalAlignment valign = _valigns[getState()];
+            return (valign != null) ? valign : _valigns[DEFAULT];
         }
-        return BConstants.TOP;
+        return VerticalAlignment.TOP;
     }
 
     /**
@@ -233,12 +236,12 @@ public class BTextArea extends BContainer {
      *
      * @return BConstants
      */
-    public int getTextEffect() {
+    public TextEffect getTextEffect() {
         if (_teffects != null) {
-            int teffect = _teffects[getState()];
-            return (teffect != -1) ? teffect : _teffects[DEFAULT];
+            TextEffect teffect = _teffects[getState()];
+            return (teffect != null) ? teffect : _teffects[DEFAULT];
         }
-        return BConstants.NORMAL;
+        return TextEffect.NORMAL;
     }
 
     /**
@@ -332,7 +335,7 @@ public class BTextArea extends BContainer {
     protected void configureStyle(BStyleSheet style) {
         super.configureStyle(style);
         final int stateCount = getStateCount();
-        int[] haligns = new int[stateCount];
+        HorizontalAlignment[] haligns = new HorizontalAlignment[stateCount];
 
         for (int ii = 0; ii < stateCount; ii++) {
             _textfacts[ii] = style.getTextFactory(
@@ -342,20 +345,20 @@ public class BTextArea extends BContainer {
         for (int ii = 0; ii < stateCount; ii++) {
             haligns[ii] = style.getTextAlignment(this, getStatePseudoClass(ii));
         }
-        _haligns = checkNonDefault(haligns, BConstants.LEFT);
+        _haligns = checkNonDefaultHorizontalAlignment(haligns);
 
-        int[] valigns = new int[stateCount];
+        VerticalAlignment[] valigns = new VerticalAlignment[stateCount];
         for (int ii = 0; ii < stateCount; ii++) {
             valigns[ii] = style.getVerticalAlignment(
                     this, getStatePseudoClass(ii));
         }
-        _valigns = checkNonDefault(valigns, BConstants.CENTER);
+        _valigns = checkNonDefaultVerticalAlignment(valigns);
 
-        int[] teffects = new int[stateCount];
+        TextEffect[] teffects = new TextEffect[stateCount];
         for (int ii = 0; ii < stateCount; ii++) {
             teffects[ii] = style.getTextEffect(this, getStatePseudoClass(ii));
         }
-        _teffects = checkNonDefault(teffects, BConstants.NORMAL);
+        _teffects = checkNonDefaultTextEffect(teffects);
 
         int[] effsizes = new int[stateCount];
         for (int ii = 0; ii < stateCount; ii++) {
@@ -378,9 +381,35 @@ public class BTextArea extends BContainer {
         }
     }
 
+    protected HorizontalAlignment[] checkNonDefaultHorizontalAlignment(HorizontalAlignment[] styles) {
+        for (HorizontalAlignment style : styles) {
+            if (style != HorizontalAlignment.LEFT) {
+                return styles;
+            }
+        }
+        return null;
+    }
+
+    protected VerticalAlignment[] checkNonDefaultVerticalAlignment(VerticalAlignment[] styles) {
+        for (VerticalAlignment style : styles) {
+            if (style != VerticalAlignment.CENTER) {
+                return styles;
+            }
+        }
+        return null;
+    }
+
+    protected TextEffect[] checkNonDefaultTextEffect(TextEffect[] styles) {
+        for (TextEffect style : styles) {
+            if (style != TextEffect.NORMAL) {
+                return styles;
+            }
+        }
+        return null;
+    }
+
     /**
      * @param styles int[]
-     * @param defval int
      * @return int[]
      */
     protected int[] checkNonDefault(int[] styles, int defval) {
@@ -414,8 +443,8 @@ public class BTextArea extends BContainer {
     protected void renderComponent(Renderer renderer) {
         super.renderComponent(renderer);
 
-        int halign = getHorizontalAlignment(),
-                valign = getVerticalAlignment();
+        HorizontalAlignment halign = getHorizontalAlignment();
+        VerticalAlignment valign = getVerticalAlignment();
 
         // compute the total height of the lines
         int start = _model.getValue(), stop = start + _model.getExtent(), lheight = 0;
@@ -427,9 +456,9 @@ public class BTextArea extends BContainer {
 
         int x = insets.left, y;
 
-        if (valign == BConstants.TOP) {
+        if (valign == VerticalAlignment.TOP) {
             y = _height - insets.top;
-        } else if (valign == BConstants.BOTTOM) {
+        } else if (valign == VerticalAlignment.BOTTOM) {
             y = lheight + insets.bottom;
         } else { // valign == BConstants.CENTER
             y = lheight + insets.bottom +
@@ -442,9 +471,9 @@ public class BTextArea extends BContainer {
             Line line = _lines.get(ii);
             y -= line.height;
             final int width = line.getWidth();
-            if (halign == BConstants.RIGHT) {
+            if (halign == HorizontalAlignment.RIGHT) {
                 x = _width - width - insets.right;
-            } else if (halign == BConstants.CENTER) {
+            } else if (halign == HorizontalAlignment.CENTER) {
                 x = insets.left +
                         (_width - horizontal - width) / 2;
             }
@@ -622,7 +651,7 @@ public class BTextArea extends BContainer {
         public int addRun(BTextFactory tfact,
                           Run run,
                           ColorRGBA color,
-                          int effect,
+                          TextEffect effect,
                           int effectSize,
                           ColorRGBA effectColor,
                           int maxWidth,
@@ -703,9 +732,10 @@ public class BTextArea extends BContainer {
         }
     }
 
-    protected int[] _haligns;
-    protected int[] _valigns;
-    protected int[] _teffects, _effsizes;
+    protected HorizontalAlignment[] _haligns;
+    protected VerticalAlignment[] _valigns;
+    protected TextEffect[] _teffects;
+    protected int[] _effsizes;
     protected ColorRGBA[] _effcols;
     protected BTextFactory[] _textfacts = new BTextFactory[getStateCount()];
 

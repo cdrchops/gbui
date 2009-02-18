@@ -21,6 +21,7 @@
 package com.jmex.bui;
 
 import com.jme.renderer.Renderer;
+import com.jmex.bui.enumeratedConstants.Orientation;
 import com.jmex.bui.event.ChangeEvent;
 import com.jmex.bui.event.ChangeListener;
 import com.jmex.bui.event.MouseWheelListener;
@@ -59,7 +60,7 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
         // create our viewport and scrollbar
         add(_vport = new BViewport(), BorderLayout.CENTER);
         _model.addChangeListener(_vport);
-        add(_vbar = new BScrollBar(BConstants.VERTICAL, _model),
+        add(_vbar = new BScrollBar(Orientation.VERTICAL, _model),
             BorderLayout.EAST);
     }
 

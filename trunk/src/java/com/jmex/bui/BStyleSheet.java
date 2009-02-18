@@ -21,25 +21,32 @@
  * $ID:$
  * $COPYRIGHT:$
  */
-package com.jmex.bui
+package com.jmex.bui;
 
-import com.jme.renderer.ColorRGBA
-import com.jmex.bui.background.BBackground
-import com.jmex.bui.background.ImageBackground
-import com.jmex.bui.border.BBorder
-import com.jmex.bui.border.CompoundBorder
-import com.jmex.bui.border.EmptyBorder
-import com.jmex.bui.border.LineBorder
-import com.jmex.bui.icon.BIcon
-import com.jmex.bui.provider.ResourceProvider
-import com.jmex.bui.text.BKeyMap
-import com.jmex.bui.text.BTextFactory
-import com.jmex.bui.text.DefaultKeyMap
-import com.jmex.bui.util.Dimension
-import com.jmex.bui.util.Insets
-import com.jmex.bui.util.TokReader
-import com.jmex.bui.*
-import com.jmex.bui.property.*
+import com.jme.renderer.ColorRGBA;
+import com.jmex.bui.background.BBackground;
+import com.jmex.bui.border.BBorder;
+import com.jmex.bui.border.CompoundBorder;
+import com.jmex.bui.border.EmptyBorder;
+import com.jmex.bui.border.LineBorder;
+import com.jmex.bui.enumeratedConstants.HorizontalAlignment;
+import com.jmex.bui.enumeratedConstants.ImageBackgroundMode;
+import com.jmex.bui.enumeratedConstants.TextEffect;
+import com.jmex.bui.enumeratedConstants.VerticalAlignment;
+import com.jmex.bui.icon.BIcon;
+import com.jmex.bui.property.*;
+import com.jmex.bui.provider.ResourceProvider;
+import com.jmex.bui.text.BKeyMap;
+import com.jmex.bui.text.BTextFactory;
+import com.jmex.bui.text.DefaultKeyMap;
+import com.jmex.bui.util.Dimension;
+import com.jmex.bui.util.Insets;
+import com.jmex.bui.util.TokReader;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Defines a stylesheet which is used to configure the style (font family, font size, foreground
@@ -78,7 +85,7 @@ import com.jmex.bui.property.*
  *   parent: other_class; // other_class must be defined *before* this one
  * <p/>
  *   tooltip: other_class; // used to define the style class for the tool_tip
- *}* </pre>
+ * }* </pre>
  * <p/>
  * Each component is identified by its default stylesheet class, which are derived from the
  * component's Java class name: <code>window, label, textfield, component, popupmenu, etc.</code>
@@ -102,7 +109,7 @@ import com.jmex.bui.property.*
  * doing the lookup every time the component is rendered (every frame) with the memory expense of
  * storing the style of every component in memory.
  */
-public class BStyleSheetGroovy implements BStyleConstants {
+public class BStyleSheet implements BStyleConstants {
     /**
      * A font style constant.
      */
@@ -133,9 +140,8 @@ public class BStyleSheetGroovy implements BStyleConstants {
     /**
      * Creates a stylesheet from the specified textual source.
      *
-     * @param reader Reader
+     * @param reader   Reader
      * @param rsrcprov ResourceProvider
-     * @throws IOException io
      */
     public BStyleSheet(final Reader reader,
                        final ResourceProvider rsrcprov) {
@@ -173,22 +179,22 @@ public class BStyleSheetGroovy implements BStyleConstants {
         return (BTextFactory) findProperty(component, pseudoClass, "font", true);
     }
 
-    public int getTextAlignment(BComponent component,
-                                String pseudoClass) {
-        Integer value = (Integer) findProperty(component, pseudoClass, "text-align", true);
-        return (value == null) ? BConstants.LEFT : value;
+    public HorizontalAlignment getTextAlignment(BComponent component,
+                                                String pseudoClass) {
+        HorizontalAlignment value = (HorizontalAlignment) findProperty(component, pseudoClass, "text-align", true);
+        return (value == null) ? HorizontalAlignment.LEFT : value;
     }
 
-    public int getVerticalAlignment(BComponent component,
+    public VerticalAlignment getVerticalAlignment(BComponent component,
+                                                  String pseudoClass) {
+        VerticalAlignment value = (VerticalAlignment) findProperty(component, pseudoClass, "vertical-align", true);
+        return (value == null) ? VerticalAlignment.CENTER : value;
+    }
+
+    public TextEffect getTextEffect(BComponent component,
                                     String pseudoClass) {
-        Integer value = (Integer) findProperty(component, pseudoClass, "vertical-align", true);
-        return (value == null) ? BConstants.CENTER : value;
-    }
-
-    public int getTextEffect(BComponent component,
-                             String pseudoClass) {
-        Integer value = (Integer) findProperty(component, pseudoClass, "text-effect", true);
-        return (value == null) ? BConstants.NORMAL : value;
+        TextEffect value = (TextEffect) findProperty(component, pseudoClass, "text-effect", true);
+        return (value == null) ? TextEffect.NORMAL : value;
     }
 
     public int getLineSpacing(BComponent component, String pseudoClass) {
@@ -329,22 +335,22 @@ public class BStyleSheetGroovy implements BStyleConstants {
             } else if (bprop.type.equals("image")) {
                 bprop.ipath = (String) args.get(1);
                 if (args.size() > 2) {
-                    String scale = (String) args.get(2);
-                    Integer scval = _ibconsts.get(scale);
-                    if (scval == null) {
-                        throw new IllegalArgumentException(
-                                "Unknown background scaling type: '" + scale + "'");
-                    }
-                    bprop.scale = scval;
-                    if (bprop.scale == ImageBackground.FRAME_XY && args.size() > 3) {
+                    String scaleModeStr = (String) args.get(2);
+                    ImageBackgroundMode scaleMode = ImageBackgroundMode.fromStylesheetAttributeString(scaleModeStr);
+//                    if (scaleMode == null) {
+//                        throw new IllegalArgumentException(
+//                                "Unknown background scaling type: '" + scaleModeStr + "'");
+//                    }
+                    bprop.scaleMode = scaleMode;
+                    if (bprop.scaleMode == ImageBackgroundMode.FRAME_XY && args.size() > 3) {
                         bprop.frame = new Insets();
                         bprop.frame.top = parseInt(args.get(3));
                         bprop.frame.right = (args.size() > 4) ?
-                                            parseInt(args.get(4)) : bprop.frame.top;
+                                parseInt(args.get(4)) : bprop.frame.top;
                         bprop.frame.bottom = (args.size() > 5) ?
-                                             parseInt(args.get(5)) : bprop.frame.top;
+                                parseInt(args.get(5)) : bprop.frame.top;
                         bprop.frame.left = (args.size() > 6) ?
-                                           parseInt(args.get(6)) : bprop.frame.right;
+                                parseInt(args.get(6)) : bprop.frame.right;
                     }
                 }
             } else if (bprop.type.equals("blank")) {
@@ -377,7 +383,7 @@ public class BStyleSheetGroovy implements BStyleConstants {
                 fprop.family = (String) args.get(0);
                 fprop.style = (String) args.get(1);
                 if (!fprop.style.equals(PLAIN) && !fprop.style.equals(BOLD) &&
-                    !fprop.style.equals(ITALIC) && !fprop.style.equals(BOLD_ITALIC)) {
+                        !fprop.style.equals(ITALIC) && !fprop.style.equals(BOLD_ITALIC)) {
                     throw new IllegalArgumentException("Unknown font style: '" + fprop.style + "'");
                 }
                 fprop.size = parseInt(args.get(2));
@@ -386,29 +392,32 @@ public class BStyleSheetGroovy implements BStyleConstants {
                 e.printStackTrace(System.err);
                 throw new IllegalArgumentException(
                         "Fonts must be specified as: " +
-                        "\"Font name\" plain|bold|italic|bolditalic point-size");
+                                "\"Font name\" plain|bold|italic|bolditalic point-size");
             }
         } else if (name.equals("text-align")) {
             String type = (String) args.get(0);
-            Object value = _taconsts.get(type);
-            if (value == null) {
-                throw new IllegalArgumentException("Unknown text-align type '" + type + "'");
-            }
-            return value;
+            return HorizontalAlignment.fromStylesheetAttributeString(type);
+//            Object value = _taconsts.get(type);
+//            if (value == null) {
+//                throw new IllegalArgumentException("Unknown text-align type '" + type + "'");
+//            }
+//            return value;
         } else if (name.equals("vertical-align")) {
             String type = (String) args.get(0);
-            Object value = _vaconsts.get(type);
-            if (value == null) {
-                throw new IllegalArgumentException("Unknown vertical-align type '" + type + "'");
-            }
-            return value;
+            return VerticalAlignment.fromStylesheetAttributeString(type);
+//            Object value = _vaconsts.get(type);
+//            if (value == null) {
+//                throw new IllegalArgumentException("Unknown vertical-align type '" + type + "'");
+//            }
+//            return value;
         } else if (name.equals("text-effect")) {
             String type = (String) args.get(0);
-            Object value = _teconsts.get(type);
-            if (value == null) {
-                throw new IllegalArgumentException("Unknown text-effect type '" + type + "'");
-            }
-            return value;
+            return TextEffect.fromStylesheetAttributeString(type);
+//            Object value = _teconsts.get(type);
+//            if (value == null) {
+//                throw new IllegalArgumentException("Unknown text-effect type '" + type + "'");
+//            }
+//            return value;
         } else if (name.equals("effect-size")) {
             return parseInt(args.get(0));
         } else if (name.equals("line-spacing")) {
@@ -436,7 +445,7 @@ public class BStyleSheetGroovy implements BStyleConstants {
             if (type.equals("blank")) {
                 return new EmptyBorder(thickness, 0, 0, 0);
             } else if (type.equals("solid")) {
-                return new LineBorder(parseColor((String) args.get(2)), thickness, 0, 0, 0);
+                return new LineBorder(parseColor((String) args.get(2)), thickness);
             } else {
                 throw new IllegalArgumentException("Unknown border type '" + type + "'");
             }
@@ -446,7 +455,7 @@ public class BStyleSheetGroovy implements BStyleConstants {
             if (type.equals("blank")) {
                 return new EmptyBorder(0, thickness, 0, 0);
             } else if (type.equals("solid")) {
-                return new LineBorder(parseColor((String) args.get(2)), 0, thickness, 0, 0);
+                return new LineBorder(parseColor((String) args.get(2)), thickness);
             } else {
                 throw new IllegalArgumentException("Unknown border type '" + type + "'");
             }
@@ -456,7 +465,7 @@ public class BStyleSheetGroovy implements BStyleConstants {
             if (type.equals("blank")) {
                 return new EmptyBorder(0, 0, thickness, 0);
             } else if (type.equals("solid")) {
-                return new LineBorder(parseColor((String) args.get(2)), 0, 0, thickness, 0);
+                return new LineBorder(parseColor((String) args.get(2)), thickness);
             } else {
                 throw new IllegalArgumentException("Unknown border type '" + type + "'");
             }
@@ -466,7 +475,7 @@ public class BStyleSheetGroovy implements BStyleConstants {
             if (type.equals("blank")) {
                 return new EmptyBorder(0, 0, 0, thickness);
             } else if (type.equals("solid")) {
-                return new LineBorder(parseColor((String) args.get(2)), 0, 0, 0, thickness);
+                return new LineBorder(parseColor((String) args.get(2)), thickness);
             } else {
                 throw new IllegalArgumentException("Unknown border type '" + type + "'");
             }
@@ -509,40 +518,4 @@ public class BStyleSheetGroovy implements BStyleConstants {
 
     protected ResourceProvider _rsrcprov;
     public HashMap<String, Rule> _rules = new HashMap<String, Rule>();
-
-    protected static HashMap<String, Integer> _taconsts = new HashMap<String, Integer>();
-    protected static HashMap<String, Integer> _vaconsts = new HashMap<String, Integer>();
-    protected static HashMap<String, Integer> _teconsts = new HashMap<String, Integer>();
-    protected static HashMap<String, Integer> _ibconsts = new HashMap<String, Integer>();
-
-    static {
-        // alignment constants
-        _taconsts.put("left", BConstants.LEFT);
-        _taconsts.put("right", BConstants.RIGHT);
-        _taconsts.put("center", BConstants.CENTER);
-
-        _vaconsts.put("center", BConstants.CENTER);
-        _vaconsts.put("top", BConstants.TOP);
-        _vaconsts.put("bottom", BConstants.BOTTOM);
-
-        // effect constants
-        _teconsts.put("none", BConstants.NORMAL);
-        _teconsts.put("shadow", BConstants.SHADOW);
-        _teconsts.put("outline", BConstants.OUTLINE);
-        _teconsts.put("plain", BConstants.PLAIN);
-
-        // background image constants
-        _ibconsts.put("centerxy", ImageBackground.CENTER_XY);
-        _ibconsts.put("centerx", ImageBackground.CENTER_X);
-        _ibconsts.put("centery", ImageBackground.CENTER_Y);
-        _ibconsts.put("scalexy", ImageBackground.SCALE_XY);
-        _ibconsts.put("scalex", ImageBackground.SCALE_X);
-        _ibconsts.put("scaley", ImageBackground.SCALE_Y);
-        _ibconsts.put("tilexy", ImageBackground.TILE_XY);
-        _ibconsts.put("tilex", ImageBackground.TILE_X);
-        _ibconsts.put("tiley", ImageBackground.TILE_Y);
-        _ibconsts.put("framexy", ImageBackground.FRAME_XY);
-        _ibconsts.put("framex", ImageBackground.FRAME_X);
-        _ibconsts.put("framey", ImageBackground.FRAME_Y);
-    }
 }

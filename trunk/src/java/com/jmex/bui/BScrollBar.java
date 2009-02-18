@@ -20,14 +20,8 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.event.ActionEvent;
-import com.jmex.bui.event.ActionListener;
-import com.jmex.bui.event.ChangeEvent;
-import com.jmex.bui.event.ChangeListener;
-import com.jmex.bui.event.MouseAdapter;
-import com.jmex.bui.event.MouseEvent;
-import com.jmex.bui.event.MouseListener;
-import com.jmex.bui.event.MouseWheelListener;
+import com.jmex.bui.enumeratedConstants.Orientation;
+import com.jmex.bui.event.*;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.util.Insets;
 
@@ -39,28 +33,28 @@ public class BScrollBar extends BContainer implements BConstants {
      * Creates a vertical scroll bar with the default range, value and extent.
      */
     public BScrollBar() {
-        this(VERTICAL);
+        this(Orientation.VERTICAL);
     }
 
     /**
      * Creates a scroll bar with the default range, value and extent.
      *
-     * @param orientation int
+     * @param orientation {@link com.jmex.bui.enumeratedConstants.Orientation}
      */
-    public BScrollBar(final int orientation) {
+    public BScrollBar(final Orientation orientation) {
         this(orientation, 0, 100, 0, 10);
     }
 
     /**
      * Creates a scroll bar with the specified orientation, range, value and extent.
      *
-     * @param orientation int
+     * @param orientation {@link com.jmex.bui.enumeratedConstants.Orientation}
      * @param min         int
      * @param value       int
      * @param extent      int
      * @param max         int
      */
-    public BScrollBar(final int orientation,
+    public BScrollBar(final Orientation orientation,
                       final int min,
                       final int value,
                       final int extent,
@@ -71,10 +65,10 @@ public class BScrollBar extends BContainer implements BConstants {
     /**
      * Creates a scroll bar with the specified orientation which will interact with the supplied model.
      *
-     * @param orientation int
+     * @param orientation {@link com.jmex.bui.enumeratedConstants.Orientation}
      * @param model       BoundedRangeModel
      */
-    public BScrollBar(final int orientation,
+    public BScrollBar(final Orientation orientation,
                       final BoundedRangeModel model) {
         super(new BorderLayout());
         _orient = orientation;
@@ -100,7 +94,7 @@ public class BScrollBar extends BContainer implements BConstants {
         addListener(_wheelListener = _model.createWheelListener());
 
         // create our buttons and backgrounds
-        String oprefix = "scrollbar_" + ((_orient == HORIZONTAL) ? "h" : "v");
+        String oprefix = "scrollbar_" + ((_orient == Orientation.HORIZONTAL) ? "h" : "v");
         _well = new BComponent();
         _well.setStyleClass(oprefix + "well");
         add(_well, BorderLayout.CENTER);
@@ -113,14 +107,14 @@ public class BScrollBar extends BContainer implements BConstants {
 
         _less = new BButton("");
         _less.setStyleClass(oprefix + "less");
-        add(_less, _orient == HORIZONTAL ?
+        add(_less, _orient == Orientation.HORIZONTAL ?
                    BorderLayout.WEST : BorderLayout.NORTH);
         _less.addListener(_buttoner);
         _less.setAction("less");
 
         _more = new BButton("");
         _more.setStyleClass(oprefix + "more");
-        add(_more, _orient == HORIZONTAL ?
+        add(_more, _orient == Orientation.HORIZONTAL ?
                    BorderLayout.EAST : BorderLayout.SOUTH);
         _more.addListener(_buttoner);
         _more.setAction("more");
@@ -177,7 +171,7 @@ public class BScrollBar extends BContainer implements BConstants {
         int theight = _well.getHeight() - winsets.getVertical();
         int range = Math.max(_model.getRange(), 1); // avoid div0
         int extent = Math.max(_model.getExtent(), 1); // avoid div0
-        if (_orient == HORIZONTAL) {
+        if (_orient == Orientation.HORIZONTAL) {
             int wellSize = twidth;
             tx = _model.getValue() * wellSize / range;
             twidth = extent * wellSize / range;
@@ -217,7 +211,7 @@ public class BScrollBar extends BContainer implements BConstants {
             // below, scroll down a page
             int mx = event.getX() - getAbsoluteX(),
                     my = event.getY() - getAbsoluteY(), dv = 0;
-            if (_orient == HORIZONTAL) {
+            if (_orient == Orientation.HORIZONTAL) {
                 if (mx < _thumb.getX()) {
                     dv = -1;
                 } else if (mx > _thumb.getX() + _thumb.getWidth()) {
@@ -247,7 +241,7 @@ public class BScrollBar extends BContainer implements BConstants {
         @Override
         public void mouseDragged(MouseEvent event) {
             int dv = 0;
-            if (_orient == HORIZONTAL) {
+            if (_orient == Orientation.HORIZONTAL) {
                 int mx = event.getX() - getAbsoluteX();
                 dv = (mx - _sx) * _model.getRange() /
                      (_well.getWidth() - _well.getInsets().getHorizontal());
@@ -281,7 +275,7 @@ public class BScrollBar extends BContainer implements BConstants {
     };
 
     protected BoundedRangeModel _model;
-    protected int _orient;
+    protected Orientation _orient;
 
     protected BButton _less, _more;
     protected BComponent _well, _thumb;

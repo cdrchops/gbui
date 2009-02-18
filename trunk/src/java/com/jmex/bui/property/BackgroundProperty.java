@@ -9,6 +9,7 @@ import com.jmex.bui.BImage;
 import com.jmex.bui.background.BlankBackground;
 import com.jmex.bui.background.ImageBackground;
 import com.jmex.bui.background.TintedBackground;
+import com.jmex.bui.enumeratedConstants.ImageBackgroundMode;
 import com.jmex.bui.provider.ResourceProvider;
 import com.jmex.bui.util.Insets;
 
@@ -24,7 +25,7 @@ public class BackgroundProperty extends Property {
     public String type;
     public ColorRGBA color;
     public String ipath;
-    public int scale = ImageBackground.SCALE_XY;
+    public ImageBackgroundMode scaleMode = ImageBackgroundMode.SCALE_XY;
     public Insets frame;
 
     // from Property
@@ -39,7 +40,7 @@ public class BackgroundProperty extends Property {
                 System.err.println("Failed to load background image '" + ipath + "': " + ioe);
                 return new BlankBackground();
             }
-            return new ImageBackground(scale, image, frame);
+            return new ImageBackground(scaleMode, image, frame);
         } else {
             return new BlankBackground();
         }

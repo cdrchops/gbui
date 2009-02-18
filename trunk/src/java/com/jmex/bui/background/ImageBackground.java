@@ -22,6 +22,8 @@ package com.jmex.bui.background;
 
 import com.jme.renderer.Renderer;
 import com.jmex.bui.BImage;
+import com.jmex.bui.enumeratedConstants.ImageBackgroundMode;
+import static com.jmex.bui.enumeratedConstants.ImageBackgroundMode.*;
 import com.jmex.bui.util.Insets;
 
 /**
@@ -46,26 +48,11 @@ import com.jmex.bui.util.Insets;
  * </ul>
  */
 public class ImageBackground extends BBackground {
-    public static final int CENTER_XY = 0;
-    public static final int CENTER_X = 1;
-    public static final int CENTER_Y = 2;
-
-    public static final int SCALE_XY = 3;
-    public static final int SCALE_X = 4;
-    public static final int SCALE_Y = 5;
-
-    public static final int TILE_XY = 6;
-    public static final int TILE_X = 7;
-    public static final int TILE_Y = 8;
-
-    public static final int FRAME_XY = 9;
-    public static final int FRAME_X = 10;
-    public static final int FRAME_Y = 11;
 
     /**
      * Creates an image background in the specified mode using the supplied image.
      */
-    public ImageBackground(int mode,
+    public ImageBackground(ImageBackgroundMode mode,
                            BImage image) {
         this(mode, image, null);
     }
@@ -75,7 +62,7 @@ public class ImageBackground extends BBackground {
      * only be used if one of the framing modes is being used and the supplied frame will be used instead of the default
      * frame which divides the image in thirds.
      */
-    public ImageBackground(int mode,
+    public ImageBackground(ImageBackgroundMode mode,
                            BImage image,
                            Insets frame) {
         _mode = mode;
@@ -96,8 +83,8 @@ public class ImageBackground extends BBackground {
     // documentation inherited
     public int getMinimumWidth() {
         return (_mode == FRAME_XY || _mode == FRAME_X)
-               ? (_frame.left + _frame.right)
-               : _image.getImageWidth();
+                ? (_frame.left + _frame.right)
+                : _image.getImageWidth();
     }
 
     /**
@@ -105,8 +92,8 @@ public class ImageBackground extends BBackground {
      */
     public int getMinimumHeight() {
         return (_mode == FRAME_XY || _mode == FRAME_Y)
-               ? _frame.top + _frame.bottom
-               : _image.getImageHeight();
+                ? _frame.top + _frame.bottom
+                : _image.getImageHeight();
     }
 
     // documentation inherited
@@ -118,20 +105,28 @@ public class ImageBackground extends BBackground {
                        float alpha) {
         super.render(renderer, x, y, width, height, alpha);
 
-        switch (_mode / 3) {
-            case CENTER:
+        switch (_mode) {
+            case CENTER_X:
+            case CENTER_XY:
+            case CENTER_Y:
                 renderCentered(renderer, x, y, width, height, alpha);
                 break;
 
-            case SCALE:
+            case SCALE_X:
+            case SCALE_XY:
+            case SCALE_Y:
                 renderScaled(renderer, x, y, width, height, alpha);
                 break;
 
-            case TILE:
+            case TILE_X:
+            case TILE_XY:
+            case TILE_Y:
                 renderTiled(renderer, x, y, width, height, alpha);
                 break;
 
-            case FRAME:
+            case FRAME_X:
+            case FRAME_XY:
+            case FRAME_Y:
                 renderFramed(renderer, x, y, width, height, alpha);
                 break;
         }
@@ -200,12 +195,12 @@ public class ImageBackground extends BBackground {
             iwidth = Math.min(width, iwidth);
             for (int yy = 0; yy < up; yy++) {
                 _image.render(renderer, 0, 0, iwidth, iheight,
-                              x, y + yy * iheight, iwidth, iheight, alpha);
+                        x, y + yy * iheight, iwidth, iheight, alpha);
             }
             int remain = height % iheight;
             if (remain > 0) {
                 _image.render(renderer, 0, 0, iwidth, remain,
-                              x, y + up * iheight, iwidth, remain, alpha);
+                        x, y + up * iheight, iwidth, remain, alpha);
             }
         } else if (_mode == TILE_XY) {
             int up = height / iheight;
@@ -230,12 +225,12 @@ public class ImageBackground extends BBackground {
         int across = width / iwidth;
         for (int xx = 0; xx < across; xx++) {
             _image.render(renderer, 0, 0, iwidth, iheight,
-                          x + xx * iwidth, y, iwidth, iheight, alpha);
+                    x + xx * iwidth, y, iwidth, iheight, alpha);
         }
         int remain = width % iwidth;
         if (remain > 0) {
             _image.render(renderer, 0, 0, remain, iheight,
-                          x + across * iwidth, y, remain, iheight, alpha);
+                    x + across * iwidth, y, remain, iheight, alpha);
         }
     }
 
@@ -252,30 +247,30 @@ public class ImageBackground extends BBackground {
         // draw the corners
         _image.render(renderer, 0, 0, _frame.left, _frame.bottom, x, y, alpha);
         _image.render(renderer, twidth - _frame.right, 0, _frame.right, _frame.bottom,
-                      x + width - _frame.right, y, alpha);
+                x + width - _frame.right, y, alpha);
         _image.render(renderer, 0, theight - _frame.top, _frame.left, _frame.top,
-                      x, y + height - _frame.top, alpha);
+                x, y + height - _frame.top, alpha);
         _image.render(renderer, twidth - _frame.right, theight - _frame.top, _frame.right, _frame.top,
-                      x + width - _frame.right, y + height - _frame.top, alpha);
+                x + width - _frame.right, y + height - _frame.top, alpha);
 
         // draw the "gaps"
         int wmiddle = twidth - _frame.getHorizontal(), hmiddle = theight - _frame.getVertical();
         int gwmiddle = width - _frame.getHorizontal(), ghmiddle = height - _frame.getVertical();
         _image.render(renderer, _frame.left, 0, wmiddle, _frame.bottom,
-                      x + _frame.left, y, gwmiddle, _frame.bottom, alpha);
+                x + _frame.left, y, gwmiddle, _frame.bottom, alpha);
         _image.render(renderer, _frame.left, theight - _frame.top, wmiddle, _frame.top, x + _frame.left,
-                      y + height - _frame.top, gwmiddle, _frame.top, alpha);
+                y + height - _frame.top, gwmiddle, _frame.top, alpha);
         _image.render(renderer, 0, _frame.bottom, _frame.left, hmiddle, x, y + _frame.bottom,
-                      _frame.left, ghmiddle, alpha);
+                _frame.left, ghmiddle, alpha);
         _image.render(renderer, twidth - _frame.right, _frame.bottom, _frame.right, hmiddle,
-                      x + width - _frame.right, y + _frame.bottom, _frame.right, ghmiddle, alpha);
+                x + width - _frame.right, y + _frame.bottom, _frame.right, ghmiddle, alpha);
 
         // draw the center
         _image.render(renderer, _frame.left, _frame.bottom, wmiddle, hmiddle,
-                      x + _frame.left, y + _frame.bottom, gwmiddle, ghmiddle, alpha);
+                x + _frame.left, y + _frame.bottom, gwmiddle, ghmiddle, alpha);
     }
 
-    protected int _mode;
+    protected ImageBackgroundMode _mode;
     protected BImage _image;
     protected Insets _frame;
 
