@@ -33,7 +33,8 @@ import com.jmex.bui.util.Rectangle;
  */
 public class HGroupLayout extends GroupLayout {
 
-    public HGroupLayout() {}
+    public HGroupLayout() {
+    }
 
     public HGroupLayout(Justification justification) {
         setJustification(justification);
@@ -56,9 +57,9 @@ public class HGroupLayout extends GroupLayout {
         DimenInfo info = computeDimens(target, true, whint, hhint);
         Dimension dims = new Dimension();
 
-        if (_policy == STRETCH) {
+        if (_policy == Policy.STRETCH) {
             dims.width = info.maxfreewid * (info.count - info.numfix) + info.fixwid;
-        } else if (_policy == EQUALIZE) {
+        } else if (_policy == Policy.EQUALIZE) {
             dims.width = info.maxwid * info.count;
         } else { // NONE or CONSTRAIN
             dims.width = info.totwid;
@@ -91,7 +92,7 @@ public class HGroupLayout extends GroupLayout {
         // do the on-axis policy calculations
         int defwid = 0;
         float conscale = 1f;
-        if (_policy == STRETCH) {
+        if (_policy == Policy.STRETCH) {
             if (freecount > 0) {
                 int freewid = b.width - info.fixwid - totgap;
                 defwid = freewid / freecount;
@@ -100,10 +101,10 @@ public class HGroupLayout extends GroupLayout {
             } else {
                 totwid = info.fixwid + totgap;
             }
-        } else if (_policy == EQUALIZE) {
+        } else if (_policy == Policy.EQUALIZE) {
             defwid = info.maxwid;
             totwid = info.fixwid + defwid * freecount + totgap;
-        } else if (_policy == CONSTRAIN) {
+        } else if (_policy == Policy.CONSTRAIN) {
             totwid = info.totwid + totgap;
             // if we exceed the width available, we must constrain
             if (totwid > b.width) {
@@ -116,16 +117,16 @@ public class HGroupLayout extends GroupLayout {
 
         // do the off-axis policy calculations
         int defhei = 0;
-        if (_offpolicy == STRETCH) {
+        if (_offpolicy == Policy.STRETCH) {
             defhei = b.height;
-        } else if (_offpolicy == EQUALIZE) {
+        } else if (_offpolicy == Policy.EQUALIZE) {
             defhei = info.maxhei;
         }
 
         // do the justification-related calculations
-        if (_justification == LEFT || _justification == TOP) {
+        if (_justification == Justification.LEFT || _justification == Justification.TOP) {
             sx = insets.left;
-        } else if (_justification == CENTER) {
+        } else if (_justification == Justification.CENTER) {
             sx = insets.left + (b.width - totwid) / 2;
         } else { // RIGHT or BOTTOM
             sx = insets.left + b.width - totwid;
@@ -141,9 +142,9 @@ public class HGroupLayout extends GroupLayout {
             BComponent child = target.getComponent(i);
             int newwid, newhei;
 
-            if (_policy == NONE || isFixed(child)) {
+            if (_policy == Policy.NONE || isFixed(child)) {
                 newwid = info.dimens[i].width;
-            } else if (_policy == CONSTRAIN) {
+            } else if (_policy == Policy.CONSTRAIN) {
                 newwid = Math.max(1, (int) (conscale * info.dimens[i].width));
             } else {
                 newwid = defwid + freefrac;
@@ -151,18 +152,18 @@ public class HGroupLayout extends GroupLayout {
                 freefrac = 0;
             }
 
-            if (_offpolicy == NONE) {
+            if (_offpolicy == Policy.NONE) {
                 newhei = info.dimens[i].height;
-            } else if (_offpolicy == CONSTRAIN) {
+            } else if (_offpolicy == Policy.CONSTRAIN) {
                 newhei = Math.min(info.dimens[i].height, b.height);
             } else {
                 newhei = defhei;
             }
 
             // determine our off-axis position
-            if (_offjust == RIGHT || _offjust == TOP) {
+            if (_offjust == Justification.RIGHT || _offjust == Justification.TOP) {
                 sy = insets.bottom + b.height - newhei;
-            } else if (_offjust == LEFT || _offjust == BOTTOM) {
+            } else if (_offjust == Justification.LEFT || _offjust == Justification.BOTTOM) {
                 sy = insets.bottom;
             } else { // CENTER
                 sy = insets.bottom + (b.height - newhei) / 2;

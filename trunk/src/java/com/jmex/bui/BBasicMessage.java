@@ -34,7 +34,7 @@ public class BBasicMessage extends BContainer {
      * @param _message String
      */
     public BBasicMessage(String _message) {
-        super(new HGroupLayout(GroupLayout.STRETCH));
+        super(new HGroupLayout(GroupLayout.Policy.STRETCH));
         message = _message;
         setupComponents();
     }

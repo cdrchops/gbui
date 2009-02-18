@@ -37,7 +37,7 @@ public class BTabbedPane extends BContainer {
      * Creates a tabbed pane with left justified buttons.
      */
     public BTabbedPane() {
-        this(GroupLayout.LEFT);
+        this(GroupLayout.Justification.LEFT);
     }
 
     /**
@@ -59,9 +59,9 @@ public class BTabbedPane extends BContainer {
         super(new BorderLayout());
 
         GroupLayout gl = GroupLayout.makeHoriz(
-                GroupLayout.STRETCH, GroupLayout.LEFT, GroupLayout.CONSTRAIN);
+                GroupLayout.Policy.STRETCH, GroupLayout.Justification.LEFT, GroupLayout.Policy.CONSTRAIN);
         _top = new BContainer(gl);
-        gl = GroupLayout.makeHoriz(GroupLayout.CONSTRAIN, tabAlign, GroupLayout.CONSTRAIN);
+        gl = GroupLayout.makeHoriz(GroupLayout.Policy.CONSTRAIN, tabAlign, GroupLayout.Policy.CONSTRAIN);
         _top.add(_buttons = new BContainer(gl));
         gl.setGap(gap);
         add(_top, BorderLayout.NORTH);

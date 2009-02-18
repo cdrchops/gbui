@@ -14,7 +14,7 @@ public class BButtonBar extends BContainer {
     private DialogOptions dialogOptions;
 
     public BButtonBar(String _name, DialogOptions options) {
-        super(_name, new HGroupLayout(GroupLayout.CENTER, GroupLayout.EQUALIZE));
+        super(_name, new HGroupLayout(GroupLayout.Justification.CENTER, GroupLayout.Policy.EQUALIZE));
         dialogOptions = options;
         createButtons();
     }

@@ -32,7 +32,8 @@ import com.jmex.bui.util.Rectangle;
  * @see GroupLayout
  */
 public class VGroupLayout extends GroupLayout {
-    public VGroupLayout() {}
+    public VGroupLayout() {
+    }
 
     public VGroupLayout(Justification justification) {
         setJustification(justification);
@@ -55,9 +56,9 @@ public class VGroupLayout extends GroupLayout {
         DimenInfo info = computeDimens(target, false, whint, hhint);
         Dimension dims = new Dimension();
 
-        if (_policy == STRETCH) {
+        if (_policy == Policy.STRETCH) {
             dims.height = info.maxfreehei * (info.count - info.numfix) + info.fixhei;
-        } else if (_policy == EQUALIZE) {
+        } else if (_policy == Policy.EQUALIZE) {
             dims.height = info.maxhei * info.count;
         } else { // NONE or CONSTRAIN
             dims.height = info.tothei;
@@ -89,7 +90,7 @@ public class VGroupLayout extends GroupLayout {
 
         // do the on-axis policy calculations
         int defhei = 0;
-        if (_policy == STRETCH) {
+        if (_policy == Policy.STRETCH) {
             if (freecount > 0) {
                 int freehei = b.height - info.fixhei - totgap;
                 defhei = freehei / freecount;
@@ -98,7 +99,7 @@ public class VGroupLayout extends GroupLayout {
             } else {
                 tothei = info.fixhei + totgap;
             }
-        } else if (_policy == EQUALIZE) {
+        } else if (_policy == Policy.EQUALIZE) {
             defhei = info.maxhei;
             tothei = info.fixhei + defhei * freecount + totgap;
         } else {
@@ -107,16 +108,16 @@ public class VGroupLayout extends GroupLayout {
 
         // do the off-axis policy calculations
         int defwid = 0;
-        if (_offpolicy == STRETCH) {
+        if (_offpolicy == Policy.STRETCH) {
             defwid = b.width;
-        } else if (_offpolicy == EQUALIZE) {
+        } else if (_offpolicy == Policy.EQUALIZE) {
             defwid = info.maxwid;
         }
 
         // do the justification-related calculations
-        if (_justification == LEFT || _justification == BOTTOM) {
+        if (_justification == Justification.LEFT || _justification == Justification.BOTTOM) {
             sy = insets.bottom + tothei;
-        } else if (_justification == CENTER) {
+        } else if (_justification == Justification.CENTER) {
             sy = insets.bottom + b.height - (b.height - tothei) / 2;
         } else { // RIGHT or TOP
             sy = insets.bottom + b.height;
@@ -132,7 +133,7 @@ public class VGroupLayout extends GroupLayout {
             BComponent child = target.getComponent(i);
             int newwid, newhei;
 
-            if (_policy == NONE || isFixed(child)) {
+            if (_policy == Policy.NONE || isFixed(child)) {
                 newhei = info.dimens[i].height;
             } else {
                 newhei = defhei + freefrac;
@@ -140,18 +141,18 @@ public class VGroupLayout extends GroupLayout {
                 freefrac = 0;
             }
 
-            if (_offpolicy == NONE) {
+            if (_offpolicy == Policy.NONE) {
                 newwid = info.dimens[i].width;
-            } else if (_offpolicy == CONSTRAIN) {
+            } else if (_offpolicy == Policy.CONSTRAIN) {
                 newwid = Math.min(info.dimens[i].width, b.width);
             } else {
                 newwid = defwid;
             }
 
             // determine our off-axis position
-            if (_offjust == LEFT || _offjust == TOP) {
+            if (_offjust == Justification.LEFT || _offjust == Justification.TOP) {
                 sx = insets.left;
-            } else if (_offjust == RIGHT || _offjust == BOTTOM) {
+            } else if (_offjust == Justification.RIGHT || _offjust == Justification.BOTTOM) {
                 sx = insets.left + (b.width - newwid);
             } else { // CENTER
                 sx = insets.left + (b.width - newwid) / 2;
