@@ -61,7 +61,7 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
         add(_vport = new BViewport(), BorderLayout.CENTER);
         _model.addChangeListener(_vport);
         add(_vbar = new BScrollBar(Orientation.VERTICAL, _model),
-            BorderLayout.EAST);
+                BorderLayout.EAST);
     }
 
     // Appends a value to our list, possibly scrolling our view to display it.
@@ -115,8 +115,9 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
             implements ChangeListener {
         public BViewport() {
             super(GroupLayout.makeVert(
-                    GroupLayout.NONE, GroupLayout.TOP,
-                    GroupLayout.STRETCH));
+                    GroupLayout.Policy.NONE,
+                    GroupLayout.Justification.TOP,
+                    GroupLayout.Policy.STRETCH));
         }
 
         //Returns a reference to the vertical scroll bar.
@@ -162,7 +163,7 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
             BWindow window;
             BRootNode root;
             if (!_valid || (window = getWindow()) == null ||
-                (root = window.getRootNode()) == null) {
+                    (root = window.getRootNode()) == null) {
                 return;
             }
 
@@ -213,7 +214,7 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
             // (because we're currently invalid, the resulting call to
             // invalidate() will have no effect)
             if (extent != _model.getExtent() ||
-                totheight != _model.getMaximum()) {
+                    totheight != _model.getMaximum()) {
                 _model.setRange(0, value, extent, totheight);
             }
 
@@ -277,10 +278,10 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
             Insets insets = getInsets();
             GL11.glTranslatef(0, _offset, 0);
             boolean scissored = intersectScissorBox(_srect,
-                                                    getAbsoluteX() + insets.left,
-                                                    getAbsoluteY() + insets.bottom,
-                                                    _width - insets.getHorizontal(),
-                                                    _height - insets.getVertical());
+                    getAbsoluteX() + insets.left,
+                    getAbsoluteY() + insets.bottom,
+                    _width - insets.getHorizontal(),
+                    _height - insets.getVertical());
             try {
                 // render our children
                 for (int ii = 0, ll = getComponentCount(); ii < ll; ii++) {
@@ -299,8 +300,8 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
             // if we're not within our bounds, we needn't check our target
             Insets insets = getInsets();
             if ((mx < _x + insets.left) || (my < _y + insets.bottom) ||
-                (mx >= _x + _width - insets.right) ||
-                (my >= _y + _height - insets.top)) {
+                    (mx >= _x + _width - insets.right) ||
+                    (my >= _y + _height - insets.top)) {
                 return null;
             }
 

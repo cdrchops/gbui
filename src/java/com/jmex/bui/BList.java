@@ -48,8 +48,10 @@ public class BList extends BContainer {
      * Creates a list and populates it with the supplied values.
      */
     public BList(Object[] values) {
-        super(GroupLayout.makeVert(GroupLayout.NONE, GroupLayout.TOP,
-                                   GroupLayout.STRETCH));
+        super(GroupLayout.makeVert(
+                GroupLayout.Policy.NONE,
+                GroupLayout.Justification.TOP,
+                GroupLayout.Policy.STRETCH));
         if (values != null) {
             for (int ii = 0; ii < values.length; ii++) {
                 addValue(values[ii]);
@@ -147,7 +149,7 @@ public class BList extends BContainer {
             }
             _selidx = _children.indexOf(e.getSource());
             emitEvent(new ActionEvent(BList.this, e.getWhen(),
-                                      e.getModifiers(), SELECT));
+                    e.getModifiers(), SELECT));
         }
     };
 }

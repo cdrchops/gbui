@@ -25,6 +25,7 @@ import com.jmex.bui.BContainer;
 import com.jmex.bui.util.Dimension;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Group layout managers lay out widgets in horizontal or vertical groups.
@@ -68,10 +69,31 @@ public abstract class GroupLayout extends BLayoutManager {
     /**
      * A class used to make our policy constants type-safe.
      */
-    public static class Policy {
+    public enum Policy {
+        /**
+         * Do not adjust the widgets on this axis.
+         */
+        NONE(0),
+
+        /**
+         * Stretch all the widgets to their maximum possible size on this axis.
+         */
+        STRETCH(1),
+
+        /**
+         * Stretch all the widgets to be equal to the size of the largest widget on this axis.
+         */
+        EQUALIZE(2),
+
+        /**
+         * Only valid for off-axis policy, this leaves widgets alone unless they are larger in the off-axis direction than
+         * their container, in which case it constrains them to fit on the off-axis.
+         */
+        CONSTRAIN(3);
+
         int code;
 
-        public Policy(int code) {
+        Policy(int code) {
             this.code = code;
         }
     }
@@ -79,10 +101,15 @@ public abstract class GroupLayout extends BLayoutManager {
     /**
      * A class used to make our policy constants type-safe.
      */
-    public static class Justification {
+    public enum Justification {
+        CENTER(0),
+        LEFT(1),
+        RIGHT(2),
+        TOP(3),
+        BOTTOM(4);
         int code;
 
-        public Justification(int code) {
+        Justification(int code) {
             this.code = code;
         }
     }
@@ -97,52 +124,6 @@ public abstract class GroupLayout extends BLayoutManager {
      * is so commonly used that we create and make this object available here.
      */
     public final static Constraints FIXED = new Constraints(true);
-
-    /**
-     * Do not adjust the widgets on this axis.
-     */
-    public final static Policy NONE = new Policy(0);
-
-    /**
-     * Stretch all the widgets to their maximum possible size on this axis.
-     */
-    public final static Policy STRETCH = new Policy(1);
-
-    /**
-     * Stretch all the widgets to be equal to the size of the largest widget on this axis.
-     */
-    public final static Policy EQUALIZE = new Policy(2);
-
-    /**
-     * Only valid for off-axis policy, this leaves widgets alone unless they are larger in the off-axis direction than
-     * their container, in which case it constrains them to fit on the off-axis.
-     */
-    public final static Policy CONSTRAIN = new Policy(3);
-
-    /**
-     * A justification constant.
-     */
-    public final static Justification CENTER = new Justification(0);
-
-    /**
-     * A justification constant.
-     */
-    public final static Justification LEFT = new Justification(1);
-
-    /**
-     * A justification constant.
-     */
-    public final static Justification RIGHT = new Justification(2);
-
-    /**
-     * A justification constant.
-     */
-    public final static Justification TOP = new Justification(3);
-
-    /**
-     * A justification constant.
-     */
-    public final static Justification BOTTOM = new Justification(4);
 
     public GroupLayout setPolicy(Policy policy) {
         _policy = policy;
@@ -277,7 +258,7 @@ public abstract class GroupLayout extends BLayoutManager {
 
         // if we're stretching, divide up the remaining space (minus gaps) and let the free
         // children know what they're getting when we first ask them for their preferred size
-        if (_policy == STRETCH) {
+        if (_policy == Policy.STRETCH) {
             if (horiz) {
                 if (whint > 0) {
                     int owhint = whint;
@@ -384,8 +365,8 @@ public abstract class GroupLayout extends BLayoutManager {
      */
     public static GroupLayout makeHStretch() {
         HGroupLayout lay = new HGroupLayout();
-        lay.setPolicy(STRETCH);
-        lay.setOffAxisPolicy(STRETCH);
+        lay.setPolicy(Policy.STRETCH);
+        lay.setOffAxisPolicy(Policy.STRETCH);
         return lay;
     }
 
@@ -394,8 +375,8 @@ public abstract class GroupLayout extends BLayoutManager {
      */
     public static GroupLayout makeVStretch() {
         VGroupLayout lay = new VGroupLayout();
-        lay.setPolicy(STRETCH);
-        lay.setOffAxisPolicy(STRETCH);
+        lay.setPolicy(Policy.STRETCH);
+        lay.setOffAxisPolicy(Policy.STRETCH);
         return lay;
     }
 
@@ -441,11 +422,11 @@ public abstract class GroupLayout extends BLayoutManager {
         return cont;
     }
 
-    protected Policy _policy = NONE;
-    protected Policy _offpolicy = CONSTRAIN;
+    protected Policy _policy = Policy.NONE;
+    protected Policy _offpolicy = Policy.CONSTRAIN;
     protected int _gap = DEFAULT_GAP;
-    protected Justification _justification = CENTER;
-    protected Justification _offjust = CENTER;
+    protected Justification _justification = Justification.CENTER;
+    protected Justification _offjust = Justification.CENTER;
 
-    protected HashMap<BComponent, Object> _constraints;
+    protected Map<BComponent, Object> _constraints;
 }

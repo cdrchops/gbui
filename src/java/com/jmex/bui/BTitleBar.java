@@ -80,7 +80,7 @@ public class BTitleBar extends BContainer {
     }
 
     private void createButtons(TitleOptions options) {
-        BContainer buttonContainer = new BContainer(GroupLayout.makeHoriz(GroupLayout.RIGHT));
+        BContainer buttonContainer = new BContainer(GroupLayout.makeHoriz(GroupLayout.Justification.RIGHT));
         BButton button;
         switch (options) {
             case MIN:

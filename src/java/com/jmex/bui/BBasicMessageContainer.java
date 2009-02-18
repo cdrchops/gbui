@@ -38,7 +38,7 @@ public class BBasicMessageContainer extends BContainer {
      */
     public BBasicMessageContainer(BBasicMessage _message,
                                   BButton button) {
-        super(new VGroupLayout(GroupLayout.EQUALIZE));
+        super(new VGroupLayout(GroupLayout.Policy.EQUALIZE));
 
         _message.setStyleClass("message");
         add(_message);
