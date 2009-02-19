@@ -40,22 +40,28 @@ import java.net.URL;
  */
 public class JMEBitmapTextFactory extends BTextFactory {
     /**
+     * JME text is all hardcoded to 16 pixels presently
+     */
+    private static final int HARDCODED_SIZE = 16;
+
+    /**
      * Creates a bitmap text factory with the specified font URL and the supplied per-character width and height.
      */
-    public JMEBitmapTextFactory(URL font,
-                                int width,
-                                int height) {
-        _width = width;
-        _height = height;
+    public JMEBitmapTextFactory(URL font) {
+        this(TextureManager.loadTexture(font,
+                Texture.MinificationFilter.NearestNeighborNoMipMaps,
+                Texture.MagnificationFilter.NearestNeighbor));
+    }
 
-        // create a texture from our font image
-        Texture texture = TextureManager.loadTexture(font,
-                                                     Texture.MinificationFilter.NearestNeighborNoMipMaps,
-                                                     Texture.MagnificationFilter.NearestNeighbor);
-        _tstate = DisplaySystem.getDisplaySystem().getRenderer().
-                createTextureState();
+    public JMEBitmapTextFactory(Texture font) {
+        if (font == null)
+            throw new IllegalArgumentException("font = null");
+        _tstate = DisplaySystem.getDisplaySystem().getRenderer().createTextureState();
         _tstate.setEnabled(true);
-        _tstate.setTexture(texture);
+        _tstate.setTexture(font);
+
+        _width = font.getImage().getWidth();
+        _height = font.getImage().getHeight();
 
         // create an alpha state that we'll use to blend our font over the
         // background
@@ -68,7 +74,7 @@ public class JMEBitmapTextFactory extends BTextFactory {
 
     // documentation inherited
     public int getHeight() {
-        return 16; // JME text is all hardcoded to 16 pixels presently
+        return HARDCODED_SIZE;
     }
 
     // documentation inherited

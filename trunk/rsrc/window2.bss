@@ -1,7 +1,9 @@
-//
-// $Id: window.bss,v 1.1 2007/05/08 22:14:15 vivaldi Exp $
-//
-// Default BUI style sheet
+/*
+
+ $Id: window.bss,v 1.1 2007/05/08 22:14:15 vivaldi Exp $
+
+ Default BUI style sheet
+*/
 
 window {
   border: 4 solid #000000;
