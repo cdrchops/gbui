@@ -1,5 +1,7 @@
-//this is the new stylesheet we're going to use
-// it starts and ends here
+/*
+this is the new stylesheet we're going to use
+ it starts and ends here
+*/
 
 root {
   color: #FFFFFF;
@@ -20,7 +22,7 @@ decoratedwindow {
 
 popupmenu {
   background: solid #00000088;
-//  padding: 5;
+  /*padding: 5;*/
   border: 2 solid #FFFFFF;
   font: "Dialog" bold 16;
 }
@@ -42,7 +44,7 @@ tooltip_label {
 }
 
 label {
-//  border: 1 solid #FFFFFF;
+  /*border: 1 solid #FFFFFF;*/
 }
 
 button {
@@ -153,8 +155,8 @@ vslider {
   border: 1 solid #000000;
 }
 
-//
-// These are for testing
+
+ /*These are for testing*/
 
 left {
   font: "Dialog" bold 16;
@@ -189,7 +191,7 @@ window_title {
   text-align: center;
 }
 
-// new for the Bui extensions by timo -- 30Apr07
+ /*new for the Bui extensions by timo -- 30Apr07*/
 titlebar {
   background: solid #2a2a90ff;
   border: 1 solid #FFFFFF;
@@ -215,8 +217,8 @@ titlebutton:disabled {
 }
 
 titlebutton:down {
-  //color: #edfe8fff;
-  //border: 1 solid #edfe8fff;
+  /*color: #edfe8fff;*/
+  /*border: 1 solid #edfe8fff;*/
   padding: 4 6 2 4;
 }
 
@@ -263,8 +265,8 @@ dialogbutton {
 }
 
 dialogbutton:hover {
-  //color: #cee453ff;
-  //border: 1 solid #cee453ff;
+  /*color: #cee453ff;*/
+  /*border: 1 solid #cee453ff;*/
   background: solid #2a2a90ff;
 }
 
@@ -274,8 +276,8 @@ dialogbutton:disabled {
 }
 
 dialogbutton:down {
-  //color: #edfe8fff;
-  //border: 1 solid #edfe8fff;
+  /*color: #edfe8fff;*/
+  /*border: 1 solid #edfe8fff;*/
   padding: 4 6 2 4;
 }
 

@@ -1,7 +1,8 @@
-//
-// $Id: menu.bss,v 1.1 2007/05/08 22:14:15 vivaldi Exp $
-//
-// Default BUI style sheet
+/*
+ $Id: menu.bss,v 1.1 2007/05/08 22:14:15 vivaldi Exp $
+
+ Default BUI style sheet
+*/
 
 menuitem {
   padding: 0 2;

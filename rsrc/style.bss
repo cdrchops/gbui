@@ -1,7 +1,9 @@
-//
-// $Id: style.bss,v 1.5 2007/05/08 22:14:15 vivaldi Exp $
-//
-// Default BUI style sheet
+/*
+
+ $Id: style.bss,v 1.5 2007/05/08 22:14:15 vivaldi Exp $
+
+ Default BUI style sheet
+*/
 
 root {
   color: #FFFFFF;
@@ -22,7 +24,7 @@ decoratedwindow {
 
 popupmenu {
   background: solid #00000088;
-//  padding: 5;
+  /*padding: 5;*/
   border: 2 solid #FFFFFF;
   font: "Dialog" bold 16;
 }
@@ -44,7 +46,7 @@ tooltip_label {
 }
 
 label {
-//  border: 1 solid #FFFFFF;
+  /*border: 1 solid #FFFFFF;*/
 }
 
 button {
@@ -155,8 +157,8 @@ vslider {
   border: 1 solid #000000;
 }
 
-//
-// These are for testing
+
+ /*These are for testing*/
 
 left {
   font: "Dialog" bold 16;
@@ -170,7 +172,7 @@ left {
 center {
   font: "Dialog" bold 16;
   text-align: center;
-  //text-effect: glow;
+  /*text-effect: glow;*/
   effect-color: #99CCFF;
   effect-size: 3;
   vertical-align: center;
@@ -186,7 +188,7 @@ right {
   border: 1 solid #FFCC99;
 }
 
-// new for the Bui extensions by timo -- 30Apr07
+ /*new for the Bui extensions by timo -- 30Apr07*/
 titlebar {
   background: solid #2a2a90ff;
   border: 1 solid #FFFFFF;

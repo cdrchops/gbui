@@ -1,8 +1,8 @@
-//
-// $Id: dialogbutton.bss,v 1.1 2007/05/08 22:14:15 vivaldi Exp $
-//
-// Default BUI style sheet
-
+/*
+ * $Id: dialogbutton.bss,v 1.1 2007/05/08 22:14:15 vivaldi Exp $
+ *
+ * Default BUI style sheet
+ */
 dialogbutton {
   background: solid #000088;
   border: 1 solid #FFFFFF;
@@ -12,8 +12,8 @@ dialogbutton {
 }
 
 dialogbutton:hover {
-  //color: #cee453ff;
-  //border: 1 solid #cee453ff;
+  /*color: #cee453ff;*/
+  /*border: 1 solid #cee453ff;*/
   background: solid #2a2a90ff;
 }
 
@@ -23,8 +23,8 @@ dialogbutton:disabled {
 }
 
 dialogbutton:down {
-  //color: #edfe8fff;
-  //border: 1 solid #edfe8fff;
+  /*color: #edfe8fff;*/
+  /*border: 1 solid #edfe8fff;*/
   padding: 4 6 2 4;
 }
 
