@@ -67,8 +67,7 @@
                includeAntRuntime="false"
                debug="on"
                optimize="on"
-               deprecation="on"
-               source="1.5">
+               deprecation="on">
             <classpath refid="classpath"/>
             <compilerarg value="-Xlint"/>
             <compilerarg value="-Xlint:-serial"/>
@@ -82,7 +81,7 @@
                    destdir="${classes.dir}"
                    includeAntRuntime="false"
                    debug="on" optimize="on"
-                   deprecation="on" source="1.5">
+                   deprecation="on">
                 <classpath refid="classpath"/>
                 <compilerarg value="-Xlint"/>
                 <compilerarg value="-Xlint:-serial"/>
