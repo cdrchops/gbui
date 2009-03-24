@@ -40,24 +40,43 @@ public class BComboBox extends BLabel {
     public static class Item extends BComponent implements Comparable<Item> {
         public Object value;
 
-        public Item(Object value,
-                    String label) {
+        /**
+         * @param value Object
+         * @param label String
+         */
+        public Item(final Object value,
+                    final String label) {
             this.value = value;
             _label = label;
         }
 
+        /**
+         * @return String
+         */
         @Override
         public String toString() {
             return _label;
         }
 
+        /**
+         * @param other Object
+         * @return boolean
+         */
         @Override
-        public boolean equals(Object other) {
-            Item oitem = (Item) other;
-            return (value == null) ? (oitem.value == null) : value.equals(oitem.value);
+        public boolean equals(final Object other) {
+            if (other instanceof Item) {
+                final Item oitem = (Item) other;
+                return (value == null) ? (oitem.value == null) : value.equals(oitem.value);
+            } else {
+                return value == null;
+            }
         }
 
-        public int compareTo(Item other) {
+        /**
+         * @param other Item
+         * @return int
+         */
+        public int compareTo(final Item other) {
             return _label.compareTo(other._label);
         }
 
@@ -78,7 +97,7 @@ public class BComboBox extends BLabel {
      *
      * @param items Object[]
      */
-    public BComboBox(Object[] items) {
+    public BComboBox(final Object[] items) {
         super("");
         setItems(items);
     }
@@ -89,7 +108,7 @@ public class BComboBox extends BLabel {
      *
      * @param items Iteratable
      */
-    public BComboBox(Iterable<?> items) {
+    public BComboBox(final Iterable<?> items) {
         super("");
         setItems(items);
     }
@@ -100,7 +119,7 @@ public class BComboBox extends BLabel {
      *
      * @param item Object
      */
-    public void addItem(Object item) {
+    public void addItem(final Object item) {
         addItem(_items.size(), item);
     }
 
@@ -111,8 +130,8 @@ public class BComboBox extends BLabel {
      * @param index int
      * @param item  Object
      */
-    public void addItem(int index,
-                        Object item) {
+    public void addItem(final int index,
+                        final Object item) {
         _items.add(index, new ComboMenuItem(item));
         clearCache();
     }
@@ -122,7 +141,7 @@ public class BComboBox extends BLabel {
      *
      * @param items Iteratable<?>
      */
-    public void setItems(Iterable<?> items) {
+    public void setItems(final Iterable<?> items) {
         clearItems();
         for (Object item : items) {
             addItem(item);
@@ -171,16 +190,20 @@ public class BComboBox extends BLabel {
 
     /**
      * Selects the item with the specified index.
+     *
+     * @param index int
      */
-    public void selectItem(int index) {
+    public void selectItem(final int index) {
         selectItem(index, 0L, 0);
     }
 
     /**
      * Selects the item with the specified index. <em>Note:</em> the supplied item is compared with the item list using
      * {@link Object#equals}.
+     *
+     * @param item Object
      */
-    public void selectItem(Object item) {
+    public void selectItem(final Object item) {
         int selidx = -1;
         for (int ii = 0, ll = _items.size(); ii < ll; ii++) {
             ComboMenuItem mitem = _items.get(ii);
@@ -195,14 +218,18 @@ public class BComboBox extends BLabel {
     /**
      * Requires that the combo box be configured with {@link Item} items, selects the item with a {@link Item#value}
      * equal to the supplied value.
+     *
+     * @param value Object
      */
-    public void selectValue(Object value) {
+    public void selectValue(final Object value) {
         // Item.equals only compares the values
         selectItem(new Item(value, ""));
     }
 
     /**
      * Returns the number of items in this combo box.
+     *
+     * @return int
      */
     public int getItemCount() {
         return _items.size();
@@ -210,15 +237,21 @@ public class BComboBox extends BLabel {
 
     /**
      * Returns the item at the specified index.
+     *
+     * @param index int
+     * @return Object
      */
-    public Object getItem(int index) {
+    public Object getItem(final int index) {
         return (index < 0 || index >= _items.size()) ? null : _items.get(index).item;
     }
 
     /**
      * Returns the value at the specified index, the item must be an instance of {@link Item}.
+     *
+     * @param index int
+     * @return Object
      */
-    public Object getValue(int index) {
+    public Object getValue(final int index) {
         return (index < 0 || index >= _items.size()) ? null : ((Item) _items.get(index).item).value;
     }
 
@@ -233,17 +266,23 @@ public class BComboBox extends BLabel {
 
     /**
      * Sets the preferred number of columns in the popup menu.
+     *
+     * @param columns int
      */
-    public void setPreferredColumns(int columns) {
+    public void setPreferredColumns(final int columns) {
         _columns = columns;
         if (_menu != null) {
             _menu.setPreferredColumns(columns);
         }
     }
 
+    /**
+     * @param event BEvent
+     * @return boolean
+     */
     @Override
     // from BComponent
-    public boolean dispatchEvent(BEvent event) {
+    public boolean dispatchEvent(final BEvent event) {
         if (event instanceof MouseEvent && isEnabled()) {
             MouseEvent mev = (MouseEvent) event;
             switch (mev.getType()) {
@@ -275,8 +314,8 @@ public class BComboBox extends BLabel {
 
     @Override
     // from BComponent
-    protected Dimension computePreferredSize(int whint,
-                                             int hhint) {
+    protected Dimension computePreferredSize(final int whint,
+                                             final int hhint) {
         // our preferred size is based on the widest of our items; computing this is rather
         // expensive, so we cache it like we do the menu
         if (_psize == null) {
@@ -296,20 +335,22 @@ public class BComboBox extends BLabel {
         return new Dimension(_psize);
     }
 
-    protected void selectItem(int index,
-                              long when,
-                              int modifiers) {
+    protected void selectItem(final int index,
+                              final long when,
+                              final int modifiers) {
         if (_selidx == index) {
             return;
         }
 
         _selidx = index;
-        Object item = getSelectedItem();
+
+        final Object item = getSelectedItem();
         if (item instanceof BIcon) {
             setIcon((BIcon) item);
         } else {
             setText(item == null ? "" : item.toString());
         }
+
         emitEvent(new ActionEvent(this, when, modifiers, "selectionChanged"));
     }
 
@@ -322,22 +363,24 @@ public class BComboBox extends BLabel {
     }
 
     protected class ComboPopupMenu extends BPopupMenu {
-        public ComboPopupMenu(int columns) {
+        public ComboPopupMenu(final int columns) {
             super(BComboBox.this.getWindow(), columns);
-            for (int ii = 0; ii < _items.size(); ii++) {
-                addMenuItem(_items.get(ii));
+            for (final ComboMenuItem _item : _items) {
+                addMenuItem(_item);
             }
         }
 
-        protected void itemSelected(BMenuItem item,
-                                    long when,
-                                    int modifiers) {
+        @Override
+        protected void itemSelected(final BMenuItem item,
+                                    final long when,
+                                    final int modifiers) {
             selectItem(_items.indexOf(item), when, modifiers);
             dismiss();
         }
 
-        protected Dimension computePreferredSize(int whint,
-                                                 int hhint) {
+        @Override
+        protected Dimension computePreferredSize(final int whint,
+                                                 final int hhint) {
             // prefer a size that is at least as wide as the combobox from which we will popup
             Dimension d = super.computePreferredSize(whint, hhint);
             d.width = Math.max(d.width, BComboBox.this.getWidth() - getInsets().getHorizontal());
@@ -345,18 +388,18 @@ public class BComboBox extends BLabel {
         }
     }
 
-    ;
-
     protected class ComboMenuItem extends BMenuItem {
         public Object item;
 
-        public ComboMenuItem(Object item) {
+        public ComboMenuItem(final Object item) {
             super(null, null, "select");
+
             if (item instanceof BIcon) {
                 setIcon((BIcon) item);
             } else {
                 setText(item.toString());
             }
+
             this.item = item;
         }
     }

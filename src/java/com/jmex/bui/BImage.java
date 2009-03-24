@@ -56,15 +56,21 @@ public class BImage extends Quad {
     public interface TexturePool {
         /**
          * Acquires textures from the pool for the state.
+         *
+         * @param tstate TextureState
          */
-        public void acquireTextures(TextureState tstate);
+        public void acquireTextures(final TextureState tstate);
 
         /**
          * Releases the state's textures back into the pool.
+         *
+         * @param tstate TextureState
          */
-        public void releaseTextures(TextureState tstate);
+        public void releaseTextures(final TextureState tstate);
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
     public Class getClassTag() {
         return this.getClass();
     }
@@ -77,8 +83,10 @@ public class BImage extends Quad {
     /**
      * Configures the supplied spatial with transparency in the standard user interface sense which is that transparent
      * pixels show through to the background but non-transparent pixels are not blended with what is behind them.
+     *
+     * @param target Spatial
      */
-    public static void makeTransparent(Spatial target) {
+    public static void makeTransparent(final Spatial target) {
         target.setRenderState(blendState);
     }
 
@@ -86,13 +94,17 @@ public class BImage extends Quad {
      * Sets the texture pool from which to acquire and release OpenGL texture objects. Applications can provide a pool
      * in order to avoid the rapid creation and destruction of OpenGL textures.  The default pool always creates new
      * textures and deletes released ones.
+     *
+     * @param pool TexturePool
      */
-    public static void setTexturePool(TexturePool pool) {
+    public static void setTexturePool(final TexturePool pool) {
         _texturePool = pool;
     }
 
     /**
      * Returns a reference to the configured texture pool.
+     *
+     * @return TexturePool
      */
     public static TexturePool getTexturePool() {
         return _texturePool;
@@ -100,24 +112,31 @@ public class BImage extends Quad {
 
     /**
      * Creates an image from the supplied source URL.
+     *
+     * @param image URL
+     * @throws IOException exception
      */
-    public BImage(URL image)
-            throws IOException {
+    public BImage(final URL image) throws IOException {
         this(ImageIO.read(image), true);
     }
 
     /**
      * Creates an image from the supplied source AWT image.
+     *
+     * @param image Image
      */
-    public BImage(java.awt.Image image) {
+    public BImage(final java.awt.Image image) {
         this(image, true);
     }
 
     /**
      * Creates an image from the supplied source AWT image.
+     *
+     * @param image Image
+     * @param flip  boolean
      */
-    public BImage(java.awt.Image image,
-                  boolean flip) {
+    public BImage(final java.awt.Image image,
+                  final boolean flip) {
         this(image.getWidth(null), image.getHeight(null));
 
         // expand the texture data to a power of two if necessary
@@ -169,15 +188,17 @@ public class BImage extends Quad {
      * @param height the height of the renderable image.
      * @param image  the image data.
      */
-    public BImage(int width,
-                  int height,
-                  Image image) {
+    public BImage(final int width,
+                  final int height,
+                  final Image image) {
         this(width, height);
         setImage(image);
     }
 
     /**
      * Returns the width of this image.
+     *
+     * @return int
      */
     public int getImageWidth() {
         return _width;
@@ -185,6 +206,8 @@ public class BImage extends Quad {
 
     /**
      * Returns the height of this image.
+     *
+     * @return int
      */
     public int getImageHeight() {
         return _height;
@@ -192,8 +215,10 @@ public class BImage extends Quad {
 
     /**
      * Configures this image to use transparency or not (true by default).
+     *
+     * @param transparent boolean
      */
-    public void setTransparent(boolean transparent) {
+    public void setTransparent(final boolean transparent) {
         if (transparent) {
             setRenderState(blendState);
         } else {
@@ -204,8 +229,10 @@ public class BImage extends Quad {
 
     /**
      * Configures the image data to be used by this image.
+     *
+     * @param image Image
      */
-    public void setImage(Image image) {
+    public void setImage(final Image image) {
         // free our old texture as appropriate
         if (_referents > 0) {
             releaseTexture();
@@ -235,17 +262,24 @@ public class BImage extends Quad {
     /**
      * Configures our texture coordinates to the specified subimage. This does not normally need to be called, but if
      * one is stealthily using a BImage as a quad, then it does.
+     *
+     * @param sx      int
+     * @param sy      int
+     * @param swidth  int
+     * @param sheight int
      */
-    public void setTextureCoords(int sx,
-                                 int sy,
-                                 int swidth,
-                                 int sheight) {
-        float lx = sx / (float) _twidth;
-        float ly = sy / (float) _theight;
-        float ux = (sx + swidth) / (float) _twidth;
-        float uy = (sy + sheight) / (float) _theight;
+    public void setTextureCoords(final int sx,
+                                 final int sy,
+                                 final int swidth,
+                                 final int sheight) {
+        final float twidth = (float) _twidth;
+        final float theight = (float) _theight;
+        final float lx = sx / twidth;
+        final float ly = sy / theight;
+        final float ux = (sx + swidth) / twidth;
+        final float uy = (sy + sheight) / theight;
 
-        FloatBuffer tcoords = getTextureCoords().get(0).coords;
+        final FloatBuffer tcoords = getTextureCoords().get(0).coords;
         tcoords.clear();
         tcoords.put(lx).put(uy);
         tcoords.put(lx).put(ly);
@@ -256,53 +290,85 @@ public class BImage extends Quad {
 
     /**
      * Renders this image at the specified coordinates.
+     *
+     * @param renderer Renderer
+     * @param tx       int
+     * @param ty       int
+     * @param alpha    float
      */
-    public void render(Renderer renderer,
-                       int tx,
-                       int ty,
-                       float alpha) {
+    public void render(final Renderer renderer,
+                       final int tx,
+                       final int ty,
+                       final float alpha) {
         render(renderer, tx, ty, _width, _height, alpha);
     }
 
     /**
      * Renders this image at the specified coordinates, scaled to the specified size.
+     *
+     * @param renderer Renderer
+     * @param tx       int
+     * @param ty       int
+     * @param twidth   int
+     * @param theight  int
+     * @param alpha    float
      */
-    public void render(Renderer renderer,
-                       int tx,
-                       int ty,
-                       int twidth,
-                       int theight,
-                       float alpha) {
+    public void render(final Renderer renderer,
+                       final int tx,
+                       final int ty,
+                       final int twidth,
+                       final int theight,
+                       final float alpha) {
         render(renderer, 0, 0, _width, _height, tx, ty, twidth, theight, alpha);
     }
 
     /**
      * Renders a region of this image at the specified coordinates.
+     *
+     * @param renderer Renderer
+     * @param sx       int
+     * @param sy       int
+     * @param swidth   int
+     * @param sheight  int
+     * @param tx       int
+     * @param ty       int
+     * @param alpha    float
      */
-    public void render(Renderer renderer,
-                       int sx,
-                       int sy,
-                       int swidth,
-                       int sheight,
-                       int tx,
-                       int ty,
-                       float alpha) {
+    public void render(final Renderer renderer,
+                       final int sx,
+                       final int sy,
+                       final int swidth,
+                       final int sheight,
+                       final int tx,
+                       final int ty,
+                       final float alpha) {
         render(renderer, sx, sy, swidth, sheight, tx, ty, swidth, sheight, alpha);
     }
 
     /**
      * Renders a region of this image at the specified coordinates, scaled to the specified size.
+     *
+     * @param renderer Renderer
+     * @param sx       int
+     * @param sy       int
+     * @param swidth   int
+     * @param sheight  int
+     * @param tx       int
+     * @param ty       int
+     * @param twidth   int
+     * @param theight  int
+     * @param alpha    float
      */
-    public void render(Renderer renderer,
-                       int sx,
-                       int sy,
-                       int swidth,
-                       int sheight,
-                       int tx,
-                       int ty,
-                       int twidth,
-                       int theight,
-                       float alpha) {
+    public void render(final Renderer renderer,
+                       final int sx,
+                       final int sy,
+                       final int swidth,
+                       final int sheight,
+                       final int tx,
+                       final int ty,
+                       final int twidth,
+                       final int theight,
+                       final float alpha) {
         if (_referents == 0) {
             Log.log.warning("Unreferenced image rendered " + this + "!");
             Thread.dumpStack();
@@ -345,9 +411,12 @@ public class BImage extends Quad {
 
     /**
      * Helper constructor.
+     *
+     * @param width  int
+     * @param height int
      */
-    protected BImage(int width,
-                     int height) {
+    protected BImage(final int width,
+                     final int height) {
         super("name", width, height);
         _width = width;
         _height = height;
@@ -355,12 +424,18 @@ public class BImage extends Quad {
         setTransparent(true);
     }
 
+    /**
+     *
+     */
     protected void acquireTexture() {
         if (_tstate.getNumberOfSetTextures() > 0) {
             _texturePool.acquireTextures(_tstate);
         }
     }
 
+    /**
+     *
+     */
     protected void releaseTexture() {
         if (_tstate.getNumberOfSetTextures() > 0) {
             _texturePool.releaseTextures(_tstate);
@@ -369,11 +444,13 @@ public class BImage extends Quad {
 
     /**
      * Rounds the supplied value up to a power of two.
+     *
+     * @param value int
+     * @return int
      */
-    protected static int nextPOT(int value) {
+    protected static int nextPOT(final int value) {
         return (Integer.bitCount(value) > 1) ? (Integer.highestOneBit(value) << 1) : value;
     }
-
 
     protected TextureState _tstate;
     protected int _width, _height;
@@ -383,12 +460,20 @@ public class BImage extends Quad {
     protected static boolean _supportsNonPowerOfTwo;
 
     protected static TexturePool _texturePool = new TexturePool() {
-        public void acquireTextures(TextureState tstate) {
+        /**
+         *
+         * @param tstate TextureState
+         */
+        public void acquireTextures(final TextureState tstate) {
             tstate.apply(); // preload
         }
 
-        public void releaseTextures(TextureState tstate) {
-            tstate.deleteAll();
+        /**
+         *
+         * @param tstate TextureState
+         */
+        public void releaseTextures(final TextureState tstate) {
+            tstate.clearTextures();
         }
     };
 
