@@ -34,7 +34,11 @@ import com.jmex.bui.enumeratedConstants.ImageBackgroundMode;
 import com.jmex.bui.enumeratedConstants.TextEffect;
 import com.jmex.bui.enumeratedConstants.VerticalAlignment;
 import com.jmex.bui.icon.BIcon;
-import com.jmex.bui.property.*;
+import com.jmex.bui.property.BackgroundProperty;
+import com.jmex.bui.property.CursorProperty;
+import com.jmex.bui.property.FontProperty;
+import com.jmex.bui.property.IconProperty;
+import com.jmex.bui.property.Property;
 import com.jmex.bui.provider.ResourceProvider;
 import com.jmex.bui.text.BKeyMap;
 import com.jmex.bui.text.BTextFactory;
@@ -223,8 +227,9 @@ public class BStyleSheet implements BStyleConstants {
                              String pseudoClass) {
         // If there is a main border, use it.
         BBorder mainBorder = (BBorder) findProperty(component, pseudoClass, "border", false);
-        if (mainBorder != null)
+        if (mainBorder != null) {
             return mainBorder;
+        }
 
         // Otherwise add up all of the other borders.
         CompoundBorder cBorder = new CompoundBorder(new EmptyBorder(0, 0, 0, 0), new EmptyBorder(0, 0, 0, 0));
@@ -249,7 +254,6 @@ public class BStyleSheet implements BStyleConstants {
             cBorder = new CompoundBorder(bottomBorder, tempBorder);
         }
         return cBorder;
-
     }
 
     public Dimension getSize(BComponent component,
@@ -336,7 +340,7 @@ public class BStyleSheet implements BStyleConstants {
                 bprop.ipath = (String) args.get(1);
                 if (args.size() > 2) {
                     String scaleModeStr = (String) args.get(2);
-                    ImageBackgroundMode scaleMode = ImageBackgroundMode.fromStylesheetAttributeString(scaleModeStr);
+                    final ImageBackgroundMode scaleMode = ImageBackgroundMode.fromStylesheetAttributeString(scaleModeStr);
 //                    if (scaleMode == null) {
 //                        throw new IllegalArgumentException(
 //                                "Unknown background scaling type: '" + scaleModeStr + "'");
@@ -346,11 +350,11 @@ public class BStyleSheet implements BStyleConstants {
                         bprop.frame = new Insets();
                         bprop.frame.top = parseInt(args.get(3));
                         bprop.frame.right = (args.size() > 4) ?
-                                parseInt(args.get(4)) : bprop.frame.top;
+                                            parseInt(args.get(4)) : bprop.frame.top;
                         bprop.frame.bottom = (args.size() > 5) ?
-                                parseInt(args.get(5)) : bprop.frame.top;
+                                             parseInt(args.get(5)) : bprop.frame.top;
                         bprop.frame.left = (args.size() > 6) ?
-                                parseInt(args.get(6)) : bprop.frame.right;
+                                           parseInt(args.get(6)) : bprop.frame.right;
                     }
                 }
             } else if (bprop.type.equals("blank")) {
@@ -383,7 +387,7 @@ public class BStyleSheet implements BStyleConstants {
                 fprop.family = (String) args.get(0);
                 fprop.style = (String) args.get(1);
                 if (!fprop.style.equals(PLAIN) && !fprop.style.equals(BOLD) &&
-                        !fprop.style.equals(ITALIC) && !fprop.style.equals(BOLD_ITALIC)) {
+                    !fprop.style.equals(ITALIC) && !fprop.style.equals(BOLD_ITALIC)) {
                     throw new IllegalArgumentException("Unknown font style: '" + fprop.style + "'");
                 }
                 fprop.size = parseInt(args.get(2));
@@ -392,7 +396,7 @@ public class BStyleSheet implements BStyleConstants {
                 e.printStackTrace(System.err);
                 throw new IllegalArgumentException(
                         "Fonts must be specified as: " +
-                                "\"Font name\" plain|bold|italic|bolditalic point-size");
+                        "\"Font name\" plain|bold|italic|bolditalic point-size");
             }
         } else if (name.equals("text-align")) {
             String type = (String) args.get(0);
@@ -491,7 +495,7 @@ public class BStyleSheet implements BStyleConstants {
             }
             return parent;
         } else if (name.equals("tooltip")) {
-            return (String) args.get(0);
+            return args.get(0);
         } else {
             throw new IllegalArgumentException("Unknown property '" + name + "'");
         }
