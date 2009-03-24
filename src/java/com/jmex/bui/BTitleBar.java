@@ -27,6 +27,7 @@ import com.jmex.bui.event.ComponentListener;
 import com.jmex.bui.headlessWindows.BTitledWindow;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.layout.GroupLayout;
+import com.jmex.bui.layout.Justification;
 import com.jmex.bui.listener.CollapsingWindowListener;
 
 import java.util.ArrayList;
@@ -80,7 +81,7 @@ public class BTitleBar extends BContainer {
     }
 
     private void createButtons(TitleOptions options) {
-        BContainer buttonContainer = new BContainer(GroupLayout.makeHoriz(GroupLayout.Justification.RIGHT));
+        BContainer buttonContainer = new BContainer(GroupLayout.makeHoriz(Justification.RIGHT));
         BButton button;
         switch (options) {
             case MIN:

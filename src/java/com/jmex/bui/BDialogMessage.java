@@ -26,6 +26,7 @@ import com.jmex.bui.icon.BIcon;
 import com.jmex.bui.icon.IconUtil;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.layout.GroupLayout;
+import com.jmex.bui.layout.Justification;
 
 //todo: change so that the style is set in the BuiSystem? and then can be propogated through
 //      the subset of the window
@@ -135,7 +136,7 @@ public class BDialogMessage extends BContainer {
                                String backgroundStyle,
                                IconOptions option,
                                DisplayStyleOptions styleOption) {
-        BContainer bc = GroupLayout.makeVBox(GroupLayout.Justification.CENTER);
+        BContainer bc = GroupLayout.makeVBox(Justification.CENTER);
         bc.setName(_name);
 
         bc.add(message);
