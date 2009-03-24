@@ -17,10 +17,18 @@
     <property name="libs.dir" value="lib"/>
     <!--<import file="libs-incl.xml"/>-->
 
+    <fileset dir="${libs.dir}" id="jme-bui.libs">
+        <include name="junit-4.jar"/>
+        <include name="jme.jar"/>
+        <include name="jme-awt.jar"/>
+        <include name="lwjgl.jar"/>
+        <include name="groovy-all-1.5.4.jar"/>
+    </fileset>
+
     <!-- declare our classpath -->
     <path id="classpath">
         <pathelement location="${classes.dir}"/>
-        <fileset dir="${libs.dir}" includes="**/*.jar"/>
+        <fileset refid="jme-bui.libs"/>
     </path>
 
     <!-- prepares the application directories -->
@@ -51,9 +59,7 @@
 
     <path id="groovy.classpath">
         <pathelement path="${libs.dir}"/>
-        <fileset dir="${libs.dir}">
-            <include name="**/*.jar"/>
-        </fileset>
+        <fileset refid="jme-bui.libs"/>
     </path>
 
     <taskdef name="groovyc"
@@ -61,14 +67,14 @@
              classpathref="groovy.classpath"/>
 
     <!-- build the java class files -->
-    <target name="compile" depends="prepare,resourcecopy">
+    <target name="compile" depends="prepare"><!--, resourcecopy-->
         <javac srcdir="${src.dir}"
                destdir="${classes.dir}"
                includeAntRuntime="false"
                debug="on"
                optimize="on"
-               deprecation="on">
-            <classpath refid="classpath"/>
+               deprecation="on"
+               classpathref="classpath">
             <compilerarg value="-Xlint"/>
             <compilerarg value="-Xlint:-serial"/>
         </javac>
@@ -81,8 +87,8 @@
                    destdir="${classes.dir}"
                    includeAntRuntime="false"
                    debug="on" optimize="on"
-                   deprecation="on">
-                <classpath refid="classpath"/>
+                   deprecation="on"
+                   classpathref="classpath">
                 <compilerarg value="-Xlint"/>
                 <compilerarg value="-Xlint:-serial"/>
             </javac>
@@ -121,12 +127,12 @@
             </classpath>
             <batchtest>
                 <fileset dir="test/groovy">
-                    <!--<exclude name="**/HttpConversionTest.java" />-->
+
                 </fileset>
 
-                <!--<fileset dir="test/java">-->
-                <!--<exclude name="**/HttpConversionTest.java" />-->
-                <!--</fileset>-->
+                <fileset dir="test/java">
+
+                </fileset>
             </batchtest>
         </junit>
     </target>
@@ -149,5 +155,10 @@
     <target name="distsrc">
         <jar destfile="${dist.dir}/jme-bui-src.jar"
              basedir="${src.dir}"/>
+    </target>
+
+    <target name="disttests">
+        <jar destfile="${dist.dir}/jme-bui-tests.jar"
+             basedir="test"/>
     </target>
 </project>
