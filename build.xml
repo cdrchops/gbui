@@ -15,12 +15,12 @@
 
     <!-- import some targets to enumerate library dependencies -->
     <property name="libs.dir" value="lib"/>
-    <import file="libs-incl.xml"/>
+    <!--<import file="libs-incl.xml"/>-->
 
     <!-- declare our classpath -->
     <path id="classpath">
         <pathelement location="${classes.dir}"/>
-        <fileset dir="lib" includes="**/*.jar"/>
+        <fileset dir="${libs.dir}" includes="**/*.jar"/>
     </path>
 
     <!-- prepares the application directories -->
@@ -62,19 +62,27 @@
 
     <!-- build the java class files -->
     <target name="compile" depends="prepare,resourcecopy">
-        <groovyc srcdir="${src.dir}"
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               includeAntRuntime="false"
+               debug="on"
+               optimize="on"
+               deprecation="on"
+               source="1.5">
+            <classpath refid="classpath"/>
+            <compilerarg value="-Xlint"/>
+            <compilerarg value="-Xlint:-serial"/>
+        </javac>
+    </target>
+
+    <target name="compile-tests" depends="compile">
+        <groovyc srcdir="${test.dir}:test/groovy"
                  destdir="${classes.dir}">
-            <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false"
-                   debug="on" optimize="on" deprecation="on" source="1.5">
-                <classpath refid="classpath"/>
-                <compilerarg value="-Xlint"/>
-                <compilerarg value="-Xlint:-serial"/>
-            </javac>
-        </groovyc>
-        <groovyc srcdir="${test.dir}"
-                 destdir="${classes.dir}">
-            <javac srcdir="${test.dir}" destdir="${classes.dir}" includeAntRuntime="false"
-                   debug="on" optimize="on" deprecation="on" source="1.5">
+            <javac srcdir="${test.dir}"
+                   destdir="${classes.dir}"
+                   includeAntRuntime="false"
+                   debug="on" optimize="on"
+                   deprecation="on" source="1.5">
                 <classpath refid="classpath"/>
                 <compilerarg value="-Xlint"/>
                 <compilerarg value="-Xlint:-serial"/>
@@ -100,14 +108,26 @@
     </target>
 
     <!-- runs our unit tests -->
-    <target name="tests" depends="compile,resourcecopy" description="Runs unit tests.">
+    <target name="tests" depends="compile-tests" description="Runs unit tests.">
         <junit printsummary="no" haltonfailure="yes" fork="false">
             <classpath refid="classpath"/>
             <formatter type="brief" usefile="false"/>
-            <batchtest>
-                <fileset dir="${src.dir}">
-                    <include name="**/*UTest.java"/>
+            <classpath>
+                <pathelement location="test/groovy"/>
+                <pathelement location="test/java"/>
+                <pathelement location="${src.dir}"/>
+                <fileset dir="${libs.dir}">
+                    <include name="**/*.jar"/>
                 </fileset>
+            </classpath>
+            <batchtest>
+                <fileset dir="test/groovy">
+                    <!--<exclude name="**/HttpConversionTest.java" />-->
+                </fileset>
+
+                <!--<fileset dir="test/java">-->
+                <!--<exclude name="**/HttpConversionTest.java" />-->
+                <!--</fileset>-->
             </batchtest>
         </junit>
     </target>
