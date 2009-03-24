@@ -40,6 +40,7 @@ import com.jmex.bui.icon.ImageIcon;
 import com.jmex.bui.layout.AbsoluteLayout;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.layout.GroupLayout;
+import com.jmex.bui.layout.Justification;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Point;
 import com.jmex.bui.util.Rectangle;
@@ -140,7 +141,7 @@ public class LayoutTest extends BaseTest {
         window.setBounds(100, 300, ps.width, 2 * ps.height / 3);
 
         window = new BWindow(style, new BorderLayout());
-        cont = new BContainer(GroupLayout.makeHoriz(GroupLayout.Justification.LEFT));
+        cont = new BContainer(GroupLayout.makeHoriz(Justification.LEFT));
         cont.add(new BToggleButton(new ImageIcon(icon), ""));
         BLabel label = new BLabel("Horizontal");
         label.setTooltipText("This is a horizontal label.");
