@@ -40,7 +40,7 @@ public class BackgroundProperty extends Property {
                 System.err.println("Failed to load background image '" + ipath + "': " + ioe);
                 return new BlankBackground();
             }
-            return new ImageBackground(scaleMode, image, frame);
+            return new ImageBackground(scaleMode.stylesheetId, image, frame);
         } else {
             return new BlankBackground();
         }
