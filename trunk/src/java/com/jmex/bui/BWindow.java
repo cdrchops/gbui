@@ -22,19 +22,28 @@ package com.jmex.bui;
 
 import com.jme.system.DisplaySystem;
 import com.jmex.bui.layout.BLayoutManager;
+import com.jmex.bui.layout.GroupLayout;
+import com.jmex.bui.layout.Justification;
+import com.jmex.bui.layout.Policy;
+import com.jmex.bui.layout.VGroupLayout;
 import com.jmex.bui.util.Dimension;
 
 /**
  * A window defines the top-level of a component hierarchy. It must be created with a stylesheet and layout manager.
  */
-public class BWindow extends BContainer
-        implements Comparable<BWindow> {
+public class BWindow extends BContainer implements Comparable<BWindow> {
     public BWindow(String name,
                    BStyleSheet style,
                    BLayoutManager layout) {
         super(name);
+        setLayoutManager(new VGroupLayout(Justification.TOP, Policy.NONE));
+        ((VGroupLayout) getLayoutManager()).setOffAxisJustification(Justification.LEFT);
+        _menuBar = new BMenuBar("menubar");
+        _rootPanel = new BContainer();
+        add(_menuBar, GroupLayout.FIXED);
+        add(_rootPanel);
         _style = style;
-        setLayoutManager(layout);
+        _rootPanel.setLayoutManager(layout);
     }
 
     public BWindow(BStyleSheet style,
@@ -58,9 +67,11 @@ public class BWindow extends BContainer
     }
 
     /**
-     * Sizes this window to its preferred size, accounting for the specified width or height hints. Specify -1 for a
-     * dimension to indicate that it is freely resizable and a non-negative hint for a dimension that should be no
-     * larger than a particular size. This method does not change the window's coordinates.
+     * Sizes this window to its preferred size, accounting for the specified
+     * width or height hints. Specify -1 for a dimension to indicate that it is
+     * freely resizable and a non-negative hint for a dimension that should be
+     * no larger than a particular size. This method does not change the
+     * window's coordinates.
      */
     public void pack(int whint,
                      int hhint) {
@@ -69,8 +80,9 @@ public class BWindow extends BContainer
     }
 
     /**
-     * Positions this window in the center of the display. This should be called after configuring the size of the
-     * window (using, for example, a call to {@link #pack}).
+     * Positions this window in the center of the display. This should be called
+     * after configuring the size of the window (using, for example, a call to
+     * {@link #pack}).
      */
     public void center() {
         int width = DisplaySystem.getDisplaySystem().getWidth();
@@ -79,17 +91,20 @@ public class BWindow extends BContainer
     }
 
     /**
-     * Configures this window to be modal which causes it to "steal" all mouse and keyboard input while it is added to
-     * the interface hierarchy. Mouse movement and button press events that would normally go to other windows or to the
-     * default mouse target will instead be sent to the top-most modal window. Other events destined for other windows
-     * (key events and mouse entry and exit events) will not be dispatched.
+     * Configures this window to be modal which causes it to "steal" all mouse
+     * and keyboard input while it is added to the interface hierarchy. Mouse
+     * movement and button press events that would normally go to other windows
+     * or to the default mouse target will instead be sent to the top-most modal
+     * window. Other events destined for other windows (key events and mouse
+     * entry and exit events) will not be dispatched.
      */
     public void setModal(boolean modal) {
         _modal = modal;
     }
 
     /**
-     * Returns whether or not this window is modal. See {@link #setModal} for more information on modality.
+     * Returns whether or not this window is modal. See {@link #setModal} for
+     * more information on modality.
      */
     public boolean isModal() {
         return _modal;
@@ -103,8 +118,8 @@ public class BWindow extends BContainer
     }
 
     /**
-     * Returns whether or not this window is an overlay, in which case its children will not receive input focus by
-     * default.
+     * Returns whether or not this window is an overlay, in which case its
+     * children will not receive input focus by default.
      */
     public boolean isOverlay() {
         return false;
@@ -118,18 +133,21 @@ public class BWindow extends BContainer
     }
 
     /**
-     * Returns the layer occupied by this window. See {@link #setLayer} for more details.
+     * Returns the layer occupied by this window. See {@link #setLayer} for more
+     * details.
      */
     public int getLayer() {
         return _layer;
     }
 
     /**
-     * Configures the "layer" occupied by this window. Windows normally stack one atop another with the most recently
-     * added window being highest in the stack. The layer configuration allows a window to be added above windows in a
-     * lower layer regardless of when it or other windows are added. All windows default to a layer of zero, windows
-     * with a higher layer will be "above" those with a lower layer. Windows in the same layer stack according to the
-     * order in which they are added.
+     * Configures the "layer" occupied by this window. Windows normally stack
+     * one atop another with the most recently added window being highest in the
+     * stack. The layer configuration allows a window to be added above windows
+     * in a lower layer regardless of when it or other windows are added. All
+     * windows default to a layer of zero, windows with a higher layer will be
+     * "above" those with a lower layer. Windows in the same layer stack
+     * according to the order in which they are added.
      */
     public void setLayer(int layer) {
         _layer = layer;
@@ -168,7 +186,8 @@ public class BWindow extends BContainer
         super.invalidate();
 
         if (_root != null) {
-            // when an invalidation call reaches an attached top-level window, let the root node
+            // when an invalidation call reaches an attached top-level window,
+            // let the root node
             // know that we're invalid
             _root.rootInvalidated(this);
         }
@@ -183,7 +202,8 @@ public class BWindow extends BContainer
         boolean relocated = (x != _x || y != _y);
         super.setBounds(x, y, width, height);
 
-        // if this window was moved, we need to tell our root node to recomput the hover component
+        // if this window was moved, we need to tell our root node to recomput
+        // the hover component
         if (relocated && _root != null) {
             _root.windowDidMove(this);
         }
@@ -196,7 +216,8 @@ public class BWindow extends BContainer
     }
 
     /**
-     * Set the parent window.  If the parent window is removed from its root node, this window will also be removed.
+     * Set the parent window. If the parent window is removed from its root
+     * node, this window will also be removed.
      */
     public void setParentWindow(BWindow parentWindow) {
         _parentWindow = parentWindow;
@@ -209,6 +230,24 @@ public class BWindow extends BContainer
         return _parentWindow;
     }
 
+    /**
+     * Gets the MenuBar displayed in the window.
+     *
+     * @return The MenuBar displayed in the window.
+     */
+    public BMenuBar getMenuBar() {
+        return _menuBar;
+    }
+
+    /**
+     * Sets the MenuBar that should be displayed in the window.
+     *
+     * @param bar The MenuBar to set for the window.
+     */
+    public void setMenuBar(BMenuBar bar) {
+        _menuBar = bar;
+    }
+
     @Override
     // from BComponent
     protected String getDefaultStyleClass() {
@@ -216,8 +255,9 @@ public class BWindow extends BContainer
     }
 
     /**
-     * Configures this window with its root node. Do not call this method, it is called automatically when a window is
-     * added to the root node via a call to {@link BRootNode#addWindow}.
+     * Configures this window with its root node. Do not call this method, it is
+     * called automatically when a window is added to the root node via a call
+     * to {@link BRootNode#addWindow}.
      */
     protected void setRootNode(BRootNode root) {
         if (_root != root) {
@@ -226,7 +266,8 @@ public class BWindow extends BContainer
                 wasRemoved();
             } else {
                 wasAdded();
-                // if we've already been configured with dimensions, start the validation process,
+                // if we've already been configured with dimensions, start the
+                // validation process,
                 // otherwise wait for whoever created us to give us dimensions
                 if (_width != 0 && _height != 0) {
                     validate();
@@ -247,7 +288,8 @@ public class BWindow extends BContainer
     }
 
     /**
-     * Called when this window gets the focus after a window on the hierarchy has been removed.
+     * Called when this window gets the focus after a window on the hierarchy
+     * has been removed.
      */
     protected void gotFocus() {
         if (_savedFocus != null) {
@@ -267,7 +309,8 @@ public class BWindow extends BContainer
     protected BRootNode _root;
 
     /**
-     * Whether or not this window steals input from other windows further down the hierarchy.
+     * Whether or not this window steals input from other windows further down
+     * the hierarchy.
      */
     protected boolean _modal;
 
@@ -277,7 +320,8 @@ public class BWindow extends BContainer
     protected int _layer;
 
     /**
-     * Stores a reference to our focus when this window is no longer the top-most window.
+     * Stores a reference to our focus when this window is no longer the
+     * top-most window.
      */
     protected BComponent _savedFocus;
 
@@ -285,4 +329,11 @@ public class BWindow extends BContainer
      * Used to associate this window with a parent window.
      */
     protected BWindow _parentWindow;
+
+    /**
+     * The menu bar that is displayed in the window.
+     */
+    protected BMenuBar _menuBar;
+
+    protected BContainer _rootPanel;
 }

@@ -21,6 +21,7 @@
 package com.jmex.bui;
 
 import com.jmex.bui.layout.GroupLayout;
+import com.jmex.bui.layout.Policy;
 
 /**
  * A top-level window with a border, a background and a title bar. Note that a decorated window uses a stretching {@link
@@ -35,7 +36,7 @@ public class BDecoratedWindow extends BWindow {
     public BDecoratedWindow(BStyleSheet style,
                             String title) {
         super(style, GroupLayout.makeVStretch());
-        ((GroupLayout) getLayoutManager()).setOffAxisPolicy(GroupLayout.Policy.CONSTRAIN);
+        ((GroupLayout) getLayoutManager()).setOffAxisPolicy(Policy.CONSTRAIN);
 
         if (title != null) {
             add(new BLabel(title, "window_title"), GroupLayout.FIXED);

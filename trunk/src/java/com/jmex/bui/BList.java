@@ -23,6 +23,8 @@ package com.jmex.bui;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.GroupLayout;
+import com.jmex.bui.layout.Justification;
+import com.jmex.bui.layout.Policy;
 
 import java.util.ArrayList;
 
@@ -49,9 +51,9 @@ public class BList extends BContainer {
      */
     public BList(Object[] values) {
         super(GroupLayout.makeVert(
-                GroupLayout.Policy.NONE,
-                GroupLayout.Justification.TOP,
-                GroupLayout.Policy.STRETCH));
+                Policy.NONE,
+                Justification.TOP,
+                Policy.STRETCH));
         if (values != null) {
             for (int ii = 0; ii < values.length; ii++) {
                 addValue(values[ii]);
@@ -149,7 +151,7 @@ public class BList extends BContainer {
             }
             _selidx = _children.indexOf(e.getSource());
             emitEvent(new ActionEvent(BList.this, e.getWhen(),
-                    e.getModifiers(), SELECT));
+                                      e.getModifiers(), SELECT));
         }
     };
 }

@@ -25,6 +25,8 @@ import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.layout.GroupLayout;
+import com.jmex.bui.layout.Justification;
+import com.jmex.bui.layout.Policy;
 
 import java.util.ArrayList;
 
@@ -37,7 +39,7 @@ public class BTabbedPane extends BContainer {
      * Creates a tabbed pane with left justified buttons.
      */
     public BTabbedPane() {
-        this(GroupLayout.Justification.LEFT);
+        this(Justification.LEFT);
     }
 
     /**
@@ -45,7 +47,7 @@ public class BTabbedPane extends BContainer {
      *
      * @param tabAlign the justification for the tab buttons.
      */
-    public BTabbedPane(GroupLayout.Justification tabAlign) {
+    public BTabbedPane(Justification tabAlign) {
         this(tabAlign, GroupLayout.DEFAULT_GAP);
     }
 
@@ -55,13 +57,12 @@ public class BTabbedPane extends BContainer {
      * @param tabAlign the justification for the tab buttons.
      * @param gap      the number of pixels space between each tab button.
      */
-    public BTabbedPane(GroupLayout.Justification tabAlign, int gap) {
+    public BTabbedPane(Justification tabAlign, int gap) {
         super(new BorderLayout());
 
-        GroupLayout gl = GroupLayout.makeHoriz(
-                GroupLayout.Policy.STRETCH, GroupLayout.Justification.LEFT, GroupLayout.Policy.CONSTRAIN);
+        GroupLayout gl = GroupLayout.makeHoriz(Policy.STRETCH, Justification.LEFT, Policy.CONSTRAIN);
         _top = new BContainer(gl);
-        gl = GroupLayout.makeHoriz(GroupLayout.Policy.CONSTRAIN, tabAlign, GroupLayout.Policy.CONSTRAIN);
+        gl = GroupLayout.makeHoriz(Policy.CONSTRAIN, tabAlign, Policy.CONSTRAIN);
         _top.add(_buttons = new BContainer(gl));
         gl.setGap(gap);
         add(_top, BorderLayout.NORTH);
