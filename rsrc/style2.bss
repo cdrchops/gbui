@@ -48,6 +48,26 @@ label {
 }
 
 button {
+  background: image "rsrc/inner_orange_4.png" framexy;
+  padding: 4 4 2 6;
+  text-align: center;
+}
+
+button:hover {
+  color: #FF00FF;
+}
+
+button:down {
+  background: image "rsrc/inner_darkblue_4.png" framexy;
+  padding: 4 4 2 6;
+}
+
+button:selected {
+  background: image "rsrc/inner_orange_4.png" framexy;
+  padding: 4 4 2 6;
+}
+/*
+button {
   background: image "rsrc/textures/button_up.png" framexy;
   padding: 3 5;
   font: "Dialog" bold 24;
@@ -56,21 +76,8 @@ button {
   effect-color: #442288;
 }
 
-menuitem {
-  padding: 0 2;
-}
-
-menuitem:hover {
-  color: #000000;
-  background: solid #FFFFFF88;
-}
-
 button:hover {
   color: #FF00FF;
-}
-
-button:disabled {
-  background: image "rsrc/textures/button_disabled.png" framexy;
 }
 
 button:down {
@@ -82,6 +89,20 @@ button:down {
 button:selected {
   background: image "rsrc/textures/button_down.png" framexy;
   padding: 4 6 2 4;
+}
+*/
+
+button:disabled {
+  background: image "rsrc/textures/button_disabled.png" framexy;
+}
+
+menuitem {
+  padding: 0 2;
+}
+
+menuitem:hover {
+  color: #000000;
+  background: solid #FFFFFF88;
 }
 
 combobox {
@@ -332,4 +353,22 @@ greymessagebg {
 
 labeltext {
     padding: 5 5;
+}
+
+menu {
+border: 1 solid #999999;
+background: solid #66666688;
+}
+menu:hover {
+border: 1 solid #336699;
+}
+menubar {
+background: solid #66666688;
+}
+menuitem {
+border: 1 solid #999999;
+background: solid #66666688;
+}
+menuitem:hover {
+border: 1 solid #336699;
 }
