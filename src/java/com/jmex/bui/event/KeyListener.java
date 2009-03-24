@@ -26,11 +26,15 @@ package com.jmex.bui.event;
 public interface KeyListener extends ComponentListener {
     /**
      * Dispatched when a key is pressed within the bounds of the target component.
+     *
+     * @param event KeyEvent
      */
     public void keyPressed(KeyEvent event);
 
     /**
      * Dispatched when a key is released after having been pressed within the bounds of the target component.
+     *
+     * @param event KeyEvent
      */
     public void keyReleased(KeyEvent event);
 }
