@@ -5,7 +5,6 @@
 package com.jmex.bui
 
 import com.jmex.bui.BButton
-import com.jmex.bui.BComboBox
 import com.jmex.bui.BContainer
 import com.jmex.bui.BWindow
 import com.jmex.bui.BuiSystem
