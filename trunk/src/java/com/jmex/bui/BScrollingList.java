@@ -117,9 +117,9 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
             implements ChangeListener {
         public BViewport() {
             super(GroupLayout.makeVert(
-                    Policy.NONE,
-                    Justification.TOP,
-                    Policy.STRETCH));
+                    GroupLayout.Policy.NONE,
+                    GroupLayout.Justification.TOP,
+                    GroupLayout.Policy.STRETCH));
         }
 
         //Returns a reference to the vertical scroll bar.

@@ -5,6 +5,7 @@ import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.HGroupLayout;
 import com.jmex.bui.layout.Justification;
 import com.jmex.bui.layout.Policy;
+import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.util.Dimension;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class BButtonBar extends BContainer {
     private DialogOptions dialogOptions;
 
     public BButtonBar(String _name, DialogOptions options) {
-        super(_name, new HGroupLayout(Justification.CENTER, Policy.EQUALIZE));
+        super(_name, new HGroupLayout(GroupLayout.Justification.CENTER, GroupLayout.Policy.EQUALIZE));
         dialogOptions = options;
         createButtons();
     }

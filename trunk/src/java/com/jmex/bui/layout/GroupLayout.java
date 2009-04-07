@@ -71,6 +71,54 @@ public abstract class GroupLayout extends BLayoutManager {
     }
 
     /**
+     * A class used to make our policy constants type-safe.
+     */
+    public enum Policy {
+        /**
+         * Do not adjust the widgets on this axis.
+         */
+        NONE(0),
+
+        /**
+         * Stretch all the widgets to their maximum possible size on this axis.
+         */
+        STRETCH(1),
+
+        /**
+         * Stretch all the widgets to be equal to the size of the largest widget on this axis.
+         */
+        EQUALIZE(2),
+
+        /**
+         * Only valid for off-axis policy, this leaves widgets alone unless they are larger in the off-axis direction than
+         * their container, in which case it constrains them to fit on the off-axis.
+         */
+        CONSTRAIN(3);
+
+        int code;
+
+        Policy(int code) {
+            this.code = code;
+        }
+    }
+
+    /**
+     * A class used to make our policy constants type-safe.
+     */
+    public enum Justification {
+        CENTER(0),
+        LEFT(1),
+        RIGHT(2),
+        TOP(3),
+        BOTTOM(4);
+        int code;
+
+        Justification(int code) {
+            this.code = code;
+        }
+    }
+
+    /**
      * The default gap used by a group layout.
      */
     public static final int DEFAULT_GAP = 5;
