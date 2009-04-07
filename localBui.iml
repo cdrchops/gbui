@@ -27,15 +27,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/dist/rsrc.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/javacc.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -264,6 +255,15 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../sources/jme2/target/jme-xml.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/rsrc.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

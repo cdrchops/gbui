@@ -36,8 +36,8 @@ public class BWindow extends BContainer implements Comparable<BWindow> {
                    BStyleSheet style,
                    BLayoutManager layout) {
         super(name);
-        setLayoutManager(new VGroupLayout(Justification.TOP, Policy.NONE));
-        ((VGroupLayout) getLayoutManager()).setOffAxisJustification(Justification.LEFT);
+        setLayoutManager(new VGroupLayout(GroupLayout.Justification.TOP, GroupLayout.Policy.NONE));
+        ((VGroupLayout) getLayoutManager()).setOffAxisJustification(GroupLayout.Justification.LEFT);
         _menuBar = new BMenuBar("menubar");
         _rootPanel = new BContainer();
         add(_menuBar, GroupLayout.FIXED);

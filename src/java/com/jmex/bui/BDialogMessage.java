@@ -136,7 +136,7 @@ public class BDialogMessage extends BContainer {
                                String backgroundStyle,
                                IconOptions option,
                                DisplayStyleOptions styleOption) {
-        BContainer bc = GroupLayout.makeVBox(Justification.CENTER);
+        BContainer bc = GroupLayout.makeVBox(GroupLayout.Justification.CENTER);
         bc.setName(_name);
 
         bc.add(message);

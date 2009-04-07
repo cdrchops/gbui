@@ -22,6 +22,7 @@ package com.jmex.bui;
 
 import com.jmex.bui.layout.HGroupLayout;
 import com.jmex.bui.layout.Policy;
+import com.jmex.bui.layout.GroupLayout;
 
 /**
  * @author timo
@@ -34,7 +35,7 @@ public class BBasicMessage extends BContainer {
      * @param _message String
      */
     public BBasicMessage(String _message) {
-        super(new HGroupLayout(Policy.STRETCH));
+        super(new HGroupLayout(GroupLayout.Policy.STRETCH));
         message = _message;
         setupComponents();
     }
