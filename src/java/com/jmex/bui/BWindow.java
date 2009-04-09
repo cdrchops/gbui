@@ -36,14 +36,15 @@ public class BWindow extends BContainer implements Comparable<BWindow> {
                    BStyleSheet style,
                    BLayoutManager layout) {
         super(name);
-        setLayoutManager(new VGroupLayout(GroupLayout.Justification.TOP, GroupLayout.Policy.NONE));
-        ((VGroupLayout) getLayoutManager()).setOffAxisJustification(GroupLayout.Justification.LEFT);
-        _menuBar = new BMenuBar("menubar");
-        _rootPanel = new BContainer();
-        add(_menuBar, GroupLayout.FIXED);
-        add(_rootPanel);
+        setLayoutManager(layout);
+//        setLayoutManager(new VGroupLayout(Justification.TOP, Policy.NONE));
+//        ((VGroupLayout) getLayoutManager()).setOffAxisJustification(Justification.LEFT);
+//        _menuBar = new BMenuBar("menubar");
+//        _rootPanel = new BContainer();
+//        add(_menuBar, GroupLayout.FIXED);
+//        add(_rootPanel);
         _style = style;
-        _rootPanel.setLayoutManager(layout);
+//        _rootPanel.setLayoutManager(layout);
     }
 
     public BWindow(BStyleSheet style,
@@ -235,18 +236,18 @@ public class BWindow extends BContainer implements Comparable<BWindow> {
      *
      * @return The MenuBar displayed in the window.
      */
-    public BMenuBar getMenuBar() {
-        return _menuBar;
-    }
+//    public BMenuBar getMenuBar() {
+//        return _menuBar;
+//    }
 
     /**
      * Sets the MenuBar that should be displayed in the window.
      *
      * @param bar The MenuBar to set for the window.
      */
-    public void setMenuBar(BMenuBar bar) {
-        _menuBar = bar;
-    }
+//    public void setMenuBar(BMenuBar bar) {
+//        _menuBar = bar;
+//    }
 
     @Override
     // from BComponent
@@ -333,7 +334,7 @@ public class BWindow extends BContainer implements Comparable<BWindow> {
     /**
      * The menu bar that is displayed in the window.
      */
-    protected BMenuBar _menuBar;
-
-    protected BContainer _rootPanel;
+//    protected BMenuBar _menuBar;
+//
+//    protected BContainer _rootPanel;
 }
