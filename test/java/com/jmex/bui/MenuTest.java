@@ -17,7 +17,7 @@ public class MenuTest extends BaseTest2 {
 
     protected void createWindows() {
         BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
-        BMenuBar bar = window.getMenuBar();
+//        BMenuBar bar = window.getMenuBar();
         BMenu fileMenu = new BMenu("File", window);
         BMenuItem newItem = new BMenuItem("New Item", "NEW");
         newItem.addListener(listener);
@@ -25,7 +25,7 @@ public class MenuTest extends BaseTest2 {
         BMenuItem exitItem = new BMenuItem("Exit", "EXIT");
         exitItem.addListener(listener);
         fileMenu.addMenuItem(exitItem);
-        bar.add(fileMenu);
+//        bar.add(fileMenu);
 
         window.setSize(400, 400);
 
