@@ -34,6 +34,7 @@ import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
 import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.enumeratedConstants.Orientation;
+import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.icon.ImageIcon;
@@ -141,7 +142,7 @@ public class LayoutTest extends BaseTest {
         window.setBounds(100, 300, ps.width, 2 * ps.height / 3);
 
         window = new BWindow(style, new BorderLayout());
-        cont = new BContainer(GroupLayout.makeHoriz(GroupLayout.Justification.LEFT));
+        cont = new BContainer(GroupLayout.makeHoriz(Justification.LEFT));
         cont.add(new BToggleButton(new ImageIcon(icon), ""));
         BLabel label = new BLabel("Horizontal");
         label.setTooltipText("This is a horizontal label.");
