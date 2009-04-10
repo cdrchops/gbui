@@ -18,11 +18,16 @@
     <!--<import file="libs-incl.xml"/>-->
 
     <fileset dir="${libs.dir}" id="jme-bui.libs">
-        <include name="junit-4.jar"/>
-        <include name="jme.jar"/>
-        <include name="jme-awt.jar"/>
-        <include name="lwjgl.jar"/>
-        <include name="groovy-all-1.5.4.jar"/>
+        <!--<include name="junit-4.jar"/>-->
+        <!--<include name="jme.jar"/>-->
+        <!--<include name="jme-awt.jar"/>-->
+        <!--<include name="lwjgl.jar"/>-->
+        <!--<include name="groovy-all-1.5.4.jar"/>-->
+        <!--<include name="strategichandler.jar"/>-->
+        <!--<include name="mouseManager_r1_jme2.jar"/>-->
+        <!--<include name="bumpMapping_a4.jar"/>-->
+        <!--<include name="shaderFactoryBloom_r1.jar"/>-->
+        <!--<include name="jme*.jar"/>-->
     </fileset>
 
     <!-- declare our classpath -->
@@ -82,7 +87,7 @@
 
     <target name="compile-tests" depends="compile">
         <groovyc srcdir="${test.dir}:test/groovy"
-                 destdir="${classes.dir}" excludesfile="test/groovy/com/jmex/bui/BuiStyleSheetTest.groovy">
+                 destdir="${classes.dir}">
             <javac srcdir="${test.dir}"
                    destdir="${classes.dir}"
                    includeAntRuntime="false"

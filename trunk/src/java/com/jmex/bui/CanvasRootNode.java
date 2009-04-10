@@ -38,7 +38,7 @@ public class CanvasRootNode extends BRootNode
     public CanvasRootNode(Canvas canvas) {
         _canvas = canvas;
 
-        // we want to hear about mouse movement, clicking, and keys
+//        // we want to hear about mouse movement, clicking, and keys
         canvas.addMouseListener(this);
         canvas.addMouseMotionListener(this);
         canvas.addMouseWheelListener(this);

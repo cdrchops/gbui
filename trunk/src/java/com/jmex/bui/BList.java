@@ -51,9 +51,9 @@ public class BList extends BContainer {
      */
     public BList(Object[] values) {
         super(GroupLayout.makeVert(
-                GroupLayout.Policy.NONE,
-                GroupLayout.Justification.TOP,
-                GroupLayout.Policy.STRETCH));
+                Policy.NONE,
+                Justification.TOP,
+                Policy.STRETCH));
         if (values != null) {
             for (int ii = 0; ii < values.length; ii++) {
                 addValue(values[ii]);

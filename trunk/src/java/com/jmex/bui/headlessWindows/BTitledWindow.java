@@ -87,6 +87,7 @@ public class BTitledWindow extends BDraggableWindow {
     }
 
     private void init() {
+//        setLayoutManager(new BorderLayout());
         if (titleBar != null) {
             add(titleBar, BorderLayout.NORTH);
         } else {

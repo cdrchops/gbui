@@ -223,6 +223,7 @@ public class BImage extends Quad {
             setRenderState(blendState);
         } else {
             clearRenderState(RenderState.RS_BLEND);
+            //clearRenderState(RenderState.StateType.RS_BLEND);
         }
         updateRenderState();
     }

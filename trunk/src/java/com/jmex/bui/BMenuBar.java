@@ -71,7 +71,7 @@ import com.jmex.bui.layout.Justification;
  */
 public class BMenuBar extends BContainer {
 	public BMenuBar(String name) {
-		super(name, new HGroupLayout(GroupLayout.Justification.LEFT));
+		super(name, new HGroupLayout(Justification.LEFT));
 	}
 
 	/*
