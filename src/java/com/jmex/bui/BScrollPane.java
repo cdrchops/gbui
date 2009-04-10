@@ -343,8 +343,8 @@ public class BScrollPane extends BContainer {
         protected final int getXOffset() {
             return _hmodel == null ? 0 : -_hmodel.getValue();
         }
-
-        protected BoundedRangeModel _vmodel, _hmodel;
+        
+        public BoundedRangeModel _vmodel, _hmodel;
         protected BComponent _target;
         protected MouseWheelListener _wheelListener;
         protected Rectangle _srect = new Rectangle();
