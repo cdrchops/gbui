@@ -6,6 +6,7 @@ package com.jmex.bui;
 
 import com.jmex.bui.base.BaseTest2;
 import com.jmex.bui.layout.BorderLayout;
+import com.jmex.bui.listener.ChatListener;
 
 /**
  * @author torr
@@ -14,12 +15,18 @@ import com.jmex.bui.layout.BorderLayout;
 public class ChatTest extends BaseTest2 {
     @Override
     protected void createWindows() {
-        BWindow window = new BWindow(BuiSystem.getStyle(), new BorderLayout(1, 2));
-        window.add(new BChatComponent(), BorderLayout.WEST);
-        window.add(new BChatComponent(), BorderLayout.EAST);
+//        for (int i = 0; i < 3; i++) {
+//            BTitledWindow mw = MessageWindowUtil.
+//                    createMessageBox("Window #" + i, "Window #" + i, TitleOptions.MIN_MAX_CLOSE, "Some content");
+//            BuiSystem.getRootNode().addWindow(mw);
+//        }
 
-        window.setBounds(20, 140, 400, 250);
-        BuiSystem.addWindow(window);
+        BChatWindow bcw = new BChatWindow(BuiSystem.getStyle(), new BorderLayout(1, 2));
+        bcw.add(new BChatComponent("player 1", new ChatListener(bcw)), BorderLayout.WEST);
+        bcw.add(new BChatComponent("player 2", new ChatListener(bcw)), BorderLayout.EAST);
+
+        bcw.setBounds(20, 140, 400, 250);
+        BuiSystem.addWindow(bcw);
     }
 
     public static void main(String[] args) {
