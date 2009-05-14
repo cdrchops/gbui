@@ -1,59 +1,49 @@
+//
+// $Id: BBasicMessage.java,v 1.3 2007/05/02 21:34:01 vivaldi Exp $
+//
+// BUI - a user interface library for the JME 3D engine
+// Copyright (C) 2005, Michael Bayne, All Rights Reserved
+//
+// This library is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Lesser General Public License as published
+// by the Free Software Foundation; either version 2.1 of the License, or
+// (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 package com.jmex.bui.dragndrop;
 
-import com.jmex.bui.BComponent;
 import com.jmex.bui.BuiSystem;
 import com.jmex.bui.event.BEvent;
 
-/**
- * @author ivicaz
- */
+/** @author ivicaz */
 public class BDropEvent extends BEvent {
-    private BDragEvent BDragEvent;
+  public static final Object NOTHING = new Object();
+  private BDragEvent BDragEvent;
 
-    /**
-     * @param source     BComponent
-     * @param bDragEvent BDragEvent
-     */
-    public BDropEvent(final BComponent source,
-                      final BDragEvent bDragEvent) {
-        super(source, BuiSystem.getRootNode().getTickStamp());
-        if (BDragEvent == null) {
-            throw new IllegalArgumentException("BDragEvent = null");
-        }
+  public BDropEvent(Object source, BDragEvent BDragEvent) {
+    super(source, BuiSystem.getRootNode().getTickStamp());
+    if (BDragEvent == null)
+      throw new IllegalArgumentException("BDragEvent = null");
+    this.BDragEvent = BDragEvent;
+  }
 
-        this.BDragEvent = bDragEvent;
-    }
+  public Object getSource() {
+    return super.getSource();
+  }
 
-    /**
-     * @return BComponent
-     */
-    @Override
-    public BComponent getSource() {
-        return (BComponent) super.getSource();
-    }
+  public BDragEvent getDragEvent() {
+    return BDragEvent;
+  }
 
-    /**
-     * @return BDragEvent
-     */
-    public BDragEvent getDragEvent() {
-        return BDragEvent;
-    }
-
-    /**
-     * @return String
-     */
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("BDropEvent@")
-                .append(hashCode())
-                .append("{")
-                .append("source=")
-                .append(getSource())
-                .append(", BDragEvent=")
-                .append(BDragEvent)
-                .append("}");
-
-        return sb.toString();
-    }
+  @Override public String toString() {
+    return new StringBuilder().append("BDropEvent@").append(hashCode()).append("{").
+            append("source=").append(getSource()).append(", BDragEvent=").append(BDragEvent).append("}").toString();
+  }
 }
