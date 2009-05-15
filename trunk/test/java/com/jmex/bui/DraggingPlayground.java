@@ -1,10 +1,6 @@
 package com.jmex.bui;
 
-import com.jmex.bui.dragndrop.BDragEvent;
-import com.jmex.bui.dragndrop.BDragListener;
-import com.jmex.bui.dragndrop.BDragNDrop;
-import com.jmex.bui.dragndrop.BDropEvent;
-import com.jmex.bui.dragndrop.BDropListener;
+import com.jmex.bui.dragndrop.*;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.headlessWindows.BTitledWindow;
 import com.jmex.bui.icon.BIcon;
@@ -67,7 +63,7 @@ public class DraggingPlayground extends AbstractBuiTest {
 
     private class SwitchIconDropTarget extends BDropListener {
         protected void drop(BDropEvent dropEvent) {
-            BComponent dropEventSource = dropEvent.getSource();
+            Object dropEventSource = dropEvent.getSource();
 
 
             if (dropEventSource instanceof BButton) {
