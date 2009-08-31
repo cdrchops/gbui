@@ -16,22 +16,18 @@ public class MainMenuPresenter extends GameStatePresenter implements IMainMenuLi
         _view.addMainMenuListener(this);
     }
 
-    @Override
     public void playCampaignPressed() {
         GameManager.getInstance().changeState(ClassFactory.getSelectCampaignPresenter());
     }
 
-    @Override
     public void connectToGamePressed() {
 //		GameManager.getInstance().changeState(ClassFactory.getConnectToGameState());
     }
 
-    @Override
     public void editSettingsPressed() {
         GameManager.getInstance().pushState(ClassFactory.getEditSettingsPresenter());
     }
 
-    @Override
     public void exitPressed() {
         Main.exit();
     }

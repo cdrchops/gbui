@@ -11,6 +11,7 @@ import com.jmex.bui.layout.AbsoluteLayout;
 import com.jmex.bui.util.Point;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InGamePauseView extends GbuiGameState implements IInGamePauseView {
     private BButton _btnSave;
@@ -42,7 +43,6 @@ public class InGamePauseView extends GbuiGameState implements IInGamePauseView {
         _btnSave.setPreferredSize(buttonWidth, buttonHeight);
         _btnSave.setEnabled(false);
         _btnSave.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _inGamePauseListener.savePressed();
             }
@@ -53,7 +53,6 @@ public class InGamePauseView extends GbuiGameState implements IInGamePauseView {
         _btnSaveAs.setPreferredSize(buttonWidth, buttonHeight);
         _btnSaveAs.setEnabled(false);
         _btnSaveAs.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _inGamePauseListener.saveAsPressed();
             }
@@ -63,7 +62,6 @@ public class InGamePauseView extends GbuiGameState implements IInGamePauseView {
         _btnEditSettings = new BButton("");
         _btnEditSettings.setPreferredSize(buttonWidth, buttonHeight);
         _btnEditSettings.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _inGamePauseListener.editSettingsPressed();
             }
@@ -73,7 +71,6 @@ public class InGamePauseView extends GbuiGameState implements IInGamePauseView {
         _btnExitGame = new BButton("");
         _btnExitGame.setPreferredSize(buttonWidth, buttonHeight);
         _btnExitGame.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _inGamePauseListener.exitGamePressed();
             }
@@ -83,7 +80,6 @@ public class InGamePauseView extends GbuiGameState implements IInGamePauseView {
         _btnResumeGame = new BButton("");
         _btnResumeGame.setPreferredSize(buttonWidth, buttonHeight);
         _btnResumeGame.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _inGamePauseListener.resumeGamePressed();
             }
@@ -93,13 +89,11 @@ public class InGamePauseView extends GbuiGameState implements IInGamePauseView {
         _window.center();
     }
 
-    @Override
     public void addInGamePauseListener(IInGamePauseListener inGamePauseListener) {
         _inGamePauseListener = inGamePauseListener;
     }
 
-    @Override
-    public ArrayList<String> getTranslationTags() {
+    public List<String> getTranslationTags() {
         ArrayList<String> translationTags = new ArrayList<String>();
         translationTags.add("InGamePause.Save");    // Save
         translationTags.add("InGamePause.SaveDescription");    // Save the current campaign
@@ -115,8 +109,7 @@ public class InGamePauseView extends GbuiGameState implements IInGamePauseView {
         return translationTags;
     }
 
-    @Override
-    public void setTranslationPhrases(ArrayList<String> translationPhrases) {
+    public void setTranslationPhrases(List<String> translationPhrases) {
         _btnSave.setText(translationPhrases.get(0));
         _btnSave.setTooltipText(translationPhrases.get(1));
         _btnSaveAs.setText(translationPhrases.get(2));

@@ -102,7 +102,6 @@ public class StartServerView extends GbuiGameState implements IStartServerView {
         _btnCancel = new BButton("");
         _btnCancel.setPreferredSize(buttonWidth, buttonHeight);
         _btnCancel.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 if (_startServerListener != null) {
                     _startServerListener.cancelPressed();
@@ -115,7 +114,6 @@ public class StartServerView extends GbuiGameState implements IStartServerView {
         _btnOk = new BButton("");
         _btnOk.setPreferredSize(buttonWidth, buttonHeight);
         _btnOk.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 if (_startServerListener != null) {
                     _startServerListener.okPressed();
@@ -127,8 +125,7 @@ public class StartServerView extends GbuiGameState implements IStartServerView {
         _window.center();
     }
 
-    @Override
-    public ArrayList<String> getTranslationTags() {
+    public List<String> getTranslationTags() {
         ArrayList<String> translationTags = new ArrayList<String>();
         translationTags.add("StartServer.Nickname"); // Nickname:
         translationTags.add("StartServer.ServerPort");    // Server Port:
@@ -141,8 +138,7 @@ public class StartServerView extends GbuiGameState implements IStartServerView {
         return translationTags;
     }
 
-    @Override
-    public void setTranslationPhrases(ArrayList<String> translationPhrases) {
+    public void setTranslationPhrases(List<String> translationPhrases) {
 //		_lblNickname.setText(translationPhrases.get(0));
 //		_lblServerPort.setText(translationPhrases.get(1));
 //		_lblAllegiance.setText(translationPhrases.get(2));
@@ -154,7 +150,6 @@ public class StartServerView extends GbuiGameState implements IStartServerView {
 //		centerOnDesktop();
     }
 
-    @Override
     public void setAllegiances(List<String> allegiances) {
 //		ComboBoxModel listModel = new ComboBoxModel();
 //		for (String allegiance : allegiances) {
@@ -168,21 +163,18 @@ public class StartServerView extends GbuiGameState implements IStartServerView {
 //		centerOnDesktop();
     }
 
-    @Override
     public void setNickname(String nickname) {
 //		_txtNickname.setText(nickname);
 
 //		centerOnDesktop();
     }
 
-    @Override
     public void setPort(int port) {
 //		_txtServerPort.setText(new Integer(port).toString());
 
 //		centerOnDesktop();
     }
 
-    @Override
     public void addStartServerListener(IStartServerListener startServerListener) {
         _startServerListener = startServerListener;
     }

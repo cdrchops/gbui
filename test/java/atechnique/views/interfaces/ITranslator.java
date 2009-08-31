@@ -1,7 +1,7 @@
 package atechnique.views.interfaces;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ITranslator {
-    ArrayList<String> getTranslatedPhrases(ArrayList<String> translationTags);
+    List<String> getTranslatedPhrases(List<String> translationTags);
 }

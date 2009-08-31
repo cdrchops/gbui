@@ -95,7 +95,6 @@ public class SelectCampaignView extends GbuiGameState implements ISelectCampaign
         _btnCancel = new BButton("");
         _btnCancel.setPreferredSize(width, height);
         _btnCancel.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _selectCampaignListener.cancelPressed();
             }
@@ -106,7 +105,6 @@ public class SelectCampaignView extends GbuiGameState implements ISelectCampaign
         _btnContinueGame.setPreferredSize(width * 2, height);
         _btnContinueGame.setEnabled(false);
         _btnContinueGame.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 // TODO Auto-generated method stub
             }
@@ -116,7 +114,6 @@ public class SelectCampaignView extends GbuiGameState implements ISelectCampaign
         _btnStartNewGame = new BButton("");
         _btnStartNewGame.setPreferredSize(width * 2, height);
         _btnStartNewGame.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _selectCampaignListener.startNewGamePressed();
             }
@@ -126,17 +123,14 @@ public class SelectCampaignView extends GbuiGameState implements ISelectCampaign
         _window.center();
     }
 
-    @Override
     public void addSelectCampaignListener(ISelectCampaignListener selectCampaignListener) {
         _selectCampaignListener = selectCampaignListener;
     }
 
-    @Override
     public void setCampaignDescription(String description) {
 //		_txtCampaignDescription.setText(description);
     }
 
-    @Override
     public void setCampaigns(List<Campaign> campaigns) {
 //		DefaultListModel listModel = new DefaultListModel();
 //		for (Campaign campaign : campaigns) {
@@ -148,12 +142,10 @@ public class SelectCampaignView extends GbuiGameState implements ISelectCampaign
 //		_lstCampaigns.setSelectedIndex(0);
     }
 
-    @Override
     public void updateCampaignState() {
     }
 
-    @Override
-    public ArrayList<String> getTranslationTags() {
+    public List<String> getTranslationTags() {
         ArrayList<String> translationTags = new ArrayList<String>();
         translationTags.add("SelectCampaign.SelectCampaign"); // Select Campaign
         translationTags.add("SelectCampaign.Cancel"); // Cancel
@@ -166,8 +158,7 @@ public class SelectCampaignView extends GbuiGameState implements ISelectCampaign
         return translationTags;
     }
 
-    @Override
-    public void setTranslationPhrases(ArrayList<String> translationPhrases) {
+    public void setTranslationPhrases(List<String> translationPhrases) {
         _lblSelectCampaign.setText(translationPhrases.get(0));
         _btnCancel.setText(translationPhrases.get(1));
         _btnCancel.setTooltipText(translationPhrases.get(2));

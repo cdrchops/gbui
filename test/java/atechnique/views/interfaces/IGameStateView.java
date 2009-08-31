@@ -1,11 +1,11 @@
 package atechnique.views.interfaces;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IGameStateView {
-    ArrayList<String> getTranslationTags();
+    List<String> getTranslationTags();
 
-    void setTranslationPhrases(ArrayList<String> translationPhrases);
+    void setTranslationPhrases(List<String> translationPhrases);
 
     void activate();
 
