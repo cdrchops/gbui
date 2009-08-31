@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.List;
 
 public class Translator implements ITranslator {
     private Locale _currentLocale;
@@ -16,8 +17,7 @@ public class Translator implements ITranslator {
         _messages = ResourceBundle.getBundle("atechnique/data/languages/MessagesBundle", _currentLocale);
     }
 
-    @Override
-    public ArrayList<String> getTranslatedPhrases(ArrayList<String> translationTags) {
+    public List<String> getTranslatedPhrases(List<String> translationTags) {
         ArrayList<String> translatedPhrases = new ArrayList<String>();
 
         if (translationTags != null) {

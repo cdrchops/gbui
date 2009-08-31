@@ -11,22 +11,18 @@ public class GameStatePresenter implements ATechniqueGameState {
         _view.setTranslationPhrases(ClassFactory.getTranslator().getTranslatedPhrases(_view.getTranslationTags()));
     }
 
-    @Override
     public void enter() {
         _view.activate();
     }
 
-    @Override
     public void exit() {
         _view.deactivate();
     }
 
-    @Override
     public void pause() {
         _view.deactivate();
     }
 
-    @Override
     public void resume() {
         _view.activate();
     }

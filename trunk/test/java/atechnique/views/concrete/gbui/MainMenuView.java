@@ -19,6 +19,7 @@ import com.jmex.bui.layout.AbsoluteLayout;
 import com.jmex.bui.util.Point;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 public class MainMenuView extends GbuiGameState implements IMainMenuView {
@@ -41,7 +42,7 @@ public class MainMenuView extends GbuiGameState implements IMainMenuView {
             GameTaskQueueManager.getManager().update(new Callable<Object>() {
                 public Object call() throws Exception {
                     BImage image = new BImage(getClass().getClassLoader().
-                            getResource("atechnique/images/sky/dg_east.png"));
+                            getResource("atechnique/images/sky/dg_east.PNG"));
                     _window.setBackground(BComponent.DEFAULT, new ImageBackground(ImageBackgroundMode.SCALE_XY, image));
                     return null;
                 }
@@ -62,7 +63,6 @@ public class MainMenuView extends GbuiGameState implements IMainMenuView {
         _btnPlayCampaign = new BButton("");
         _btnPlayCampaign.setPreferredSize(buttonWidth, buttonHeight);
         _btnPlayCampaign.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _mainMenuListener.playCampaignPressed();
             }
@@ -73,7 +73,6 @@ public class MainMenuView extends GbuiGameState implements IMainMenuView {
         _btnConnectToGame.setPreferredSize(buttonWidth, buttonHeight);
         _btnConnectToGame.setEnabled(false);
         _btnConnectToGame.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _mainMenuListener.connectToGamePressed();
             }
@@ -83,7 +82,6 @@ public class MainMenuView extends GbuiGameState implements IMainMenuView {
         _btnEditSettings = new BButton("");
         _btnEditSettings.setPreferredSize(buttonWidth, buttonHeight);
         _btnEditSettings.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _mainMenuListener.editSettingsPressed();
             }
@@ -93,7 +91,6 @@ public class MainMenuView extends GbuiGameState implements IMainMenuView {
         _btnExit = new BButton("");
         _btnExit.setPreferredSize(buttonWidth, buttonHeight);
         _btnExit.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 _mainMenuListener.exitPressed();
             }
@@ -108,15 +105,12 @@ public class MainMenuView extends GbuiGameState implements IMainMenuView {
         keyboard.add("exit", KeyInput.KEY_ESCAPE);
     }
 
-
-    @Override
     public void addMainMenuListener(IMainMenuListener mainMenuListener) {
         _mainMenuListener = mainMenuListener;
     }
 
-    @Override
-    public ArrayList<String> getTranslationTags() {
-        ArrayList<String> translationTags = new ArrayList<String>();
+    public List<String> getTranslationTags() {
+        List<String> translationTags = new ArrayList<String>(8);
         translationTags.add("MainMenu.PlayCampaign");    // Play Campaign
         translationTags.add("MainMenu.PlayCampaignDescription");    // Select a campaign to play
         translationTags.add("MainMenu.ConnectToGame");    // Connect to a Game
@@ -129,8 +123,7 @@ public class MainMenuView extends GbuiGameState implements IMainMenuView {
         return translationTags;
     }
 
-    @Override
-    public void setTranslationPhrases(ArrayList<String> translationPhrases) {
+    public void setTranslationPhrases(List<String> translationPhrases) {
         _btnPlayCampaign.setText(translationPhrases.get(0));
         _btnPlayCampaign.setTooltipText(translationPhrases.get(1));
         _btnConnectToGame.setText(translationPhrases.get(2));

@@ -43,22 +43,33 @@ public class GbuiGameState extends BasicGameState {
         // Display the GBUI portion
         rootNode.attachChild(ClassFactory.getMouseManager().getMouse().getMouseSpatial());
         rootNode.attachChild(BuiSystem.getRootNode());
-        rootNode.updateRenderState();
+
         GameTaskQueueManager.getManager().update(new Callable<Object>() {
             public Object call() throws Exception {
                 BuiSystem.addWindow(_window);
+                _window.getRootNode().updateRenderState();
                 return null;
             }
         });
+
+        rootNode.updateRenderState();
     }
 
     public void deactivate() {
         // If still active, hide the GBUI portion
-        if (_window.getRootNode() != null) {
-            _window.dismiss();
-        }
-        rootNode.detachChild(BuiSystem.getRootNode());
-        rootNode.detachChild(ClassFactory.getMouseManager().getMouse().getMouseSpatial());
+        GameTaskQueueManager.getManager().update(new Callable<Object>() {
+            public Object call() throws Exception {
+
+                if (_window.getRootNode() != null) {
+                    _window.dismiss();
+                }
+                return null;
+            }
+        });
+
+//        rootNode.detachChild(BuiSystem.getRootNode());
+//        rootNode.detachChild(ClassFactory.getMouseManager().getMouse().getMouseSpatial());
+        rootNode.updateRenderState();
 
         // Deactivate the main GameState portion
         super.setActive(false);

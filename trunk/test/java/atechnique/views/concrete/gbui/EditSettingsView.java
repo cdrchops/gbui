@@ -80,7 +80,6 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         _btnCancel = new BButton("");
         _btnCancel.setPreferredSize(buttonWidth, buttonHeight);
         _btnCancel.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 if (_editSettingsListener != null) {
                     _editSettingsListener.CancelPressed();
@@ -93,7 +92,6 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         _btnOk = new BButton("");
         _btnOk.setPreferredSize(buttonWidth, buttonHeight);
         _btnOk.addListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent event) {
                 if (_editSettingsListener != null) {
                     _editSettingsListener.SaveSettings();
@@ -105,8 +103,7 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         _window.center();
     }
 
-    @Override
-    public ArrayList<String> getTranslationTags() {
+    public List<String> getTranslationTags() {
         ArrayList<String> translationTags = new ArrayList<String>();
         translationTags.add("EditSettings.Resolution"); // Resolution:
         translationTags.add("EditSettings.Depth");     // Depth:
@@ -117,8 +114,7 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         return translationTags;
     }
 
-    @Override
-    public void setTranslationPhrases(ArrayList<String> translationPhrases) {
+    public void setTranslationPhrases(List<String> translationPhrases) {
         _lblResolution.setText(translationPhrases.get(0));
         _lblDepth.setText(translationPhrases.get(1));
         _lblFrequency.setText(translationPhrases.get(2));
@@ -127,12 +123,10 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         _btnOk.setText(translationPhrases.get(5));
     }
 
-    @Override
     public void addEditSettingsListener(IEditSettingsListener editSettingsListener) {
         _editSettingsListener = editSettingsListener;
     }
 
-    @Override
     public void setResolutionOptions(List<String> resolutions) {
         _cboResolution.clearItems();
         for (String resolution : resolutions) {
@@ -140,7 +134,6 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         }
     }
 
-    @Override
     public void setDepthOptions(List<String> depthValues) {
         _cboDepth.clearItems();
         for (String bit : depthValues) {
@@ -148,7 +141,6 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         }
     }
 
-    @Override
     public void setFrequencyOptions(List<String> frequencyOptions) {
         _cboFrequency.clearItems();
         for (String frequency : frequencyOptions) {
@@ -156,27 +148,22 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         }
     }
 
-    @Override
     public void setResolution(String resolution) {
         _cboResolution.selectItem(resolution);
     }
 
-    @Override
     public void setDepth(String depth) {
         _cboDepth.selectItem(depth);
     }
 
-    @Override
     public void setFrequency(String frequency) {
         _cboFrequency.selectItem(frequency);
     }
 
-    @Override
     public void setIsFullScreen(boolean isFullScreen) {
         _chkIsFullScreen.setSelected(isFullScreen);
     }
 
-    @Override
     public int getWidth() {
         int width = 0;
 
@@ -189,7 +176,6 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         return width;
     }
 
-    @Override
     public int getHeight() {
         int height = 0;
 
@@ -202,22 +188,18 @@ public class EditSettingsView extends GbuiGameState implements IEditSettingsView
         return height;
     }
 
-    @Override
     public int getDepth() {
         return Integer.parseInt((String) _cboDepth.getSelectedItem());
     }
 
-    @Override
     public int getFrequency() {
         return Integer.parseInt((String) _cboFrequency.getSelectedItem());
     }
 
-    @Override
     public boolean isFullScreen() {
         return _chkIsFullScreen.isSelected();
     }
 
-    @Override
     public void showErrorDialog(String title, String message) {
         DialogBoxUtil.createErrorDialogBox("dialog1", message);
     }
