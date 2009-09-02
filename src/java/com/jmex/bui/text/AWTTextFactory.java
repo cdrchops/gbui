@@ -55,6 +55,9 @@ import java.util.Map;
 public class AWTTextFactory extends BTextFactory {
     /**
      * Creates an AWT text factory with the supplied font.
+     *
+     * @param font Font
+     * @param antialias boolean
      */
     public AWTTextFactory(Font font,
                           boolean antialias) {
