@@ -474,7 +474,8 @@ public class BImage extends Quad {
          * @param tstate TextureState
          */
         public void releaseTextures(final TextureState tstate) {
-            tstate.clearTextures();
+        	tstate.deleteAll();
+//            tstate.clearTextures();
         }
     };
 
