@@ -21,6 +21,8 @@
 package com.jmex.bui;
 
 import com.jme.input.KeyInput;
+import com.jme.intersection.CollisionResults;
+import com.jme.scene.Spatial;
 import com.jmex.bui.event.InputEvent;
 import com.jmex.bui.event.KeyEvent;
 import com.jmex.bui.event.MouseEvent;
@@ -475,4 +477,11 @@ public class CanvasRootNode extends BRootNode
     }
 
     protected Canvas _canvas;
+
+    public void findCollisions(final Spatial spatial, final CollisionResults collisionResults) {
+    }
+
+    public boolean hasCollision(final Spatial spatial, final boolean b) {
+        return false;
+    }
 }
