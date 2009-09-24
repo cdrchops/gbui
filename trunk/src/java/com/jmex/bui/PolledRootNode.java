@@ -25,6 +25,8 @@ import com.jme.input.KeyInput;
 import com.jme.input.KeyInputListener;
 import com.jme.input.MouseInput;
 import com.jme.input.MouseInputListener;
+import com.jme.intersection.CollisionResults;
+import com.jme.scene.Spatial;
 import com.jme.util.Timer;
 import com.jmex.bui.event.InputEvent;
 import com.jmex.bui.event.KeyEvent;
@@ -37,9 +39,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Processes the polled input information available from the underlying
- * input system into input events and dispatches those to the appropriate
- * parties.
+ * Processes the polled input information available from the underlying input system into input events and dispatches
+ * those to the appropriate parties.
  */
 public class PolledRootNode extends BRootNode {
     public PolledRootNode(Timer timer) {
@@ -188,6 +189,13 @@ public class PolledRootNode extends BRootNode {
                 root.validate();
             }
         }
+    }
+
+    public void findCollisions(final Spatial spatial, final CollisionResults collisionResults) {
+    }
+
+    public boolean hasCollision(final Spatial spatial, final boolean b) {
+        return false;
     }
 
     @Override
