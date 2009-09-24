@@ -48,8 +48,6 @@ public class LineBorder extends BBorder {
         _width = width;
     }
 
-    @Override
-    // from BBorder
     public Insets adjustInsets(Insets insets) {
         return new Insets(_left + insets.left, _top + insets.top,
                           _right + insets.right, _bottom + insets.bottom);
