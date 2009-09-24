@@ -117,7 +117,6 @@ public abstract class BMultiSelectBox<V> extends BScrollingList<V, BToggleButton
         }
     }
 
-    @Override
     protected final BToggleButton createComponent(V value) {
         BToggleButton component = createListEntry(value);
         component.addListener(selectionListener);
