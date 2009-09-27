@@ -21,24 +21,23 @@
  */
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import com.jmex.bui.base.BaseTest2;
 import com.jmex.bui.enumeratedConstants.Orientation;
 import com.jmex.bui.icon.ImageIcon;
 import com.jmex.bui.layout.GroupLayout;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Does something extraordinary.
  *
  * @author Michael Bayne
  */
-public class LabelTest extends BaseTest implements BConstants {
+public class LabelTest extends BaseTest2 implements BConstants {
     @Override
-    protected void createWindows(final BRootNode root,
-                                 final BStyleSheet style) {
-        final BWindow window = new BDecoratedWindow(style, null);
+    protected void createWindows() {
+        final BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
         window.setLayoutManager(GroupLayout.makeVStretch());
 
         BImage image = null;
@@ -69,9 +68,9 @@ public class LabelTest extends BaseTest implements BConstants {
             }
         }
 
-        root.addWindow(window);
+        BuiSystem.getRootNode().addWindow(window);
         window.setSize(400, 400);
-        window.setLocation(25, 25);
+        window.center();
     }
 
     public static void main(String[] args) {

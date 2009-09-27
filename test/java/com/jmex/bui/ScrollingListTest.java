@@ -20,18 +20,16 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest;
-import com.jmex.bui.layout.GroupLayout;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ScrollingListTest extends BaseTest
-        implements BConstants {
+import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.layout.GroupLayout;
+
+public class ScrollingListTest extends BaseTest2 {
     @Override
-    protected void createWindows(BRootNode root,
-                                 BStyleSheet style) {
-        BWindow window = new BDecoratedWindow(style, null);
+    protected void createWindows() {
+        BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
 
         window.setLayoutManager(GroupLayout.makeVStretch());
 
@@ -45,7 +43,7 @@ public class ScrollingListTest extends BaseTest
 
         window.add(list);
 
-        root.addWindow(window);
+        BuiSystem.getRootNode().addWindow(window);
         window.setSize(400, 400);
         window.setLocation(25, 25);
 

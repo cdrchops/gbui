@@ -20,26 +20,26 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest;
-import com.jmex.bui.layout.BorderLayout;
-import com.jmex.bui.text.HTMLView;
+import java.awt.Font;
+import java.io.StringReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.html.CSS;
 import javax.swing.text.html.StyleSheet;
-import java.awt.*;
-import java.io.StringReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.layout.BorderLayout;
+import com.jmex.bui.text.HTMLView;
 
 /**
  * Tests our HTML view.
  */
-public class HTMLTest extends BaseTest {
+public class HTMLTest extends BaseTest2 {
     @Override
-    protected void createWindows(BRootNode root,
-                                 BStyleSheet style) {
+    protected void createWindows() {
         // test out custom font handling
         StyleSheet sheet = new StyleSheet() {
             @Override
@@ -72,13 +72,14 @@ public class HTMLTest extends BaseTest {
         try {
             String styledef = ".test { " +
                               "font-variant: \"Test\"; " +
-                              "font-size: 16; }";
+                              "font-size: 16;" +
+                              "color: yellow;}";
             sheet.loadRules(new StringReader(styledef), null);
         } catch (Throwable t) {
             t.printStackTrace(System.err);
         }
 
-        BWindow window = new BWindow(style, new BorderLayout(5, 5));
+        BWindow window = new BWindow(BuiSystem.getStyle(), new BorderLayout(5, 5));
         HTMLView view = new HTMLView();
         view.setStyleSheet(sheet);
         view.setContents(
@@ -90,7 +91,7 @@ public class HTMLTest extends BaseTest {
                 "<tr><td colspan=3 align=center><i>tables!</i></td></tr></table>" +
                 "</body></html>");
         window.add(view, BorderLayout.CENTER);
-        root.addWindow(window);
+        BuiSystem.getRootNode().addWindow(window);
         window.setBounds(100, 100, 200, 100);
         window.center();
     }

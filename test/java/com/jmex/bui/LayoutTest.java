@@ -20,6 +20,10 @@
 
 package com.jmex.bui;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.jme.light.DirectionalLight;
 import com.jme.math.FastMath;
 import com.jme.math.Quaternion;
@@ -32,9 +36,8 @@ import com.jme.scene.shape.Box;
 import com.jme.scene.state.LightState;
 import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
-import com.jmex.bui.base.BaseTest;
+import com.jmex.bui.base.BaseTest2;
 import com.jmex.bui.enumeratedConstants.Orientation;
-import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.icon.ImageIcon;
@@ -46,18 +49,13 @@ import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Point;
 import com.jmex.bui.util.Rectangle;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Tests random BUI bits.
  */
 
-public class LayoutTest extends BaseTest {
+public class LayoutTest extends BaseTest2 {
     @Override
-    protected void createWindows(final BRootNode root,
-                                 BStyleSheet style) {
+    protected void createWindows() {
         BWindow window;
         BContainer cont;
 
@@ -69,7 +67,7 @@ public class LayoutTest extends BaseTest {
             e.printStackTrace(System.err);
         }
 
-        window = new BDecoratedWindow(style, null);
+        window = new BDecoratedWindow(BuiSystem.getStyle(), null);
 //         BLabel label = new BLabel(new ImageIcon(icon));
 //         label.setText("NORTH");
 //         window.add(label, BorderLayout.NORTH);
@@ -92,11 +90,11 @@ public class LayoutTest extends BaseTest {
         pane.addTab("Two", nview);
         pane.addTab("Three", new BTextArea());
         pane.addTab("Four", new BLabel("Four contents"));
-        root.addWindow(window);
+        BuiSystem.getRootNode().addWindow(window);
         window.setSize(200, 150);
         window.setLocation(25, 25);
 
-        window = new BWindow(style, new BorderLayout(5, 5));
+        window = new BWindow(BuiSystem.getStyle(), new BorderLayout(5, 5));
         window.add(new BSlider(Orientation.VERTICAL, 0, 100, 25),
                    BorderLayout.WEST);
         window.add(_text = new BTextArea(), BorderLayout.CENTER);
@@ -115,10 +113,10 @@ public class LayoutTest extends BaseTest {
                 }
             }
         });
-        root.addWindow(window);
+        BuiSystem.getRootNode().addWindow(window);
         window.setBounds(300, 140, 400, 250);
 
-        window = new BWindow(style, GroupLayout.makeVStretch());
+        window = new BWindow(BuiSystem.getStyle(), GroupLayout.makeVStretch());
         GroupLayout glay = GroupLayout.makeVStretch();
         glay.setGap(0);
         cont = new BContainer(glay);
@@ -137,11 +135,11 @@ public class LayoutTest extends BaseTest {
         cont.add(new BButton("Nine", "nine"));
 
         window.add(new BScrollPane(cont));
-        root.addWindow(window);
+        BuiSystem.getRootNode().addWindow(window);
         Dimension ps = window.getPreferredSize(-1, -1);
         window.setBounds(100, 300, ps.width, 2 * ps.height / 3);
 
-        window = new BWindow(style, new BorderLayout());
+        window = new BWindow(BuiSystem.getStyle(), new BorderLayout());
         cont = new BContainer(GroupLayout.makeHoriz(Justification.LEFT));
         cont.add(new BToggleButton(new ImageIcon(icon), ""));
         BLabel label = new BLabel("Horizontal");
@@ -164,11 +162,11 @@ public class LayoutTest extends BaseTest {
         window.add(cont, BorderLayout.CENTER);
         window.add(new BSlider(Orientation.HORIZONTAL, 0, 100, 25),
                    BorderLayout.SOUTH);
-        root.addWindow(window);
+        BuiSystem.getRootNode().addWindow(window);
         window.pack();
         window.setLocation(300, 400);
 
-        window = new BWindow(style, new AbsoluteLayout());
+        window = new BWindow(BuiSystem.getStyle(), new AbsoluteLayout());
         window.add(new BLabel("+0+0"), new Point(0, 0));
         final BWindow fwin = window;
         final BLabel lbl = new BLabel("+10+35");
@@ -178,25 +176,25 @@ public class LayoutTest extends BaseTest {
             public void actionPerformed(ActionEvent event) {
                 _count += 9;
                 lbl.setText(String.valueOf(_count));
-                root.removeWindow(fwin);
+                BuiSystem.getRootNode().removeWindow(fwin);
             }
 
             protected int _count;
         };
         window.add(new BButton("250x25+50+75", list, ""),
                    new Rectangle(50, 75, 250, 25));
-        root.addWindow(window);
+        BuiSystem.getRootNode().addWindow(window);
         window.pack();
         window.setLocation(300, 25);
 
-        window = new BWindow(style, new BorderLayout());
+        window = new BWindow(BuiSystem.getStyle(), new BorderLayout());
         window.add(new BLabel("This is some styled text.\n" +
                               "@=b(bold) @=i(italic) @=u(underline) " +
                               "@=s(strike: @*)\n" +
                               "@=#FFCC99(escaped chars: @@ @( @))\n" +
                               "@=bu#99CCFF(bold, underlined and colored)"),
                    BorderLayout.CENTER);
-        root.addWindow(window);
+        BuiSystem.getRootNode().addWindow(window);
         window.pack();
         window.setLocation(300, 470);
     }
