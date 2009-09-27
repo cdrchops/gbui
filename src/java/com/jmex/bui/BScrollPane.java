@@ -40,7 +40,7 @@ public class BScrollPane extends BContainer {
     public BScrollPane(BComponent child,
                        boolean vert,
                        boolean horiz) {
-        this(child, true, false, -1);
+        this(child, vert, horiz, -1);
     }
 
     public BScrollPane(
@@ -49,7 +49,7 @@ public class BScrollPane extends BContainer {
             boolean horiz,
             int snap) {
         super(new BorderLayout(0, 0));
-
+        
         add(_vport = new BViewport(child, vert, horiz, snap),
             BorderLayout.CENTER);
         if (vert) {
