@@ -3,6 +3,7 @@
 
     <property name="lib.name" value="jme-bui"/>
     <property name="src.dir" value="src/java"/>
+    <property name="res.dir" value="rsrc"/>
     <property name="test.dir" value="test/java"/>
     <property name="dist.dir" value="dist"/>
     <property name="dist.jar" value="${lib.name}.jar"/>
@@ -162,7 +163,11 @@
              basedir="${src.dir}"/>
     </target>
 
-    <target name="disttests">
+    <target name="dist-rsrc" depends="prepare">
+        <jar destfile="${dist.dir}/rsrc.jar" basedir="." includes="${res.dir}/**"/>
+    </target>
+
+    <target name="disttests" depends="dist-rsrc">
         <jar destfile="${dist.dir}/jme-bui-tests.jar"
              basedir="test"/>
     </target>
