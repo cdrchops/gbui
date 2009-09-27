@@ -20,7 +20,7 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.headlessWindows.BTitledWindow;
 import com.jmex.bui.headlessWindows.MessageWindowUtil;
 
@@ -28,7 +28,7 @@ import com.jmex.bui.headlessWindows.MessageWindowUtil;
  * @author timo
  * @since 27Apr07
  */
-public class TiledMessageWindowTest extends BaseTest2 {
+public class TiledMessageWindowTest extends BaseTest {
     @Override
     protected void createWindows() {
         for (int i = 0; i < 3; i++) {

@@ -32,7 +32,7 @@ import com.jmex.bui.event.ActionListener;
 /**
  * A base class for our various visual tests.
  */
-public abstract class BaseTest2 extends SimpleGame {
+public abstract class BaseTest extends SimpleGame {
     protected ActionListener listener = new ActionListener() {
         public void actionPerformed(final ActionEvent event) {
             System.out.println(event.getAction());

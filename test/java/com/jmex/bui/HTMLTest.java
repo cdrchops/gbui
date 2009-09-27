@@ -30,14 +30,14 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.html.CSS;
 import javax.swing.text.html.StyleSheet;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.text.HTMLView;
 
 /**
  * Tests our HTML view.
  */
-public class HTMLTest extends BaseTest2 {
+public class HTMLTest extends BaseTest {
     @Override
     protected void createWindows() {
         // test out custom font handling

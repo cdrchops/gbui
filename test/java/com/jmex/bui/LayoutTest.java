@@ -36,7 +36,7 @@ import com.jme.scene.shape.Box;
 import com.jme.scene.state.LightState;
 import com.jme.scene.state.ZBufferState;
 import com.jme.system.DisplaySystem;
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.enumeratedConstants.Orientation;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
@@ -53,7 +53,7 @@ import com.jmex.bui.util.Rectangle;
  * Tests random BUI bits.
  */
 
-public class LayoutTest extends BaseTest2 {
+public class LayoutTest extends BaseTest {
     @Override
     protected void createWindows() {
         BWindow window;

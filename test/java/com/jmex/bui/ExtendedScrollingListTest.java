@@ -20,14 +20,14 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.layout.GroupLayout;
 
 /**
  * @author timo
  * @since 27Apr07
  */
-public class ExtendedScrollingListTest extends BaseTest2 {
+public class ExtendedScrollingListTest extends BaseTest {
     protected void createWindows() {
         BWindow window = new BWindow(BuiSystem.getStyle(), GroupLayout.makeVStretch());
 

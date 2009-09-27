@@ -1,10 +1,10 @@
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.bss.BStyleSheetUtil;
 import com.jmex.bui.layout.GroupLayout;
 
-public class MultipleStyleSheetsTest extends BaseTest2 {
+public class MultipleStyleSheetsTest extends BaseTest {
     protected void createWindows() {
         BStyleSheet style1 = BStyleSheetUtil.getStyleSheetFromFile("/rsrc/styles.properties");
 //        BStyleSheet style2 = BStyleSheetUtil.getStyleSheetFromFile("/rsrc/styles2.properties");

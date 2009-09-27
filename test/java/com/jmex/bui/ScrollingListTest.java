@@ -23,10 +23,10 @@ package com.jmex.bui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.layout.GroupLayout;
 
-public class ScrollingListTest extends BaseTest2 {
+public class ScrollingListTest extends BaseTest {
     @Override
     protected void createWindows() {
         BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);

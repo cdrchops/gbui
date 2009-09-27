@@ -1,13 +1,13 @@
 package com.jmex.bui;
 
 import com.jmex.bui.BMultiSelectBox.SelectionMode;
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.util.Dimension;
 
-public class MultiSelectBoxTest extends BaseTest2 {
+public class MultiSelectBoxTest extends BaseTest {
     ActionListener listener2 = new ActionListener() {
         public void actionPerformed(ActionEvent event) {
             BToggleButton button = (BToggleButton) event.getSource();

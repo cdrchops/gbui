@@ -1,9 +1,9 @@
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.layout.BorderLayout;
 
-public class ScrollPaneTest extends BaseTest2 {
+public class ScrollPaneTest extends BaseTest {
 
     @Override
     protected void createWindows() {
