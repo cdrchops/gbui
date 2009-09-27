@@ -63,7 +63,7 @@ public class GeomViewTest extends SimpleGame {
         window.setSize(400, 300);
         window.center();
 
-//    window.add(view, BorderLayout.CENTER);
+        window.add(view, BorderLayout.CENTER);
         BuiSystem.addWindow(window);
 
         window.setBackground(BComponent.DEFAULT, new TintedBackground(new ColorRGBA(0, 0, 1, 0.7f)));
