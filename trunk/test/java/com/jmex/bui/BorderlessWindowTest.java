@@ -4,7 +4,7 @@
  */
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.GroupLayout;
@@ -18,7 +18,7 @@ import com.jmex.bui.layout.GroupLayout;
  * @author torr
  * @since Mar 18, 2008 - 1:08:33 PM
  */
-public class BorderlessWindowTest extends BaseTest2 {
+public class BorderlessWindowTest extends BaseTest {
     public static void main(String[] args) {
         new BorderlessWindowTest().start();
     }

@@ -1,10 +1,10 @@
 package com.jmex.bui;
 
 import com.jmex.bui.BComboBox.Item;
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.layout.GroupLayout;
 
-public class HoverTest extends BaseTest2 {
+public class HoverTest extends BaseTest {
     protected void createWindows() {
         BWindow window = new BWindow(BuiSystem.getStyle(), GroupLayout.makeVStretch());
 

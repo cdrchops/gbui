@@ -20,7 +20,7 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.GroupLayout;
@@ -29,7 +29,7 @@ import com.jmex.bui.layout.GroupLayout;
  * @author timo
  * @since 27Apr07
  */
-public class TwoWindowTest extends BaseTest2 {
+public class TwoWindowTest extends BaseTest {
     private ActionListener listener2 = new ActionListener() {
         public void actionPerformed(ActionEvent event) {
             handleInput(event);

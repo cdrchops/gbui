@@ -20,7 +20,7 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.event.DialogListener;
 import com.jmex.bui.headlessWindows.InputBoxUtil;
 
@@ -28,7 +28,7 @@ import com.jmex.bui.headlessWindows.InputBoxUtil;
  * @author timo
  * @since 27Apr07
  */
-public class InputBoxTest extends BaseTest2 {
+public class InputBoxTest extends BaseTest {
     protected void createWindows() {
         BInputBox box = InputBoxUtil.createInfoInputBox("inputTest1", "Message");
         box.setDialogListener(new DialogListener() {

@@ -20,7 +20,7 @@
 
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.event.DialogListener;
 import com.jmex.bui.headlessWindows.DialogBoxUtil;
 
@@ -31,7 +31,7 @@ import java.util.logging.Logger;
  * @author timo
  * @since 27Apr07
  */
-public class QuestionDialogBoxTest extends BaseTest2 {
+public class QuestionDialogBoxTest extends BaseTest {
     protected void createWindows() {
         BDialogBox box = DialogBoxUtil.createQuestionDialogBox("qmessage1", "message");
         box.setDialogListener(new DialogListener() {

@@ -24,7 +24,7 @@ package com.jmex.bui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.enumeratedConstants.Orientation;
 import com.jmex.bui.icon.ImageIcon;
 import com.jmex.bui.layout.GroupLayout;
@@ -34,7 +34,7 @@ import com.jmex.bui.layout.GroupLayout;
  *
  * @author Michael Bayne
  */
-public class LabelTest extends BaseTest2 implements BConstants {
+public class LabelTest extends BaseTest implements BConstants {
     @Override
     protected void createWindows() {
         final BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);

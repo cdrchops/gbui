@@ -4,7 +4,7 @@
  */
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.GroupLayout;
@@ -13,7 +13,7 @@ import com.jmex.bui.layout.GroupLayout;
  * @author torr
  * @since Apr 24, 2009 - 1:37:43 PM
  */
-public class ColorTransitionTest extends BaseTest2 {
+public class ColorTransitionTest extends BaseTest {
     static boolean switcher = true;
     protected ActionListener listener2 = new ActionListener() {
         public void actionPerformed(final ActionEvent event) {

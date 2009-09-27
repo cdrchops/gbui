@@ -4,7 +4,7 @@
  */
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.listener.ChatListener;
 
@@ -12,7 +12,7 @@ import com.jmex.bui.listener.ChatListener;
  * @author torr
  * @since Apr 10, 2009 - 2:44:23 PM
  */
-public class ChatTest extends BaseTest2 {
+public class ChatTest extends BaseTest {
     @Override
     protected void createWindows() {
 //        for (int i = 0; i < 3; i++) {

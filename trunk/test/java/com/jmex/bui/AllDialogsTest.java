@@ -25,7 +25,7 @@ import com.jmex.bui.BDialogBox;
 import com.jmex.bui.BInputBox;
 import com.jmex.bui.BuiSystem;
 import com.jmex.bui.UserResponse;
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.enumeratedConstants.TitleOptions;
 import com.jmex.bui.event.DialogListener;
 import com.jmex.bui.headlessWindows.BTitledWindow;
@@ -40,7 +40,7 @@ import java.util.logging.Logger;
  * @author timo
  * @since 27Apr07
  */
-public class AllDialogsTest extends BaseTest2 {
+public class AllDialogsTest extends BaseTest {
     protected void createWindows() {
         DialogListener responseListener = new DialogListener() {
             public void responseAvailable(UserResponse response, BComponent source) {

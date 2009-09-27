@@ -4,7 +4,7 @@
  */
 package com.jmex.bui;
 
-import com.jmex.bui.base.BaseTest2;
+import com.jmex.bui.base.BaseTest;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  * @author torr
  * @since Jan 7, 2009 - 4:31:26 PM
  */
-public class MenuTest extends BaseTest2 {
+public class MenuTest extends BaseTest {
 
     protected void createWindows() {
         BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
