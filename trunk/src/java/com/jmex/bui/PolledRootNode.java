@@ -379,4 +379,13 @@ public class PolledRootNode extends BRootNode {
     private Set<MouseInputListener> mouseListeners;
     private Set<KeyInputListener> keyListeners;
     private Set<BUpdateListener> updateListeners;
+	@Override
+	public void findCollisions(Spatial scene, CollisionResults results) {
+		
+	}
+
+	@Override
+	public boolean hasCollision(Spatial scene, boolean checkTriangles) {
+		return false;
+	}
 }
