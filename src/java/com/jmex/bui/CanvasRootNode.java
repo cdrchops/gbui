@@ -475,6 +475,16 @@ public class CanvasRootNode extends BRootNode
                 return KeyInput.KEY_UNLABELED;
         }
     }
+    
+    @Override
+    public boolean hasCollision(Spatial scene, boolean checkTriangles) {
+    	return false;
+    }
 
-    protected Canvas _canvas;
+	@Override
+	public void findCollisions(Spatial scene, CollisionResults results) {
+		
+	}
+	
+	protected Canvas _canvas;
 }
