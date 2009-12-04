@@ -13,6 +13,7 @@ import com.jmex.bui.text.BTextFactory;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.URL;
@@ -51,24 +52,29 @@ public class DefaultResourceProvider implements ResourceProvider {
 
     public BImage loadImage(String path) throws IOException {
         // normalize the image path
-        if (!path.startsWith("/")) {
-            path = "/" + path;
+    	String newPath = path;
+        if (!newPath.startsWith("/")) {
+            newPath = "/" + newPath;
         }
 
         // first check the cache
-        WeakReference<BImage> iref = _cache.get(path);
+        WeakReference<BImage> iref = _cache.get(newPath);
         BImage image;
         if (iref != null && (image = iref.get()) != null) {
             return image;
         }
 
         // create and cache a new BUI image with the appropriate data
-        URL url = getClass().getResource(path);
+        URL url = getClass().getResource(newPath);
         if (url == null) {
-            throw new IOException("Can't locate image '" + path + "'.");
+        	File file = new File(path);
+        	url = file.toURI().toURL();
+        	if (url == null) {
+        		throw new IOException("Can't locate image '" + newPath + "'.");
+        	}
         }
         image = new BImage(url);
-        _cache.put(path, new WeakReference<BImage>(image));
+        _cache.put(newPath, new WeakReference<BImage>(image));
 
         return image;
     }
