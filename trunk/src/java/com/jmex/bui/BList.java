@@ -118,7 +118,9 @@ public class BList extends BContainer {
         if (idx == _selidx) {
             return;
         }
-        ((BToggleButton) _children.get(_selidx)).setSelected(false);
+        if (_selidx != -1) {
+        	((BToggleButton) _children.get(_selidx)).setSelected(false);
+        }
         if (idx != -1) {
             ((BToggleButton) _children.get(idx)).setSelected(true);
         }

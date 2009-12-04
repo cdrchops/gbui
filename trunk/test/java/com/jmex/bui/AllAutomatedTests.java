@@ -5,7 +5,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @SuiteClasses ( {
-	BTextFieldTest.class
+	BTextFieldTest.class,
+	BListTest.class
 })
 @RunWith(Suite.class)
 public class AllAutomatedTests {
