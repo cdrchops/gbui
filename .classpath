@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="src" path="test/java"/>
+	<classpathentry kind="lib" path="lib/bumpMapping_a4.jar"/>
+	<classpathentry kind="lib" path="lib/cssparser-0.9.5-sources.jar"/>
+	<classpathentry kind="lib" path="lib/cssparser-0.9.5.jar"/>
+	<classpathentry kind="lib" path="lib/data.jar"/>
+	<classpathentry kind="lib" path="lib/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="lib/groovy-all-1.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/javacc.jar"/>
+	<classpathentry kind="lib" path="lib/jinput.jar"/>
+	<classpathentry kind="lib" path="lib/jmetest-data-cursor.jar"/>
+	<classpathentry kind="lib" path="lib/jmetest-data-images.jar"/>
+	<classpathentry kind="lib" path="lib/jmetest-data-model.jar"/>
+	<classpathentry kind="lib" path="lib/jmetest-data-skybox1.jar"/>
+	<classpathentry kind="lib" path="lib/jmetest-data-sound.jar"/>
+	<classpathentry kind="lib" path="lib/jmetest-data-texture.jar"/>
+	<classpathentry kind="lib" path="lib/jmetest.jar"/>
+	<classpathentry kind="lib" path="lib/jogl.jar"/>
+	<classpathentry kind="lib" path="lib/jorbis-0.0.17.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl_util_applet.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="lib/lwjgl.jar"/>
+	<classpathentry kind="lib" path="lib/mouseManager_r1_jme2.jar"/>
+	<classpathentry kind="lib" path="lib/rsrc_jme.jar"/>
+	<classpathentry kind="lib" path="lib/rsrc.jar"/>
+	<classpathentry kind="lib" path="lib/sac.jar"/>
+	<classpathentry kind="lib" path="lib/shaderFactoryBloom_r1.jar"/>
+	<classpathentry kind="lib" path="lib/strategicHandler_r1_jme2.jar"/>
+	<classpathentry kind="lib" path="lib/swt_fake.jar"/>
+	<classpathentry kind="lib" path="lib/swt.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Aether RPG/lib/jME2.jar" sourcepath="D:/java/Aether RPG/lib/jME2_src.zip"/>
+	<classpathentry kind="lib" path="lib/testing/easymock-2.5.2.jar" sourcepath="D:/java/gbui/lib/testing/easymock-2.5.2-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/D:/java/gbui/lib/testing/easymock-2.5.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/testing/junit-4.7.jar" sourcepath="D:/java/gbui/lib/testing/junit-4.7-src.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
