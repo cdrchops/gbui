@@ -80,6 +80,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 	public BTextField(String text, int maxLength) {
 		setMaxLength(maxLength);
 		setText(text);
+		listeners = new LinkedList<FocusListener>();
 	}
 
 	/**
@@ -387,9 +388,6 @@ public class BTextField extends BTextComponent implements EditCommands,
 
 
 	public void addFocusListener(FocusListener listener) {
-		if (listeners == null) {
-			listeners = new LinkedList<FocusListener>();
-		}
 		if (!listeners.contains(listener)) {
 			listeners.add(listener);
 		}
