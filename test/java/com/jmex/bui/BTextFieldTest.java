@@ -63,4 +63,9 @@ public class BTextFieldTest {
 		textField.dispatchEvent(new FocusEvent(textField, 1l, FocusEvent.FOCUS_LOST));
 		EasyMock.verify(listener);
 	}
+	
+	@Test
+	public void test_Works_without_any_listeners_added() throws Exception {
+		textField.dispatchEvent(new FocusEvent(textField, 1l, FocusEvent.FOCUS_LOST));
+	}
 }
