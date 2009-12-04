@@ -154,7 +154,7 @@ public class BStyleSheetUtil {
      * @param reader Reader
      * @return BStyleSheet instance
      */
-    private static BStyleSheet getStyleSheet(final Reader reader) {
+    public static BStyleSheet getStyleSheet(final Reader reader) {
         BStyleSheet sheet = null;
 
         sheet = new BStyleSheet(reader,

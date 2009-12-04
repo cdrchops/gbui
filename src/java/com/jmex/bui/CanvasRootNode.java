@@ -477,11 +477,4 @@ public class CanvasRootNode extends BRootNode
     }
 
     protected Canvas _canvas;
-
-    public void findCollisions(final Spatial spatial, final CollisionResults collisionResults) {
-    }
-
-    public boolean hasCollision(final Spatial spatial, final boolean b) {
-        return false;
-    }
 }

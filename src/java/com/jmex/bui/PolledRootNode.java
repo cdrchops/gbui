@@ -191,13 +191,6 @@ public class PolledRootNode extends BRootNode {
         }
     }
 
-    public void findCollisions(final Spatial spatial, final CollisionResults collisionResults) {
-    }
-
-    public boolean hasCollision(final Spatial spatial, final boolean b) {
-        return false;
-    }
-
     @Override
     // documentation inherited
     public float getTooltipTimeout() {
