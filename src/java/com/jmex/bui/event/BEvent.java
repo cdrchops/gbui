@@ -67,8 +67,8 @@ public class BEvent extends EventObject {
         super(source);
         _when = when;
     }
-
-    protected void toString(StringBuffer buf) {
+    
+     protected void toString(StringBuffer buf) {
         String name = getClass().getName();
         name = name.substring(name.lastIndexOf(".") + 1);
         buf.append("type=").append(name);

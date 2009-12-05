@@ -19,8 +19,7 @@ public class Rule {
 
     public HashMap<String, Object> properties = new HashMap<String, Object>();
 
-    public Object get(HashMap rules,
-                      String key) {
+    public Object get(HashMap rules, String key) {
         Object value = properties.get(key);
         if (value != null) {
             return value;
