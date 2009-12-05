@@ -6,7 +6,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @SuiteClasses ( {
 	BTextFieldTest.class,
-	BListTest.class
+	BListTest.class,
+	BGroupContainerSingleSelectionTest.class,
+	BToggleButtonTest.class
 })
 @RunWith(Suite.class)
 public class AllAutomatedTests {
