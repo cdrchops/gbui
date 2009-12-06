@@ -80,7 +80,25 @@ public class BList extends BContainer {
         add(button);
         _values.add(value);
     }
-
+    
+    @Override
+    public void remove(BComponent child) {
+    	int index = _children.indexOf(child);
+    	if (index != -1) {
+    		_values.remove(index);
+    		if (index == _selidx) {
+    			_selidx = -1;
+    		}
+    	}
+    	super.remove(child);
+    }
+    
+    @Override
+    public void remove(int index) {
+    	BComponent component = _children.get(index);
+    	remove(component);
+    }
+    
     /**
      * Removes a value from the list, if it is present.
      *
