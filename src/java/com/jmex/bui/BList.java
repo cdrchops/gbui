@@ -20,25 +20,66 @@
 
 package com.jmex.bui;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
+import com.jmex.bui.event.SelectionListener;
+import com.jmex.bui.event.StateChangedEvent;
+import com.jmex.bui.event.StateChangedEvent.SelectionState;
+import com.jmex.bui.icon.BIcon;
 import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.layout.Justification;
 import com.jmex.bui.layout.Policy;
 
-import java.util.ArrayList;
-
 /**
- * Displays a list of selectable entries and fires an {@link ActionEvent} when the selected value
- * changes. Each entry is displayed as a string obtained by calling {@link Object#toString} on the
- * supplied values.
+ * Displays a list of entries that can be selected and fires a {@link StateChangedEvent} when the selected value
+ * changes. Each entry by default is displayed as a string obtained by calling {@link Object#toString} on the
+ * supplied values.  An alternative text can be displayed by providing a {@link LabelProvider}.
  */
 public class BList extends BContainer {
     /**
      * The action fired when the list selection changes.
      */
     public static final String SELECT = "select";
+    
+    /**
+     * The values contained in the list.
+     */
+    protected List<Object> values = new ArrayList<Object>();
+    protected List<SelectionListener> selectionListeners = new LinkedList<SelectionListener>();
+    
+    /**
+     * The index of the current selection (or -1 for none).
+     */
+    protected int _selidx = -1;
+    private LabelProvider labelProvider;
 
+    /**
+     * Listens for button selections.
+     */
+    protected ActionListener _slistener = new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            if (_selidx != -1) {
+                ((BToggleButton) _children.get(_selidx)).setSelected(false);
+            }
+            _selidx = _children.indexOf(e.getSource());
+            emitEvent(new ActionEvent(BList.this, e.getWhen(),
+                                      e.getModifiers(), SELECT));
+        }
+    };
+    protected SelectionListener selectionListener = new SelectionListener() {
+		@Override
+		public void stateChanged(StateChangedEvent e) {
+			StateChangedEvent event = StateChangedEvent.create(BList.this, e.getType() == SelectionState.Selected);
+			for (SelectionListener each : selectionListeners) {
+				each.stateChanged(event);
+			}
+		}
+    };
     /**
      * Creates an empty list.
      */
@@ -60,6 +101,11 @@ public class BList extends BContainer {
             }
         }
     }
+    
+    @Override
+    public void add(BComponent child) {
+    	throw new IllegalStateException("BList does not support adding of components");
+    }
 
     /**
      * Adds a value to the list.
@@ -67,9 +113,17 @@ public class BList extends BContainer {
     public void addValue(Object value) {
         // list entries can be selected by clicking on them, but unselected
         // only by clicking another entry
-        BToggleButton button = new BToggleButton(value.toString()) {
-            protected void fireAction(long when,
-                                      int modifiers) {
+    	String text = value.toString();
+    	BIcon icon = null;
+    	if (labelProvider != null) {
+    		text = labelProvider.getText(value);
+    	}
+    	if (labelProvider instanceof ImageLabelProvider) {
+    		ImageLabelProvider imageLabelProvider = (ImageLabelProvider)labelProvider;
+			icon = imageLabelProvider.getImage(value);
+    	}
+		BToggleButton button = new BToggleButton(text) {
+            protected void fireAction(long when, int modifiers) {
                 if (!_selected) {
                     super.fireAction(when, modifiers);
                 }
@@ -77,15 +131,36 @@ public class BList extends BContainer {
         };
         button.setStyleClass("list_entry");
         button.addListener(_slistener);
-        add(button);
-        _values.add(value);
+        button.addSelectionListener(selectionListener);
+        button.setIcon(icon);
+        super.add(button);
+        values.add(value);
     }
-    
+	
+    /**
+     * Adds the list of values after the current values contained in the list
+     * @param toAdd all values to be added in order
+     */
+    public void addAllValues(Collection<? extends Object> toAdd) {
+		for (Object each : toAdd) {
+			addValue(each);
+		}
+	}
+
+    /**
+     * Returns the value at the given index
+     * @param i
+     * @return
+     */
+	public Object getValue(int i) {
+		return values.get(i);
+	}
+	
     @Override
     public void remove(BComponent child) {
     	int index = _children.indexOf(child);
     	if (index != -1) {
-    		_values.remove(index);
+    		values.remove(index);
     		if (index == _selidx) {
     			_selidx = -1;
     		}
@@ -105,15 +180,22 @@ public class BList extends BContainer {
      * @return true if the value was removed, false if it was not in the list
      */
     public boolean removeValue(Object value) {
-        int idx = _values.indexOf(value);
+        int idx = values.indexOf(value);
         if (idx == -1) {
             return false;
         }
         if (idx == _selidx) {
             _selidx = -1;
         }
-        remove(_children.get(idx));
-        _values.remove(idx);
+        BComponent child = _children.get(idx); 
+        // memory leak, remember to clean up
+        if (child instanceof BToggleButton) {
+        	BToggleButton button = (BToggleButton)child; 
+        	button.removeAllListeners();
+        	button.removeSelectionListener(selectionListener);
+        }
+		remove(child);
+        values.remove(idx);
         return true;
     }
 
@@ -123,7 +205,7 @@ public class BList extends BContainer {
      * @return the selected value, or <code>null</code> for none
      */
     public Object getSelectedValue() {
-        return (_selidx == -1) ? null : _values.get(_selidx);
+        return (_selidx == -1) ? null : values.get(_selidx);
     }
 
     /**
@@ -132,7 +214,7 @@ public class BList extends BContainer {
      * @param value the value to select, or <code>null</code> for none
      */
     public void setSelectedValue(Object value) {
-        int idx = (value == null) ? -1 : _values.indexOf(value);
+        int idx = (value == null) ? -1 : values.indexOf(value);
         if (idx == _selidx) {
             return;
         }
@@ -145,33 +227,40 @@ public class BList extends BContainer {
         _selidx = idx;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see com.jmex.bui.BContainer#getDefaultStyleClass()
+     */
     @Override
-    // documentation inherited
     protected String getDefaultStyleClass() {
         return "list";
     }
+    
+	public void addSelectionListener(SelectionListener listener) {
+		if (!selectionListeners.contains(listener)) {
+			selectionListeners.add(listener);
+		}
+	}
+	
+	public void removeSelectionListener(SelectionListener listener) {
+		selectionListeners.remove(listener);
+	}
 
-    /**
-     * The values contained in the list.
-     */
-    protected ArrayList<Object> _values = new ArrayList<Object>();
-
-    /**
-     * The index of the current selection (or -1 for none).
-     */
-    protected int _selidx = -1;
-
-    /**
-     * Listens for button selections.
-     */
-    protected ActionListener _slistener = new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            if (_selidx != -1) {
-                ((BToggleButton) _children.get(_selidx)).setSelected(false);
-            }
-            _selidx = _children.indexOf(e.getSource());
-            emitEvent(new ActionEvent(BList.this, e.getWhen(),
-                                      e.getModifiers(), SELECT));
-        }
-    };
+	public void setLabelProvider(LabelProvider labelProvider) {
+		for (Object each : values) {
+			int index = values.indexOf(each);
+			BToggleButton toggleButton = (BToggleButton)_children.get(index);
+			String text = labelProvider.getText(each);
+			if (text == null) {
+				text = each.toString();
+			}
+			toggleButton.setText(text);
+			if (labelProvider instanceof ImageLabelProvider) {
+				ImageLabelProvider provider = (ImageLabelProvider) labelProvider;
+				BIcon image = provider.getImage(each);
+				toggleButton.setIcon(image);
+			}
+		}
+		this.labelProvider = labelProvider;
+	}
 }

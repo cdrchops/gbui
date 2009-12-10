@@ -39,6 +39,7 @@ public class BComboBox extends BLabel {
      */
     public static class Item extends BComponent implements Comparable<Item> {
         public Object value;
+        protected String label;
 
         /**
          * @param value Object
@@ -47,7 +48,7 @@ public class BComboBox extends BLabel {
         public Item(final Object value,
                     final String label) {
             this.value = value;
-            _label = label;
+            this.label = label;
         }
 
         /**
@@ -55,7 +56,7 @@ public class BComboBox extends BLabel {
          */
         @Override
         public String toString() {
-            return _label;
+            return this.label;
         }
 
         /**
@@ -77,10 +78,9 @@ public class BComboBox extends BLabel {
          * @return int
          */
         public int compareTo(final Item other) {
-            return _label.compareTo(other._label);
+            return this.label.compareTo(other.label);
         }
 
-        protected String _label;
     }
 
     /**

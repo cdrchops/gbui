@@ -36,7 +36,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * Handles the underlying layout and rendering for {@link BLabel} and {@link BButton}.
  */
-public class Label implements BConstants {
+public class Label {
     public Label(BTextComponent container) {
         _container = container;
     }

@@ -37,7 +37,9 @@ public class CanvasRootNode extends BRootNode
                    java.awt.event.MouseMotionListener,
                    java.awt.event.MouseWheelListener,
                    java.awt.event.KeyListener {
-    public CanvasRootNode(Canvas canvas) {
+	private static final long serialVersionUID = 1L;
+
+	public CanvasRootNode(Canvas canvas) {
         _canvas = canvas;
 
 //        // we want to hear about mouse movement, clicking, and keys
@@ -475,16 +477,6 @@ public class CanvasRootNode extends BRootNode
                 return KeyInput.KEY_UNLABELED;
         }
     }
-    
-    @Override
-    public boolean hasCollision(Spatial scene, boolean checkTriangles) {
-    	return false;
-    }
-
-	@Override
-	public void findCollisions(Spatial scene, CollisionResults results) {
-		
-	}
 	
 	protected Canvas _canvas;
 }

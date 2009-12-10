@@ -37,7 +37,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/testing/junit-4.7.jar" sourcepath="D:/java/gbui/lib/testing/junit-4.7-src.jar"/>
-	<classpathentry kind="lib" path="lib/jME_2.0.jar"/>
 	<classpathentry kind="lib" path="lib/jme-audio.jar"/>
 	<classpathentry kind="lib" path="lib/jme-awt.jar"/>
 	<classpathentry kind="lib" path="lib/jme-collada.jar"/>
