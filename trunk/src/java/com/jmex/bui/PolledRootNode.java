@@ -43,7 +43,9 @@ import java.util.Set;
  * those to the appropriate parties.
  */
 public class PolledRootNode extends BRootNode {
-    public PolledRootNode(Timer timer) {
+	private static final long serialVersionUID = 1L;
+
+	public PolledRootNode(Timer timer) {
         this(timer, null);
     }
 
@@ -379,13 +381,4 @@ public class PolledRootNode extends BRootNode {
     private Set<MouseInputListener> mouseListeners;
     private Set<KeyInputListener> keyListeners;
     private Set<BUpdateListener> updateListeners;
-	@Override
-	public void findCollisions(Spatial scene, CollisionResults results) {
-		
-	}
-
-	@Override
-	public boolean hasCollision(Spatial scene, boolean checkTriangles) {
-		return false;
-	}
 }
