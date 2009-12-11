@@ -34,9 +34,12 @@ import java.util.ArrayList;
  * Displays a selected value and allows that value to be changed by selecting from a popup menu.
  */
 public class BComboBox extends BLabel {
-    /**
+    private LabelProvider provider;
+
+	/**
      * Used for displaying a label that is associated with a particular non-displayable value.
      */
+    @Deprecated
     public static class Item extends BComponent implements Comparable<Item> {
         public Object value;
         protected String label;
@@ -130,8 +133,7 @@ public class BComboBox extends BLabel {
      * @param index int
      * @param item  Object
      */
-    public void addItem(final int index,
-                        final Object item) {
+    public void addItem(final int index, final Object item) {
         _items.add(index, new ComboMenuItem(item));
         clearCache();
     }
@@ -141,7 +143,7 @@ public class BComboBox extends BLabel {
      *
      * @param items Iteratable<?>
      */
-    public void setItems(final Iterable<?> items) {
+    public void setItems(final Iterable<? extends Object> items) {
         clearItems();
         for (Object item : items) {
             addItem(item);
@@ -174,6 +176,7 @@ public class BComboBox extends BLabel {
      *
      * @return Object selected index Item
      */
+    @Deprecated
     public Object getSelectedItem() {
         return getItem(_selidx);
     }
@@ -189,10 +192,11 @@ public class BComboBox extends BLabel {
     }
 
     /**
-     * Selects the item with the specified index.
+     * Selects the item wrapped value with the specified index.
      *
      * @param index int
      */
+    @Deprecated
     public void selectItem(final int index) {
         selectItem(index, 0L, 0);
     }
@@ -203,11 +207,14 @@ public class BComboBox extends BLabel {
      *
      * @param item Object
      */
+    @Deprecated
     public void selectItem(final Object item) {
         int selidx = -1;
         for (int ii = 0, ll = _items.size(); ii < ll; ii++) {
             ComboMenuItem mitem = _items.get(ii);
-            if (mitem.item.equals(item)) {
+            if (mitem.item == item || 
+            		(mitem != null && mitem.item.equals(item)) || 
+            		(item instanceof Item && mitem.item.equals( ((Item)item).value))) {
                 selidx = ii;
                 break;
             }
@@ -236,11 +243,12 @@ public class BComboBox extends BLabel {
     }
 
     /**
-     * Returns the item at the specified index.
+     * Returns the item wrapped value at the specified index.
      *
-     * @param index int
+     * @param index of the Item
      * @return Object
      */
+    @Deprecated
     public Object getItem(final int index) {
         return (index < 0 || index >= _items.size()) ? null : _items.get(index).item;
     }
@@ -252,7 +260,8 @@ public class BComboBox extends BLabel {
      * @return Object
      */
     public Object getValue(final int index) {
-        return (index < 0 || index >= _items.size()) ? null : ((Item) _items.get(index).item).value;
+        Object value = (index < 0 || index >= _items.size()) ? null : ( _items.get(index).item);
+        return (value instanceof Item)? ((Item)value).value: value;
     }
 
     /**
@@ -275,6 +284,17 @@ public class BComboBox extends BLabel {
             _menu.setPreferredColumns(columns);
         }
     }
+
+	public void setLabelProvider(LabelProvider provider) {
+		this.provider = provider;
+		if (_selidx != -1) {
+			ComboMenuItem menuItem = _items.get(_selidx);
+			String text = getLabelProvidedText(menuItem.item);
+			setText(text);
+			BIcon icon = getImageLabel(menuItem.item);
+			setIcon(icon);
+		}
+	}
 
     /**
      * @param event BEvent
@@ -348,7 +368,10 @@ public class BComboBox extends BLabel {
         if (item instanceof BIcon) {
             setIcon((BIcon) item);
         } else {
-            setText(item == null ? "" : item.toString());
+        	String text = getLabelProvidedText(item);
+            setText(text);
+            BIcon icon = getImageLabel(item);
+            setIcon(icon);
         }
 
         emitEvent(new ActionEvent(this, when, modifiers, "selectionChanged"));
@@ -397,12 +420,37 @@ public class BComboBox extends BLabel {
             if (item instanceof BIcon) {
                 setIcon((BIcon) item);
             } else {
-                setText(item.toString());
+            	String text = getLabelProvidedText(item);
+                setText(text);
+                BIcon icon = getImageLabel(item);
+                setIcon(icon);
             }
 
             this.item = item;
         }
     }
+
+    private String getLabelProvidedText(Object item) {
+    	if (item instanceof Item) {
+    		item = ((Item)item).value;
+    	}
+    	String text = (item == null)? "": item.toString();
+    	if (provider != null) {
+    		text = provider.getText(item);
+    	}
+    	return text;
+    }
+    
+    private BIcon getImageLabel(Object item) {
+    	if (item instanceof Item) {
+    		item = ((Item)item).value;
+    	}
+    	BIcon icon = null;
+    	if (provider instanceof ImageLabelProvider) {
+    		icon = ((ImageLabelProvider)provider).getImage(item);
+    	}
+    	return icon;
+	}
 
     /**
      * The index of the currently selected item.
