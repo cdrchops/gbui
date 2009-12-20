@@ -19,6 +19,9 @@ public class DraggingPlayground extends AbstractBuiTest {
         BDragNDrop dnd = BDragNDrop.instance();
         dnd.addDragNDropListener(new BDragNDrop.DragNDropListener() {
             public void dragInitiated(BDragNDrop container, BDragEvent event) {
+            	if (((BButton)event.getSource()).getIcon() == null) {
+            		// allow me to cancel the drag, since it doesn't make sense.
+            	}
                 System.out.println("Drag initiated: " + event);
             }
 
@@ -36,8 +39,8 @@ public class DraggingPlayground extends AbstractBuiTest {
         win.setLocation(x, y);
         win.setSize(320, 240);
 
-        BButton button = new BButton(getImageIcon("../resources/ui/items/fire-ice-claw.png"), "");
-        button.addListener(new BDragListener(button, new GetIcon(button)));
+        BButton button = new BButton(getImageIcon("rsrc/test/gold.jpg"), "");
+        button.addListener(new BDragListener(button, new GetIcon(button)/**, getImageIcon("rsrc/test/gold.jpg")*/));
         button.addListener(new SwitchIconDropTarget());
         win.getComponentArea().add(button);
 
@@ -52,7 +55,6 @@ public class DraggingPlayground extends AbstractBuiTest {
         win.setLocation(x, y);
         win.setSize(320, 240);
 
-
         BButton button = new BButton("Empty");
         button.addListener(new BDragListener(button, new GetIcon(button)));
         button.addListener(new SwitchIconDropTarget());
@@ -64,7 +66,6 @@ public class DraggingPlayground extends AbstractBuiTest {
     private class SwitchIconDropTarget extends BDropListener {
         protected void drop(BDropEvent dropEvent) {
             Object dropEventSource = dropEvent.getSource();
-
 
             if (dropEventSource instanceof BButton) {
                 BButton dropButton = (BButton) dropEventSource;
@@ -79,7 +80,7 @@ public class DraggingPlayground extends AbstractBuiTest {
             }
         }
     }
-
+    
     private class GetIcon {
         private BButton button;
 
