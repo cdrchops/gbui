@@ -25,6 +25,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.jmex.bui.dragndrop.BDragSourceListener;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.event.SelectionListener;
@@ -262,5 +263,9 @@ public class BList extends BContainer {
 			}
 		}
 		this.labelProvider = labelProvider;
+	}
+
+	public void addDragListener(BDragSourceListener dragSourceListener) {
+		
 	}
 }

@@ -138,6 +138,14 @@ public class BTextArea extends BContainer {
         clearText();
         appendText(text);
     }
+    
+	public String getText() {
+		String result = "";
+		for (Run each : _runs) {
+			result += each.text + "\n";
+		}
+		return result.substring(0, result.length() - 1);
+	}
 
     /**
      * Appends text with the foreground color in the plain style.

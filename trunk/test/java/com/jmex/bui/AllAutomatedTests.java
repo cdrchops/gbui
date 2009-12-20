@@ -11,7 +11,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	BGroupContainerSingleSelectionTest.class,
 	BToggleButtonTest.class, 
 	BComboBoxLabelProviderTest.class,
-	BComboBoxTest.class
+	BComboBoxTest.class,
+	BListDragAndDropTest.class,
+	BTextAreaTest.class
 })
 @RunWith(Suite.class)
 public class AllAutomatedTests {

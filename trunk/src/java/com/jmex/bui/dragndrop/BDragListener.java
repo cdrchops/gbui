@@ -24,61 +24,62 @@ import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.EventListener;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.icon.BIcon;
+import com.jmex.bui.icon.BlankIcon;
 
 /** @author ivicaz */
 public class BDragListener implements EventListener {
-  private Object dragObject;
-  private IconRequest iconRequest;
-  private BComponent source;
+	private Object dragObject;
+	private IconRequest iconRequest;
+	private BComponent source;
 
-  public BDragListener(BComponent source, Object dragObject) {
-    this(source, dragObject, (BIcon) null);
-  }
+	public BDragListener(BComponent source, Object dragObject) {
+		this(source, dragObject, new BlankIcon(14, 14));
+	}
 
-  public BDragListener(BComponent source, Object dragObject, BIcon iconRequest) {
-    this(source, dragObject, new SimpleIconRequest(iconRequest));
-  }
+	public BDragListener(BComponent source, Object dragObject, BIcon iconRequest) {
+		this(source, dragObject, new SimpleIconRequest(iconRequest));
+	}
 
-  public BDragListener(BComponent source, Object dragObject, IconRequest iconRequest) {
-    this.source = source;
-    this.dragObject = dragObject;
-    this.iconRequest = iconRequest;
-  }
+	public BDragListener(BComponent source, Object dragObject, IconRequest iconRequest) {
+		this.source = source;
+		this.dragObject = dragObject;
+		this.iconRequest = iconRequest;
+	}
 
-  public void eventDispatched(BEvent event) {
-    if (event instanceof MouseEvent) {
-      MouseEvent e = (MouseEvent) event;
-      if (e.getType() == MouseEvent.MOUSE_ENTERED) {
-        BDragNDrop dnd = BDragNDrop.instance();
-        if(iconRequest.getIcon() != null){
-          dnd.setDragIconDisplacement(-iconRequest.getIcon().getWidth()/2,-iconRequest.getIcon().getHeight()/2);
-          dnd.setPotentialDrag(source, dragObject, iconRequest.getIcon());
-        }
-      } else if (e.getType() == MouseEvent.MOUSE_MOVED) { // Yes, its stupid to constantly do that, but I have no fucking other choice!
-        BDragNDrop dnd = BDragNDrop.instance();
-        if(iconRequest.getIcon() != null){
-          dnd.setDragIconDisplacement(-iconRequest.getIcon().getWidth()/2,-iconRequest.getIcon().getHeight()/2);
-          dnd.setPotentialDrag(source, dragObject, iconRequest.getIcon());
-        }
-      } else if (e.getType() == MouseEvent.MOUSE_EXITED) {
-        BDragNDrop.instance().removePotentialDrag(source);
-      }
-    }
-  }
+	public void eventDispatched(BEvent event) {
+		if (event instanceof MouseEvent) {
+			MouseEvent e = (MouseEvent) event;
+			if (e.getType() == MouseEvent.MOUSE_ENTERED) {
+				BDragNDrop dnd = BDragNDrop.instance();
+				if (iconRequest.getIcon() != null) {
+					dnd.setDragIconDisplacement(-iconRequest.getIcon().getWidth() / 2, -iconRequest.getIcon().getHeight() / 2);
+					dnd.setPotentialDrag(source, dragObject, iconRequest.getIcon());
+				}
+			} else if (e.getType() == MouseEvent.MOUSE_MOVED) {
+				BDragNDrop dnd = BDragNDrop.instance();
+				if (iconRequest.getIcon() != null) {
+					dnd.setDragIconDisplacement(-iconRequest.getIcon().getWidth() / 2, -iconRequest.getIcon().getHeight() / 2);
+					dnd.setPotentialDrag(source, dragObject, iconRequest.getIcon());
+				}
+			} else if (e.getType() == MouseEvent.MOUSE_EXITED) {
+				BDragNDrop.instance().removePotentialDrag(source);
+			}
+		}
+	}
 
-  public static interface IconRequest {
-    BIcon getIcon();
-  }
+	public static interface IconRequest {
+		BIcon getIcon();
+	}
 
-  private static class SimpleIconRequest implements IconRequest {
-    private BIcon icon;
+	private static class SimpleIconRequest implements IconRequest {
+		private BIcon icon;
 
-    private SimpleIconRequest(BIcon icon) {
-      this.icon = icon;
-    }
+		private SimpleIconRequest(BIcon icon) {
+			this.icon = icon;
+		}
 
-    public BIcon getIcon() {
-      return icon;
-    }
-  }
+		public BIcon getIcon() {
+			return icon;
+		}
+	}
 }
