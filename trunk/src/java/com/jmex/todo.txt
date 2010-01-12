@@ -46,3 +46,14 @@ Actual unit tests
 Build files
 
 More Groovy way of doing things
+
+As for the BSS - the goals I have for BSS is multiphasic:
+1) be able to use CSS 2.0 standard - not necessarily all of the functionality of 2.0, but the syntax for the things we support
+2) backwards compatible to the current BSS format, eventually phasing it out and/or writing a converter to convert it from BSS (current) to BSS 2.0 (for lack of better descriptor)
+3) initiate a BSS class and add styles programmatically e.g.
+     b = new BSS(); b.put(new ColorStyle()); whatever there is
+4) initiate a BSS class and add styles singularly e.g.
+     b = new BSS(); b.put('color {#50555}')
+5) read in multiple BSS at the same time to create one global stylesheet for the display
+6) read in multiple BSS at the same time to create multiple styles for different uses that can be switched between e.g
+      login.bss; menu.bss; gameplay.bss - so that login may have a completely different look and feel to it than menu or gameplay and also have a graceful fallback to some standard that if something isn't there then it will gracefully degrade
