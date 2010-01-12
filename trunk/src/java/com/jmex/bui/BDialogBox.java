@@ -31,6 +31,14 @@ public class BDialogBox extends BTitledWindow {
 
     private DialogListener listener;
 
+    /**
+     *
+     * @param name String name of the component
+     * @param titleBar BTitleBar
+     * @param message BDialogMessage
+     * @param options DialogOptions
+     * @param style BStyleSheet stylesheet
+     */
     public BDialogBox(final String name,
                       final BTitleBar titleBar,
                       final BDialogMessage message,
@@ -41,13 +49,13 @@ public class BDialogBox extends BTitledWindow {
             throw new IllegalArgumentException("The message for BDialogBox cannot be null");
         }
 
-        BContainer tmp = getComponentArea();
+        final BContainer tmp = getComponentArea();
 
         tmp.setStyleClass("greymessagebg");
         tmp.setLayoutManager(new BorderLayout());
         tmp.add(message, BorderLayout.NORTH);
 
-        BButtonBar buttons = new BButtonBar("", options);
+        final BButtonBar buttons = new BButtonBar("", options);
         buttons.setButtonListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 fireResponse(event);
@@ -57,8 +65,8 @@ public class BDialogBox extends BTitledWindow {
         tmp.add(buttons, BorderLayout.SOUTH);
     }
 
-    private void fireResponse(ActionEvent event) {
-        UserResponse response = UserResponse.valueOf(event.getAction().toUpperCase());
+    private void fireResponse(final ActionEvent event) {
+        final UserResponse response = UserResponse.valueOf(event.getAction().toUpperCase());
         if (response != null) {
             if (listener != null) {
                 listener.responseAvailable(response, this);
@@ -67,7 +75,7 @@ public class BDialogBox extends BTitledWindow {
         }
     }
 
-    public void setDialogListener(DialogListener listener) {
+    public void setDialogListener(final DialogListener listener) {
         this.listener = listener;
     }
 }

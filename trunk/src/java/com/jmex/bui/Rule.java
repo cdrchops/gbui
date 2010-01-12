@@ -5,6 +5,7 @@
 package com.jmex.bui;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Removed from BStyleSheet and made into its own class
@@ -17,15 +18,18 @@ public class Rule {
 
     public String pseudoClass;
 
-    public HashMap<String, Object> properties = new HashMap<String, Object>();
+    public Map<String, Object> properties = new HashMap<String, Object>(1);
 
-    public Object get(HashMap rules, String key) {
-        Object value = properties.get(key);
+    public Object get(final HashMap rules, final String key) {
+        final Object value = properties.get(key);
         if (value != null) {
             return value;
         }
-        Rule prule = (Rule) properties.get("parent");
-        return (prule != null) ? prule.get(rules, key) : null;
+
+        final Rule prule = (Rule) properties.get("parent");
+        return prule != null
+                 ? prule.get(rules, key)
+                 : null;
     }
 
     @Override

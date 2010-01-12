@@ -68,9 +68,9 @@ public class ButtonWiggleTest extends SimpleGame {
     public void simpleUpdate() {
         updateTransition(super.tpf, 10f, -1);
 
-        float transitionOffset = (float) FastMath.pow(transitionPosition, 2);
+        final float transitionOffset = FastMath.pow(transitionPosition, 2);
 
-        int tempPosition = (int) startPosition.x;
+        int tempPosition = startPosition.x;
 
         tempPosition -= transitionOffset * 512;
 
@@ -82,7 +82,7 @@ public class ButtonWiggleTest extends SimpleGame {
         super.simpleUpdate();
     }
 
-    boolean updateTransition(float tpf, float transitionOffTime, int direction) {
+    boolean updateTransition(final float tpf, final float transitionOffTime, final int direction) {
         // How much should we move by?
         float transitionDelta;
 
@@ -96,8 +96,10 @@ public class ButtonWiggleTest extends SimpleGame {
         transitionPosition += transitionDelta * direction;
 
         // Did we reach the end of the transition?
-        if (((direction < 0) && (transitionPosition <= 0)) ||
-            ((direction > 0) && (transitionPosition >= 1))) {
+        if (direction < 0
+              && transitionPosition <= 0
+            || direction > 0
+               && transitionPosition >= 1) {
             transitionPosition = FastMath.clamp(transitionPosition, 0, 1);
             return false;
         }

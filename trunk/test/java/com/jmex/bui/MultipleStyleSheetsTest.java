@@ -14,7 +14,7 @@ public class MultipleStyleSheetsTest extends BaseTest {
 //
         rootNode.attachChild(BuiSystem.getRootNode());
 
-        BWindow window1 = new BWindow(style1, GroupLayout.makeVStretch());
+        final BWindow window1 = new BWindow(style1, GroupLayout.makeVStretch());
 //        window1.add(new BButton("bob", "bob"));
         window1.setSize(400, 400);
 

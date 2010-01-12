@@ -21,11 +21,13 @@
 package com.jmex.bui;
 
 import com.jme.intersection.CollisionResults;
+import com.jme.intersection.PickResults;
 import com.jme.renderer.ColorRGBA;
 import com.jme.renderer.Renderer;
 import com.jme.scene.Geometry;
 import com.jme.scene.Spatial;
 import com.jme.system.DisplaySystem;
+import com.jme.math.Ray;
 import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.EventListener;
 import com.jmex.bui.event.FocusEvent;
@@ -410,16 +412,6 @@ public abstract class BRootNode extends Geometry {
         }
     }
 
-    public void findCollisions(Spatial scene, CollisionResults results,
-                               int requiredOnBits) {
-        // do nothing
-    }
-
-    public boolean hasCollision(Spatial scene, boolean checkTriangles,
-                                int requiredOnBits) {
-        return false;    // do nothing
-    }
-
     /**
      * Sets the color of the shade behind the first active modal window.
      *
@@ -629,4 +621,15 @@ public abstract class BRootNode extends Geometry {
     protected ArrayList<EventListener> _globals = new ArrayList<EventListener>();
 
     protected static final float TIP_MODE_RESET = 0.6f;
+
+    public void findCollisions(final Spatial spatial, final CollisionResults collisionResults, final int i) {
+    }
+
+    public boolean hasCollision(final Spatial spatial, final boolean b, final int i) {
+        hasCollision(spatial, b);
+        return false;
+    }
+
+    public void findPick(final Ray ray, final PickResults pickResults, final int i) {
+    }
 }

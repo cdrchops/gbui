@@ -222,7 +222,7 @@ public class BImage extends Quad {
         if (transparent) {
             setRenderState(blendState);
         } else {
-            clearRenderState(RenderState.RS_BLEND);
+            clearRenderState(RenderState.StateType.Blend);
             //clearRenderState(RenderState.StateType.RS_BLEND);
         }
         updateRenderState();

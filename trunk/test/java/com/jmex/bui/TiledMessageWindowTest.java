@@ -32,7 +32,7 @@ public class TiledMessageWindowTest extends BaseTest {
     @Override
     protected void createWindows() {
         for (int i = 0; i < 3; i++) {
-            BTitledWindow mw = MessageWindowUtil.createMessageBox("Message box #" + i,
+            final BTitledWindow mw = MessageWindowUtil.createMessageBox("Message box #" + i,
                                                                   "You won't be able to dismiss this evil window.");
             BuiSystem.getRootNode().addWindow(mw);
         }

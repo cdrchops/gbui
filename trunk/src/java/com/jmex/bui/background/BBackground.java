@@ -24,6 +24,8 @@ import com.jme.renderer.Renderer;
 
 /**
  * Provides additional information about a background that is used to display the backgrounds of various components.
+ *
+ * @author mbayne
  */
 public abstract class BBackground {
     /**

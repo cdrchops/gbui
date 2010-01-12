@@ -22,7 +22,12 @@ package com.jmex.bui.background;
 
 /**
  * A blank background.
+ * 
+ * @author timo
  */
 public class BlankBackground extends BBackground {
-    public BlankBackground() {}
+    /**
+     * Constructor
+     */
+    public BlankBackground() { }
 }

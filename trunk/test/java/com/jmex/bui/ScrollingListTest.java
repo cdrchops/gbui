@@ -29,11 +29,11 @@ import com.jmex.bui.layout.GroupLayout;
 public class ScrollingListTest extends BaseTest {
     @Override
     protected void createWindows() {
-        BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
+        final BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
 
         window.setLayoutManager(GroupLayout.makeVStretch());
 
-        BScrollingList<String, BButton> list =
+        final BScrollingList<String, BButton> list =
                 new BScrollingList<String, BButton>() {
                     @Override
                     public BButton createComponent(String str) {
@@ -54,7 +54,6 @@ public class ScrollingListTest extends BaseTest {
 
     public static void main(String[] args) {
         Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
-        ScrollingListTest test = new ScrollingListTest();
-        test.start();
+        new ScrollingListTest().start();
     }
 }
