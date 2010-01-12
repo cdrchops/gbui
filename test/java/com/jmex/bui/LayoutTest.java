@@ -21,6 +21,7 @@
 package com.jmex.bui;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -77,16 +78,16 @@ public class LayoutTest extends BaseTest {
 //                    BorderLayout.SOUTH);
 //         window.add(new BLabel("WEST"), BorderLayout.WEST);
 //         window.add(new BLabel("CENTER"), BorderLayout.CENTER);
-        BTabbedPane pane = new BTabbedPane();
+        final BTabbedPane pane = new BTabbedPane();
         window.add(pane);
-        BButton button = new BButton("One contents");
+        final BButton button = new BButton("One contents");
         button.setTooltipText("This is a very long tooltip the likes of " +
                               "which you may not dare to contemplate. Indeed " +
                               "it is so long that I expect it to wrap.");
         pane.addTab("One", button);
         button.setEnabled(false);
 
-        BGeomView nview = new BGeomView(createGeometry());
+        final BGeomView nview = new BGeomView(createGeometry());
         pane.addTab("Two", nview);
         pane.addTab("Three", new BTextArea());
         pane.addTab("Four", new BLabel("Four contents"));
@@ -117,10 +118,10 @@ public class LayoutTest extends BaseTest {
         window.setBounds(300, 140, 400, 250);
 
         window = new BWindow(BuiSystem.getStyle(), GroupLayout.makeVStretch());
-        GroupLayout glay = GroupLayout.makeVStretch();
+        final GroupLayout glay = GroupLayout.makeVStretch();
         glay.setGap(0);
         cont = new BContainer(glay);
-        ArrayList<String> items = new ArrayList<String>();
+        final List<String> items = new ArrayList<String>();
         for (int ii = 0; ii < 100; ii++) {
             items.add("item " + ii);
         }
@@ -136,7 +137,7 @@ public class LayoutTest extends BaseTest {
 
         window.add(new BScrollPane(cont));
         BuiSystem.getRootNode().addWindow(window);
-        Dimension ps = window.getPreferredSize(-1, -1);
+        final Dimension ps = window.getPreferredSize(-1, -1);
         window.setBounds(100, 300, ps.width, 2 * ps.height / 3);
 
         window = new BWindow(BuiSystem.getStyle(), new BorderLayout());
@@ -172,7 +173,7 @@ public class LayoutTest extends BaseTest {
         final BLabel lbl = new BLabel("+10+35");
         lbl.setTooltipText("This is a @=b(funny) label.");
         window.add(lbl, new Point(10, 35));
-        ActionListener list = new ActionListener() {
+        final ActionListener list = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 _count += 9;
                 lbl.setText(String.valueOf(_count));
@@ -200,25 +201,25 @@ public class LayoutTest extends BaseTest {
     }
 
     protected Node createGeometry() {
-        DirectionalLight light = new DirectionalLight();
+        final DirectionalLight light = new DirectionalLight();
         light.setDiffuse(new ColorRGBA(1.0f, 1.0f, 1.0f, 1.0f));
         light.setAmbient(new ColorRGBA(0.5f, 0.5f, 1.0f, 1.0f));
         light.setDirection(new Vector3f(1, -1, 0));
         light.setEnabled(true);
 
-        Renderer renderer = DisplaySystem.getDisplaySystem().getRenderer();
+        final Renderer renderer = DisplaySystem.getDisplaySystem().getRenderer();
 
-        LightState ls = renderer.createLightState();
+        final LightState ls = renderer.createLightState();
         ls.setEnabled(true);
         ls.attach(light);
 
-        ZBufferState zstate =
+        final ZBufferState zstate =
                 DisplaySystem.getDisplaySystem().getRenderer().createZBufferState();
         zstate.setEnabled(true);
         zstate.setFunction(ZBufferState.TestFunction.LessThan);
 
         final Box box = new Box("box", new Vector3f(), 4, 4, 4);
-        Quaternion quat45 = new Quaternion();
+        final Quaternion quat45 = new Quaternion();
         quat45.fromAngleAxis(0.7854f, new Vector3f(1, 1, 1));
         box.setLocalRotation(quat45);
 
@@ -230,12 +231,12 @@ public class LayoutTest extends BaseTest {
                 box.getLocalRotation().set(_rotation);
             }
 
-            protected float _angle;
-            protected Quaternion _rotation = new Quaternion();
-            protected final Vector3f UP = new Vector3f(0, 1, 0);
+            private float _angle;
+            private Quaternion _rotation = new Quaternion();
+            private final Vector3f UP = new Vector3f(0, 1, 0);
         });
 
-        Node n = new Node("geometry");
+        final Node n = new Node("geometry");
         n.setRenderState(ls);
         n.setRenderState(zstate);
         n.attachChild(box);
@@ -245,7 +246,7 @@ public class LayoutTest extends BaseTest {
 
     public static void main(String[] args) {
         Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
-        LayoutTest test = new LayoutTest();
+        final LayoutTest test = new LayoutTest();
         test.start();
     }
 

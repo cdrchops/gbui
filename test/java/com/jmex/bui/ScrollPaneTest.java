@@ -8,12 +8,12 @@ public class ScrollPaneTest extends BaseTest {
     @Override
     protected void createWindows() {
 
-        BWindow window = new BWindow(BuiSystem.getStyle(), new BorderLayout());
+        final BWindow window = new BWindow(BuiSystem.getStyle(), new BorderLayout());
         window.setLayoutManager(new BorderLayout());
         window.setSize(400, 300);
         window.center();
 
-        BTextArea textArea = new BTextArea(
+        final BTextArea textArea = new BTextArea(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                 "Phasellus ipsum nulla, pretium sed egestas nec, rhoncus non eros. Fusce quis purus massa. " +
                 "Sed enim orci, lacinia mollis tincidunt ut, sagittis rhoncus urna. Pellentesque vulputate " +
@@ -34,5 +34,4 @@ public class ScrollPaneTest extends BaseTest {
     public static void main(String[] args) {
         new ScrollPaneTest().start();
     }
-
 }

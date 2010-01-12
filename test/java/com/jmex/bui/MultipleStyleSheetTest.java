@@ -21,7 +21,7 @@ public class MultipleStyleSheetTest {
         BStyleSheetUtil.combineMultipleBSS("stylesb.bss", STYLE1, STYLE2);
 
         //load multiple bss files by URL and/or String reference in a List
-        List<Object> lst = new LinkedList<Object>();
+        final List<Object> lst = new LinkedList<Object>();
         lst.add(STYLE1_STRING);
         lst.add(STYLE2);
 

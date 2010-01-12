@@ -31,7 +31,9 @@ public class BDecoratedWindow extends BWindow {
     /**
      * Creates a decorated window using the supplied look and feel.
      *
-     * @param title the title of the window or null if no title bar is desired.
+     * @param style BStyleSheet the stylesheet
+     * @param title String the title of the window or null if no title bar is desired.
+     *
      */
     public BDecoratedWindow(BStyleSheet style,
                             String title) {
@@ -44,7 +46,9 @@ public class BDecoratedWindow extends BWindow {
     }
 
     @Override
-    // documentation inherited
+    /**
+     * documentation inherited
+     */
     protected String getDefaultStyleClass() {
         return "decoratedwindow";
     }

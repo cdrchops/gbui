@@ -43,9 +43,8 @@ public class ScrollingListTestWithButton extends BaseTest implements BConstants 
   BScrollingList<String, BButton> list;
 
   @Override
-  protected void createWindows(BRootNode root,
-                               BStyleSheet style) {
-    final def window = new BWindow(style, new BorderLayout(5, 5));
+  protected void createWindows() {
+    final def window = new BWindow(BuiSystem.getStyle(), new BorderLayout(5, 5));
     final def removeAll = new BButton("removeAll", "removeAll");
     final def removeValues = new BButton("removeValues", "removeValues");
     final def populate = new BButton("populate", "populate");

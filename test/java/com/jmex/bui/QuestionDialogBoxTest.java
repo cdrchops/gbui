@@ -33,7 +33,7 @@ import java.util.logging.Logger;
  */
 public class QuestionDialogBoxTest extends BaseTest {
     protected void createWindows() {
-        BDialogBox box = DialogBoxUtil.createQuestionDialogBox("qmessage1", "message");
+        final BDialogBox box = DialogBoxUtil.createQuestionDialogBox("qmessage1", "message");
         box.setDialogListener(new DialogListener() {
 
             public void responseAvailable(UserResponse response,

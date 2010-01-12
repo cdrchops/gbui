@@ -16,13 +16,13 @@ import java.util.logging.Logger;
 public class MenuTest extends BaseTest {
 
     protected void createWindows() {
-        BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
+        final BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
 //        BMenuBar bar = window.getMenuBar();
-        BMenu fileMenu = new BMenu("File", window);
-        BMenuItem newItem = new BMenuItem("New Item", "NEW");
+        final BMenu fileMenu = new BMenu("File", window);
+        final BMenuItem newItem = new BMenuItem("New Item", "NEW");
         newItem.addListener(listener);
         fileMenu.addMenuItem(newItem);
-        BMenuItem exitItem = new BMenuItem("Exit", "EXIT");
+        final BMenuItem exitItem = new BMenuItem("Exit", "EXIT");
         exitItem.addListener(listener);
         fileMenu.addMenuItem(exitItem);
 //        bar.add(fileMenu);

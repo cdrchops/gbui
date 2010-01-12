@@ -8,9 +8,9 @@ import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.util.Dimension;
 
 public class MultiSelectBoxTest extends BaseTest {
-    ActionListener listener2 = new ActionListener() {
+    final ActionListener listener2 = new ActionListener() {
         public void actionPerformed(ActionEvent event) {
-            BToggleButton button = (BToggleButton) event.getSource();
+            final BToggleButton button = (BToggleButton) event.getSource();
             if (button.isSelected()) {
 
             }
@@ -19,12 +19,11 @@ public class MultiSelectBoxTest extends BaseTest {
     };
 
     protected void createWindows() {
-        BWindow window = new BWindow(BuiSystem.getStyle(), GroupLayout.makeVStretch());
-        BContainer container = new BContainer(GroupLayout.makeVStretch());
-        BMultiSelectBox<String> list = new BMultiSelectBox<String>() {
-
+        final BWindow window = new BWindow(BuiSystem.getStyle(), GroupLayout.makeVStretch());
+        final BContainer container = new BContainer(GroupLayout.makeVStretch());
+        final BMultiSelectBox<String> list = new BMultiSelectBox<String>() {
             protected BToggleButton createListEntry(String value) {
-                BToggleButton entry = new BToggleButton(value, "select");
+                final BToggleButton entry = new BToggleButton(value, "select");
                 entry.setProperty("entry", value);
                 entry.addListener(listener2);
                 entry.setStyleClass("list_entry");
@@ -39,7 +38,7 @@ public class MultiSelectBoxTest extends BaseTest {
         list.addListener(listener2);
 
         for (int i = 0; i < 10; i++) {
-            String name = "Name" + i;
+            final String name = "Name" + i;
 
             list.addValue(name, false);
         }

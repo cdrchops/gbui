@@ -39,8 +39,17 @@ public class Spacer extends BComponent {
      * @param prefWidth  int
      * @param prefHeight int
      */
-    public Spacer(int prefWidth,
-                  int prefHeight) {
-        setPreferredSize(new Dimension(prefWidth, prefHeight));
+    public Spacer(final int prefWidth,
+                  final int prefHeight) {
+        this(new Dimension(prefWidth, prefHeight));
+    }
+
+    /**
+     * Creates a spacer with the specified preferred dimensions.
+     *
+     * @param dimension Dimension
+     */
+    public Spacer(final Dimension dimension) {
+        setPreferredSize(dimension);
     }
 }
