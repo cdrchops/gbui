@@ -1,22 +1,26 @@
-//
-// $Id: BTextField.java,v 1.2 2007/04/27 19:46:29 vivaldi Exp $
-//
-// BUI - a user interface library for the JME 3D engine
-// Copyright (C) 2005, Michael Bayne, All Rights Reserved
-//
-// This library is free software; you can redistribute it and/or modify it
-// under the terms of the GNU Lesser General Public License as published
-// by the Free Software Foundation; either version 2.1 of the License, or
-// (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+/**
+ *
+ * $Id:$
+ * $Copyright:$
+ *
+ * BUI - a user interface library for the JME 3D engine
+ * Copyright (C) 2005-2006, Michael Bayne, All Rights Reserved
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ */
 
 package com.jmex.bui;
 
@@ -49,7 +53,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 	 * Creates a blank text field with maximum input length. The maximum input
 	 * length is controlled by a {@link LengthLimitedDocument}, changing the
 	 * document will remove the length control.
-	 * 
+	 *
 	 * @param maxLength
 	 *            int
 	 */
@@ -59,7 +63,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 
 	/**
 	 * Creates a text field with the specified starting text.
-	 * 
+	 *
 	 * @param text
 	 *            String
 	 */
@@ -71,7 +75,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 	 * Creates a text field with the specified starting text and max length. The
 	 * maximum input length is controlled by a {@link LengthLimitedDocument},
 	 * changing the document will remove the length control.
-	 * 
+	 *
 	 * @param text
 	 *            String
 	 * @param maxLength
@@ -106,7 +110,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 	 * Configures the maximum length of this text field. This will replace any
 	 * currently set document with a LengthLimitedDocument (or no document at
 	 * all if maxLength is <= 0).
-	 * 
+	 *
 	 * @param maxLength
 	 *            int
 	 */
@@ -120,7 +124,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 
 	/**
 	 * Configures this text field with a custom document.
-	 * 
+	 *
 	 * @param document
 	 *            Document
 	 */
@@ -133,7 +137,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 	 * Returns the underlying document used by this text field to maintain its
 	 * state. Changes to the document will be reflected in the text field
 	 * display.
-	 * 
+	 *
 	 * @return Document
 	 */
 	public Document getDocument() {
@@ -143,7 +147,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 	/**
 	 * Configures the preferred width of this text field (the preferred height
 	 * will be calculated from the font).
-	 * 
+	 *
 	 * @param width
 	 *            int
 	 */
@@ -436,7 +440,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 
 		// format our text and determine how much of it we can display
 		_glyphs = getTextFactory().createText(getDisplayText(), getColor(),
-				TextEffect.PLAIN, BConstants.DEFAULT_SIZE, null, true);
+				TextEffect.PLAIN, BConstants.DEFAULT_SIZE.getValue(), null, true);
 		if (isAdded()) {
 			_glyphs.wasAdded();
 		}
@@ -456,7 +460,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 	/**
 	 * This method allows a derived class (specifically {@link BPasswordField})
 	 * to display something other than the actual contents of the text field.
-	 * 
+	 *
 	 * @return String
 	 */
 	protected String getDisplayText() {
@@ -466,7 +470,7 @@ public class BTextField extends BTextComponent implements EditCommands,
 	/**
 	 * Updates the cursor position, moving the visible representation as well as
 	 * the insertion and deletion point.
-	 * 
+	 *
 	 * @param cursorPos
 	 *            int
 	 */

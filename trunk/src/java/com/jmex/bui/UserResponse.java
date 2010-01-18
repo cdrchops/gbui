@@ -1,7 +1,7 @@
 /**
  *
- * $Id$
- * $Copyright$
+ * $Id:$
+ * $Copyright:$
  *
  * BUI - a user interface library for the JME 3D engine
  * Copyright (C) 2005-2006, Michael Bayne, All Rights Reserved

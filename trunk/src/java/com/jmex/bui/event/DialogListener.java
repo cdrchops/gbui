@@ -9,6 +9,10 @@ import com.jmex.bui.UserResponse;
  * @author Lucian Cristian Beskid
  */
 public interface DialogListener {
-
+    /**
+     * 
+     * @param response UserResponse
+     * @param source BComponent
+     */
     void responseAvailable(UserResponse response, BComponent source);
 }
