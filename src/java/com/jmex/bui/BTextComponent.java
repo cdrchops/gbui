@@ -1,22 +1,26 @@
-//
-// $Id: BTextComponent.java,v 1.2 2007/04/27 19:46:29 vivaldi Exp $
-//
-// BUI - a user interface library for the JME 3D engine
-// Copyright (C) 2005-2006, Michael Bayne, All Rights Reserved
-//
-// This library is free software; you can redistribute it and/or modify it
-// under the terms of the GNU Lesser General Public License as published
-// by the Free Software Foundation; either version 2.1 of the License, or
-// (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+/**
+ *
+ * $Id:$
+ * $Copyright:$
+ *
+ * BUI - a user interface library for the JME 3D engine
+ * Copyright (C) 2005-2006, Michael Bayne, All Rights Reserved
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ */
 
 package com.jmex.bui;
 
@@ -88,13 +92,14 @@ public abstract class BTextComponent extends BComponent {
     /**
      * Returns the effect for this component's text.
      *
-     * @return int BConstants
+     * @return int TextEffect
      */
     public TextEffect getTextEffect() {
         if (_teffects != null) {
             TextEffect teffect = _teffects[getState()];
             return (teffect != null) ? teffect : _teffects[ComponentState.DEFAULT.ordinal()];
         }
+
         return TextEffect.NORMAL;
     }
 
@@ -108,7 +113,8 @@ public abstract class BTextComponent extends BComponent {
             int effsize = _effsizes[getState()];
             return (effsize > 0) ? effsize : _effsizes[ComponentState.DEFAULT.ordinal()];
         }
-        return BConstants.DEFAULT_SIZE;
+
+        return BConstants.DEFAULT_SIZE.getValue();
     }
 
     /**
@@ -157,7 +163,7 @@ public abstract class BTextComponent extends BComponent {
         for (int ii = 0; ii < stateCount; ii++) {
             effsizes[ii] = style.getEffectSize(this, getStatePseudoClass(ii));
         }
-        _effsizes = checkNonDefault(effsizes, BConstants.DEFAULT_SIZE);
+        _effsizes = checkNonDefault(effsizes, BConstants.DEFAULT_SIZE.getValue());
 
         boolean nondef = false;
         ColorRGBA[] effcols = new ColorRGBA[stateCount];

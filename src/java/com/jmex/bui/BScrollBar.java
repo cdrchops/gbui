@@ -1,34 +1,43 @@
-//
-// $Id: BScrollBar.java,v 1.2 2007/04/27 19:46:29 vivaldi Exp $
-//
-// BUI - a user interface library for the JME 3D engine
-// Copyright (C) 2005, Michael Bayne, All Rights Reserved
-//
-// This library is free software; you can redistribute it and/or modify it
-// under the terms of the GNU Lesser General Public License as published
-// by the Free Software Foundation; either version 2.1 of the License, or
-// (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+/**
+ * $Id: BScrollBar.java,v 1.2 2007/04/27 19:46:29 vivaldi Exp $
+ *
+ * BUI - a user interface library for the JME 3D engine
+ * Copyright (C) 2005, Michael Bayne, All Rights Reserved
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
 
 package com.jmex.bui;
 
 import com.jmex.bui.enumeratedConstants.Orientation;
-import com.jmex.bui.event.*;
+
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.util.Insets;
+import com.jmex.bui.event.MouseWheelListener;
+import com.jmex.bui.event.ActionListener;
+import com.jmex.bui.event.ActionEvent;
+import com.jmex.bui.event.MouseEvent;
+import com.jmex.bui.event.MouseAdapter;
+import com.jmex.bui.event.ChangeListener;
+import com.jmex.bui.event.MouseListener;
+import com.jmex.bui.event.ChangeEvent;
 
 /**
  * Displays a scroll bar for all your horizontal and vertical scrolling needs.
  */
-public class BScrollBar extends BContainer implements BConstants {
+public class BScrollBar extends BContainer {
     /**
      * Creates a vertical scroll bar with the default range, value and extent.
      */
@@ -256,11 +265,7 @@ public class BScrollBar extends BContainer implements BConstants {
             }
         }
 
-        protected int _sx
-                ,
-                _sy
-                ,
-                _sv;
+        protected int _sx,_sy, _sv;
     };
 
     protected ActionListener _buttoner = new ActionListener() {
