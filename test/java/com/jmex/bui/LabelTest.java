@@ -34,7 +34,7 @@ import com.jmex.bui.layout.GroupLayout;
  *
  * @author Michael Bayne
  */
-public class LabelTest extends BaseTest implements BConstants {
+public class LabelTest extends BaseTest {
     @Override
     protected void createWindows() {
         final BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
