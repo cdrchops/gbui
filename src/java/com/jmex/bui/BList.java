@@ -1,22 +1,26 @@
-//
-// $Id: BList.java,v 1.2 2007/04/27 19:46:29 vivaldi Exp $
-//
-// BUI - a user interface library for the JME 3D engine
-// Copyright (C) 2005, Michael Bayne, All Rights Reserved
-//
-// This library is free software; you can redistribute it and/or modify it
-// under the terms of the GNU Lesser General Public License as published
-// by the Free Software Foundation; either version 2.1 of the License, or
-// (at your option) any later version.
-//
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-//
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+/**
+ *
+ * $Id:$
+ * $Copyright:$
+ *
+ * BUI - a user interface library for the JME 3D engine
+ * Copyright (C) 2005-2006, Michael Bayne, All Rights Reserved
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ */
 
 package com.jmex.bui;
 
@@ -46,13 +50,13 @@ public class BList extends BContainer {
      * The action fired when the list selection changes.
      */
     public static final String SELECT = "select";
-    
+
     /**
      * The values contained in the list.
      */
     protected List<Object> values = new ArrayList<Object>();
     protected List<SelectionListener> selectionListeners = new LinkedList<SelectionListener>();
-    
+
     /**
      * The index of the current selection (or -1 for none).
      */
@@ -102,7 +106,7 @@ public class BList extends BContainer {
             }
         }
     }
-    
+
     @Override
     public void add(BComponent child) {
     	throw new IllegalStateException("BList does not support adding of components");
@@ -137,7 +141,7 @@ public class BList extends BContainer {
         super.add(button);
         values.add(value);
     }
-	
+
     /**
      * Adds the list of values after the current values contained in the list
      * @param toAdd all values to be added in order
@@ -156,7 +160,7 @@ public class BList extends BContainer {
 	public Object getValue(int i) {
 		return values.get(i);
 	}
-	
+
     @Override
     public void remove(BComponent child) {
     	int index = _children.indexOf(child);
@@ -168,13 +172,13 @@ public class BList extends BContainer {
     	}
     	super.remove(child);
     }
-    
+
     @Override
     public void remove(int index) {
     	BComponent component = _children.get(index);
     	remove(component);
     }
-    
+
     /**
      * Removes a value from the list, if it is present.
      *
@@ -188,10 +192,10 @@ public class BList extends BContainer {
         if (idx == _selidx) {
             _selidx = -1;
         }
-        BComponent child = _children.get(idx); 
+        BComponent child = _children.get(idx);
         // memory leak, remember to clean up
         if (child instanceof BToggleButton) {
-        	BToggleButton button = (BToggleButton)child; 
+        	BToggleButton button = (BToggleButton)child;
         	button.removeAllListeners();
         	button.removeSelectionListener(selectionListener);
         }
@@ -236,13 +240,13 @@ public class BList extends BContainer {
     protected String getDefaultStyleClass() {
         return "list";
     }
-    
+
 	public void addSelectionListener(SelectionListener listener) {
 		if (!selectionListeners.contains(listener)) {
 			selectionListeners.add(listener);
 		}
 	}
-	
+
 	public void removeSelectionListener(SelectionListener listener) {
 		selectionListeners.remove(listener);
 	}
@@ -266,6 +270,6 @@ public class BList extends BContainer {
 	}
 
 	public void addDragListener(BDragSourceListener dragSourceListener) {
-		
+
 	}
 }
