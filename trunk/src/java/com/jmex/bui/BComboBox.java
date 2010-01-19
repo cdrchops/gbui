@@ -1,22 +1,25 @@
 /**
- // $Id: BComboBox.java,v 1.2 2007/04/27 19:46:29 vivaldi Exp $
- // $Copyright:$
- // BUI - a user interface library for the JME 3D engine
- // Copyright (C) 2005, Michael Bayne, All Rights Reserved
- //
- // This library is free software; you can redistribute it and/or modify it
- // under the terms of the GNU Lesser General Public License as published
- // by the Free Software Foundation; either version 2.1 of the License, or
- // (at your option) any later version.
- //
- // This library is distributed in the hope that it will be useful,
- // but WITHOUT ANY WARRANTY; without even the implied warranty of
- // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- // Lesser General Public License for more details.
- //
- // You should have received a copy of the GNU Lesser General Public
- // License along with this library; if not, write to the Free Software
- // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ *
+ * $Id:$
+ * $Copyright:$
+ *
+ * BUI - a user interface library for the JME 3D engine
+ * Copyright (C) 2005-2006, Michael Bayne, All Rights Reserved
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License as published
+ * by the Free Software Foundation; either version 2.1 of the License, or
+ * (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ *
  */
 
 package com.jmex.bui;
@@ -212,8 +215,8 @@ public class BComboBox extends BLabel {
         int selidx = -1;
         for (int ii = 0, ll = _items.size(); ii < ll; ii++) {
             ComboMenuItem mitem = _items.get(ii);
-            if (mitem.item == item || 
-            		(mitem != null && mitem.item.equals(item)) || 
+            if (mitem.item == item ||
+            		(mitem != null && mitem.item.equals(item)) ||
             		(item instanceof Item && mitem.item.equals( ((Item)item).value))) {
                 selidx = ii;
                 break;
@@ -440,7 +443,7 @@ public class BComboBox extends BLabel {
     	}
     	return text;
     }
-    
+
     private BIcon getImageLabel(Object item) {
     	if (item instanceof Item) {
     		item = ((Item)item).value;
