@@ -57,18 +57,18 @@ public class BTitledWindow extends BDraggableWindow {
     }
 
     private WindowState windowState = WindowState.NORMAL;
-    private WindowState previousState = WindowState.NORMAL;
+    protected WindowState previousState = WindowState.NORMAL;
     private String maximizedStyle = "window";
     private String minimizedStyle = "window";
 
     // the window's size before maximizing
-    private Rectangle originalBounds = new Rectangle(0, 0, 0, 0);
-    private Rectangle maximizedBounds = new Rectangle(0, 0, 0, 0);
-    private Dimension maximizedSize = new Dimension(-1, -1);
-    private Dimension minimizedSize = new Dimension(-1, -1);
+    protected Rectangle originalBounds = new Rectangle(0, 0, 0, 0);
+    protected Rectangle maximizedBounds = new Rectangle(0, 0, 0, 0);
+    protected Dimension maximizedSize = new Dimension(-1, -1);
+    protected Dimension minimizedSize = new Dimension(-1, -1);
 
-    private BTitleBar titleBar;
-    private BStatusBar statusBar;
+    protected BTitleBar titleBar;
+    protected BStatusBar statusBar;
     private BContainer componentArea;
 
     public BTitledWindow(final String name,
