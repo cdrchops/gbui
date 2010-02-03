@@ -280,6 +280,18 @@ public class BComponent {
         Insets insets = _insets[getState()];
         return (insets == null) ? Insets.ZERO_INSETS : insets;
     }
+    
+    public void setColor(ColorRGBA color, int state) {
+    	_colors[state] = color;
+    	invalidate();
+    }
+    
+    public void setColor(ColorRGBA color) {
+    	for(int i=0; i<STATE_COUNT; i++) {
+    		_colors[i] = color;
+    	}
+    	invalidate();
+    }
 
     /**
      * Returns the (foreground) color configured for this component.
