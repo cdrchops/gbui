@@ -41,14 +41,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//Provides a scrollable, lazily instantiated component view of values
+/**
+ * Provides a scrollable, lazily instantiated component view of values
+ */
 public abstract class BScrollingList<V, C extends BComponent> extends BContainer {
     //Instantiates an empty {@link BScrollingList}.
     public BScrollingList() {
         this(null);
     }
 
-    //Instantiates a {@link BScrollingList} with an initial value collection.
+    /**
+     * Instantiates a {@link BScrollingList} with an initial value collection.
+     * @param values the values to add
+     */
     public BScrollingList(Collection<V> values) {
         super(new BorderLayout(0, 0));
 
@@ -70,19 +75,54 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
             BorderLayout.EAST);
     }
 
-    // Appends a value to our list, possibly scrolling our view to display it.
+    /**
+     * Appends a value to our list, possibly scrolling our view to display it.
+     * @param value the value to add
+     * @param snapToBottom if the value should snap to the bottom of the list
+     */
     public void addValue(V value,
                          boolean snapToBottom) {
         addValue(_values.size(), value, snapToBottom);
     }
 
-    //Inserts a value into our list at the specified position.
+    /**
+     * Inserts a value into our list at the specified position.
+     * @param index the index to add this value at
+     * @param value the value to add
+     */
     public void addValue(int index,
                          V value) {
         addValue(index, value, false);
     }
+    
+    /**
+     * Removes the value at the specified index
+     * @param index the index at which to remove a value
+     */
+    public void removeValue(int index) {
+        Entry<V, C> value = _values.remove(index);
+        _vport.remove(value.component);
+        _vport.invalidate();
+    }
+    
+    /**
+     * Removes the first occurrence of the specified value
+     * @param value the value to remove
+     */
+    public void removeValue(V value) {
+    	for(Entry<V, C> entry : _values) {
+    		if(entry.value == value) {
+    	        _values.remove(entry);
+    	        _vport.remove(entry.component);
+    	        _vport.invalidate();
+    	        break;
+    		}
+    	}
+    }
 
-    //Clears all the current values and any related components.
+    /**
+     * Clears all the current values and any related components.
+     */
     public void removeValues() {
         _values.clear();
         _model.setValue(0);
@@ -108,7 +148,12 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
      */
     protected abstract C createComponent(V value);
 
-    //Adds a value to the list and snaps to the bottom of the list if desired.
+    /**
+     * Adds a value to the list and snaps to the bottom of the list if desired.
+     * @param index the index to add this value at
+     * @param value the value to add
+     * @param snap if the value should snap to the bottom of the list
+     */
     protected void addValue(int index,
                             V value,
                             boolean snap) {
@@ -116,7 +161,9 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
         _vport.invalidateAndSnap();
     }
 
-    //Does all the heavy lifting for the {@link BScrollingList}.
+    /**
+     * Does all the heavy lifting for the {@link BScrollingList}.
+     */
     protected class BViewport extends BContainer
             implements ChangeListener {
         public BViewport() {
@@ -126,7 +173,10 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
                     Policy.STRETCH));
         }
 
-        //Returns a reference to the vertical scroll bar.
+        /**
+         * Returns a reference to the vertical scroll bar.
+         * @return a reference to the vertical scroll bar
+         */
         public BScrollBar getVerticalScrollBar() {
             return _vbar;
         }
