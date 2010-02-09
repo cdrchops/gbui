@@ -29,7 +29,6 @@ import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.layout.HGroupLayout;
 import com.jmex.bui.layout.Justification;
 import com.jmex.bui.layout.Policy;
-import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.util.Dimension;
 
 import java.util.ArrayList;
@@ -77,6 +76,18 @@ public class BButtonBar extends BContainer {
                     buttons.add(button);
                     button = new BButton("No", UserResponse.NO.toString());
                     button.setPreferredSize(DEFAULT_SIZE);
+                    button.setStyleClass("dialogbutton");
+                    add(button);
+                    buttons.add(button);
+                    break;
+                case OK_CANCEL:
+                	button = new BButton("OK", UserResponse.OK.toString());
+                    button.setSize(50, 12);
+                    button.setStyleClass("dialogbutton");
+                    add(button);
+                    buttons.add(button);
+                    button = new BButton("Cancel", UserResponse.CANCEL.toString());
+                    button.setSize(50, 12);
                     button.setStyleClass("dialogbutton");
                     add(button);
                     buttons.add(button);
