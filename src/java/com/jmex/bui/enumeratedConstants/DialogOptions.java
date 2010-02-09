@@ -29,5 +29,5 @@ package com.jmex.bui.enumeratedConstants;
  * @since 27Apr07
  */
 public enum DialogOptions {
-    YES_NO, YES_NO_CANCEL, YES_CANCEL, CANCEL, OK
+    YES_NO, YES_NO_CANCEL, YES_CANCEL, CANCEL, OK, OK_CANCEL
 }
