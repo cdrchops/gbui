@@ -101,6 +101,7 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
      */
     public void removeValue(int index) {
         Entry<V, C> value = _values.remove(index);
+        _model.setValue(0);
         _vport.remove(value.component);
         _vport.invalidate();
     }
@@ -113,6 +114,7 @@ public abstract class BScrollingList<V, C extends BComponent> extends BContainer
     	for(Entry<V, C> entry : _values) {
     		if(entry.value == value) {
     	        _values.remove(entry);
+    	        _model.setValue(0);
     	        _vport.remove(entry.component);
     	        _vport.invalidate();
     	        break;
