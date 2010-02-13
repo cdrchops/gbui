@@ -32,7 +32,7 @@ import com.jmex.bui.headlessWindows.BTitledWindow;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.layout.GroupLayout;
 import com.jmex.bui.layout.Justification;
-import com.jmex.bui.listener.CollapsingWindowListener;
+import com.jmex.bui.listener.CollapsesTitledWindow;
 
 import java.util.ArrayList;
 
@@ -42,7 +42,7 @@ import java.util.ArrayList;
  */
 public class BTitleBar extends BContainer {
     private BLabel title;
-    private ArrayList<BButton> buttons = new ArrayList<BButton>(3);
+    protected ArrayList<BButton> buttons = new ArrayList<BButton>(3);
 
     public BTitleBar(final String name,
                      final BLabel title,
@@ -73,7 +73,7 @@ public class BTitleBar extends BContainer {
 
     @Override
     public void addListener(ComponentListener listener) {
-        if (listener instanceof CollapsingWindowListener) {
+        if (listener instanceof CollapsesTitledWindow) {
             BButton button;
             for (int i = 0; i < buttons.size(); i++) {
                 button = buttons.get(i);

@@ -36,7 +36,7 @@ import com.jmex.bui.util.Dimension;
  * @author timo
  * @since 07May07
  */
-public class CollapsingWindowListener extends BTiledWindowController {
+public class CollapsingWindowListener extends BTiledWindowController implements CollapsesTitledWindow {
     private Dimension maximizedSize = new Dimension(800, 600);
 
     @Override
