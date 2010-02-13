@@ -32,7 +32,7 @@ import com.jmex.bui.event.ComponentListener;
 import com.jmex.bui.event.MouseEvent;
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.layout.GroupLayout;
-import com.jmex.bui.listener.CollapsingWindowListener;
+import com.jmex.bui.listener.CollapsesTitledWindow;
 import com.jmex.bui.util.Dimension;
 import com.jmex.bui.util.Rectangle;
 
@@ -83,7 +83,7 @@ public class BTitledWindow extends BDraggableWindow {
 
     @Override
     public void addListener(final ComponentListener listener) {
-        if (listener instanceof CollapsingWindowListener) {
+        if (listener instanceof CollapsesTitledWindow) {
             titleBar.removeAllListeners();
             titleBar.addListener(listener);
         }
