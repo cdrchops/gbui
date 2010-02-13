@@ -52,7 +52,9 @@ public class BTiledWindowController implements ActionListener {
         } else {
             BWindow window = source.getWindow();
             if (window instanceof BTitledWindow) {
-                activateWindow((BTitledWindow) window);
+            	if (event.getAction().equals(BDraggableWindow.WINDOW_ACTIVATE_ACTION)) {
+                    activateWindow((BTitledWindow) source);
+                }
             }
         }
     }

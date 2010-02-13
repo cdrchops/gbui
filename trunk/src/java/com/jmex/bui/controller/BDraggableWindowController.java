@@ -38,13 +38,11 @@ public class BDraggableWindowController implements ActionListener {
     private BDraggableWindow activeWindow;
 
     public void actionPerformed(ActionEvent event) {
-    	System.out.println("Activate window");
         BComponent source = (BComponent) event.getSource();
 
         if (source == activeWindow) {
             return;
         }
-
         if (source instanceof BDraggableWindow) {
             if (event.getAction().equals(BDraggableWindow.WINDOW_ACTIVATE_ACTION)) {
                 activateWindow((BDraggableWindow) source);
@@ -52,13 +50,14 @@ public class BDraggableWindowController implements ActionListener {
         } else {
             BWindow window = source.getWindow();
             if (window instanceof BDraggableWindow) {
-                activateWindow((BDraggableWindow) window);
+            	if (event.getAction().equals(BDraggableWindow.WINDOW_ACTIVATE_ACTION)) {
+                    activateWindow((BDraggableWindow) source);
+                }
             }
         }
     }
 
     private void activateWindow(BDraggableWindow window) {
-    	System.out.println("Activate window "+window.getName());
         if (window == null) {
             return;
         }
