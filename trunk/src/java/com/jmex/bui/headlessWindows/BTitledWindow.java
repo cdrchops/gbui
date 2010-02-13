@@ -139,10 +139,10 @@ public class BTitledWindow extends BDraggableWindow {
         return componentArea;
     }
 
-    public void setComponentArea(final BContainer compoenentArea) {
+    public void setComponentArea(final BContainer componentArea) {
         remove(this.componentArea);
         this.componentArea.removeAll();
-        this.componentArea = compoenentArea;
+        this.componentArea = componentArea;
         invalidate();
     }
 
