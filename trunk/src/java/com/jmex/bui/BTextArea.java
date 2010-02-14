@@ -580,7 +580,13 @@ public class BTextArea extends BContainer {
             }
             lines++;
         }
-
+        
+        //If state has changed, don't update the model
+        //We don't want it to scroll down on hover over/out etc.
+        if(stateChanged) {
+        	stateChanged = false;
+        	return;
+        }
         // update our model (which will cause the text to be repositioned)
         int sline = Math.max(0, _lines.size() - lines);
         if (!_model.setRange(0, sline, lines, _lines.size())) {
@@ -595,6 +601,12 @@ public class BTextArea extends BContainer {
      * Called when our model has changed (due to scrolling by a scroll bar or a call to {@link #scrollToLine}, etc.).
      */
     protected void modelDidChange() {
+    }
+    
+    //Documentation inherited
+    protected void stateDidChange() {
+    	stateChanged = true;
+    	super.stateDidChange();
     }
 
     /**
@@ -753,6 +765,7 @@ public class BTextArea extends BContainer {
 
     protected BoundedRangeModel _model = new BoundedRangeModel(0, 0, 0, 0);
     protected int _prefWidth = -1;
+    protected boolean stateChanged = false;
 
     protected ArrayList<Run> _runs = new ArrayList<Run>();
     protected ArrayList<Line> _lines = new ArrayList<Line>();
