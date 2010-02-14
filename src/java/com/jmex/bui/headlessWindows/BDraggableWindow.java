@@ -24,8 +24,10 @@
 
 package com.jmex.bui.headlessWindows;
 
+import com.jmex.bui.BComponent;
 import com.jmex.bui.BStyleSheet;
 import com.jmex.bui.BWindow;
+import com.jmex.bui.Draggable;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.MouseEvent;
@@ -35,12 +37,13 @@ import com.jmex.bui.layout.BLayoutManager;
  * @author timo
  * @since 27Apr07
  */
-public class BDraggableWindow extends BWindow {
+public class BDraggableWindow extends BWindow implements Draggable {
     public static final String WINDOW_ACTIVATE_ACTION = "activate window";
     private boolean armed;
     private int grabOffsetX = -1;
     private int grabOffsetY = -1;
     private boolean dragging = false;
+    private boolean childDragged = false;
 
     public BDraggableWindow(final String name,
                             final BStyleSheet style,
@@ -52,7 +55,7 @@ public class BDraggableWindow extends BWindow {
                             final BLayoutManager layout) {
         super(style, layout);
     }
-
+    
     @Override
     public boolean dispatchEvent(final BEvent event) {
         if (event instanceof MouseEvent) {
@@ -76,13 +79,25 @@ public class BDraggableWindow extends BWindow {
                 case MouseEvent.MOUSE_PRESSED:
                     if (mev.getButton() == 0) {
                         armed = true;
-                        dragging = true;
+                        //Check if a child is being dragged
+                        applyOperation(new ChildOp() {
+                            public void apply(BComponent child) {
+                                if(child instanceof Draggable) {
+                                	if(((Draggable) child).isDragged()) {
+                                		childDragged = true;
+                                	}
+                                }
+                            }
+                        });
+                        if(!childDragged) {
+                        	dragging = true;
 
-                        // remember the offset of the mouse pointer (won't change until released)
-                        grabOffsetY = _y - mev.getY();
-                        grabOffsetX = _x - mev.getX();
-
-                        fireAction(mev.getWhen(), mev.getModifiers());
+	                        // remember the offset of the mouse pointer (won't change until released)
+	                        grabOffsetY = _y - mev.getY();
+	                        grabOffsetX = _x - mev.getX();
+	
+	                        fireAction(mev.getWhen(), mev.getModifiers());
+                        }
                     }
                     return true; // consume this event
 
@@ -99,7 +114,7 @@ public class BDraggableWindow extends BWindow {
 
         return super.dispatchEvent(event);
     }
-
+    
     protected void fireAction(final long when,
                               final int modifiers) {
         emitEvent(new ActionEvent(this, when, modifiers, WINDOW_ACTIVATE_ACTION));
@@ -111,4 +126,9 @@ public class BDraggableWindow extends BWindow {
      * @param event The mouse event generated when the window was released.
      */
     protected void windowReleased(MouseEvent event) {}
+
+	@Override
+	public boolean isDragged() {
+		return dragging;
+	}
 }
