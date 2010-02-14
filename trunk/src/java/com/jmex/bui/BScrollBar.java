@@ -25,13 +25,12 @@ import com.jmex.bui.enumeratedConstants.Orientation;
 
 import com.jmex.bui.layout.BorderLayout;
 import com.jmex.bui.util.Insets;
+import com.jmex.bui.event.BEvent;
 import com.jmex.bui.event.MouseWheelListener;
 import com.jmex.bui.event.ActionListener;
 import com.jmex.bui.event.ActionEvent;
 import com.jmex.bui.event.MouseEvent;
-import com.jmex.bui.event.MouseAdapter;
 import com.jmex.bui.event.ChangeListener;
-import com.jmex.bui.event.MouseListener;
 import com.jmex.bui.event.ChangeEvent;
 
 /**
@@ -104,15 +103,13 @@ public class BScrollBar extends BContainer {
 
         // create our buttons and backgrounds
         String oprefix = "scrollbar_" + ((_orient == Orientation.HORIZONTAL) ? "h" : "v");
-        _well = new BComponent();
+        _well = new BWell(this);
         _well.setStyleClass(oprefix + "well");
         add(_well, BorderLayout.CENTER);
-        _well.addListener(_wellListener);
-
-        _thumb = new BComponent();
+        
+        _thumb = new BThumb(this);
         _thumb.setStyleClass(oprefix + "thumb");
         add(_thumb, BorderLayout.IGNORE);
-        _thumb.addListener(_thumbListener);
 
         _less = new BButton("");
         _less.setStyleClass(oprefix + "less");
@@ -214,60 +211,6 @@ public class BScrollBar extends BContainer {
         }
     };
 
-    protected MouseListener _wellListener = new MouseAdapter() {
-        public void mousePressed(MouseEvent event) {
-            // if we're above the thumb, scroll up by a page, if we're
-            // below, scroll down a page
-            int mx = event.getX() - getAbsoluteX(),
-                    my = event.getY() - getAbsoluteY(), dv = 0;
-            if (_orient == Orientation.HORIZONTAL) {
-                if (mx < _thumb.getX()) {
-                    dv = -1;
-                } else if (mx > _thumb.getX() + _thumb.getWidth()) {
-                    dv = 1;
-                }
-            } else {
-                if (my < _thumb.getY()) {
-                    dv = 1;
-                } else if (my > _thumb.getY() + _thumb.getHeight()) {
-                    dv = -1;
-                }
-            }
-            if (dv != 0) {
-                dv *= Math.max(1, _model.getExtent());
-                _model.setValue(_model.getValue() + dv);
-            }
-        }
-    };
-
-    protected MouseAdapter _thumbListener = new MouseAdapter() {
-        public void mousePressed(MouseEvent event) {
-            _sv = _model.getValue();
-            _sx = event.getX() - getAbsoluteX();
-            _sy = event.getY() - getAbsoluteY();
-        }
-
-        @Override
-        public void mouseDragged(MouseEvent event) {
-            int dv = 0;
-            if (_orient == Orientation.HORIZONTAL) {
-                int mx = event.getX() - getAbsoluteX();
-                dv = (mx - _sx) * _model.getRange() /
-                     (_well.getWidth() - _well.getInsets().getHorizontal());
-            } else {
-                int my = event.getY() - getAbsoluteY();
-                dv = (_sy - my) * _model.getRange() /
-                     (_well.getHeight() - _well.getInsets().getVertical());
-            }
-
-            if (dv != 0) {
-                _model.setValue(_sv + dv);
-            }
-        }
-
-        protected int _sx,_sy, _sv;
-    };
-
     protected ActionListener _buttoner = new ActionListener() {
         public void actionPerformed(ActionEvent event) {
             int delta = _model.getScrollIncrement();
@@ -283,7 +226,117 @@ public class BScrollBar extends BContainer {
     protected Orientation _orient;
 
     protected BButton _less, _more;
-    protected BComponent _well, _thumb;
+    protected BWell _well;
+    protected BThumb _thumb;
 
     protected MouseWheelListener _wheelListener;
+}
+class BWell extends BComponent {
+	private BScrollBar bar;
+	
+	public BWell(BScrollBar bar) {
+		this.bar = bar;
+	}
+	
+	public boolean dispatchEvent(final BEvent event) {
+    	if (event instanceof MouseEvent) {
+            MouseEvent mev = (MouseEvent) event;
+            switch (mev.getType()) {
+                case MouseEvent.MOUSE_PRESSED:
+                	// if we're above the thumb, scroll up by a page, if we're
+                    // below, scroll down a page
+                    int mx = mev.getX() - bar.getAbsoluteX(),
+                            my = mev.getY() - bar.getAbsoluteY(), dv = 0;
+                    if (bar._orient == Orientation.HORIZONTAL) {
+                        if (mx < bar._thumb.getX()) {
+                            dv = -1;
+                        } else if (mx > bar._thumb.getX() + bar._thumb.getWidth()) {
+                            dv = 1;
+                        }
+                    } else {
+                        if (my < bar._thumb.getY()) {
+                            dv = 1;
+                        } else if (my > bar._thumb.getY() + bar._thumb.getHeight()) {
+                            dv = -1;
+                        }
+                    }
+                    if (dv != 0) {
+                        dv *= Math.max(1, bar._model.getExtent());
+                        bar._model.setValue(bar._model.getValue() + dv);
+                    }
+                    return true; // consume this event
+	        }
+	    }
+    	
+        return super.dispatchEvent(event);
+	}
+}
+class BThumb extends BComponent implements Draggable {
+	protected boolean dragging = false;
+    protected boolean armed = false;
+    protected int _sx,_sy, _sv;
+    protected BScrollBar bar;
+    
+    public BThumb(BScrollBar bar) {
+    	this.bar = bar;
+    }
+    
+    public boolean dispatchEvent(final BEvent event) {
+    	if (event instanceof MouseEvent) {
+            MouseEvent mev = (MouseEvent) event;
+            switch (mev.getType()) {
+                case MouseEvent.MOUSE_ENTERED:
+                    armed = true;
+                    break; // we don't consume this event
+
+                case MouseEvent.MOUSE_EXITED:
+                    if (!dragging) {
+                        armed = false;
+                    }
+                    break; // we don't consume this event
+                case MouseEvent.MOUSE_DRAGGED:
+                    if (dragging) {
+                        int dv = 0;
+                        if (bar._orient == Orientation.HORIZONTAL) {
+                            int mx = mev.getX() - bar.getAbsoluteX();
+                            dv = (mx - _sx) * bar._model.getRange() /
+                                 (bar._well.getWidth() - bar._well.getInsets().getHorizontal());
+                        } else {
+                            int my = mev.getY() - bar.getAbsoluteY();
+                            dv = (_sy - my) * bar._model.getRange() /
+                                 (bar._well.getHeight() - bar._well.getInsets().getVertical());
+                        }
+
+                        if (dv != 0) {
+                            bar._model.setValue(_sv + dv);
+                        }
+                        return true;
+                    }
+                    break;
+                case MouseEvent.MOUSE_PRESSED:
+                    if (mev.getButton() == 0) {
+                    	dragging = true;
+                    	_sv = bar._model.getValue();
+                        _sx = mev.getX() - bar.getAbsoluteX();
+                        _sy = mev.getY() - bar.getAbsoluteY();
+                    }
+                    return true; // consume this event
+
+                case MouseEvent.MOUSE_RELEASED:
+                    if (armed && dragging) {
+                        // this means the windows reached its final position (window released)
+                        armed = false;
+                        dragging = false;
+                    }
+                    return true; // consume this event
+            }
+        }
+
+        return super.dispatchEvent(event);
+    }
+
+	@Override
+	public boolean isDragged() {
+		return dragging;
+	}
 }
