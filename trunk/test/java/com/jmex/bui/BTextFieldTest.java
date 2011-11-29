@@ -6,8 +6,11 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.jme.input.KeyInput;
+import com.jme.input.KeyBindingManager.KeyCodes;
 import com.jmex.bui.event.FocusEvent;
 import com.jmex.bui.event.FocusListener;
+import com.jmex.bui.event.KeyEvent;
 
 
 public class BTextFieldTest {
@@ -52,7 +55,7 @@ public class BTextFieldTest {
 	}
 	
 	@Test
-	public void test_Adding_two_of_the_same_listener_receives_only_one_event() throws Exception {
+	public void adding_two_of_the_same_listener_receives_only_one_event() throws Exception {
 		FocusListener listener = EasyMock.createStrictMock(FocusListener.class);
 		listener.focusLost((FocusEvent)EasyMock.anyObject());
 		
@@ -65,7 +68,7 @@ public class BTextFieldTest {
 	}
 	
 	@Test
-	public void test_Works_without_any_listeners_added() throws Exception {
+	public void works_without_any_listeners_added() throws Exception {
 		textField.dispatchEvent(new FocusEvent(textField, 1l, FocusEvent.FOCUS_LOST));
 	}
 }
