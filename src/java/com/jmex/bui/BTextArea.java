@@ -685,7 +685,7 @@ public class BTextArea extends BContainer {
             }
 
             final String rtext = run.text.substring(offset);
-
+            
             // TODO: this could perhaps be done more efficiently now that the text factory breaks things down into multiple lines for us
             final BText[] text = tfact.wrapText(
                     rtext, color, effect, effectSize, effectColor, maxWidth - dx);

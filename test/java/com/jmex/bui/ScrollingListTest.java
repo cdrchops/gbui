@@ -20,40 +20,50 @@
 
 package com.jmex.bui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.junit.Test;
+import org.lwjgl.LWJGLException;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+
+import static org.junit.Assert.*;
 
 import com.jmex.bui.base.BaseTest;
 import com.jmex.bui.layout.GroupLayout;
 
 public class ScrollingListTest extends BaseTest {
-    @Override
-    protected void createWindows() {
-        final BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
+	private BScrollingList<String, BButton> list;
 
-        window.setLayoutManager(GroupLayout.makeVStretch());
+	@Test
+	public void performanceCheck() throws LWJGLException {
+		System.setProperty("org.lwjgl.librarypath", "D:\\java\\gbui\\lib\\lwjgl\\native\\windows");
+		Display.setDisplayMode(new DisplayMode(500, 500));
+		Display.setFullscreen(false);
+		start();
 
-        final BScrollingList<String, BButton> list =
-                new BScrollingList<String, BButton>() {
-                    @Override
-                    public BButton createComponent(String str) {
-                        return new BButton(str);
-                    }
-                };
+		assertTrue(list.isShowing());
+	}
+	
+	@Override
+	protected void createWindows() {
+		final BWindow window = new BDecoratedWindow(BuiSystem.getStyle(), null);
 
-        window.add(list);
+		window.setLayoutManager(GroupLayout.makeVStretch());
 
-        BuiSystem.getRootNode().addWindow(window);
-        window.setSize(400, 400);
-        window.setLocation(25, 25);
+		list = new BScrollingList<String, BButton>() {
+			@Override
+			public BButton createComponent(String str) {
+				return new BButton(str);
+			}
+		};
 
-        for (int i = 0; i < 100; i++) {
-            list.addValue("Item #" + i, true);
-        }
-    }
+		window.add(list);
 
-    public static void main(String[] args) {
-        Logger.getLogger("com.jmex.bui").setLevel(Level.WARNING);
-        new ScrollingListTest().start();
-    }
+		BuiSystem.getRootNode().addWindow(window);
+		window.setSize(400, 400);
+		window.setLocation(25, 25);
+
+		for (int i = 0; i < 100; i++) {
+			list.addValue("Item #" + i, true);
+		}
+	}
 }

@@ -23,7 +23,7 @@ package com.jmex.bui.base;
 import com.jme.app.SimpleGame;
 import com.jme.input.KeyBindingManager;
 import com.jme.input.MouseInput;
-import com.jme.renderer.ColorRGBA;
+import com.jme.system.JmeException;
 import com.jmex.bui.BuiSystem;
 import com.jmex.bui.PolledRootNode;
 import com.jmex.bui.event.ActionEvent;
@@ -33,6 +33,7 @@ import com.jmex.bui.event.ActionListener;
  * A base class for our various visual tests.
  */
 public abstract class BaseTest extends SimpleGame {
+	
     protected ActionListener listener = new ActionListener() {
         public void actionPerformed(final ActionEvent event) {
             System.out.println(event.getAction());
@@ -46,7 +47,6 @@ public abstract class BaseTest extends SimpleGame {
 
         BuiSystem.init(new PolledRootNode(timer, input), "/rsrc/style2.bss");
         rootNode.attachChild(BuiSystem.getRootNode());
-
         createWindows();
 
         KeyBindingManager kb = KeyBindingManager.getKeyBindingManager();
@@ -59,8 +59,6 @@ public abstract class BaseTest extends SimpleGame {
         kb.remove("camera_out");
 
         lightState.setEnabled(false);
-
-        display.getRenderer().setBackgroundColor(ColorRGBA.gray);
     }
 
     @Override

@@ -48,6 +48,6 @@
 	<classpathentry kind="lib" path="lib/jme-swt.jar"/>
 	<classpathentry kind="lib" path="lib/jme-terrain.jar"/>
 	<classpathentry kind="lib" path="lib/jme-xml.jar"/>
-	<classpathentry kind="lib" path="lib/jme.jar"/>
+	<classpathentry kind="lib" path="lib/jme.jar" sourcepath="/jme"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
