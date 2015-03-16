@@ -1,0 +1,35 @@
+BSS, or BUI Style Sheets, are a similar equivalent of Cascading Style Sheets, or CSS, that are used to give style, color, even position to HTML elements on web pages.
+
+BSS styles have a similar syntax as CSS.
+
+For example, we'll take a button and we want to give it a standard look.  So we're going to center the text, outline the text and give it a color.  We also want to make the font size 24 and bold the text
+
+let's start with the button... this is the default style for the BButton class.  When the BButton loads it will check for resources to see if this resource is there.
+
+button {
+  background: image "rsrc/textures/button_up.png" framexy;
+  padding: 3 5;
+  font: "Dialog" bold 24;
+  text-align: center;
+  text-effect: outline;
+  effect-color: #442288;
+}
+
+button:hover {
+  color: #FF00FF;
+}
+
+button:disabled {
+  background: image "rsrc/textures/button_disabled.png" framexy;
+}
+
+button:down {
+  background: image "rsrc/textures/button_down.png" framexy;
+  color: #FF00FF;
+  padding: 4 6 2 4;
+}
+
+button:selected {
+  background: image "rsrc/textures/button_down.png" framexy;
+  padding: 4 6 2 4;
+}
